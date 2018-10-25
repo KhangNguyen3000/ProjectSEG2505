@@ -1,3 +1,5 @@
+package com.example.nguye.seg2505app;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
