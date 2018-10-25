@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyProfile">
+
+    <LinearLayout
+        android:id="@+id/mp_llv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/mp_llv_info"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mp_txt_infoLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Personal information"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/mp_txt_fullNameDisp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full name" />
+
+            <TextView
+                android:id="@+id/mp_txt_addressDisp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address" />
+
+            <TextView
+                android:id="@+id/mp_txt_phoneNumberDisp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mp_llv_credentials"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mp_txt_credentialsLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Credentials"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/mp_llh_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mp_txt_emailLbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Email:" />
+
+                <TextView
+                    android:id="@+id/mp_txt_emailDisp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:hint="Email" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mp_llh_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mp_txt_passwordLbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Password:" />
+
+                <TextView
+                    android:id="@+id/mp_txt_passwordDisp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:hint="Password" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mp_llv_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/mp_btn_modify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change my information" />
+
+            <Button
+                android:id="@+id/mp_btn_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete my account" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
