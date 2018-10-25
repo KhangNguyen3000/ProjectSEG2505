@@ -55,4 +55,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
         startActivityForResult(intent, 0);
     }
+    public void onClickLoginButton(View view){
+        Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
+        startActivityForResult(intent,0);
+    }
 }
