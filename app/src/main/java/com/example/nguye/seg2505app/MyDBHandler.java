@@ -1,3 +1,5 @@
+package com.example.nguye.seg2505app;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
@@ -12,19 +14,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // Structure of the table "Accounts"
     public static final String TABLE_ACCOUNTS = "Accounts";
 //    public static final String ACCOUNTS_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
-    public static final String ACCOUNTS_EMAIL = "Email TEXT";
-    public static final String ACCOUNTS_TYPE = "Type INTEGER";
-    public static final String ACCOUNTS_FIRSTNAME = "FirstName TEXT";
-    public static final String ACCOUNTS_LASTNAME = "LastName TEXT";
-    public static final String ACCOUNTS_STREETNUMBER = "StreetNumber INTEGER";
-    public static final String ACCOUNTS_STREETNAME = "StreetName TEXT";
-    public static final String ACCOUNTS_APPARTMENT = "Appartment TEXT";
-    public static final String ACCOUNTS_CITY = "City TEXT";
-    public static final String ACCOUNTS_PROVINCE = "Province TEXT";
-    public static final String ACCOUNTS_COUNTRY = "Country TEXT";
-    public static final String ACCOUNTS_POSTALCODE = "PostalCode TEXT";
-    public static final String ACCOUNTS_PHONE = "PhoneNumber BIGINT";
-    public static final String ACCOUNTS_PASSWORD = "StreetName TEXT";
+    public static final String ACCOUNTS_EMAIL = "Email";
+    public static final String ACCOUNTS_TYPE = "Type";
+    public static final String ACCOUNTS_FIRSTNAME = "FirstName";
+    public static final String ACCOUNTS_LASTNAME = "LastName";
+    public static final String ACCOUNTS_STREETNUMBER = "StreetNumber";
+    public static final String ACCOUNTS_STREETNAME = "StreetName";
+    public static final String ACCOUNTS_APARTMENT = "Apartment";
+    public static final String ACCOUNTS_CITY = "City";
+    public static final String ACCOUNTS_PROVINCE = "Province";
+    public static final String ACCOUNTS_COUNTRY = "Country";
+    public static final String ACCOUNTS_POSTALCODE = "PostalCode";
+    public static final String ACCOUNTS_PHONE = "PhoneNumber";
+    public static final String ACCOUNTS_PASSWORD = "Password";
 
     public static final String TABLE_SERVICES = "Services";
     public static final String SERVICES_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
@@ -52,19 +54,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         String CREATE_TABLE_ACCOUNTS =
                 "CREATE TABLE " + TABLE_ACCOUNTS + "("
-                + ACCOUNTS_EMAIL + ", "
-                + ACCOUNTS_TYPE + ", "
-                + ACCOUNTS_FIRSTNAME + ", "
-                + ACCOUNTS_LASTNAME + ", "
-                + ACCOUNTS_STREETNUMBER + ", "
-                + ACCOUNTS_STREETNAME + ", "
-                + ACCOUNTS_APPARTMENT + ", "
-                + ACCOUNTS_CITY + ", "
-                + ACCOUNTS_PROVINCE + ", "
-                + ACCOUNTS_COUNTRY + ", "
-                + ACCOUNTS_POSTALCODE + ", "
-                + ACCOUNTS_PHONE + ", "
-                + ACCOUNTS_PASSWORD + ")";
+                + ACCOUNTS_EMAIL + " TEXT, "
+                + ACCOUNTS_TYPE + " INTEGER, "
+                + ACCOUNTS_FIRSTNAME + " TEXT, "
+                + ACCOUNTS_LASTNAME + " TEXT, "
+                + ACCOUNTS_STREETNUMBER + " INTEGER, "
+                + ACCOUNTS_STREETNAME + " TEXT, "
+                + ACCOUNTS_APARTMENT + " TEXT, "
+                + ACCOUNTS_CITY + " TEXT, "
+                + ACCOUNTS_PROVINCE + " TEXT, "
+                + ACCOUNTS_COUNTRY + " TEXT, "
+                + ACCOUNTS_POSTALCODE + " TEXT, "
+                + ACCOUNTS_PHONE + " BIGINT, "
+                + ACCOUNTS_PASSWORD + " TEXT)";
 
         String CREATE_TABLE_SERVICES =
                 "CREATE TABLE " + TABLE_SERVICES + "("
@@ -87,8 +89,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void addAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ACCOUNTS_TYPE, account.getAccountType());
-        // ... all other data
+        values.put(ACCOUNTS_EMAIL, account.getEmail());
+        values.put(ACCOUNTS_TYPE, account.getType());
+        values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());
+        values.put(ACCOUNTS_LASTNAME, account.getLastName());
+        values.put(ACCOUNTS_STREETNUMBER, account.getStreetNumber());
+        values.put(ACCOUNTS_STREETNAME, account.getStreetName());
+        values.put(ACCOUNTS_APARTMENT, account.getApartment());
+        values.put(ACCOUNTS_CITY, account.getCity());
+        values.put(ACCOUNTS_PROVINCE, account.getProvince());
+        values.put(ACCOUNTS_COUNTRY, account.getCountry());
+        values.put(ACCOUNTS_POSTALCODE, account.getPostalCode());
+        values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
+        values.put(ACCOUNTS_PASSWORD, account.getPassword());
 
         db.insert(TABLE_ACCOUNTS, null, values);
         db.close();
@@ -106,26 +119,31 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query =
-                "Select * FROM" + TABLE_ACCOUNTS
-                + " WHERE " + ACCOUNTS_EMAIL + " = " + email;
+                "Select * FROM " + TABLE_ACCOUNTS
+                        + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\"";
 
         Cursor cursor = db.rawQuery(query, null);
         Account account = new Account();
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             account.setEmail(cursor.getString(0));
             account.setType(Integer.parseInt(cursor.getString(1)));
             account.setFirstName(cursor.getString(2));
             account.setLastName(cursor.getString(3));
             account.setStreetNumber(Integer.parseInt(cursor.getString(4)));
             account.setStreetName(cursor.getString(5));
-            account.setAppartment(cursor.getString(6));
+            account.setApartment(cursor.getString(6));
             account.setCity(cursor.getString(7));
             account.setProvince(cursor.getString(8));
             account.setCountry(cursor.getString(9));
             account.setPostalCode(cursor.getString(10));
             account.setPhoneNumber(Long.parseLong(cursor.getString(11)));
             account.setPassword(cursor.getString(12));
+        } else {
+            account = null;
         }
+        db.close();
+
+        return account;
     }
 }

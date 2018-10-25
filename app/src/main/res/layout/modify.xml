@@ -18,31 +18,31 @@
             android:layout_weight="0.1">
 
             <LinearLayout
-                android:id="@+id/reg_llv_main"
+                android:id="@+id/mod_llv_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/reg_llh_fullName"
+                    android:id="@+id/mod_llh_fullName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/reg_llv_firstName"
+                        android:id="@+id/mod_llv_firstName"
                         android:layout_width="197dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/reg_txt_firstNameLbl"
+                            android:id="@+id/mod_txt_firstNameLbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="First name" />
 
                         <EditText
-                            android:id="@+id/reg_input_firstName"
+                            android:id="@+id/mod_input_firstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -52,19 +52,19 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/reg_llv_lastName"
+                        android:id="@+id/mod_llv_lastName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/reg_txt_lastNameLbl"
+                            android:id="@+id/mod_txt_lastNameLbl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Last name" />
 
                         <EditText
-                            android:id="@+id/reg_input_lastName"
+                            android:id="@+id/mod_input_lastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -74,13 +74,13 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/reg_txt_emailLbl"
+                    android:id="@+id/mod_txt_emailLbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="E-mail address" />
 
                 <EditText
-                    android:id="@+id/reg_input_email"
+                    android:id="@+id/mod_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -88,13 +88,13 @@
                     android:inputType="textEmailAddress" />
 
                 <TextView
-                    android:id="@+id/reg_txt_passwordLbl"
+                    android:id="@+id/mod_txt_passwordLbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Password" />
 
                 <EditText
-                    android:id="@+id/reg_input_password"
+                    android:id="@+id/mod_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
