@@ -14,6 +14,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // Structure of the table "Accounts"
     public static final String TABLE_ACCOUNTS = "Accounts";
 //    public static final String ACCOUNTS_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
+
     public static final String ACCOUNTS_EMAIL = "Email";
     public static final String ACCOUNTS_TYPE = "Type";
     public static final String ACCOUNTS_FIRSTNAME = "FirstName";
@@ -27,6 +28,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String ACCOUNTS_POSTALCODE = "PostalCode";
     public static final String ACCOUNTS_PHONE = "PhoneNumber";
     public static final String ACCOUNTS_PASSWORD = "Password";
+
 
     public static final String TABLE_SERVICES = "Services";
     public static final String SERVICES_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
@@ -68,6 +70,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + ACCOUNTS_PHONE + " BIGINT, "
                 + ACCOUNTS_PASSWORD + " TEXT)";
 
+
         String CREATE_TABLE_SERVICES =
                 "CREATE TABLE " + TABLE_SERVICES + "("
                 + SERVICES_ID + ", "
@@ -103,6 +106,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
         values.put(ACCOUNTS_PASSWORD, account.getPassword());
 
+
         db.insert(TABLE_ACCOUNTS, null, values);
         db.close();
     }
@@ -119,13 +123,16 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query =
+
                 "Select * FROM " + TABLE_ACCOUNTS
                         + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\"";
+
 
         Cursor cursor = db.rawQuery(query, null);
         Account account = new Account();
 
-        if (cursor.moveToFirst()) {
+
+        if(cursor.moveToFirst()) {
             account.setEmail(cursor.getString(0));
             account.setType(Integer.parseInt(cursor.getString(1)));
             account.setFirstName(cursor.getString(2));
@@ -143,7 +150,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
             account = null;
         }
         db.close();
-
         return account;
     }
 }

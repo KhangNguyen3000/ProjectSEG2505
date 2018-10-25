@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 public class RegisterFinal extends AppCompatActivity {
 
+    EditText firstName, lastName;
+    EditText email, cEmail;
+    EditText pass, cPass;
+    EditText num, ap, street, city, province, country, postalC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,40 +33,6 @@ public class RegisterFinal extends AppCompatActivity {
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
 
-//
-//        final MyDBHandler dbHandler = new MyDBHandler(this);
-//
-//        final Button button = findViewById(R.id.reg_btn_register);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Account account = new Account();
-//                account.setFirstName(((EditText) findViewById(R.id.reg_input_firstName)).getText().toString());
-//                account.setLastName(((EditText) findViewById(R.id.reg_input_lastName)).getText().toString());
-//                account.setEmail(((EditText) findViewById(R.id.reg_input_email)).getText().toString());
-//                account.setPassword(((EditText) findViewById(R.id.reg_input_password)).getText().toString());
-//                account.setStreetNumber(Integer.parseInt(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString()));
-//                account.setStreetName(((EditText) findViewById(R.id.reg_input_streetName)).getText().toString());
-//                account.setApartment(((EditText) findViewById(R.id.reg_input_apartment)).getText().toString());
-//                account.setCity(((EditText) findViewById(R.id.reg_input_city)).getText().toString());
-//                account.setProvince(((EditText) findViewById(R.id.reg_input_province)).getText().toString());
-//                account.setCountry(((EditText) findViewById(R.id.reg_input_country)).getText().toString());
-//                account.setPostalCode(((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString());
-//                account.setPhoneNumber(Long.parseLong(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString()));
-//
-//                int accType;
-//                if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
-//                    accType = 1;
-//                } else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
-//                    accType = 2;
-//                } else {
-//                    accType = 3;
-//                }
-//                account.setType(accType);
-//                dbHandler.addAccount(account);
-//                Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
-//                toast.show();
-//            }
-//        });
     }
 
     public void onClickRegisterButton(View view){
@@ -93,6 +64,33 @@ public class RegisterFinal extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
 
+    }
+
+
+        //End Spinner
+
+        firstName = (EditText) findViewById(R.id.reg_input_firstName);
+        lastName = (EditText) findViewById(R.id.reg_input_lastName);
+        email = (EditText) findViewById(R.id.reg_input_email);
+        cEmail = (EditText) findViewById(R.id.reg_input_emailConfirm);
+        pass= (EditText) findViewById(R.id.reg_input_password);
+        cPass= (EditText) findViewById(R.id.reg_input_passwordConfirm);
+        num = (EditText) findViewById(R.id.reg_input_streetNumber);
+        ap = (EditText) findViewById(R.id.reg_input_appartment);
+        street = (EditText) findViewById(R.id.reg_input_streetName);
+        city = (EditText) findViewById(R.id.reg_input_city);
+        province = (EditText) findViewById(R.id.reg_input_province);
+        country = (EditText) findViewById(R.id.reg_input_country);
+        postalC = (EditText) findViewById(R.id.reg_input_postalCode);
+    }
+
+    public void onClickRegister(View view){
+        if (checkAll()){
+            addUserToDatabase();
+        }
+        else{
+            //Dire à l'utilisateur qu'il n'a pas bien rempli le formulaire
+        }
     }
 
 
