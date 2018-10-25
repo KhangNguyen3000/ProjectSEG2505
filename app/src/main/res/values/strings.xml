@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">SEG2505App</string>
     <string name="action_settings">Settings</string>
+    <string-array name= "account_type_spinner">
+        <item>Client</item>
+        <item>Worker</item>
+    </string-array>
 </resources>

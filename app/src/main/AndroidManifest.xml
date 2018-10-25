@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyProfile" />
-        <activity android:name=".RegisterVincent"></activity>
+        <activity android:name=".RegisterFinal" />
     </application>
 
 </manifest>

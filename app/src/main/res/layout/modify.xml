@@ -14,7 +14,7 @@
         <ScrollView
             android:id="@+id/scrollRegister"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.1">
 
             <LinearLayout
@@ -26,7 +26,7 @@
                 <LinearLayout
                     android:id="@+id/reg_llh_fullName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -88,20 +88,6 @@
                     android:inputType="textEmailAddress" />
 
                 <TextView
-                    android:id="@+id/reg_txt_emailConfirmLbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Confirm e-mail address" />
-
-                <EditText
-                    android:id="@+id/reg_input_emailConfirm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="xyz@example.com"
-                    android:inputType="textEmailAddress" />
-
-                <TextView
                     android:id="@+id/reg_txt_passwordLbl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,20 +95,6 @@
 
                 <EditText
                     android:id="@+id/reg_input_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
-
-                <TextView
-                    android:id="@+id/reg_txt_passwordConfirmLbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Confirm password" />
-
-                <EditText
-                    android:id="@+id/reg_input_passwordConfirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -138,7 +110,7 @@
                 <LinearLayout
                     android:id="@+id/reg_llh_street"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -229,7 +201,7 @@
                 <LinearLayout
                     android:id="@+id/reg_llh_country"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -299,7 +271,7 @@
                 <LinearLayout
                     android:id="@+id/reg_llh_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <TextView
@@ -319,36 +291,31 @@
                         android:inputType="phone" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/reg_llh_accountType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/reg_txt_accountTypeLbl"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Create an account as:" />
-
-                    <Spinner
-                        android:id="@+id/reg_dd_accountType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/registerButton"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Register" />
+            android:layout_height="108dp"
+            android:layout_weight="0.1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/modifyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="150dp"
+                android:text="Modify" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="149dp"
+            android:layout_weight="0.1" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
