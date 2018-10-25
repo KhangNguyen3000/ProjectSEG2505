@@ -4,68 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".Welcome">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/emailText"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textPersonName" />
+            android:gravity="center_horizontal"
+            android:text="Welcome username"
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/passwordText"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:gravity="center_horizontal"
+            android:text="You are now logged in as Account type"
+            android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/loginButton"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickLoginButton"
-            android:text="LOGIN"
-            android:textSize="24sp" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="100dp">
-
-        </FrameLayout>
+            android:layout_height="150dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/descriptionNACC"
+            <Button
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Don't have an account?" />
+                android:text="My Profile" />
 
             <Button
-                android:id="@+id/signUpButton"
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onClickSignupButton"
-                android:scaleX=".5"
-                android:scaleY=".5"
-                android:text="SignUP"
-                android:textSize="24sp" />
+                android:text="Log Out" />
+
         </LinearLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
