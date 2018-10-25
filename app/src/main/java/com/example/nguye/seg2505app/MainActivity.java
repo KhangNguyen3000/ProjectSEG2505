@@ -86,10 +86,13 @@ public class MainActivity extends AppCompatActivity {
         if(account != null) {
             Toast toast = Toast.makeText(getApplicationContext(), "User found!", Toast.LENGTH_LONG);
             toast.show();
+            Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
+            startActivityForResult(intent, 0);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "User does not exist...", Toast.LENGTH_LONG);
             toast.show();
         }
+        }
     }
 
-}
+
