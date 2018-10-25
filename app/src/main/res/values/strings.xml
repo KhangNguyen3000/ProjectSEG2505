@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string-array name= "account_type_spinner">
         <item>Client</item>
-        <item>Worker</item>
+        <item>Provider</item>
+        <item>Administrator</item>
     </string-array>
 </resources>
