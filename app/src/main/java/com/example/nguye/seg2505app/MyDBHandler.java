@@ -152,9 +152,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-   /* public String[] getUsers{
-        mysql> SELECT Email
-                -> FROM customers;
-
-    }*/
+    public Cursor getUsers (){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query ="SELECT * FROM "+ ACCOUNTS_EMAIL;
+        Cursor users = db.rawQuery(query,null);
+        return users;
+    }
 }
