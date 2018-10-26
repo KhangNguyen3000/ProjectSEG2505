@@ -6,7 +6,7 @@ public class CurrentAccount {
     public Account getCurrentAccount(){
         return current;
     }
-    public Account setCurrentAccount(Account utili){
+    public void setCurrentAccount(Account utili){
            current = utili;
     }
 
