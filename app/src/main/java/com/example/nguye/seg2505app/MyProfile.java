@@ -28,9 +28,6 @@ public class MyProfile extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MyDBHandler dbHandler = new MyDBHandler(this);
-                String currentEmail = CurrentAccount.account.getEmail();
-                dbHandler.deleteAccount(currentEmail);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, 0);
             }
