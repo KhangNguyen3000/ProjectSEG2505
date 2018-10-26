@@ -13,7 +13,7 @@ public class MyProfile extends AppCompatActivity {
         setContentView(R.layout.activity_my_profile);
     }
 
-    public void onClickModify(View view){
+    public void onClickModifyButton(View view){
         Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
         startActivityForResult(intent, 0);
     }
