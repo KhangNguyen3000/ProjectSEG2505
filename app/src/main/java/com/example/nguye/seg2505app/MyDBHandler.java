@@ -24,7 +24,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String ACCOUNTS_LASTNAME = "LastName";
     public static final String ACCOUNTS_STREETNUMBER = "StreetNumber";
     public static final String ACCOUNTS_STREETNAME = "StreetName";
-//    public static final String ACCOUNTS_APARTMENT = "Apartment";
+
     public static final String ACCOUNTS_CITY = "City";
     public static final String ACCOUNTS_PROVINCE = "Province";
     public static final String ACCOUNTS_COUNTRY = "Country";
@@ -64,7 +64,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + ACCOUNTS_LASTNAME + " TEXT, "
                 + ACCOUNTS_STREETNUMBER + " INTEGER, "
                 + ACCOUNTS_STREETNAME + " TEXT, "
-//                + ACCOUNTS_APARTMENT + " TEXT, "
+
                 + ACCOUNTS_CITY + " TEXT, "
                 + ACCOUNTS_PROVINCE + " TEXT, "
                 + ACCOUNTS_COUNTRY + " TEXT, "
@@ -100,7 +100,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_LASTNAME, account.getLastName());
         values.put(ACCOUNTS_STREETNUMBER, account.getStreetNumber());
         values.put(ACCOUNTS_STREETNAME, account.getStreetName());
-//        values.put(ACCOUNTS_APARTMENT, account.getApartment());
+
         values.put(ACCOUNTS_CITY, account.getCity());
         values.put(ACCOUNTS_PROVINCE, account.getProvince());
         values.put(ACCOUNTS_COUNTRY, account.getCountry());
@@ -165,7 +165,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             account.setLastName(cursor.getString(3));
             account.setStreetNumber(Integer.parseInt(cursor.getString(4)));
             account.setStreetName(cursor.getString(5));
-//            account.setApartment(cursor.getString(6));
+
             account.setCity(cursor.getString(6));
             account.setProvince(cursor.getString(7));
             account.setCountry(cursor.getString(8));

@@ -7,7 +7,6 @@ public class Account {
     private String lastName;
     private int streetNumber;
     private String streetName;
-//    private String apartment;
     private String city;
     private String province;
     private String country;
@@ -27,7 +26,6 @@ public class Account {
     public void setLastName(String lastName){this.lastName = lastName;}
     public void setStreetNumber(int streetNumber){this.streetNumber = streetNumber;}
     public void setStreetName(String streetName){this.streetName = streetName;}
-//    public void setApartment(String appartment){this.apartment = appartment;}
     public void setCity(String city){this.city = city;}
     public void setProvince(String province){this.province = province;}
     public void setCountry(String country){this.country = country;}
@@ -40,7 +38,6 @@ public class Account {
     public String getLastName(){return this.lastName;}
     public int getStreetNumber(){return this.streetNumber;}
     public String getStreetName(){return this.streetName;}
-//    public String getApartment(){return this.apartment;}
     public String getCity(){return this.city;}
     public String getProvince(){return this.province;}
     public String getCountry(){return this.country;}

@@ -39,3 +39,5 @@ public class WelcomePage extends AppCompatActivity{
         startActivityForResult(intent, 0);
     }
 }
+
+
