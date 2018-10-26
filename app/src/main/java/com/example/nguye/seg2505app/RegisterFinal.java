@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -14,7 +13,9 @@ public class RegisterFinal extends AppCompatActivity {
     String firstName, lastName;
     String email, cEmail;
     String pass, cPass;
-    String ap, street, city, province, country, postalC;
+    Long numberPhone;
+    int streetNumber;
+    String street, city, province, country, postalC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +37,13 @@ public class RegisterFinal extends AppCompatActivity {
         account.setLastName(lastName);
         account.setEmail(email);
         account.setPassword(pass);
-        account.setStreetNumber(Integer.parseInt(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString()));
+        account.setStreetNumber(streetNumber);
         account.setStreetName(street);
-        account.setApartment(((EditText) findViewById(R.id.reg_input_appartment)).getText().toString());
         account.setCity(city);
         account.setProvince(province);
         account.setCountry(country);
         account.setPostalCode(postalC);
-        account.setPhoneNumber(Long.parseLong(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString()));
+        account.setPhoneNumber(numberPhone);
 
         int accType = 0;
         if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
@@ -138,14 +138,22 @@ public class RegisterFinal extends AppCompatActivity {
 
     public boolean nonEmpty(){
         boolean answer = true;
-        if (firstName.length()==0 || lastName.equals("")){
+        if (firstName.matches("") || lastName.matches("") ||  email.matches("") ||  cEmail.matches("")
+                ||  pass.matches("")  ||  cPass.matches("")  ||  street.matches("")  ||  city.matches("")
+                ||  province.matches("") ||  country.matches("") ||  postalC.matches("")){
             Toast empty = Toast.makeText(getApplicationContext(), "Please fill every field", Toast.LENGTH_LONG);
+            empty.show();
+            answer = false;
         }
         return answer;
     }
 
+    public boolean checkNumberPhone(){
+
+    }
+
     public boolean checkAll(){
-        return(nonEmpty() && checkAllStrings() && checkPass() && checkEmail());
+        return(nonEmpty() && checkAllStrings() && checkNumberPhone() && checkPass() && checkEmail());
     }
 
     public void onClickRegister(View view){
@@ -155,6 +163,8 @@ public class RegisterFinal extends AppCompatActivity {
         cEmail = ((EditText) findViewById(R.id.reg_input_emailConfirm)).getText().toString();
         pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
         cPass= ((EditText) findViewById(R.id.reg_input_passwordConfirm)).getText().toString();
+        numberPhone = Long.parseLong(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString());
+        streetNumber = Integer.parseInt(((EditText) findViewById(R.id.reg_input_phone)).getText().toString());
         street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
         city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
         province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
