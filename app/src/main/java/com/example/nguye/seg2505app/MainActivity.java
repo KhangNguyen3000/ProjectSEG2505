@@ -83,12 +83,19 @@ public class MainActivity extends AppCompatActivity {
         String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
         String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
         Account account = dbHandler.findAccount(email);
+        String dbPassword;
         if(account != null) {
-            CurrentAccount.setCurrentAccount(account);
-            Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
-            toast.show();
-            Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
-            startActivityForResult(intent, 0);
+            dbPassword = account.getPassword();
+            if(dbPassword.equals(password)) {
+                CurrentAccount.setCurrentAccount(account);
+                Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
+                toast.show();
+                Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
+                startActivityForResult(intent, 0);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Wrong password...", Toast.LENGTH_LONG);
+                toast.show();
+            }
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "User does not exist...", Toast.LENGTH_LONG);
             toast.show();
