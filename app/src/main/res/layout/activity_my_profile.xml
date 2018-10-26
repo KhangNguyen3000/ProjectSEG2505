@@ -110,6 +110,7 @@
                 android:id="@+id/mp_btn_modify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickModifyButton"
                 android:text="Change my information" />
 
             <Button
