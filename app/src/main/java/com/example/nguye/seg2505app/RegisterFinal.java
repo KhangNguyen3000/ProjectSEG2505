@@ -23,7 +23,7 @@ public class RegisterFinal extends AppCompatActivity {
 
         //Spinner
         Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
-        ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_types, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
 
@@ -38,7 +38,7 @@ public class RegisterFinal extends AppCompatActivity {
         account.setPassword(pass);
         account.setStreetNumber(Integer.parseInt(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString()));
         account.setStreetName(street);
-        account.setApartment(((EditText) findViewById(R.id.reg_input_appartment)).getText().toString());
+//        account.setApartment(((EditText) findViewById(R.id.reg_input_appartment)).getText().toString());
         account.setCity(city);
         account.setProvince(province);
         account.setCountry(country);
@@ -90,7 +90,7 @@ public class RegisterFinal extends AppCompatActivity {
     public boolean checkPass(){
         boolean answer = true;
         if (pass.length() < 6 || pass.length() > 20){
-            Toast password = Toast.makeText(this, "Please use a 6-20 lenght password", Toast.LENGTH_LONG);
+            Toast password = Toast.makeText(this, "Please use a 6-20 length password", Toast.LENGTH_LONG);
             password.show();
             answer = false;
         }
