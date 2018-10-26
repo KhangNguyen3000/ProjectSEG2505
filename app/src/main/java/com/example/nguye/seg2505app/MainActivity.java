@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "User does not exist...", Toast.LENGTH_LONG);
             toast.show();
         }
-        }
     }
+}
 
 
