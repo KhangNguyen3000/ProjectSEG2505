@@ -81,33 +81,19 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLoginButton(View view) {
         MyDBHandler dbHandler = new MyDBHandler(this);
         String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
-
-        if(!(email.contains("@"))){
-            Toast email1 = Toast.makeText(getApplicationContext(), "Invalid e-mail address", Toast.LENGTH_LONG);
-            email1.show();
-        }
-
         String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
         Account account = dbHandler.findAccount(email);
-        String dbPassword;
-
-        if( account != null ) {
-            dbPassword = account.getPassword();
-            if (dbPassword.equals(password)){
-                Toast toast = Toast.makeText(getApplicationContext(), "User found!", Toast.LENGTH_LONG);
-                toast.show();
-                Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
-                startActivityForResult(intent, 0);
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_LONG);
-                toast.show();
-            }
-
+        if(account != null) {
+            CurrentAccount.setCurrentAccount(account);
+            Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
+            toast.show();
+            Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
+            startActivityForResult(intent, 0);
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "User does not exist..", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "User does not exist...", Toast.LENGTH_LONG);
             toast.show();
         }
+        }
     }
-}
 
 

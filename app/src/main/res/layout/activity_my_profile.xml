@@ -117,6 +117,7 @@
                 android:id="@+id/mp_btn_delete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickDelete"
                 android:text="Delete my account" />
         </LinearLayout>
 
