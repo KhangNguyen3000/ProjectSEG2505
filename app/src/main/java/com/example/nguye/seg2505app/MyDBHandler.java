@@ -51,7 +51,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_TABLE_ACCOUNTS =
@@ -152,4 +151,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
         return account;
     }
+
+   /* public String[] getUsers{
+        mysql> SELECT Email
+                -> FROM customers;
+
+    }*/
 }
