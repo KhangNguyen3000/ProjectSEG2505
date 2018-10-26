@@ -51,7 +51,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_TABLE_ACCOUNTS =
@@ -111,6 +110,29 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
+    /**
+     * Deletes from the Accounts table the record that contains the specified email
+     * @param email
+     * @return
+     */
+    public boolean deleteAccount(String email) {
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query =
+                "SELECT * FROM " + TABLE_ACCOUNTS
+                + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\""
+        ;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            String pkStr = cursor.getString(0); // primary key string
+            db.delete(TABLE_ACCOUNTS, ACCOUNTS_EMAIL + " = " + pkStr, null);
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
 
     /**
      * Retrieve an accounts information using the email as primary key
@@ -125,7 +147,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         String query =
 
                 "Select * FROM " + TABLE_ACCOUNTS
-                        + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\"";
+                + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\""
+        ;
 
 
         Cursor cursor = db.rawQuery(query, null);
@@ -152,4 +175,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
         return account;
     }
+
+   /* public String[] getUsers{
+        mysql> SELECT Email
+                -> FROM customers;
+
+    }*/
 }
