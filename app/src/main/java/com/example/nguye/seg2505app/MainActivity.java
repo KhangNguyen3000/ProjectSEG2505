@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
         Account account = dbHandler.findAccount(email);
         if(account != null) {
-            Toast toast = Toast.makeText(getApplicationContext(), "User found!", Toast.LENGTH_LONG);
+            CurrentAccount.setCurrentAccount(account);
+            Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
             toast.show();
             Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
             startActivityForResult(intent, 0);

@@ -1,13 +1,14 @@
 package com.example.nguye.seg2505app;
 
 public class CurrentAccount {
-    Account current = null;
+    static Account current = null;
 
-    public Account getCurrentAccount(){
+    public static Account getCurrentAccount(){
         return current;
     }
-    public void setCurrentAccount(Account utili){
-           current = utili;
+
+    public static void setCurrentAccount(Account account){
+        current = account;
     }
 
 }

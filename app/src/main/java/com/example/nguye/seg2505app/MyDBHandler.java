@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -21,6 +24,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String ACCOUNTS_LASTNAME = "LastName";
     public static final String ACCOUNTS_STREETNUMBER = "StreetNumber";
     public static final String ACCOUNTS_STREETNAME = "StreetName";
+
     public static final String ACCOUNTS_CITY = "City";
     public static final String ACCOUNTS_PROVINCE = "Province";
     public static final String ACCOUNTS_COUNTRY = "Country";
@@ -60,6 +64,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + ACCOUNTS_LASTNAME + " TEXT, "
                 + ACCOUNTS_STREETNUMBER + " INTEGER, "
                 + ACCOUNTS_STREETNAME + " TEXT, "
+
                 + ACCOUNTS_CITY + " TEXT, "
                 + ACCOUNTS_PROVINCE + " TEXT, "
                 + ACCOUNTS_COUNTRY + " TEXT, "
@@ -95,6 +100,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_LASTNAME, account.getLastName());
         values.put(ACCOUNTS_STREETNUMBER, account.getStreetNumber());
         values.put(ACCOUNTS_STREETNAME, account.getStreetName());
+
         values.put(ACCOUNTS_CITY, account.getCity());
         values.put(ACCOUNTS_PROVINCE, account.getProvince());
         values.put(ACCOUNTS_COUNTRY, account.getCountry());
@@ -123,7 +129,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             String pkStr = cursor.getString(0); // primary key string
-            db.delete(TABLE_ACCOUNTS, ACCOUNTS_EMAIL + " = " + pkStr, null);
+            db.delete(TABLE_ACCOUNTS, ACCOUNTS_EMAIL + " = \"" + pkStr + "\"", null);
             cursor.close();
             result = true;
         }
@@ -143,7 +149,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
         String query =
 
-                "Select * FROM " + TABLE_ACCOUNTS
+                "SELECT * FROM " + TABLE_ACCOUNTS
                 + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\""
         ;
 
@@ -159,6 +165,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             account.setLastName(cursor.getString(3));
             account.setStreetNumber(Integer.parseInt(cursor.getString(4)));
             account.setStreetName(cursor.getString(5));
+
             account.setCity(cursor.getString(6));
             account.setProvince(cursor.getString(7));
             account.setCountry(cursor.getString(8));
@@ -172,9 +179,20 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-   /* public String[] getUsers{
-        mysql> SELECT Email
-                -> FROM customers;
+    public List<String> getUsers (){
+        List<String> mArrayList = new ArrayList<String>();
 
-    }*/
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query ="SELECT * FROM "+ ACCOUNTS_EMAIL;
+        Cursor users = db.rawQuery(query,null);
+        users.moveToFirst();
+        int i = 0;
+        while(!users.isAfterLast()) {
+            mArrayList.add(users.getString(i)); //add the item
+            users.moveToNext();
+            i++;
+        }
+            return mArrayList;
+    }
+
 }
