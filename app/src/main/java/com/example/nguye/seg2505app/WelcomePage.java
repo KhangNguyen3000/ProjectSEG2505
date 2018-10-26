@@ -19,13 +19,12 @@ public class WelcomePage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         MyDBHandler a = new MyDBHandler(this);
-        List<String> dataUsers = a.getUsers();
-        List<String> users = new ArrayList<String>();
+        List<String> users = a.getUsers();
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users.toArray(new String[users.size()]));
         //android.R.id.text1
         ListView listView = (ListView) findViewById(R.id._ListViewUsers);
         listView.setAdapter(itemsAdapter);
-        }
+    }
 
 
 

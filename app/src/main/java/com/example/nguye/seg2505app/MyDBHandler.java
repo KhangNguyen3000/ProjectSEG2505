@@ -183,16 +183,14 @@ public class MyDBHandler extends SQLiteOpenHelper{
         List<String> mArrayList = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String query ="SELECT * FROM "+ ACCOUNTS_EMAIL;
+        String query ="SELECT " + ACCOUNTS_EMAIL + " FROM "+ TABLE_ACCOUNTS;
         Cursor users = db.rawQuery(query,null);
         users.moveToFirst();
-        int i = 0;
         while(!users.isAfterLast()) {
-            mArrayList.add(users.getString(i)); //add the item
+            mArrayList.add(users.getString(0)); //add the item
             users.moveToNext();
-            i++;
         }
-            return mArrayList;
+        return mArrayList;
     }
 
 }
