@@ -1,3 +1,5 @@
+package com.example.nguye.seg2505app;
+
 public class DBStructure {
 
     public String tableName;
