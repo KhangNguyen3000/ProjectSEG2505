@@ -165,31 +165,10 @@ public class ModifyScreen extends AppCompatActivity{
         return false;
     }
 
-    public boolean checkNumberPhone(){
-        String number = numberPhone.toString();
-        if (number.matches("\\d{10}")){
-            return true;
-        }
-        Toast numberP = Toast.makeText(getApplicationContext(), "Please enter a valid number phone", Toast.LENGTH_LONG);
-        numberP.show();
-        return false;
-    }
-
-    public boolean checkNumberStreet(){
-        String number = Integer.toString(streetNumber);
-        for(int i = 0; i < number.length(); i++){
-            if(number.charAt(i) <= 29 || number.charAt(i) >= 40 ){
-                Toast numberS = Toast.makeText(getApplicationContext(), "Please enter a valid street number", Toast.LENGTH_LONG);
-                numberS.show();
-                return false;
-            }
-        }
-        return true;
-    }
 
     public boolean checkAll(){
         return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail()
-                && checkPostalCode() && checkNumberPhone() && checkNumberStreet());
+                && checkPostalCode());
     }
 
     public void clickModify(View view){
@@ -197,7 +176,6 @@ public class ModifyScreen extends AppCompatActivity{
         lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
         email = ((EditText) findViewById(R.id.mod_input_email)).getText().toString();
         pass= ((EditText) findViewById(R.id.mod_input_password)).getText().toString();
-        numberPhone = Long.parseLong(((EditText) findViewById(R.id.mod_input_streetNumber)).getText().toString());
         street = ((EditText) findViewById(R.id.mod_input_streetName)).getText().toString();
         city = ((EditText) findViewById(R.id.mod_input_city)).getText().toString();
         province = ((EditText) findViewById(R.id.mod_input_province)).getText().toString();
