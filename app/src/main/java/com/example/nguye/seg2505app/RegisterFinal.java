@@ -3,6 +3,7 @@ package com.example.nguye.seg2505app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -148,12 +149,39 @@ public class RegisterFinal extends AppCompatActivity {
         return answer;
     }
 
-    public boolean checkNumberPhone(){
+    public boolean checkPostalCode(){
+        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
+            return true;
+        }
+        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
+        postal.show();
+        return false;
+    }
 
+    public boolean checkNumberPhone(){
+        String number = numberPhone.toString();
+        if (number.matches("\\d{10}")){
+            return true;
+        }
+        Toast numberP = Toast.makeText(getApplicationContext(), "Please enter a valid number phone", Toast.LENGTH_LONG);
+        numberP.show();
+        return false;
+    }
+
+    public boolean checkNumberStreet(){
+        String number = Integer.toString(streetNumber);
+        for(int i = 0; i < number.length(); i++){
+            if(number.charAt(i) <= 29 || number.charAt(i) >= 40 ){
+                Toast numberS = Toast.makeText(getApplicationContext(), "Please enter a valid street number", Toast.LENGTH_LONG);
+                numberS.show();
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean checkAll(){
-        return(nonEmpty() && checkAllStrings() && checkNumberPhone() && checkPass() && checkEmail());
+        return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail());
     }
 
     public void onClickRegister(View view){
