@@ -126,7 +126,7 @@
                             android:text="No." />
 
                         <EditText
-                            android:id="@+id/reg_input_streetNumber"
+                            android:id="@+id/mod_input_streetNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -147,7 +147,7 @@
                             android:text="Street" />
 
                         <EditText
-                            android:id="@+id/reg_input_streetName"
+                            android:id="@+id/mod_input_streetName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -168,7 +168,7 @@
                             android:text="City" />
 
                         <EditText
-                            android:id="@+id/reg_input_city"
+                            android:id="@+id/mod_input_city"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -196,7 +196,7 @@
                             android:text="Province" />
 
                         <EditText
-                            android:id="@+id/reg_input_province"
+                            android:id="@+id/mod_input_province"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -217,7 +217,7 @@
                             android:text="Country" />
 
                         <EditText
-                            android:id="@+id/reg_input_country"
+                            android:id="@+id/mod_input_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -238,7 +238,7 @@
                             android:text="Postal code" />
 
                         <EditText
-                            android:id="@+id/reg_input_postalCode"
+                            android:id="@+id/mod_input_postalCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -288,7 +288,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="150dp"
-                android:text="Modify" />
+                android:onClick="clickModify"
+                android:text="Modify"
+                tools:ignore="OnClick" />
         </LinearLayout>
 
         <Space
