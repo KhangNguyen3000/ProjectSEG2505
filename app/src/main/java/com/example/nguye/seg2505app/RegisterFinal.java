@@ -3,7 +3,6 @@ package com.example.nguye.seg2505app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewDebug;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -181,7 +180,8 @@ public class RegisterFinal extends AppCompatActivity {
     }
 
     public boolean checkAll(){
-        return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail());
+        return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail()
+        && checkPostalCode() && checkNumberPhone() && checkNumberStreet());
     }
 
     public void onClickRegister(View view){
