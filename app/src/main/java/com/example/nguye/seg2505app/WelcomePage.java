@@ -18,15 +18,17 @@ public class WelcomePage extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        MyDBHandler a = new MyDBHandler();
-        Cursor dataUsers = a.getUsers();
-
+        MyDBHandler a = new MyDBHandler(this);
+        List<String> dataUsers = a.getUsers();
         List<String> users = new ArrayList<String>();
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,users);
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users.toArray(new String[users.size()]));
+        //android.R.id.text1
         ListView listView = (ListView) findViewById(R.id._ListViewUsers);
         listView.setAdapter(itemsAdapter);
-    }
+        }
+
+
+
 
     public void onClickMyProfileButton(View view){
         Intent intent = new Intent(getApplicationContext(), MyProfile.class);

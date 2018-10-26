@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyDBHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 1;
@@ -176,10 +179,20 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-    public Cursor getUsers (){
+    public List<String> getUsers (){
+        List<String> mArrayList = new ArrayList<String>();
+
         SQLiteDatabase db = this.getReadableDatabase();
         String query ="SELECT * FROM "+ ACCOUNTS_EMAIL;
         Cursor users = db.rawQuery(query,null);
-        return users;
+        users.moveToFirst();
+        int i = 0;
+        while(!users.isAfterLast()) {
+            mArrayList.add(users.getString(i)); //add the item
+            users.moveToNext();
+            i++;
+        }
+            return mArrayList;
     }
+
 }
