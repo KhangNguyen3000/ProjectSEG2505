@@ -16,7 +16,7 @@ public class ModifyScreen extends AppCompatActivity{
     String firstName, lastName;
     String email, cEmail;
     String pass, cPass;
-    Long numberPhone;
+    long phoneNumber;
     int streetNumber;
     String street, city, province, country, postalC;
 
@@ -41,7 +41,7 @@ public class ModifyScreen extends AppCompatActivity{
         tvPassWord.setText(currentAccount.getPassword());
 
         TextView tvStreetN = (TextView)findViewById(R.id.mod_input_streetNumber);
-        tvStreetN.setText(currentAccount.getStreetNumber());
+        tvStreetN.setText(Integer.toString(currentAccount.getStreetNumber()));
 
         TextView tvStreet = (TextView)findViewById(R.id.mod_input_streetName);
         tvStreet.setText(currentAccount.getStreetName());
@@ -61,6 +61,7 @@ public class ModifyScreen extends AppCompatActivity{
 
 
     public void modifyCurrentUser(){
+        MyDBHandler dbHandler = new MyDBHandler(this);
         Account currentAccount = CurrentAccount.getCurrentAccount();
         currentAccount.setFirstName(firstName);
         currentAccount.setLastName(lastName);
@@ -68,13 +69,13 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setPassword(pass);
         currentAccount.setStreetNumber(streetNumber);
         currentAccount.setStreetName(street);
-
         currentAccount.setCity(city);
         currentAccount.setProvince(province);
         currentAccount.setCountry(country);
         currentAccount.setPostalCode(postalC);
+        currentAccount.setPhoneNumber(phoneNumber);
 
-
+        dbHandler.modifyAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
     }
@@ -146,8 +147,8 @@ public class ModifyScreen extends AppCompatActivity{
 
     public boolean nonEmpty(){
         boolean answer = true;
-        if (firstName.matches("") || lastName.matches("") ||  email.matches("") ||  cEmail.matches("")
-                ||  pass.matches("")  ||  cPass.matches("")  ||  street.matches("")  ||  city.matches("")
+        if (firstName.matches("") || lastName.matches("") ||  email.matches("")
+                ||  pass.matches("") ||  street.matches("")  ||  city.matches("")
                 ||  province.matches("") ||  country.matches("") ||  postalC.matches("")){
             Toast empty = Toast.makeText(getApplicationContext(), "Please fill every field", Toast.LENGTH_LONG);
             empty.show();
@@ -157,12 +158,14 @@ public class ModifyScreen extends AppCompatActivity{
     }
 
     public boolean checkPostalCode(){
-        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
-            return true;
-        }
-        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
-        postal.show();
-        return false;
+//        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
+//            return true;
+//        }
+//        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
+//        postal.show();
+//        return false;
+
+        return true;
     }
 
 
