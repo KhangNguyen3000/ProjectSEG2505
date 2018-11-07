@@ -179,6 +179,26 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
+    public boolean existsType(String type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query =
+
+                "SELECT * FROM " + TABLE_ACCOUNTS
+                        + " WHERE " + ACCOUNTS_TYPE + " = \"" + type + "\""
+                ;
+
+
+        Cursor cursor = db.rawQuery(query, null);
+
+
+        if(cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<String> getUsers (){
         List<String> mArrayList = new ArrayList<String>();
 
