@@ -10,4 +10,5 @@ public class service_management extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management);
     }
+
 }
