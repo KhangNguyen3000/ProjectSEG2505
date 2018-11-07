@@ -11,20 +11,18 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
     public static final String TABLE_ACCOUNTS = "Accounts";
-//    public static final String ACCOUNTS_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
-
+    public static final String ACCOUNTS_ID = "ID";
     public static final String ACCOUNTS_EMAIL = "Email";
     public static final String ACCOUNTS_TYPE = "Type";
     public static final String ACCOUNTS_FIRSTNAME = "FirstName";
     public static final String ACCOUNTS_LASTNAME = "LastName";
     public static final String ACCOUNTS_STREETNUMBER = "StreetNumber";
     public static final String ACCOUNTS_STREETNAME = "StreetName";
-
     public static final String ACCOUNTS_CITY = "City";
     public static final String ACCOUNTS_PROVINCE = "Province";
     public static final String ACCOUNTS_COUNTRY = "Country";
@@ -58,13 +56,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         String CREATE_TABLE_ACCOUNTS =
                 "CREATE TABLE " + TABLE_ACCOUNTS + "("
+                + ACCOUNTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ACCOUNTS_EMAIL + " TEXT, "
                 + ACCOUNTS_TYPE + " INTEGER, "
                 + ACCOUNTS_FIRSTNAME + " TEXT, "
                 + ACCOUNTS_LASTNAME + " TEXT, "
                 + ACCOUNTS_STREETNUMBER + " INTEGER, "
                 + ACCOUNTS_STREETNAME + " TEXT, "
-
                 + ACCOUNTS_CITY + " TEXT, "
                 + ACCOUNTS_PROVINCE + " TEXT, "
                 + ACCOUNTS_COUNTRY + " TEXT, "
@@ -100,7 +98,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_LASTNAME, account.getLastName());
         values.put(ACCOUNTS_STREETNUMBER, account.getStreetNumber());
         values.put(ACCOUNTS_STREETNAME, account.getStreetName());
-
         values.put(ACCOUNTS_CITY, account.getCity());
         values.put(ACCOUNTS_PROVINCE, account.getProvince());
         values.put(ACCOUNTS_COUNTRY, account.getCountry());
@@ -110,6 +107,27 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
 
         db.insert(TABLE_ACCOUNTS, null, values);
+        db.close();
+    }
+
+    // Adds an account to the database
+    public void modifyAccount(Account account) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ACCOUNTS_EMAIL, account.getEmail());
+        values.put(ACCOUNTS_TYPE, account.getType());
+        values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());
+        values.put(ACCOUNTS_LASTNAME, account.getLastName());
+        values.put(ACCOUNTS_STREETNUMBER, account.getStreetNumber());
+        values.put(ACCOUNTS_STREETNAME, account.getStreetName());
+        values.put(ACCOUNTS_CITY, account.getCity());
+        values.put(ACCOUNTS_PROVINCE, account.getProvince());
+        values.put(ACCOUNTS_COUNTRY, account.getCountry());
+        values.put(ACCOUNTS_POSTALCODE, account.getPostalCode());
+        values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
+        values.put(ACCOUNTS_PASSWORD, account.getPassword());
+
+        db.update(TABLE_ACCOUNTS, values, "ID="+Integer.toString(account.getId()), null);
         db.close();
     }
 
@@ -159,19 +177,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
 
         if(cursor.moveToFirst()) {
-            account.setEmail(cursor.getString(0));
-            account.setType(Integer.parseInt(cursor.getString(1)));
-            account.setFirstName(cursor.getString(2));
-            account.setLastName(cursor.getString(3));
-            account.setStreetNumber(Integer.parseInt(cursor.getString(4)));
-            account.setStreetName(cursor.getString(5));
+            account.setEmail(cursor.getString(1));
+            account.setType(Integer.parseInt(cursor.getString(2)));
+            account.setFirstName(cursor.getString(3));
+            account.setLastName(cursor.getString(4));
+            account.setStreetNumber(Integer.parseInt(cursor.getString(5)));
+            account.setStreetName(cursor.getString(6));
 
-            account.setCity(cursor.getString(6));
-            account.setProvince(cursor.getString(7));
-            account.setCountry(cursor.getString(8));
-            account.setPostalCode(cursor.getString(9));
-            account.setPhoneNumber(Long.parseLong(cursor.getString(10)));
-            account.setPassword(cursor.getString(11));
+            account.setCity(cursor.getString(7));
+            account.setProvince(cursor.getString(8));
+            account.setCountry(cursor.getString(9));
+            account.setPostalCode(cursor.getString(10));
+            account.setPhoneNumber(Long.parseLong(cursor.getString(11)));
+            account.setPassword(cursor.getString(12));
         } else {
             account = null;
         }

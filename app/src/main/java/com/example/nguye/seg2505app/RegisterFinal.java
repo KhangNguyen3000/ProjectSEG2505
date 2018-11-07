@@ -47,15 +47,24 @@ public class RegisterFinal extends AppCompatActivity {
         account.setPhoneNumber(phoneNumber);
 
         int accType = 0;
-        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        String typeOption = typeUserSpinner.getSelectedItem().toString();
+
+        if (typeOption.equals("Client")) {
             accType = 3;
-        }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+        } else if (typeOption.equals("Provider")) {
             accType = 2;
         }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
-            accType = 1;
-        }
+
+//        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+//            accType = 3;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+//            accType = 2;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
+//            accType = 1;
+//        }
         account.setType(accType);
         dbHandler.addAccount(account);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);

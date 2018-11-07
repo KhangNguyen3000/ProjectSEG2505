@@ -1,6 +1,7 @@
 package com.example.nguye.seg2505app;
 
 public class Account {
+    private int id;
     private String email;
     private int type;
     private String firstName;
@@ -32,6 +33,8 @@ public class Account {
     public void setPostalCode(String postalCode){this.postalCode = postalCode;}
     public void setPhoneNumber(long phoneNumber){this.phoneNumber = phoneNumber;}
     public void setPassword(String password){this.password = password;}
+
+    public int getId(){return this.id;}
     public String getEmail(){return this.email;}
     public int getType(){return this.type;}
     public String getFirstName(){return this.firstName;}
