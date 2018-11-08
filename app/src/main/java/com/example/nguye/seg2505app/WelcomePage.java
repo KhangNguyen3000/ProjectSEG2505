@@ -58,7 +58,10 @@ public class WelcomePage extends AppCompatActivity{
     }
 
 
-
+    public void onClickManageServiceButton(View view){
+        Intent intent = new Intent(getApplicationContext(), Service_management.class);
+        startActivityForResult(intent, 0);
+    }
 
     public void onClickMyProfileButton(View view){
         Intent intent = new Intent(getApplicationContext(), MyProfile.class);
