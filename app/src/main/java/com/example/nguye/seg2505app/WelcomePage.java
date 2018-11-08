@@ -51,14 +51,14 @@ public class WelcomePage extends AppCompatActivity{
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
         } else {
-            accType = Integer.toString(currentAccount.getType());
+            accType ="Client";
         }
         return accType;
     }
 
 
     public void onClickManageServiceButton(View view){
-        Intent intent = new Intent(getApplicationContext(), Service_management.class);
+        Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
         startActivityForResult(intent, 0);
     }
 
