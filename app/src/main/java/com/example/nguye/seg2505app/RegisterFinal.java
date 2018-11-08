@@ -15,7 +15,7 @@ public class RegisterFinal extends AppCompatActivity {
     String pass, cPass;
     long phoneNumber;
     int streetNumber;
-    String street, city, province, country, postalC;
+    String street, city, province, country, postalC, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,9 +169,20 @@ public class RegisterFinal extends AppCompatActivity {
     }
 
 
+    public boolean checkAdmin(){
+        if(type == "Administrator"){
+            MyDBHandler dbHandler = new MyDBHandler(this);
+            if(dbHandler.existsType("Administrator")){
+                return false;
+            }
+            return true;
+        }
+        return true;
+    }
+
     public boolean checkAll(){
         return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail()
-        && checkPostalCode());
+        && checkPostalCode() && checkAdmin());
     }
 
     public void onClickRegister(View view){
@@ -186,6 +197,7 @@ public class RegisterFinal extends AppCompatActivity {
         province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
         country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
         postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
+        type =  ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
         System.out.println(firstName);
         if (checkAll()){
             addUserToDatabase();
