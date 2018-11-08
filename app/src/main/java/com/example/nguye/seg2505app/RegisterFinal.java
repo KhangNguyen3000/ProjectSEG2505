@@ -13,7 +13,7 @@ public class RegisterFinal extends AppCompatActivity {
     String firstName, lastName;
     String email, cEmail;
     String pass, cPass;
-    Long numberPhone;
+    long phoneNumber;
     int streetNumber;
     String street, city, province, country, postalC, type;
 
@@ -44,18 +44,27 @@ public class RegisterFinal extends AppCompatActivity {
         account.setProvince(province);
         account.setCountry(country);
         account.setPostalCode(postalC);
-        account.setPhoneNumber(numberPhone);
+        account.setPhoneNumber(phoneNumber);
 
         int accType = 0;
-        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        String typeOption = typeUserSpinner.getSelectedItem().toString();
+
+        if (typeOption.equals("Client")) {
             accType = 3;
-        }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+        } else if (typeOption.equals("Provider")) {
             accType = 2;
         }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
-            accType = 1;
-        }
+
+//        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+//            accType = 3;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+//            accType = 2;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
+//            accType = 1;
+//        }
         account.setType(accType);
         dbHandler.addAccount(account);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
@@ -150,12 +159,13 @@ public class RegisterFinal extends AppCompatActivity {
     }
 
     public boolean checkPostalCode(){
-        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
-            return true;
-        }
-        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
-        postal.show();
-        return false;
+//        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
+//            return true;
+//        }
+//        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
+//        postal.show();
+//        return false;
+        return true;
     }
 
 
