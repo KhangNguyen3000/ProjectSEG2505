@@ -48,11 +48,10 @@ public class WelcomePage extends AppCompatActivity{
             accType = "Administrator";
             List<String> users = a.getUsers();
             UserList(users);
-            return accType;
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
         } else {
-            accType = "Client";
+            accType = Integer.toString(currentAccount.getType());
         }
         return accType;
     }
