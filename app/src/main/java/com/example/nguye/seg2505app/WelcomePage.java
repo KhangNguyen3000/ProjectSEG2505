@@ -25,14 +25,13 @@ public class WelcomePage extends AppCompatActivity{
 
         Account currentAccount = CurrentAccount.getCurrentAccount();
 
-        //Initialize the text view for are text field on Welcome page
+
         TextView tvFullName = (TextView)findViewById(R.id.textView2);
         TextView tvAccountType = (TextView)findViewById(R.id.textView);
 
-        // Set the text for User name and account type
         String accType = AccountType(currentAccount);
         tvFullName.setText("Welcome " + currentAccount.getFirstName() + " " + currentAccount.getLastName());
-        tvAccountType.setText("You are now logged in as " + accType );
+        tvAccountType.setText("You are now logged in as " + accType);
     }
 
     //Display The list of Users;
@@ -42,20 +41,15 @@ public class WelcomePage extends AppCompatActivity{
         listView.setAdapter(itemsAdapter);
     }
 
-    //Returns the String equivalent to for the current account type
     public String AccountType (Account currentAccount) {
 
         String accType;
-        //if the current account is an Admin also display the list of Users
         if(currentAccount.getType() == 1) {
             accType = "Administrator";
             List<String> users = a.getUsers();
             UserList(users);
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
-
-
-            //Just for trouble shooting the currentAccount int value
         } else {
             accType = Integer.toString(currentAccount.getType());
         }
@@ -64,7 +58,7 @@ public class WelcomePage extends AppCompatActivity{
 
 
     public void onClickManageServiceButton(View view){
-        Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
+        Intent intent = new Intent(getApplicationContext(), Service_management.class);
         startActivityForResult(intent, 0);
     }
 
