@@ -58,6 +58,7 @@ public class WelcomePage extends AppCompatActivity{
         } else {
             accType = "Client";
             managementServiceButton.setVisibility(View.GONE);
+            accType = Integer.toString(currentAccount.getType());
         }
         return accType;
     }
