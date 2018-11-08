@@ -21,8 +21,9 @@
         </activity>
         <activity android:name=".MyProfile" />
         <activity android:name=".RegisterFinal" />
-        <activity android:name=".WelcomePage"/>
-        <activity android:name=".ModifyScreen"/>
+        <activity android:name=".WelcomePage" />
+        <activity android:name=".ModifyScreen" />
+        <activity android:name=".service_management"></activity>
     </application>
 
 </manifest>

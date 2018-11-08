@@ -13,7 +13,7 @@ public class RegisterFinal extends AppCompatActivity {
     String firstName, lastName;
     String email, cEmail;
     String pass, cPass;
-    Long numberPhone;
+    long phoneNumber;
     int streetNumber;
     String street, city, province, country, postalC;
 
@@ -44,18 +44,27 @@ public class RegisterFinal extends AppCompatActivity {
         account.setProvince(province);
         account.setCountry(country);
         account.setPostalCode(postalC);
-        account.setPhoneNumber(numberPhone);
+        account.setPhoneNumber(phoneNumber);
 
         int accType = 0;
-        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        String typeOption = typeUserSpinner.getSelectedItem().toString();
+
+        if (typeOption.equals("Client")) {
             accType = 3;
-        }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+        } else if (typeOption.equals("Provider")) {
             accType = 2;
         }
-        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
-            accType = 1;
-        }
+
+//        if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Client")) {
+//            accType = 3;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Provider")) {
+//            accType = 2;
+//        }
+//        else if(((EditText) findViewById(R.id.reg_input_province)).getText().toString().equals("Administrator")) {
+//            accType = 1;
+//        }
         account.setType(accType);
         dbHandler.addAccount(account);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
@@ -150,39 +159,19 @@ public class RegisterFinal extends AppCompatActivity {
     }
 
     public boolean checkPostalCode(){
-        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
-            return true;
-        }
-        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
-        postal.show();
-        return false;
-    }
-
-    public boolean checkNumberPhone(){
-        String number = numberPhone.toString();
-        if (number.matches("\\d{10}")){
-            return true;
-        }
-        Toast numberP = Toast.makeText(getApplicationContext(), "Please enter a valid number phone", Toast.LENGTH_LONG);
-        numberP.show();
-        return false;
-    }
-
-    public boolean checkNumberStreet(){
-        String number = Integer.toString(streetNumber);
-        for(int i = 0; i < number.length(); i++){
-            if(number.charAt(i) <= 29 || number.charAt(i) >= 40 ){
-                Toast numberS = Toast.makeText(getApplicationContext(), "Please enter a valid street number", Toast.LENGTH_LONG);
-                numberS.show();
-                return false;
-            }
-        }
+//        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
+//            return true;
+//        }
+//        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
+//        postal.show();
+//        return false;
         return true;
     }
 
+
     public boolean checkAll(){
         return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail()
-        && checkPostalCode() && checkNumberPhone() && checkNumberStreet());
+        && checkPostalCode());
     }
 
     public void onClickRegister(View view){
@@ -192,8 +181,6 @@ public class RegisterFinal extends AppCompatActivity {
         cEmail = ((EditText) findViewById(R.id.reg_input_emailConfirm)).getText().toString();
         pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
         cPass= ((EditText) findViewById(R.id.reg_input_passwordConfirm)).getText().toString();
-        numberPhone = Long.parseLong(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString());
-        streetNumber = Integer.parseInt(((EditText) findViewById(R.id.reg_input_phone)).getText().toString());
         street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
         city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
         province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();

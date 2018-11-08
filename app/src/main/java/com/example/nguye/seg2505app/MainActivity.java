@@ -23,14 +23,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        })*/;
 
 
 //        final MyDBHandler dbHandler = new MyDBHandler(this);
@@ -86,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
         String dbPassword;
         if(account != null) {
             dbPassword = account.getPassword();
-            if (dbPassword.equals(password)) {
+            if(dbPassword.equals(password)) {
                 CurrentAccount.setCurrentAccount(account);
                 Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
                 toast.show();
                 Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
                 startActivityForResult(intent, 0);
-            }else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_LONG);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Wrong password...", Toast.LENGTH_LONG);
                 toast.show();
             }
         } else {
