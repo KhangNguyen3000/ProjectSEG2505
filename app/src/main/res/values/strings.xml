@@ -4,6 +4,5 @@
     <string-array name= "account_type_spinner">
         <item>Client</item>
         <item>Provider</item>
-        <item>Administrator</item>
     </string-array>
 </resources>

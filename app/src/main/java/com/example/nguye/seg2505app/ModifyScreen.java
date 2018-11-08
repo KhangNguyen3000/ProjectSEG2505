@@ -14,8 +14,8 @@ public class ModifyScreen extends AppCompatActivity{
 
 
     String firstName, lastName;
-    String email, cEmail;
-    String pass, cPass;
+    String email;
+    String pass;
     long phoneNumber;
     int streetNumber;
     String street, city, province, country, postalC;
@@ -157,21 +157,10 @@ public class ModifyScreen extends AppCompatActivity{
         return answer;
     }
 
-    public boolean checkPostalCode(){
-//        if(postalC.matches("\\c{1}\\d{1}\\c{1}\\d{1}\\c{1}\\d{1}")){
-//            return true;
-//        }
-//        Toast postal = Toast.makeText(getApplicationContext(), "Please enter a valid Postal Code", Toast.LENGTH_LONG);
-//        postal.show();
-//        return false;
-
-        return true;
-    }
 
 
     public boolean checkAll(){
-        return(nonEmpty() && checkAllStrings() && checkPostalCode() && checkPass() && checkEmail()
-                && checkPostalCode());
+        return(nonEmpty() && checkAllStrings()  && checkPass() && checkEmail());
     }
 
     public void clickModify(View view){
