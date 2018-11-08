@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -247,6 +247,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         account.setPhoneNumber(0000000000);
 
         account.setType(1);
+
+        addAccount(account);
     }
 
     public boolean existsType(int type) {
