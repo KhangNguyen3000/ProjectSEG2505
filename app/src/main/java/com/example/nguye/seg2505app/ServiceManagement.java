@@ -6,7 +6,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceManagement extends AppCompatActivity {
 
@@ -14,6 +19,14 @@ public class ServiceManagement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management);
+        ListView lv;
+        lv = (ListView) findViewById(R.id.serviceList);
+        List<String> serviceList = new ArrayList<String>();
+
+        //rempli arraylist avec tous les elements du database
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,serviceList);
+    lv.setAdapter(arrayAdapter);
     }
     public void onClickList(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
