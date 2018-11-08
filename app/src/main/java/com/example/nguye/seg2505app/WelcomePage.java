@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,20 +44,14 @@ public class WelcomePage extends AppCompatActivity{
     public String AccountType (Account currentAccount) {
 
         String accType;
-        Button managementServiceButton = findViewById(R.id.wel_manageservice_button);
         if(currentAccount.getType() == 1) {
             accType = "Administrator";
             List<String> users = a.getUsers();
             UserList(users);
-            managementServiceButton.setVisibility(View.VISIBLE);
-            return accType;
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
-            managementServiceButton.setVisibility(View.GONE);
         } else {
-            accType = "Client";
-            managementServiceButton.setVisibility(View.GONE);
-            accType = Integer.toString(currentAccount.getType());
+            accType ="Client";
         }
         return accType;
     }
