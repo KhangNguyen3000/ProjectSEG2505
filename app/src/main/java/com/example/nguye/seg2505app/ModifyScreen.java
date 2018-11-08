@@ -74,10 +74,11 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setCountry(country);
         currentAccount.setPostalCode(postalC);
         currentAccount.setPhoneNumber(phoneNumber);
-
+        currentAccount.setId(CurrentAccount.getCurrentAccount().getId());
         dbHandler.modifyAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
+
     }
 
     public boolean checkEmail(){

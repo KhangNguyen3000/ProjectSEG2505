@@ -21,6 +21,7 @@ public class Account {
     }
 
     // Setters and getters
+    public void setId(int id){this.id = id;}
     public void setEmail(String email){this.email = email;}
     public void setType(int type){this.type = type;}
     public void setFirstName(String firstName){this.firstName = firstName;}
