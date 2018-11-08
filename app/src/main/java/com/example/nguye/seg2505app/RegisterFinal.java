@@ -71,7 +71,6 @@ public class RegisterFinal extends AppCompatActivity {
         int lenght = 0;
         MyDBHandler dbHandler = new MyDBHandler(this);
         Context context = getApplicationContext();
-        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
         firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
         email = ((EditText) findViewById(R.id.reg_input_email)).getText().toString();
@@ -84,7 +83,7 @@ public class RegisterFinal extends AppCompatActivity {
         country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
         postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
         lenght = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
-        Checking check = new Checking(firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, lenght, dbHandler, context);
+        Checking check = new Checking("register", firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, lenght, dbHandler, context);
         if (check.checkAll()){
             addUserToDatabase();
         }
