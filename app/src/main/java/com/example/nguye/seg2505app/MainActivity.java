@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        if(!(dbHandler.existsType(1))){
+            dbHandler.createAdmin();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
