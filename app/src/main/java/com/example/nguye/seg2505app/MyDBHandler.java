@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -197,13 +197,30 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-    public boolean existsType(String type) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    public void createAdmin(){
+        Account account = new Account();
+        account.setFirstName("admin");
+        account.setLastName("admin");
+        account.setEmail("admin@admin.admin");
+        account.setPassword("admin0");
+        account.setStreetNumber(0);
+        account.setStreetName("admin");
 
+        account.setCity("admin");
+        account.setProvince("admin");
+        account.setCountry("admin");
+        account.setPostalCode("a0a0a0");
+        account.setPhoneNumber(0000000000);
+
+        account.setType(1);
+    }
+
+    public boolean existsType(int type) {
+        SQLiteDatabase db = this.getReadableDatabase();
         String query =
 
                 "SELECT * FROM " + TABLE_ACCOUNTS
-                        + " WHERE " + ACCOUNTS_TYPE + " = \"" + type + "\""
+                        + " WHERE " + ACCOUNTS_TYPE + " = " + type
                 ;
 
 
