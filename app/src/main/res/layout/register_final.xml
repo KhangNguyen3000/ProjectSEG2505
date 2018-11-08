@@ -294,7 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="(123) 456-7890"
+                        android:hint="1234567890"
                         android:inputType="phone" />
                 </LinearLayout>
 
