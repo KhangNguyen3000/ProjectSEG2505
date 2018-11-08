@@ -3,7 +3,7 @@ package com.example.nguye.seg2505app;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class service_management extends AppCompatActivity {
+public class ServiceManagement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

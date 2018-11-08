@@ -23,7 +23,7 @@
         <activity android:name=".RegisterFinal" />
         <activity android:name=".WelcomePage" />
         <activity android:name=".ModifyScreen" />
-        <activity android:name=".service_management"></activity>
+        <activity android:name=".ServiceManagement"></activity>
     </application>
 
 </manifest>
