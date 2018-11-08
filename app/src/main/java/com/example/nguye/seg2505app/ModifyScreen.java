@@ -1,5 +1,6 @@
 package com.example.nguye.seg2505app;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,21 +162,25 @@ public class ModifyScreen extends AppCompatActivity{
 
 
     public boolean checkAll(){
-        return(nonEmpty() && checkAllStrings()  && checkPass() && checkEmail());
+        return(nonEmpty() && checkAllStrings() && checkPass() && checkEmail());
     }
 
     public void clickModify(View view){
-        firstName = ((EditText) findViewById(R.id.mod_input_firstName)).getText().toString();
-        lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
-        email = ((EditText) findViewById(R.id.mod_input_email)).getText().toString();
-        pass= ((EditText) findViewById(R.id.mod_input_password)).getText().toString();
-        street = ((EditText) findViewById(R.id.mod_input_streetName)).getText().toString();
-        city = ((EditText) findViewById(R.id.mod_input_city)).getText().toString();
-        province = ((EditText) findViewById(R.id.mod_input_province)).getText().toString();
-        country = ((EditText) findViewById(R.id.mod_input_country)).getText().toString();
-        postalC = ((EditText) findViewById(R.id.mod_input_postalCode)).getText().toString();
-        System.out.println(firstName);
-        if (checkAll()){
+        int len = 0;
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        Context context = getApplicationContext();
+        firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
+        lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
+        email = ((EditText) findViewById(R.id.reg_input_email)).getText().toString();
+        pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
+        street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
+        city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
+        province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
+        country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
+        postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
+        len = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
+        Checking check = new Checking(firstName, lastName, email, pass, street, city, province, country, postalC, len, dbHandler, context);
+        if (check.checkAll()){
             modifyCurrentUser();
         }
     }

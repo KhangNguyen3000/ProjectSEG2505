@@ -1,17 +1,18 @@
 package com.example.nguye.seg2505app;
 
-import android.widget.EditText;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-public class Checking {
+public class Checking extends AppCompatActivity {
 
     String firstName, lastName, email, cEmail,  pass, cPass, street, city, province, country, postalC;
-    int lenghtPhoneN;
+    int lenPhoneN;
     MyDBHandler dbHandler;
     Context context;
 
 
-    public Checking(String fN, String lN, String eM, String cEM, String pW, String cPW, String street, String city, String province, String country, String postalC, int lenght,
+    public Checking(String fN, String lN, String eM, String cEM, String pW, String cPW, String street, String city, String province, String country, String postalC, int len,
                     MyDBHandler dbHandler, Context context){
         firstName = fN;
         lastName = lN;
@@ -24,16 +25,17 @@ public class Checking {
         this.province = province;
         this.country = country;
         this.postalC = postalC;
-        lenghtPhoneN = lenght;
+        lenPhoneN = len;
         this.dbHandler =dbHandler;
         this.context = context;
     }
 
-    public Checking(String fN, String lN, String eM, String pW, String street, String city, String province, String country, String postalC, int lenght){
+    public Checking(String fN, String lN, String eM, String pW, String street, String city, String province, String country, String postalC, int len,
+                    MyDBHandler dbHandler, Context context){
         firstName = fN;
         lastName = lN;
         email = eM;
-        cEmail = eM
+        cEmail = eM;
         pass = pW;
         cPass = pW;
         this.street = street;
@@ -41,8 +43,9 @@ public class Checking {
         this.province = province;
         this.country = country;
         this.postalC = postalC;
-        lenghtPhoneN = lenght;
+        lenPhoneN = len;
         this.dbHandler =dbHandler;
+        this.context = context;
     }
 
     public boolean checkEmail(){
@@ -133,7 +136,7 @@ public class Checking {
 
 
 
-    public boolean checkLenght(int l){
+    public boolean checkLen(int l){
         if (l == 10){
             return true;
         }
@@ -143,6 +146,6 @@ public class Checking {
     }
 
     public boolean checkAll(){
-        return(checkLenght() && nonEmpty() &&  checkAllStrings() && checkPass() && checkEmail());
+        return(checkLen(lenPhoneN) && nonEmpty() &&  checkAllStrings() && checkPass() && checkEmail());
     }
 }
