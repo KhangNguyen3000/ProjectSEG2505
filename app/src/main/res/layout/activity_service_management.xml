@@ -38,7 +38,8 @@
             android:id="@+id/serviceList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true" />
+            android:clickable="true"
+            android:onClick="OnClickList" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
