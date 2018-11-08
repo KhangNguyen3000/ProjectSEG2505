@@ -59,6 +59,9 @@ public class ModifyScreen extends AppCompatActivity{
 
         TextView tvPostal = (TextView)findViewById(R.id.mod_input_postalCode);
         tvPostal.setText(currentAccount.getPostalCode());
+
+        TextView tvPhoneNumber = (TextView)findViewById(R.id.mod_input_phone);
+        tvPhoneNumber.setText(Long.toString(currentAccount.getPhoneNumber()));
     }
 
 
