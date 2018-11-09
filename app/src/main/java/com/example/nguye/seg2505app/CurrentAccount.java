@@ -1,7 +1,7 @@
 package com.example.nguye.seg2505app;
 
 public class CurrentAccount {
-    static Account current = null;
+    private static Account current = null;
 
     public static Account getCurrentAccount(){
         return current;
