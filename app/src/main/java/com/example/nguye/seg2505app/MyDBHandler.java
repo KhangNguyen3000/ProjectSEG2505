@@ -101,6 +101,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void modifyAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ACCOUNTS_ID, account.getId());
         values.put(ACCOUNTS_EMAIL, account.getEmail());
         values.put(ACCOUNTS_TYPE, account.getType());
         values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());
@@ -244,11 +245,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
         account.setProvince("admin");
         account.setCountry("admin");
         account.setPostalCode("a0a0a0");
-        account.setPhoneNumber(0000000000);
+        account.setPhoneNumber(1000000000);
 
         account.setType(1);
 
         addAccount(account);
+
+        System.out.println("Administrateur créé");
     }
 
     public boolean existsType(int type) {
