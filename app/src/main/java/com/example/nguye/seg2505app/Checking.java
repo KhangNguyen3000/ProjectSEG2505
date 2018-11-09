@@ -14,9 +14,13 @@ public class Checking extends AppCompatActivity {
     Context context;
 
 
-    public Checking(String action, String fN, String lN, String eM, String cEM, String pW, String cPW, String street, String city, String province, String country, String postalC, int len,
+
+
+    // First constructor, used when a user registers
+
+    public Checking(String fN, String lN, String eM, String cEM, String pW, String cPW, String street, String city, String province, String country, String postalC, int len,
                     MyDBHandler dbHandler, Context context){
-        this.action = action;
+        this.action = "register";
         firstName = fN;
         lastName = lN;
         email = eM;
@@ -33,9 +37,14 @@ public class Checking extends AppCompatActivity {
         this.context = context;
     }
 
-    public Checking(String action, String fN, String lN, String eM, String pW, String street, String city, String province, String country, String postalC, int len,
+
+
+    // Second constructor, used when a user wants to modify his informations
+    // email verification and password verification aren't required
+
+    public Checking(String fN, String lN, String eM, String pW, String street, String city, String province, String country, String postalC, int len,
                     MyDBHandler dbHandler, Context context){
-        this.action = action;
+        this.action = "modify";
         firstName = fN;
         lastName = lN;
         email = eM;
@@ -52,24 +61,29 @@ public class Checking extends AppCompatActivity {
         this.context = context;
     }
 
+
+
+    // This function is used to check if the email set in the field is correct
+
     public boolean checkEmail(){
         boolean answer = true;
         if(dbHandler.findAccount(email) != null && this.action.equals("register")){
+            // Only enter in this block if you are registering
+
             Toast account1 = Toast.makeText(context, "Account already existing with this email adress", Toast.LENGTH_LONG);
             account1.show();
             answer = false;
         }
-        if(email == null || cEmail == null){
-            Toast em = Toast.makeText(context, "Please fill every field", Toast.LENGTH_LONG);
-            em.show();
-            answer = false;
-        }
         if(!(email.contains("@"))){
+            // Check if the email contains an "@" symbol
+
             Toast email1 = Toast.makeText(context, "Invalid e-mail adress", Toast.LENGTH_LONG);
             email1.show();
             answer = false;
         }
         if(!email.equals(cEmail)){
+            // Check if the email and the email verification are equals
+
             Toast email2 = Toast.makeText(context, "The two e-mail adress are not the same", Toast.LENGTH_LONG);
             email2.show();
             answer = false;
@@ -77,20 +91,31 @@ public class Checking extends AppCompatActivity {
         return answer;
     }
 
+
+    // This function is used to check if the password set in the field is correct
+
     public boolean checkPass(){
         boolean answer = true;
         if (pass.length() < 6 || pass.length() > 20){
+            // Check if the password has a definite size
+
             Toast password = Toast.makeText(this, "Please use a 6-20 length password", Toast.LENGTH_LONG);
             password.show();
             answer = false;
         }
         if(!pass.equals(cPass)){
+            // Check if the password and the password verification are equals
+
             Toast pass1 = Toast.makeText(context, "The two passwords are not the same", Toast.LENGTH_LONG);
             pass1.show();
             answer = false;
         }
         return answer;
     }
+
+
+
+    // This function is used to verify that none of the strings contain numbers
 
     public boolean checkAllStrings(){
 
@@ -126,6 +151,10 @@ public class Checking extends AppCompatActivity {
         return answer;
     }
 
+
+
+    // this function is used to verify that none of the fields is empty
+
     public boolean nonEmpty(){
         boolean answer = true;
         if (firstName.matches("") || lastName.matches("") ||  email.matches("") ||  cEmail.matches("")
@@ -140,6 +169,9 @@ public class Checking extends AppCompatActivity {
 
 
 
+
+    // This function is used to check if the phone number is correct. It checks if it's a 10 long number
+
     public boolean checkLen(int l){
         if (l == 10){
             return true;
@@ -148,6 +180,10 @@ public class Checking extends AppCompatActivity {
         phone.show();
         return false;
     }
+
+
+
+    // checkAll() calls all the previous functions and return true if all the functions returned true, false if not
 
     public boolean checkAll(){
         return(nonEmpty() && checkLen(lenPhoneN) &&  checkAllStrings() && checkPass() && checkEmail());

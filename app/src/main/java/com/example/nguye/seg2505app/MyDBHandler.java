@@ -114,6 +114,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void modifyAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(ACCOUNTS_ID, account.getId());
         values.put(ACCOUNTS_EMAIL, account.getEmail());
         values.put(ACCOUNTS_TYPE, account.getType());
         values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());

@@ -102,7 +102,7 @@ public class ModifyScreen extends AppCompatActivity{
         country = ((EditText) findViewById(R.id.mod_input_country)).getText().toString();
         postalC = ((EditText) findViewById(R.id.mod_input_postalCode)).getText().toString();
         len = ((EditText) findViewById(R.id.mod_input_phone)).getText().length();
-        Checking check = new Checking("modify", firstName, lastName, email, pass, street, city, province, country, postalC, len, dbHandler, context);
+        Checking check = new Checking(firstName, lastName, email, pass, street, city, province, country, postalC, len, dbHandler, context);
         if (check.checkAll()){
             modifyCurrentUser();
         }

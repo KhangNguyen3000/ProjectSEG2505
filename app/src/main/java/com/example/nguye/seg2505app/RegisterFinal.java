@@ -24,13 +24,54 @@ public class RegisterFinal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_final);
 
-        //Spinner
+        // Spinner creation
         Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
         ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
 
     }
+
+
+
+    // This function is used to store all the values that we need to register a new user
+
+    public void store(){
+        firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
+        lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
+        email = ((EditText) findViewById(R.id.reg_input_email)).getText().toString();
+        cEmail = ((EditText) findViewById(R.id.reg_input_emailConfirm)).getText().toString();
+        pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
+        cPass= ((EditText) findViewById(R.id.reg_input_passwordConfirm)).getText().toString();
+        street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
+        city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
+        province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
+        country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
+        postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
+    }
+
+
+
+    // This function is used when we click on the "Register" button. It verifies that every field is correctly filled
+
+    public void onClickRegister(View view){
+        store();
+
+        int len = 0;
+        MyDBHandler dbHandler = new MyDBHandler(this);
+        Context context = getApplicationContext();
+
+        len = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
+
+        Checking check = new Checking(firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, len, dbHandler, context);
+        if (check.checkAll()){
+            addUserToDatabase();
+        }
+    }
+
+
+
+    // This function implements the new user to the Database
 
     public void addUserToDatabase(){
         MyDBHandler dbHandler = new MyDBHandler(this);
@@ -67,27 +108,7 @@ public class RegisterFinal extends AppCompatActivity {
     }
 
 
-    public void onClickRegister(View view){
-        int lenght = 0;
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        Context context = getApplicationContext();
-        firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
-        lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
-        email = ((EditText) findViewById(R.id.reg_input_email)).getText().toString();
-        cEmail = ((EditText) findViewById(R.id.reg_input_emailConfirm)).getText().toString();
-        pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
-        cPass= ((EditText) findViewById(R.id.reg_input_passwordConfirm)).getText().toString();
-        street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
-        city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
-        province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
-        country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
-        postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
-        lenght = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
-        Checking check = new Checking("register", firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, lenght, dbHandler, context);
-        if (check.checkAll()){
-            addUserToDatabase();
-        }
-    }
+
 
 
 
