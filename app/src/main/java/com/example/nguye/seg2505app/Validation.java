@@ -25,11 +25,9 @@ public class Validation extends AppCompatActivity {
         // This regular expression should cover most valid email addresses, just don't go crazy.
         Toast errorMessage;
         String input = inputField.getText().toString().trim();
-        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(input);
 
-        boolean isValid = m.matches();
+
+        boolean isValid = validEmailString(input) ;
         if (!isValid) {
             errorMessage = Toast.makeText(inputField.getContext(), "You must enter a valid email address.", Toast.LENGTH_LONG);
             errorMessage.show();
@@ -60,6 +58,15 @@ public class Validation extends AppCompatActivity {
 //        }
 //        return isValid;
 //    }
+
+    //Method that verify's the Email String value validity (Returns boolean value true if valid)
+    public static boolean validEmailString(String input){
+        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(input);
+        return m.matches();
+    }
+
 
     public static boolean validatePassword(EditText inputField) {
         // First, check if the field is empty
