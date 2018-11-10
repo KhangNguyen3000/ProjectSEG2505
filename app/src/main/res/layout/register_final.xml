@@ -45,6 +45,7 @@
                             android:id="@+id/reg_input_firstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="First name"
                             android:ems="10"
                             android:hint="First name"
                             android:inputType="textPersonName" />
@@ -67,6 +68,7 @@
                             android:id="@+id/reg_input_lastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="First name"
                             android:ems="10"
                             android:hint="Last name"
                             android:inputType="textPersonName" />
@@ -83,6 +85,7 @@
                     android:id="@+id/reg_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Email"
                     android:ems="10"
                     android:hint="xyz@example.com"
                     android:inputType="textEmailAddress" />
@@ -97,6 +100,7 @@
                     android:id="@+id/reg_input_emailConfirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Email confirmation"
                     android:ems="10"
                     android:hint="xyz@example.com"
                     android:inputType="textEmailAddress" />
@@ -111,6 +115,7 @@
                     android:id="@+id/reg_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Password"
                     android:ems="10"
                     android:hint="Password"
                     android:inputType="textPassword" />
@@ -125,6 +130,7 @@
                     android:id="@+id/reg_input_passwordConfirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Password confirmation"
                     android:ems="10"
                     android:hint="Password"
                     android:inputType="textPassword" />
@@ -157,9 +163,10 @@
                             android:id="@+id/reg_input_streetNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="Street number"
                             android:ems="10"
                             android:hint="999"
-                            android:inputType="numberDecimal" />
+                            android:inputType="number" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -178,9 +185,10 @@
                             android:id="@+id/reg_input_streetName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="Street name"
                             android:ems="10"
                             android:hint="Street name"
-                            android:inputType="text" />
+                            android:inputType="textPersonName" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -199,8 +207,9 @@
                             android:id="@+id/reg_input_city"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="City"
                             android:ems="10"
-                            android:hint="City name"
+                            android:hint="City"
                             android:inputType="textPersonName" />
                     </LinearLayout>
                 </LinearLayout>
@@ -227,6 +236,7 @@
                             android:id="@+id/reg_input_province"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="Province"
                             android:ems="10"
                             android:hint="Province"
                             android:inputType="textPersonName" />
@@ -248,6 +258,7 @@
                             android:id="@+id/reg_input_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="Country"
                             android:ems="10"
                             android:hint="Country"
                             android:inputType="textPersonName" />
@@ -269,9 +280,10 @@
                             android:id="@+id/reg_input_postalCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:contentDescription="Postal code"
                             android:ems="10"
                             android:hint="A1A1A1"
-                            android:inputType="textPersonName" />
+                            android:inputType="textPostalAddress" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -293,6 +305,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:contentDescription="Phone number"
                         android:ems="10"
                         android:hint="1234567890"
                         android:inputType="phone" />
@@ -319,16 +332,17 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/reg_btn_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onClickRegister"
+                    android:text="Register" />
+
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/reg_btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClickRegister"
-            android:text="Register" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
