@@ -81,7 +81,10 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setPhoneNumber(phoneNumber);
         currentAccount.setId(CurrentAccount.getCurrentAccount().getId());
 
+        // Refresh the CurrentAccount
         CurrentAccount.setCurrentAccount(currentAccount);
+
+        //
         dbHandler.modifyAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
