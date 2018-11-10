@@ -41,13 +41,15 @@ public class WelcomePage extends AppCompatActivity{
         listView.setAdapter(itemsAdapter);
     }
 
-    public String AccountType (Account currentAccount) {
+    public String AccountType (Account currentAccount) { //select the account type and display or not the buttons that needs the current account
 
         String accType;
         if(currentAccount.getType() == 1) {
             accType = "Administrator";
             List<String> users = a.getUsers();
-            UserList(users);
+            UserList(users); //display the list of users
+            managementServiceButton.setVisibility(View.VISIBLE); //display the button "Manage Service"
+            return accType;
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
         } else {
@@ -57,16 +59,16 @@ public class WelcomePage extends AppCompatActivity{
     }
 
 
-    public void onClickManageServiceButton(View view){
+    public void onClickManageServiceButton(View view){ //go to the activity_service_management
         Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
         startActivityForResult(intent, 0);
     }
 
-    public void onClickMyProfileButton(View view){
+    public void onClickMyProfileButton(View view){ //go to the activity_my_profile
         Intent intent = new Intent(getApplicationContext(), MyProfile.class);
         startActivityForResult(intent, 0);
     }
-    public void onClickLogOutButton(View view){
+    public void onClickLogOutButton(View view){ //go ot the activity_main
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(intent, 0);
     }
