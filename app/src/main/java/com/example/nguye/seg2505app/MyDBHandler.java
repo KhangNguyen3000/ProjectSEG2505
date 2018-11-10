@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -30,28 +30,17 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String ACCOUNTS_PHONE = "PhoneNumber";
     public static final String ACCOUNTS_PASSWORD = "Password";
 
+    // Structure of the table "ServiceTypes"
+    public static final String TABLE_SERVICETYPES = "ServiceTypes";
+    public static final String SERVICETYPES_ID = "ID";
+    public static final String SERVICETYPES_TYPE = "Type";
+    public static final String SERVICETYPES_MAXRATE = "MaxRate";
 
-    public static final String TABLE_SERVICES = "Services";
-    public static final String SERVICES_ID = "ID INTEGER PRIMARY KEY AUTOINCREMENT";
-    public static final String SERVICES_TYPE = "Type INTEGER";
-    public static final String SERVICES_PROVIDER = "Provider INTEGER";
-
-
-//    public static final String TABLE_ACCOUNTTYPES = "AccountTypes";
-//    public static final String ACCOUNTTYPES_ID_TITLE = "ID";
-//    public static final String ACCOUNTTYPES_ID_TYPE = "INTEGER PRIMARY KEY";
-//    public static final String ACCOUNTTYPES_TYPE_TITLE = "Type";
-//    public static final String ACCOUNTTYPES_TYPE_TYPE = "TEXT";
-//
-//    public static final String TABLE_USERS = "Users";
-//    public static final String USERS_ID_TITLE = "ID";
-//    public static final String USERS_ID_TYPE = "INTEGER PRIMARY KEY";
-//    public static final String USERS_TYPE_TITLE = "Type";
-//    public static final String USERS_TYPE_TYPE = "TEXT";
 
     public MyDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_TABLE_ACCOUNTS =
@@ -70,25 +59,24 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + ACCOUNTS_PHONE + " BIGINT, "
                 + ACCOUNTS_PASSWORD + " TEXT)";
 
-
-        String CREATE_TABLE_SERVICES =
-                "CREATE TABLE " + TABLE_SERVICES + "("
-                + SERVICES_ID + ", "
-                + SERVICES_TYPE + ", "
-                + SERVICES_PROVIDER + ")";
+        String CREATE_TABLE_SERVICETYPES =
+                "CREATE TABLE " + TABLE_SERVICETYPES + "("
+                + SERVICETYPES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + SERVICETYPES_TYPE + " TEXT, "
+                + SERVICETYPES_MAXRATE + " DOUBLE)";
 
         db.execSQL(CREATE_TABLE_ACCOUNTS);
-        db.execSQL(CREATE_TABLE_SERVICES);
+        db.execSQL(CREATE_TABLE_SERVICETYPES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICETYPES);
         onCreate(db);
     }
 
-    // Adds an account to the database
+    // Adds an account to the table Accounts
     public void addAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -105,15 +93,15 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
         values.put(ACCOUNTS_PASSWORD, account.getPassword());
 
-
         db.insert(TABLE_ACCOUNTS, null, values);
         db.close();
     }
 
-    // Adds an account to the database
+    // Modify an account in the table Accounts
     public void modifyAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+//        values.put(ACCOUNTS_ID, account.getId());
         values.put(ACCOUNTS_EMAIL, account.getEmail());
         values.put(ACCOUNTS_TYPE, account.getType());
         values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());
@@ -127,7 +115,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
         values.put(ACCOUNTS_PASSWORD, account.getPassword());
 
-        db.update(TABLE_ACCOUNTS, values, "ID="+Integer.toString(account.getId()), null);
+        db.update(TABLE_ACCOUNTS, values, "ID=" + account.getId(), null);
+        System.out.println(account.getId());
         db.close();
     }
 
@@ -146,7 +135,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         ;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
-            String pkStr = cursor.getString(0); // primary key string
+            String pkStr = cursor.getString(1); // primary key string
             db.delete(TABLE_ACCOUNTS, ACCOUNTS_EMAIL + " = \"" + pkStr + "\"", null);
             cursor.close();
             result = true;
@@ -175,20 +164,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery(query, null);
         Account account = new Account();
 
-
         if(cursor.moveToFirst()) {
+            account.setId(cursor.getInt(0));
             account.setEmail(cursor.getString(1));
             account.setType(Integer.parseInt(cursor.getString(2)));
             account.setFirstName(cursor.getString(3));
             account.setLastName(cursor.getString(4));
-            account.setStreetNumber(Integer.parseInt(cursor.getString(5)));
+            account.setStreetNumber(cursor.getInt(5));
             account.setStreetName(cursor.getString(6));
-
             account.setCity(cursor.getString(7));
             account.setProvince(cursor.getString(8));
             account.setCountry(cursor.getString(9));
             account.setPostalCode(cursor.getString(10));
-            account.setPhoneNumber(Long.parseLong(cursor.getString(11)));
+            account.setPhoneNumber(cursor.getLong(11));
             account.setPassword(cursor.getString(12));
         } else {
             account = null;
@@ -197,13 +185,82 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-    public boolean existsType(String type) {
-        SQLiteDatabase db = this.getReadableDatabase();
+    // Adds a service type to the table ServiceTypes
+    public void addServiceType(String type, double maxRate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
+        values.put(SERVICETYPES_TYPE, type);
+        values.put(SERVICETYPES_MAXRATE, maxRate);
+
+        db.insert(TABLE_SERVICETYPES, null, values);
+        db.close();
+    }
+
+
+    public void modifyServiceType(int id, String type, double maxRate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SERVICETYPES_TYPE, type);
+        values.put(SERVICETYPES_TYPE, maxRate);
+
+        db.update(TABLE_SERVICETYPES, values, "ID="+id, null);
+        db.close();
+    }
+
+    public boolean deleteServiceType(int id) {
+        boolean result;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        result = db.delete(TABLE_SERVICETYPES,SERVICETYPES_ID + " = " + id, null) > 0;
+
+        db.close();
+        return result;
+//        String query =
+//                "SELECT * FROM " + TABLE_SERVICETYPES
+//                        + " WHERE " + SERVICETYPES_ID + " = " + id
+//                ;
+//        Cursor cursor = db.rawQuery(query, null);
+//        if(cursor.moveToFirst()){
+//            int primaryKey = Integer.parseInt(cursor.getString(0)); // primary key
+//            db.delete(TABLE_SERVICETYPES, SERVICETYPES_ID + " = " + primaryKey, null);
+//            cursor.close();
+//            result = true;
+//        }
+//        db.close();
+//        return result;
+    }
+
+
+    public void createAdmin(){
+        Account account = new Account();
+        account.setFirstName("admin");
+        account.setLastName("admin");
+        account.setEmail("admin@admin.admin");
+        account.setPassword("admin0");
+        account.setStreetNumber(0);
+        account.setStreetName("admin");
+
+        account.setCity("admin");
+        account.setProvince("admin");
+        account.setCountry("admin");
+        account.setPostalCode("a0a0a0");
+        account.setPhoneNumber(1000000000);
+
+        account.setType(1);
+
+        addAccount(account);
+
+        System.out.println("Administrateur créé");
+    }
+
+    public boolean existsType(int type) {
+        SQLiteDatabase db = this.getReadableDatabase();
         String query =
 
                 "SELECT * FROM " + TABLE_ACCOUNTS
-                        + " WHERE " + ACCOUNTS_TYPE + " = \"" + type + "\""
+                        + " WHERE " + ACCOUNTS_TYPE + " = " + type
                 ;
 
 

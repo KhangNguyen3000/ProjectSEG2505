@@ -6,6 +6,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceManagement extends AppCompatActivity {
 
@@ -13,20 +19,24 @@ public class ServiceManagement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management);
+        ListView lv;
+        lv = (ListView) findViewById(R.id.sma_list_serviceList);
+        List<String> sma_list_serviceList = new ArrayList<String>();
+
+        //rempli arraylist avec tous les elements du database
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,sma_list_serviceList);
+    lv.setAdapter(arrayAdapter);
     }
-    public void onClickDelete(View view) {
+    public void onClickList(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle("Edit Service");
-        builder.setMessage("");//Metter le nom du service
+        View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
+        EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
+        EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
-                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
-                dbHandler.deleteAccount(currentEmail);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent, 0);
+                //update on database
             }
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
