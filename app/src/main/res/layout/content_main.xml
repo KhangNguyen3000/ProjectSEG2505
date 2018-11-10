@@ -17,14 +17,16 @@
             android:id="@+id/emailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="Email address"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/passwordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="Password"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword" />

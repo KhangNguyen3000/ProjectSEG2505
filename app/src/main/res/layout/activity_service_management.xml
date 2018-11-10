@@ -15,6 +15,7 @@
             android:id="@+id/serviceName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="Service name"
             android:ems="10"
             android:hint="Enter service name"
             android:inputType="textPersonName" />
@@ -23,9 +24,10 @@
             android:id="@+id/servicePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="Service price"
             android:ems="10"
             android:hint="Enter service price"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
 
         <Button
             android:id="@+id/addB"
