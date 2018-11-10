@@ -28,6 +28,7 @@ public class ServiceManagement extends AppCompatActivity {
     }
 
 
+
 // This updates the List element on the activity_service_management screen
     public void showServiceList(List<String> services){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
@@ -40,6 +41,28 @@ public class ServiceManagement extends AppCompatActivity {
        String  serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString();
        double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
        data.addServiceType(serviceName,serviceRate);
-    }
+
+//     public void onClickList(View view) {
+//         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
+//         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
+//         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
+//         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 //update on database
+//             }
+//         });
+//         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 // do nothing
+//             }
+//         });
+
+//         AlertDialog dialog = builder.create();
+//         dialog.show();
+
+//     }
 
 }

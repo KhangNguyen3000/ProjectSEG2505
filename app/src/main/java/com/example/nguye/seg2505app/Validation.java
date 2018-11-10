@@ -34,7 +34,23 @@ public class Validation extends AppCompatActivity {
             return false;
         }
 
+//        // Check if the email is already bound to an account
+//        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
+//        Account currentAccount = CurrentAccount.getCurrentAccount();
+//        String currentEmail = currentAccount.getEmail();
+//        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+//            errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
+//            errorMessage.show();
+//            return false;
+//        }
+
+        return true;
+    }
+
+    public static boolean availableEmail(EditText inputField) {
         // Check if the email is already bound to an account
+        Toast errorMessage;
+        String input = inputField.getText().toString().trim();
         MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
         Account currentAccount = CurrentAccount.getCurrentAccount();
         String currentEmail = currentAccount.getEmail();
@@ -43,7 +59,6 @@ public class Validation extends AppCompatActivity {
             errorMessage.show();
             return false;
         }
-
         return true;
     }
 
@@ -59,7 +74,7 @@ public class Validation extends AppCompatActivity {
 //        return isValid;
 //    }
 
-    //Method that verify's the Email String value validity (Returns boolean value true if valid)
+    //Method that verifies the Email String value validity (Returns boolean value true if valid)
     public static boolean validEmailString(String input){
         String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
         Pattern p = Pattern.compile(regex);
@@ -192,6 +207,7 @@ public class Validation extends AppCompatActivity {
     /**
      * Goes through all EditText fields in the specified layout and validates them.
      * Confirmation validation (ex. for email and password) must be done separately.
+     * To be validated, each field must have the appropriate input type assigned to it.
      * @param layout
      * @return false as soon as any validation fails, returns true if all validations are successful
      */
@@ -237,11 +253,6 @@ public class Validation extends AppCompatActivity {
                         return false;
                     }
                     break;
-//                case 8194: // inputType == numberDecimal
-//                    if(!validateDecimal(field)) {
-//                        return false;
-//                    }
-//                    break;
                 case 131073: // inputType == none
                     // Don't do anything and apply custom validation outside of this function.
                     // Keep this input type for validation of inputs that don't belong to another category
