@@ -27,19 +27,19 @@ public class ExampleUnitTest {
         assertEquals( data.getDatabase().existsType(1),true);
     }
 
-    @Test
+    /*@Test
     public void hasUnoAdmin(){
 
 
 
-    }
+    }*/
 
 
 
     @Test
     public void validUsers(){
-        List<String> users =data.getDatabase().getUsers();
-        for(String elem: users){
+        List<String> users =data.getDatabase().getList("Email","Accounts");
+        for (String elem: users){
             assertTrue(Validation.validEmailString(elem));
         }
     }
