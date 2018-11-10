@@ -37,10 +37,11 @@ public class ServiceManagement extends AppCompatActivity {
     }
 
 
-    public void onClickAddService(View view){
-       String  serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString();
-       double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
-       data.addServiceType(serviceName,serviceRate);
+    public void onClickAddService(View view) {
+        String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString();
+        double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
+        data.addServiceType(serviceName, serviceRate);
+    }
 
 //     public void onClickList(View view) {
 //         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -59,10 +60,8 @@ public class ServiceManagement extends AppCompatActivity {
 //                 // do nothing
 //             }
 //         });
-
 //         AlertDialog dialog = builder.create();
 //         dialog.show();
-
-     }
+//     }
 
 }

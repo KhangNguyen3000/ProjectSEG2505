@@ -90,6 +90,12 @@ public class Validation extends AppCompatActivity {
         }
 
         // If not empty, check if the input is valid
+        String input = inputField.getText().toString();
+        if (input.length() < 6 || input.length() > 20) {
+            Toast errorMessage = Toast.makeText(inputField.getContext(), "Please use a password between 6 and 20 characters.", Toast.LENGTH_LONG);
+            errorMessage.show();
+            return false;
+        }
         return true;
     }
 
