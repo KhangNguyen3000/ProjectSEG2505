@@ -12,7 +12,7 @@ public class Account {
     private String province;
     private String country;
     private String postalCode;
-    private long phoneNumber;
+    private String phoneNumber;
     private String password;
 
     // Constructor
@@ -32,7 +32,7 @@ public class Account {
     public void setProvince(String province){this.province = province;}
     public void setCountry(String country){this.country = country;}
     public void setPostalCode(String postalCode){this.postalCode = postalCode;}
-    public void setPhoneNumber(long phoneNumber){this.phoneNumber = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
     public void setPassword(String password){this.password = password;}
 
     public int getId(){return this.id;}
@@ -46,7 +46,7 @@ public class Account {
     public String getProvince(){return this.province;}
     public String getCountry(){return this.country;}
     public String getPostalCode(){return this.postalCode;}
-    public long getPhoneNumber(){return this.phoneNumber;}
+    public String getPhoneNumber(){return this.phoneNumber;}
     public String getPassword(){return this.password;}
 
 }

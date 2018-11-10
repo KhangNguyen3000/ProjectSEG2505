@@ -62,7 +62,7 @@ public class MyProfile extends AppCompatActivity {
         tvAddress.setText(currentAccount.getStreetNumber() + " " + currentAccount.getStreetName()
                 + ", " + currentAccount.getCity() + ", " + currentAccount.getProvince()
                 + ", " + currentAccount.getCountry() + " " + currentAccount.getPostalCode());
-        tvPhoneNumber.setText(Long.toString(currentAccount.getPhoneNumber()));
+        tvPhoneNumber.setText(currentAccount.getPhoneNumber());
         tvEmail.setText(currentAccount.getEmail());
         tvPassword.setText(currentAccount.getPassword());
     }
