@@ -130,7 +130,9 @@ public class ModifyScreen extends AppCompatActivity{
 //            updateUserInDatabase();
 //        }
         ViewGroup layout = findViewById(R.id.mod_layout_root);
-        if (Validation.validateAll(layout)) {
+        EditText email = findViewById(R.id.mod_input_email);
+        if (Validation.validateAll(layout)
+                && Validation.availableEmail(email)) {
             storeInfo();
             updateUserInDatabase();
             finish();

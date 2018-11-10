@@ -17,7 +17,7 @@ public class Account {
 
     // Constructor
     public Account(){
-
+        this.email = "empty"; // This is to prevent errors on a null value
     }
 
     // Setters and getters

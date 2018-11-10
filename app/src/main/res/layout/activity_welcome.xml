@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onClickManageServiceButton"
-            android:text="Manage Service" />
+            android:text="Manage Service"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/wel_myprofile_button"
