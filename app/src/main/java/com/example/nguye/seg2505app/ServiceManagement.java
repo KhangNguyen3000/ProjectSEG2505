@@ -34,6 +34,8 @@ public class ServiceManagement extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedService = (String) parent.getItemAtPosition(position);
+                ServiceType serviceType = data.findServiceType(selectedService);
+
                 Button addButton = findViewById(R.id.addB);
                 Button updateButton = findViewById(R.id.updateB);
                 Button deleteButton = findViewById(R.id.deleteB);
@@ -45,12 +47,12 @@ public class ServiceManagement extends AppCompatActivity {
                 updateButton.setVisibility(View.VISIBLE);
                 deleteButton.setVisibility(View.VISIBLE);
 
-                serviceName.setText(o.toString());
-                serviceMaxRate.setText();
+                serviceName.setText(serviceType.getName());
+                serviceMaxRate.setText(serviceType.getRate());
 
 
 
-                System.out.println(o);
+//                System.out.println(o);
             }
         });
     }
