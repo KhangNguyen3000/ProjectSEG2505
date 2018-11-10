@@ -35,11 +35,10 @@
             android:text="ADD" />
 
         <ListView
-            android:id="@+id/serviceList"
+            android:id="@+id/sma_list_serviceList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:onClick="onClickList" />
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

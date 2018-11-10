@@ -27,6 +27,7 @@ public class MyProfile extends AppCompatActivity {
             + ", " + currentAccount.getCity() + ", " + currentAccount.getProvince()
             + ", " + currentAccount.getCountry() + " " + currentAccount.getPostalCode());
         tvPhoneNumber.setText(Long.toString(currentAccount.getPhoneNumber()));
+
         tvEmail.setText(currentAccount.getEmail());
         tvPassword.setText(currentAccount.getPassword());
     }

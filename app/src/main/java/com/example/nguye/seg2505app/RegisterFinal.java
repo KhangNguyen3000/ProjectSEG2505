@@ -43,10 +43,12 @@ public class RegisterFinal extends AppCompatActivity {
         cEmail = ((EditText) findViewById(R.id.reg_input_emailConfirm)).getText().toString();
         pass= ((EditText) findViewById(R.id.reg_input_password)).getText().toString();
         cPass= ((EditText) findViewById(R.id.reg_input_passwordConfirm)).getText().toString();
+        streetNumber = Integer.parseInt(((EditText) findViewById(R.id.reg_input_streetNumber)).getText().toString());
         street = ((EditText) findViewById(R.id.reg_input_streetName)).getText().toString();
         city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
         province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
         country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
+        phoneNumber = Long.parseLong(((EditText) findViewById(R.id.reg_input_phone)).getText().toString());
         postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
     }
 
