@@ -152,18 +152,17 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // Later we can add different ways of searching, like a search by City
     // that returns an array of Account
     public Account findAccount(String email) {
+
         SQLiteDatabase db = this.getReadableDatabase();
-
         String query =
-
                 "SELECT * FROM " + TABLE_ACCOUNTS
                 + " WHERE " + ACCOUNTS_EMAIL + " = \"" + email + "\""
         ;
 
-
-        Cursor cursor = db.rawQuery(query, null);
+        // Create an instance of Account and set its attributes to the values found in the record
+        //  with the corresponding email address.
         Account account = new Account();
-
+        Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
             account.setId(cursor.getInt(0));
             account.setEmail(cursor.getString(1));
