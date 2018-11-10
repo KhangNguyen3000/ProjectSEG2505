@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class ServiceManagement extends AppCompatActivity {
     MyDBHandler data;
-
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class ServiceManagement extends AppCompatActivity {
 // This updates the List element on the activity_service_management screen
     public void showServiceList(List<String> services){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
-        ListView listView = (ListView) findViewById(R.id._ListViewServices);
+        this.listView = (ListView) findViewById(R.id._ListViewServices);
         listView.setAdapter(itemsAdapter);
     }
 
