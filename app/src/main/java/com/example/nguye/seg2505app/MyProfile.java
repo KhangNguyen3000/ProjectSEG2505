@@ -16,37 +16,6 @@ public class MyProfile extends AppCompatActivity {
         setContentView(R.layout.activity_my_profile);
     }
 
-    public void onClickModifyButton(View view){
-        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
-        startActivityForResult(intent, 0);
-    }
-
-    public void onClickDelete(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle("Warning!");
-        builder.setMessage("You are about to delete this account permanently. Do you wish to continue?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
-                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
-                dbHandler.deleteAccount(currentEmail);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent, 0);
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -66,4 +35,40 @@ public class MyProfile extends AppCompatActivity {
         tvEmail.setText(currentAccount.getEmail());
         tvPassword.setText(currentAccount.getPassword());
     }
+
+    public void onClickModifyButton(View view){
+        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
+        startActivity(intent);
+    }
+
+    public void onClickDelete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Warning!");
+        builder.setMessage("You are about to delete this account permanently. Do you wish to continue?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
+                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
+                dbHandler.deleteAccount(currentEmail);
+                // The result code 9999 indicates that the account has been deleted
+                setResult(9999, null);
+                finish();
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivityForResult(intent, 0);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
 }

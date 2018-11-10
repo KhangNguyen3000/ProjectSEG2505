@@ -28,6 +28,7 @@ public class ServiceManagement extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,sma_list_serviceList);
     lv.setAdapter(arrayAdapter);
     }
+
     public void onClickList(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);

@@ -240,13 +240,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
         account.setPassword("admin0");
         account.setStreetNumber(0);
         account.setStreetName("admin");
-
         account.setCity("admin");
         account.setProvince("admin");
         account.setCountry("admin");
         account.setPostalCode("a0a0a0");
         account.setPhoneNumber("1000000000");
-
         account.setType(1);
 
         addAccount(account);

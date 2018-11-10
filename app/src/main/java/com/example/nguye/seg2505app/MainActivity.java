@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSignupButton(View view){
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
-        startActivityForResult(intent, 0);
+        startActivity(intent);
     }
 
     public void onClickLoginButton(View view) {
