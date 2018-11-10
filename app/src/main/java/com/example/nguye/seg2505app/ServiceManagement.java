@@ -20,12 +20,12 @@ public class ServiceManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management);
         ListView lv;
-        lv = (ListView) findViewById(R.id.serviceList);
-        List<String> serviceList = new ArrayList<String>();
+        lv = (ListView) findViewById(R.id.sma_list_serviceList);
+        List<String> sma_list_serviceList = new ArrayList<String>();
 
         //rempli arraylist avec tous les elements du database
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,serviceList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,sma_list_serviceList);
     lv.setAdapter(arrayAdapter);
     }
     public void onClickList(View view) {

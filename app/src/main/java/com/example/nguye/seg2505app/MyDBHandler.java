@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -101,7 +101,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void modifyAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ACCOUNTS_ID, account.getId());
+//        values.put(ACCOUNTS_ID, account.getId());
         values.put(ACCOUNTS_EMAIL, account.getEmail());
         values.put(ACCOUNTS_TYPE, account.getType());
         values.put(ACCOUNTS_FIRSTNAME, account.getFirstName());
@@ -115,7 +115,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(ACCOUNTS_PHONE, account.getPhoneNumber());
         values.put(ACCOUNTS_PASSWORD, account.getPassword());
 
-        db.update(TABLE_ACCOUNTS, values, "ID="+Integer.toString(account.getId()), null);
+        db.update(TABLE_ACCOUNTS, values, "ID=" + account.getId(), null);
+        System.out.println(account.getId());
         db.close();
     }
 
@@ -164,18 +165,18 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Account account = new Account();
 
         if(cursor.moveToFirst()) {
-            account.setId(Integer.parseInt(cursor.getString(0)));
+            account.setId(cursor.getInt(0));
             account.setEmail(cursor.getString(1));
             account.setType(Integer.parseInt(cursor.getString(2)));
             account.setFirstName(cursor.getString(3));
             account.setLastName(cursor.getString(4));
-            account.setStreetNumber(Integer.parseInt(cursor.getString(5)));
+            account.setStreetNumber(cursor.getInt(5));
             account.setStreetName(cursor.getString(6));
             account.setCity(cursor.getString(7));
             account.setProvince(cursor.getString(8));
             account.setCountry(cursor.getString(9));
             account.setPostalCode(cursor.getString(10));
-            account.setPhoneNumber(Long.parseLong(cursor.getString(11)));
+            account.setPhoneNumber(cursor.getLong(11));
             account.setPassword(cursor.getString(12));
         } else {
             account = null;
