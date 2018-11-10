@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,6 +28,31 @@ public class ServiceManagement extends AppCompatActivity {
         List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
 
+        ListView serviceList = (ListView) findViewById(R.id._ListViewServices);
+//        serviceList.setClickable(true);
+        serviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedService = (String) parent.getItemAtPosition(position);
+                Button addButton = findViewById(R.id.addB);
+                Button updateButton = findViewById(R.id.updateB);
+                Button deleteButton = findViewById(R.id.deleteB);
+                EditText serviceName = findViewById(R.id.serviceName);
+                EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+
+                // Show the modify options
+                addButton.setVisibility(View.GONE);
+                updateButton.setVisibility(View.VISIBLE);
+                deleteButton.setVisibility(View.VISIBLE);
+
+                serviceName.setText(o.toString());
+                serviceMaxRate.setText();
+
+
+
+                System.out.println(o);
+            }
+        });
     }
 
 
@@ -52,28 +78,29 @@ public class ServiceManagement extends AppCompatActivity {
         // Update the list view
         List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
-
     }
 
-//     public void onClickList(View view) {
-//         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
-//         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
-//         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
-//         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-//             @Override
-//             public void onClick(DialogInterface dialog, int which) {
-//                 //update on database
-//             }
-//         });
-//         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//             @Override
-//             public void onClick(DialogInterface dialog, int which) {
-//                 // do nothing
-//             }
-//         });
-//         AlertDialog dialog = builder.create();
-//         dialog.show();
-//     }
+     public void onClickList(View view) {
+         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
+         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
+         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
+         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 //update on database
+             }
+         });
+         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 // do nothing
+             }
+         });
+         AlertDialog dialog = builder.create();
+         dialog.show();
+     }
+
+
 
 }
