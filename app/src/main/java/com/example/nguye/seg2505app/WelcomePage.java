@@ -62,7 +62,7 @@ public class WelcomePage extends AppCompatActivity{
         String accType;
         if(currentAccount.getType() == 1) {
             accType = "Administrator";
-            List<String> users = a.getUsers();
+            List<String> users = a.getList("Email","Accounts");
             UserList(users); //display the list of users
             Button serviceManagement = findViewById(R.id.wel_manageservice_button);
             serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"

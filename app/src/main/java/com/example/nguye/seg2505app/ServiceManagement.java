@@ -14,41 +14,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceManagement extends AppCompatActivity {
+    MyDBHandler data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management);
-        ListView lv;
-        lv = (ListView) findViewById(R.id.sma_list_serviceList);
-        List<String> sma_list_serviceList = new ArrayList<String>();
+        this.data = new MyDBHandler(this);
 
-        //rempli arraylist avec tous les elements du database
+        List<String> services = data.getList("Email","Accounts");
+        showServiceList(services);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_service_management,sma_list_serviceList);
-    lv.setAdapter(arrayAdapter);
     }
 
-    public void onClickList(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
-        EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
-        EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
-        builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //update on database
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+
+// This updates the List element on the activity_service_management screen
+    public void showServiceList(List<String> services){
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
+        ListView listView = (ListView) findViewById(R.id._ListViewServices);
+        listView.setAdapter(itemsAdapter);
     }
+
+
+    public void onClickAddService(View view){
+       String  serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString();
+       double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
+       data.addServiceType(serviceName,serviceRate);
+
+//     public void onClickList(View view) {
+//         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
+//         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
+//         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
+//         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 //update on database
+//             }
+//         });
+//         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 // do nothing
+//             }
+//         });
+
+//         AlertDialog dialog = builder.create();
+//         dialog.show();
+
+//     }
 
 }

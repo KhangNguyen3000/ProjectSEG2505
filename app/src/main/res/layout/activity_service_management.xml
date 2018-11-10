@@ -34,10 +34,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:onClick="onClickAddService"
             android:text="ADD" />
 
         <ListView
-            android:id="@+id/sma_list_serviceList"
+            android:id="@+id/_ListViewServices"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
