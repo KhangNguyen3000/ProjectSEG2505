@@ -22,7 +22,7 @@ public class ServiceManagement extends AppCompatActivity {
         setContentView(R.layout.activity_service_management);
         this.data = new MyDBHandler(this);
 
-        List<String> services = data.getList("Email","Accounts");
+        List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
 
     }
@@ -63,6 +63,6 @@ public class ServiceManagement extends AppCompatActivity {
 //         AlertDialog dialog = builder.create();
 //         dialog.show();
 
-//     }
+     }
 
 }
