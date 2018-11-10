@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,19 @@ public class ServiceManagement extends AppCompatActivity {
 
 
     public void onClickAddService(View view) {
-        String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString();
+        // Add the service to the database
+        String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
         double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
         data.addServiceType(serviceName, serviceRate);
+
+        // Display a success message
+        Toast toast = Toast.makeText(getApplicationContext(), "Service added!", Toast.LENGTH_LONG);
+        toast.show();
+
+        // Update the list view
+        List<String> services = data.getList("Name","ServiceTypes");
+        showServiceList(services);
+
     }
 
 //     public void onClickList(View view) {
