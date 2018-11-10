@@ -197,12 +197,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
 //    }
 
     // Adds a service type to the table ServiceTypes
-    public void addServiceType(Service service) {
+    public void addServiceType(ServiceType serviceType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SERVICETYPES_NAME, service.getName());
-        values.put(SERVICETYPES_MAXRATE, service.getRate());
+        values.put(SERVICETYPES_NAME, serviceType.getName());
+        values.put(SERVICETYPES_MAXRATE, serviceType.getRate());
 
         db.insert(TABLE_SERVICETYPES, null, values);
         db.close();
@@ -220,14 +220,14 @@ public class MyDBHandler extends SQLiteOpenHelper{
 //        db.close();
 //    }
 
-    public void updateServiceType(Service service) {
+    public void updateServiceType(ServiceType serviceType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SERVICETYPES_NAME, service.getName());
-        values.put(SERVICETYPES_MAXRATE, service.getRate());
+        values.put(SERVICETYPES_NAME, serviceType.getName());
+        values.put(SERVICETYPES_MAXRATE, serviceType.getRate());
 
-        db.update(TABLE_SERVICETYPES, values, "ID=" + service.getID(), null);
+        db.update(TABLE_SERVICETYPES, values, "ID=" + serviceType.getID(), null);
         db.close();
     }
 
@@ -254,11 +254,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
 ////        return result;
 //    }
 
-    public boolean deleteServiceType(Service service) {
+    public boolean deleteServiceType(ServiceType serviceType) {
         boolean result;
         SQLiteDatabase db = this.getWritableDatabase();
 
-        result = db.delete(TABLE_SERVICETYPES,SERVICETYPES_ID + " = " + service.getID(), null) > 0;
+        result = db.delete(TABLE_SERVICETYPES,SERVICETYPES_ID + " = " + serviceType.getID(), null) > 0;
 
         db.close();
         return result;
