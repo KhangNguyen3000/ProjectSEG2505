@@ -72,6 +72,7 @@ public class RegisterFinal extends AppCompatActivity {
 //        Validation.confirmField(password, passwordConf, "Password");
 
         if (Validation.validateAll(layout)
+                && Validation.availableEmail(email)
                 && Validation.confirmField(email, emailConf, "Email")
                 && Validation.confirmField(password, passwordConf, "Password")) {
             storeInfo();
@@ -122,8 +123,9 @@ public class RegisterFinal extends AppCompatActivity {
         dbHandler.addAccount(account);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(intent, 0);
+        finish();
+//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//        startActivityForResult(intent, 0);
     }
 
 
