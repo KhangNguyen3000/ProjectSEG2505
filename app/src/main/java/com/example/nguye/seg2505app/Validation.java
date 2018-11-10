@@ -74,7 +74,7 @@ public class Validation extends AppCompatActivity {
 //        return isValid;
 //    }
 
-    //Method that verify's the Email String value validity (Returns boolean value true if valid)
+    //Method that verifies the Email String value validity (Returns boolean value true if valid)
     public static boolean validEmailString(String input){
         String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
         Pattern p = Pattern.compile(regex);
