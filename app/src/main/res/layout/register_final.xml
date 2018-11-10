@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reg_layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterFinal">
@@ -282,8 +283,7 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="Postal code"
                             android:ems="10"
-                            android:hint="A1A1A1"
-                            android:inputType="textPostalAddress" />
+                            android:hint="A1A1A1" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -305,7 +305,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:contentDescription="Phone number"
                         android:ems="10"
                         android:hint="1234567890"
                         android:inputType="phone" />
@@ -332,17 +331,16 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/reg_btn_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onClickRegister"
-                    android:text="Register" />
-
             </LinearLayout>
         </ScrollView>
 
+        <Button
+            android:id="@+id/reg_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onClickRegister"
+            android:text="Register" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

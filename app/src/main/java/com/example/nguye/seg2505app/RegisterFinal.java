@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,7 +16,7 @@ public class RegisterFinal extends AppCompatActivity {
     String firstName, lastName;
     String email, cEmail;
     String pass, cPass;
-    long phoneNumber;
+    String phoneNumber;
     int streetNumber;
     String street, city, province, country, postalC, type;
 
@@ -36,7 +37,7 @@ public class RegisterFinal extends AppCompatActivity {
 
     // This function is used to store all the values that we need to register a new user
 
-    public void store(){
+    public void storeInfo(){
         firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
         email = ((EditText) findViewById(R.id.reg_input_email)).getText().toString();
@@ -48,7 +49,7 @@ public class RegisterFinal extends AppCompatActivity {
         city = ((EditText) findViewById(R.id.reg_input_city)).getText().toString();
         province = ((EditText) findViewById(R.id.reg_input_province)).getText().toString();
         country = ((EditText) findViewById(R.id.reg_input_country)).getText().toString();
-        phoneNumber = Long.parseLong(((EditText) findViewById(R.id.reg_input_phone)).getText().toString());
+        phoneNumber = ((EditText) findViewById(R.id.reg_input_phone)).getText().toString();
         postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
     }
 
@@ -57,18 +58,35 @@ public class RegisterFinal extends AppCompatActivity {
     // This function is used when we click on the "Register" button. It verifies that every field is correctly filled
 
     public void onClickRegister(View view){
-        store();
 
-        int len = 0;
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        Context context = getApplicationContext();
+        // Perform validation on all fields
+        ViewGroup layout = findViewById(R.id.reg_layout_root);
+//        Validation.validateAll(layout);
 
-        len = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
+        // Confirm the email and password
+        EditText email = findViewById(R.id.reg_input_email);
+        EditText emailConf = findViewById(R.id.reg_input_emailConfirm);
+        EditText password = findViewById(R.id.reg_input_password);
+        EditText passwordConf = findViewById(R.id.reg_input_passwordConfirm);
+//        Validation.confirmField(email, emailConf, "Email");
+//        Validation.confirmField(password, passwordConf, "Password");
 
-        Checking check = new Checking(firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, len, dbHandler, context);
-        if (check.checkAll()){
+        if (Validation.validateAll(layout)
+                && Validation.confirmField(email, emailConf, "Email")
+                && Validation.confirmField(password, passwordConf, "Password")) {
+            storeInfo();
             addUserToDatabase();
         }
+//        int len = 0;
+//        MyDBHandler dbHandler = new MyDBHandler(this);
+//        Context context = getApplicationContext();
+//
+//        len = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
+//
+//        Checking check = new Checking(firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, len, dbHandler, context);
+//        if (check.checkAll()){
+//            addUserToDatabase();
+//        }
     }
 
 
@@ -84,7 +102,6 @@ public class RegisterFinal extends AppCompatActivity {
         account.setPassword(pass);
         account.setStreetNumber(streetNumber);
         account.setStreetName(street);
-
         account.setCity(city);
         account.setProvince(province);
         account.setCountry(country);

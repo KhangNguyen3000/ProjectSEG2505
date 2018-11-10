@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -56,7 +56,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + ACCOUNTS_PROVINCE + " TEXT, "
                 + ACCOUNTS_COUNTRY + " TEXT, "
                 + ACCOUNTS_POSTALCODE + " TEXT, "
-                + ACCOUNTS_PHONE + " BIGINT, "
+                + ACCOUNTS_PHONE + " TEXT, "
                 + ACCOUNTS_PASSWORD + " TEXT)";
 
         String CREATE_TABLE_SERVICETYPES =
@@ -98,7 +98,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
 
     // Modify an account in the table Accounts
-    public void modifyAccount(Account account) {
+    public void updateAccount(Account account) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 //        values.put(ACCOUNTS_ID, account.getId());
@@ -175,7 +175,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             account.setProvince(cursor.getString(8));
             account.setCountry(cursor.getString(9));
             account.setPostalCode(cursor.getString(10));
-            account.setPhoneNumber(cursor.getLong(11));
+            account.setPhoneNumber(cursor.getString(11));
             account.setPassword(cursor.getString(12));
         } else {
             account = null;
@@ -245,7 +245,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         account.setProvince("admin");
         account.setCountry("admin");
         account.setPostalCode("a0a0a0");
-        account.setPhoneNumber(1000000000);
+        account.setPhoneNumber("1000000000");
 
         account.setType(1);
 

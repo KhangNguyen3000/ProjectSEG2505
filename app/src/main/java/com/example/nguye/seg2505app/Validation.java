@@ -2,6 +2,7 @@ package com.example.nguye.seg2505app;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.Layout;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,10 +25,10 @@ public class Validation extends AppCompatActivity {
         // This regular expression should cover most valid email addresses, just don't go crazy.
         Toast errorMessage;
         String input = inputField.getText().toString().trim();
-        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z]+\\.[a-zA-Z]+)$";
-//        String regex = "^[a-zA-Z0-9[!#$%&'*+/=?^_`{|}~-]*]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$";
+        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(input);
+
         boolean isValid = m.matches();
         if (!isValid) {
             errorMessage = Toast.makeText(inputField.getContext(), "You must enter a valid email address.", Toast.LENGTH_LONG);
@@ -35,24 +36,16 @@ public class Validation extends AppCompatActivity {
             return false;
         }
 
-//        // Check if the email is already bound to an account
-//        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
-//        if(dbHandler.findAccount(input) != null) {
-//            errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
-//            errorMessage.show();
-//            return false;
-//        }
+        // Check if the email is already bound to an account
+        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
+        Account currentAccount = CurrentAccount.getCurrentAccount();
+        String currentEmail = currentAccount.getEmail();
+        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+            errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
+            errorMessage.show();
+            return false;
+        }
 
-//        if(!(input.contains("@"))) { // Check if the email format is valid
-//            errorMessage = Toast.makeText(inputField.getContext(), "Invalid email address.", Toast.LENGTH_LONG);
-//            errorMessage.show();
-//            return false;
-//        }
-//        if(!email.equals(cEmail)){
-//            Toast email2 = Toast.makeText(getApplicationContext(), "The two e-mail adress are not the same", Toast.LENGTH_LONG);
-//            email2.show();
-//            answer = false;
-//        }
         return true;
     }
 
@@ -91,7 +84,11 @@ public class Validation extends AppCompatActivity {
 //    }
 
 
-
+    /**
+     * Validate any proper noun (ex. city, first name, last name, street, etc.)
+     * @param inputField
+     * @return
+     */
     public static boolean validateName(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -194,12 +191,12 @@ public class Validation extends AppCompatActivity {
     public static boolean validateAll(ViewGroup layout) {
         // Puts all the EditText components in a list
         // Inspired from https://stackoverflow.com/questions/7790487/method-to-get-all-edittexts-in-a-view
-        ArrayList<EditText> editTextList = new ArrayList<EditText>();
-        for (int i = 0; i < layout.getChildCount(); i++) {
-            if (layout.getChildAt(i) instanceof EditText) {
-                editTextList.add((EditText) layout.getChildAt(i)); // Adds all EditText components in a list
-            }
-        }
+        ArrayList<EditText> editTextList = getAllEditTexts(layout);
+//        for (int i = 0; i < layout.getChildCount(); i++) {
+//            if (layout.getChildAt(i) instanceof EditText) {
+//                editTextList.add((EditText) layout.getChildAt(i)); // Adds all EditText components in a list
+//            }
+//        }
         // Validate each field in the list, applying a different validation based on its type
         for (EditText field : editTextList) {
             // See https://developer.android.com/reference/android/text/InputType for input types
@@ -250,6 +247,33 @@ public class Validation extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    /**
+     * Recursively gets all the EditText descendants of the specified layout.
+     * @param layout
+     * @return
+     */
+    public static ArrayList<EditText> getAllEditTexts(ViewGroup layout) {
+
+        ArrayList<EditText> subEditTextList = new ArrayList<EditText>();
+
+        int childCount = layout.getChildCount();
+        if (childCount > 0) {
+            for (int i = 0; i < childCount; i++) {
+                View child = layout.getChildAt(i);
+                if (child instanceof EditText) {
+                    subEditTextList.add((EditText) child);
+                } else if (child instanceof ViewGroup) {
+                    subEditTextList.addAll(getAllEditTexts((ViewGroup) child));
+                }
+            }
+        }
+
+        ArrayList<EditText> fullEditTextList = new ArrayList<EditText>();
+        fullEditTextList.addAll(subEditTextList);
+
+        return fullEditTextList;
     }
 
 }
