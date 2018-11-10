@@ -33,7 +33,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     // Structure of the table "ServiceTypes"
     public static final String TABLE_SERVICETYPES = "ServiceTypes";
     public static final String SERVICETYPES_ID = "ID";
-    public static final String SERVICETYPES_TYPE = "Type";
+    public static final String SERVICETYPES_NAME = "Name";
     public static final String SERVICETYPES_MAXRATE = "MaxRate";
 
 
@@ -62,7 +62,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         String CREATE_TABLE_SERVICETYPES =
                 "CREATE TABLE " + TABLE_SERVICETYPES + "("
                 + SERVICETYPES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + SERVICETYPES_TYPE + " TEXT, "
+                + SERVICETYPES_NAME + " TEXT, "
                 + SERVICETYPES_MAXRATE + " DOUBLE)";
 
         db.execSQL(CREATE_TABLE_ACCOUNTS);
@@ -185,11 +185,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
 
     // Adds a service type to the table ServiceTypes
-    public void addServiceType(String type, double maxRate) {
+    public void addServiceType(String name, double maxRate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SERVICETYPES_TYPE, type);
+        values.put(SERVICETYPES_NAME, name);
         values.put(SERVICETYPES_MAXRATE, maxRate);
 
         db.insert(TABLE_SERVICETYPES, null, values);
@@ -197,12 +197,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
     }
 
 
-    public void modifyServiceType(int id, String type, double maxRate) {
+    public void modifyServiceType(int id, String name, double maxRate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SERVICETYPES_TYPE, type);
-        values.put(SERVICETYPES_TYPE, maxRate);
+        values.put(SERVICETYPES_NAME, name);
+        values.put(SERVICETYPES_NAME, maxRate);
 
         db.update(TABLE_SERVICETYPES, values, "ID="+id, null);
         db.close();
@@ -273,11 +273,12 @@ public class MyDBHandler extends SQLiteOpenHelper{
         }
     }
 
-    public List<String> getUsers (){
+    public List<String> getList(String elem, String table){
+
         List<String> mArrayList = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String query ="SELECT " + ACCOUNTS_EMAIL + " FROM "+ TABLE_ACCOUNTS;
+        String query ="SELECT " + elem + " FROM "+ table;
         Cursor users = db.rawQuery(query,null);
         users.moveToFirst();
         while(!users.isAfterLast()) {
@@ -285,6 +286,9 @@ public class MyDBHandler extends SQLiteOpenHelper{
             users.moveToNext();
         }
         return mArrayList;
+
+
     }
+
 
 }
