@@ -184,25 +184,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-    public ServiceType findServiceType(String name){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query =
-                "SELECT * FROM " + TABLE_SERVICETYPES
-                        + " WHERE " + SERVICETYPES_NAME + " = \"" + name + "\""
-                ;
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()) {
-            ServiceType service = new ServiceType(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2));
-            db.close();
-            return service;
-        } else {
-            ServiceType service = null;
-            db.close();
-            return service;
-        }
-    }
-
-
     /**
      * Adds a service type to the table ServiceTypes
      * @param serviceType
@@ -233,7 +214,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-
     /**
      * Delete a service type from the table ServiceTypes
      * @param serviceType
@@ -247,6 +227,24 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
         db.close();
         return result;
+    }
+
+    public ServiceType findServiceType(String name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query =
+                "SELECT * FROM " + TABLE_SERVICETYPES
+                        + " WHERE " + SERVICETYPES_NAME + " = \"" + name + "\""
+                ;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            ServiceType service = new ServiceType(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2));
+            db.close();
+            return service;
+        } else {
+            ServiceType service = null;
+            db.close();
+            return service;
+        }
     }
 
     /**
