@@ -1,5 +1,6 @@
 package com.example.nguye.seg2505app;
 
+
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class ExampleUnitTest {
     }
 
 
+
     // Check if setEmail and getEmail methods work
 
     @Test
@@ -78,5 +80,20 @@ public class ExampleUnitTest {
 
 
 
+
+
+    }
+
+    @Test
+    public void validUsers(){
+        List<String> users = data.getDatabase().getList();
+        for(String elem: users){
+            assertTrue(Validation.validEmailString(elem));
+        }
+    }
+
+    @Test
+    public void testAccountType() {
+        }
 
 }

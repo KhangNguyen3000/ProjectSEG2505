@@ -6,6 +6,11 @@ public class ServiceType {
     private double rate;
 
     public ServiceType(String name, double rate){
+        this.name = name;
+        this.rate = rate;
+    }
+
+    public ServiceType(int ID, String name, double rate){
         this.ID = ID;
         this.name = name;
         this.rate = rate;

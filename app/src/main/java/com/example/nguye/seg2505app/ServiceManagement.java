@@ -43,9 +43,11 @@ public class ServiceManagement extends AppCompatActivity {
                 Button addButton = findViewById(R.id.addB);
                 Button updateButton = findViewById(R.id.updateB);
                 Button deleteButton = findViewById(R.id.deleteB);
+                Button cancelButton = findViewById(R.id.cancelB);
                 addButton.setVisibility(View.GONE);
                 updateButton.setVisibility(View.VISIBLE);
                 deleteButton.setVisibility(View.VISIBLE);
+                cancelButton.setVisibility(view.VISIBLE);
 
                 // Fills the fields with the current information of the selected service
                 EditText serviceName = findViewById(R.id.serviceName);
@@ -56,7 +58,8 @@ public class ServiceManagement extends AppCompatActivity {
 
                 // Stores the information of the selected service type
                 updatedServiceType = data.findServiceType(serviceType.getName());
-//                System.out.println(o);
+                System.out.println(updatedServiceType.getID());
+                System.out.println(updatedServiceType.getName());
             }
         });
     }
@@ -132,6 +135,10 @@ public class ServiceManagement extends AppCompatActivity {
         serviceName.setText("");
         serviceMaxRate.setText("");
 
+        //Display the success message
+        Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
+        toast.show();
+
         // Update the list view
         List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
@@ -147,6 +154,13 @@ public class ServiceManagement extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 MyDBHandler data = new MyDBHandler(getApplicationContext());
                 data.deleteServiceType(updatedServiceType);
+
+                //Display the success message
+                Toast toast = Toast.makeText(getApplicationContext(), "Service deleted!", Toast.LENGTH_LONG);
+                toast.show();
+                // Update the list view
+                List<String> services = data.getList("Name","ServiceTypes");
+                showServiceList(services);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -157,12 +171,25 @@ public class ServiceManagement extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-
-        // Update the list view
-        MyDBHandler data = new MyDBHandler(getApplicationContext());
-        List<String> services = data.getList("Name","ServiceTypes");
-        showServiceList(services);
     }
 
+    public void onClickCancelButton(View view) {
+        Button addButton = findViewById(R.id.addB);
+        Button updateButton = findViewById(R.id.updateB);
+        Button deleteButton = findViewById(R.id.deleteB);
+        Button cancelButton = findViewById(R.id.cancelB);
 
+        //Hide the 3 buttons and show the add one
+        addButton.setVisibility(View.VISIBLE);
+        updateButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
+
+        //Fill the fields empty
+        EditText serviceName = findViewById(R.id.serviceName);
+        EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+        serviceName.setText("");
+        serviceMaxRate.setText("");
+
+    }
 }
