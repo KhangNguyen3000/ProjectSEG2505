@@ -43,9 +43,11 @@ public class ServiceManagement extends AppCompatActivity {
                 Button addButton = findViewById(R.id.addB);
                 Button updateButton = findViewById(R.id.updateB);
                 Button deleteButton = findViewById(R.id.deleteB);
+                Button cancelButton = findViewById(R.id.cancelB);
                 addButton.setVisibility(View.GONE);
                 updateButton.setVisibility(View.VISIBLE);
                 deleteButton.setVisibility(View.VISIBLE);
+                cancelButton.setVisibility(view.VISIBLE);
 
                 // Fills the fields with the current information of the selected service
                 EditText serviceName = findViewById(R.id.serviceName);
@@ -163,5 +165,19 @@ public class ServiceManagement extends AppCompatActivity {
         dialog.show();
     }
 
+    public void onClickCancelButton(View view) {
+        Button addButton = findViewById(R.id.addB);
+        Button updateButton = findViewById(R.id.updateB);
+        Button deleteButton = findViewById(R.id.deleteB);
+        Button cancelButton = findViewById(R.id.cancelB);
 
+        addButton.setVisibility(View.VISIBLE);
+        updateButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        cancelButton.setVisibility(View.GONE);
+        EditText serviceName = findViewById(R.id.serviceName);
+        EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+        serviceName.setText("");
+        serviceMaxRate.setText("");
+    }
 }

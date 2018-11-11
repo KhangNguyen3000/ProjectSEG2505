@@ -61,6 +61,15 @@
                 android:text="Delete"
                 android:visibility="gone" />
 
+            <Button
+                android:id="@+id/cancelB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickCancelButton"
+                android:text="Cancel"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
         <ListView
