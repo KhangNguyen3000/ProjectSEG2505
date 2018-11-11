@@ -55,7 +55,7 @@ public class RegisterFinal extends AppCompatActivity {
 
 
 
-    // This function is used when we click on the "Register" button. It verifies that every field is correctly filled
+    // This function is used when we click on the "Register" button. It verifies that every field is correctly filled.
 
     public void onClickRegister(View view){
 
