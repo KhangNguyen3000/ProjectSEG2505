@@ -1,6 +1,7 @@
 package com.example.nguye.seg2505app;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.junit.Test;
 
@@ -45,7 +46,6 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testOnCLickMyProfileButton(){
-        onView( findViewById (R.id.wel_myprofile_button));
-    }
+    public void testAccountType() {
+        }
 }
