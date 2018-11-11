@@ -56,7 +56,8 @@ public class ServiceManagement extends AppCompatActivity {
 
                 // Stores the information of the selected service type
                 updatedServiceType = data.findServiceType(serviceType.getName());
-//                System.out.println(o);
+                System.out.println(updatedServiceType.getID());
+                System.out.println(updatedServiceType.getName());
             }
         });
     }
@@ -147,6 +148,9 @@ public class ServiceManagement extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 MyDBHandler data = new MyDBHandler(getApplicationContext());
                 data.deleteServiceType(updatedServiceType);
+                // Update the list view
+                List<String> services = data.getList("Name","ServiceTypes");
+                showServiceList(services);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -157,11 +161,6 @@ public class ServiceManagement extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-
-        // Update the list view
-        MyDBHandler data = new MyDBHandler(getApplicationContext());
-        List<String> services = data.getList("Name","ServiceTypes");
-        showServiceList(services);
     }
 
 
