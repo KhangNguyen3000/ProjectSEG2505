@@ -56,7 +56,6 @@ public class ServiceManagement extends AppCompatActivity {
                 serviceName.setText(serviceType.getName());
                 serviceMaxRate.setText(Double.toString(serviceType.getRate()));
 
-
                 // Stores the information of the selected service type
                 updatedServiceType = data.findServiceType(serviceType.getName());
                 System.out.println(updatedServiceType.getID());
@@ -66,15 +65,21 @@ public class ServiceManagement extends AppCompatActivity {
     }
 
 
-
-// This updates the List element on the activity_service_management screen
+    /**
+     * This updates the List element on the activity_service_management screen
+     * @param services
+     */
     public void showServiceList(List<String> services){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
         this.listView = (ListView) findViewById(R.id._ListViewServices);
         listView.setAdapter(itemsAdapter);
     }
 
-
+    /**
+     * Called when clicking on the Add button
+     * Add the service to the table ServiceTypes
+     * @param view
+     */
     public void onClickAddService(View view) {
         ViewGroup layout = findViewById(R.id.sma_layout_root);
         if (Validation.validateAll(layout)) {
@@ -94,28 +99,12 @@ public class ServiceManagement extends AppCompatActivity {
             showServiceList(services);
         }
     }
-//
-//     public void onClickList(View view) {
-//         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
-//         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
-//         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
-//         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-//             @Override
-//             public void onClick(DialogInterface dialog, int which) {
-//                 //update on database
-//             }
-//         });
-//         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//             @Override
-//             public void onClick(DialogInterface dialog, int which) {
-//                 // do nothing
-//             }
-//         });
-//         AlertDialog dialog = builder.create();
-//         dialog.show();
-//     }
 
+    /**
+     * Called when clicking on the update button
+     * Update the service in the table ServiceTypes
+     * @param view
+     */
     public void onClickUpdate(View view) {
         ViewGroup layout = findViewById(R.id.sma_layout_root);
         if (Validation.validateAll(layout)) {
@@ -153,7 +142,13 @@ public class ServiceManagement extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when clicking on the delete button
+     * Delete the service from the table ServiceTypes
+     * @param view
+     */
     public void onClickDelete(View view) {
+        // Create the dialog box to confirm with the user that he really wants to delete the serviceType
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("Delete service");
@@ -198,6 +193,11 @@ public class ServiceManagement extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Called when clicking on the cancel button
+     * Hides the Update, Delete and Cancel buttons and show the Add button.
+     * @param view
+     */
     public void onClickCancelButton(View view) {
         Button addButton = findViewById(R.id.addB);
         Button updateButton = findViewById(R.id.updateB);
@@ -215,6 +215,5 @@ public class ServiceManagement extends AppCompatActivity {
         EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
         serviceName.setText("");
         serviceMaxRate.setText("");
-
     }
 }

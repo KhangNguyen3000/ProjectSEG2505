@@ -19,7 +19,7 @@ public class AccountMethodsTest {
     public void checkId(){
         Account testAccount = new Account();
         testAccount.setId(20);
-        assertEquals(testAccount.getId(), 12);
+        assertEquals(testAccount.getId(), 20);
     }
 
     // Check if setEmail and getEmail methods work

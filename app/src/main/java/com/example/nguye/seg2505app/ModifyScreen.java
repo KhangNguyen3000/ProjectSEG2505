@@ -29,6 +29,7 @@ public class ModifyScreen extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify);
 
+        // Set the content of each field to the values of the currentAccount
         Account currentAccount = CurrentAccount.getCurrentAccount();
 
         TextView tvFirstName = (TextView)findViewById(R.id.mod_input_firstName);
@@ -65,8 +66,11 @@ public class ModifyScreen extends AppCompatActivity{
         tvPhoneNumber.setText(currentAccount.getPhoneNumber());
     }
 
-
+    /**
+     * Update the account information in the database
+     */
     public void updateUserInDatabase(){
+        // set the attributes of the currentAccount with the values entered in the fields
         MyDBHandler dbHandler = new MyDBHandler(this);
         Account currentAccount = CurrentAccount.getCurrentAccount();
         currentAccount.setFirstName(firstName);
@@ -85,14 +89,15 @@ public class ModifyScreen extends AppCompatActivity{
         // Refresh the CurrentAccount
         CurrentAccount.setCurrentAccount(currentAccount);
 
-        //
+        // Update the database
         dbHandler.updateAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
-
     }
 
-
+    /**
+     * Store the informations entered in the fields in variables
+     */
     public void storeInfo(){
         firstName = ((EditText) findViewById(R.id.mod_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
@@ -109,6 +114,11 @@ public class ModifyScreen extends AppCompatActivity{
         postalC = ((EditText) findViewById(R.id.mod_input_postalCode)).getText().toString();
     }
 
+    /**
+     * Called when clicking on the modify button.
+     * Validate every field and update the database if the validation is successful.
+     * @param view
+     */
     public void onClickModify(View view){
 //        int len = 0;
 //        MyDBHandler dbHandler = new MyDBHandler(this);
