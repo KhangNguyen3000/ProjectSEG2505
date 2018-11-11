@@ -192,7 +192,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 ;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
-            ServiceType service = new ServiceType(cursor.getString(1), cursor.getDouble(2));
+            ServiceType service = new ServiceType(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2));
             db.close();
             return service;
         } else {
@@ -279,6 +279,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         result = db.delete(TABLE_SERVICETYPES,SERVICETYPES_ID + " = " + serviceType.getID(), null) > 0;
 
         db.close();
+        System.out.println(result);
         return result;
 //        String query =
 //                "SELECT * FROM " + TABLE_SERVICETYPES
