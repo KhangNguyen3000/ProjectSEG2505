@@ -82,12 +82,14 @@ public class ServiceManagement extends AppCompatActivity {
      */
     public void onClickAddService(View view) {
         ViewGroup layout = findViewById(R.id.sma_layout_root);
-        if (Validation.validateAll(layout)) {
+        EditText serviceName = findViewById(R.id.serviceName);
+        if (Validation.validateAll(layout)
+                && Validation.availableServiceType(serviceName, "")) {
             // Add the service to the database
-            String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
-            double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
+            String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
+            double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
             MyDBHandler data = new MyDBHandler(getApplicationContext());
-            ServiceType serviceType = new ServiceType(serviceName, serviceRate);
+            ServiceType serviceType = new ServiceType(newServiceName, newServiceRate);
             data.addServiceType(serviceType);
 
             // Display a success message
@@ -107,7 +109,9 @@ public class ServiceManagement extends AppCompatActivity {
      */
     public void onClickUpdate(View view) {
         ViewGroup layout = findViewById(R.id.sma_layout_root);
-        if (Validation.validateAll(layout)) {
+        EditText serviceName = findViewById(R.id.serviceName);
+        if (Validation.validateAll(layout)
+                && Validation.availableServiceType(serviceName, updatedServiceType.getName())) {
             // Get the inputs and update the object updatedServiceType
             String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
@@ -122,7 +126,7 @@ public class ServiceManagement extends AppCompatActivity {
             Button updateButton = findViewById(R.id.updateB);
             Button deleteButton = findViewById(R.id.deleteB);
             Button cancelButton = findViewById(R.id.cancelB);
-            EditText serviceName = findViewById(R.id.serviceName);
+//            EditText serviceName = findViewById(R.id.serviceName);
             EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
 
             addButton.setVisibility(View.VISIBLE);

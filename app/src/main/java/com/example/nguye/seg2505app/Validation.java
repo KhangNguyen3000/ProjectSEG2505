@@ -76,6 +76,27 @@ public class Validation extends AppCompatActivity {
     }
 
     /**
+     *  Check if the serviceType already exists
+     * @param inputField, the instance of the EditText
+     * @param currentServiceType,
+     * @return true if the serviceType already exists
+     */
+    public static boolean availableServiceType(EditText inputField, String currentServiceType) {
+        // Check if the serviceType already exists
+        Toast errorMessage;
+        String input = inputField.getText().toString().trim(); // Extract the string from the input field
+        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext()); // Instantiate MyDBHandler
+//        Account currentAccount = CurrentAccount.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
+//        String currentEmail = currentAccount.getEmail();
+        if((dbHandler.findServiceType(input) != null) && (!currentServiceType.equals(input))) {
+            errorMessage = Toast.makeText(inputField.getContext(), "This service type already exists.", Toast.LENGTH_LONG);
+            errorMessage.show();
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Validate a password input field
      * @param inputField, the instance of the EditText
      * @return true if valid
