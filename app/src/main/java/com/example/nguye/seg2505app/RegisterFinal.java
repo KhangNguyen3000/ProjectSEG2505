@@ -25,18 +25,14 @@ public class RegisterFinal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_final);
 
-        // Spinner creation
+        // Spinner (drop-down) creation
         Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
         ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
-
     }
 
-
-
     // This function is used to store all the values that we need to register a new user
-
     public void storeInfo(){
         firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.reg_input_lastName)).getText().toString();
@@ -53,35 +49,30 @@ public class RegisterFinal extends AppCompatActivity {
         postalC = ((EditText) findViewById(R.id.reg_input_postalCode)).getText().toString();
     }
 
-
-
-    // This function is used when we click on the "Register" button. It verifies that every field is correctly filled.
-
+    /**
+     * This function is used when we click on the "Register" button. It verifies that every field is correctly filled.
+     * @param view
+     */
     public void onClickRegister(View view){
 
-        // Perform validation on all fields
         ViewGroup layout = findViewById(R.id.reg_layout_root);
-//        Validation.validateAll(layout);
-
-        // Confirm the email and password
         EditText email = findViewById(R.id.reg_input_email);
         EditText emailConf = findViewById(R.id.reg_input_emailConfirm);
         EditText password = findViewById(R.id.reg_input_password);
         EditText passwordConf = findViewById(R.id.reg_input_passwordConfirm);
 
-        if (Validation.validateAll(layout)
-                && Validation.availableEmail(email)
-                && Validation.confirmField(email, emailConf, "Email")
-                && Validation.confirmField(password, passwordConf, "Password")) {
+        if (Validation.validateAll(layout) // Perform validation on all fields
+                && Validation.availableEmail(email) // Check if the email is already taken
+                && Validation.confirmField(email, emailConf, "Email") // Confirm the email
+                && Validation.confirmField(password, passwordConf, "Password")) { // Confirm the password
             storeInfo();
             addUserToDatabase();
         }
     }
 
-
-
-    // This function implements the new user to the Database
-
+    /**
+     * This function adds the new user to the Database
+     */
     public void addUserToDatabase(){
         MyDBHandler dbHandler = new MyDBHandler(this);
         Account account = new Account();
@@ -108,17 +99,10 @@ public class RegisterFinal extends AppCompatActivity {
             accType = 2;
         }
         account.setType(accType);
+        // Add the account to the database.
         dbHandler.addAccount(account);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
         finish();
-//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivityForResult(intent, 0);
     }
-
-
-
-
-
-
 }

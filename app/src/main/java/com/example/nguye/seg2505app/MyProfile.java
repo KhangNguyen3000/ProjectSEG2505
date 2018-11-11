@@ -19,9 +19,8 @@ public class MyProfile extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        // Update the account information
         Account currentAccount = CurrentAccount.getCurrentAccount();
-
         TextView tvFullName = (TextView)findViewById(R.id.mp_txt_fullNameDisp);
         TextView tvAddress = (TextView)findViewById(R.id.mp_txt_addressDisp);
         TextView tvPhoneNumber = (TextView)findViewById(R.id.mp_txt_phoneNumberDisp);
@@ -36,12 +35,22 @@ public class MyProfile extends AppCompatActivity {
         tvPassword.setText(currentAccount.getPassword());
     }
 
+    /**
+     * Open the ModifyScreen activity
+     * @param view
+     */
     public void onClickModifyButton(View view){
         Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
         startActivity(intent);
     }
 
+    /**
+     * Asks the user if he really want to delete the account.
+     * Do so if yes, nothing if no.
+     * @param view
+     */
     public void onClickDelete(View view) {
+        // Create the alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("Warning!");
@@ -55,8 +64,7 @@ public class MyProfile extends AppCompatActivity {
                 // The result code 9999 indicates that the account has been deleted
                 setResult(9999, null);
                 finish();
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivityForResult(intent, 0);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -69,6 +77,4 @@ public class MyProfile extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 }
