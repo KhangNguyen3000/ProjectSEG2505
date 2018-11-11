@@ -68,8 +68,6 @@ public class RegisterFinal extends AppCompatActivity {
         EditText emailConf = findViewById(R.id.reg_input_emailConfirm);
         EditText password = findViewById(R.id.reg_input_password);
         EditText passwordConf = findViewById(R.id.reg_input_passwordConfirm);
-//        Validation.confirmField(email, emailConf, "Email");
-//        Validation.confirmField(password, passwordConf, "Password");
 
         if (Validation.validateAll(layout)
                 && Validation.availableEmail(email)
@@ -78,16 +76,6 @@ public class RegisterFinal extends AppCompatActivity {
             storeInfo();
             addUserToDatabase();
         }
-//        int len = 0;
-//        MyDBHandler dbHandler = new MyDBHandler(this);
-//        Context context = getApplicationContext();
-//
-//        len = ((EditText) findViewById(R.id.reg_input_phone)).getText().length();
-//
-//        Checking check = new Checking(firstName, lastName, email, cEmail, pass, cPass, street, city, province, country, postalC, len, dbHandler, context);
-//        if (check.checkAll()){
-//            addUserToDatabase();
-//        }
     }
 
 
