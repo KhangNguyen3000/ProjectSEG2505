@@ -191,10 +191,15 @@ public class MyDBHandler extends SQLiteOpenHelper{
                         + " WHERE " + SERVICETYPES_NAME + " = \"" + name + "\""
                 ;
         Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()) ServiceType service = new ServiceType(cursor.getInt(0),cursor.getString(1),cursor.getDouble(2));
-        else ServiceType service = null;
-        return service;
-
+        if(cursor.moveToFirst()) {
+            ServiceType service = new ServiceType(cursor.getString(1), cursor.getDouble(2));
+            db.close();
+            return service;
+        } else {
+            ServiceType service = null;
+            db.close();
+            return service;
+        }
     }
 
 //    // Adds a service type to the table ServiceTypes
