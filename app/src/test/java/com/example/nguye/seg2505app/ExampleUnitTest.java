@@ -1,5 +1,7 @@
 package com.example.nguye.seg2505app;
 
+import android.widget.EditText;
+
 import org.junit.Test;
 
 
@@ -31,18 +33,18 @@ public class ExampleUnitTest {
     public void hasUnoAdmin(){
 
 
-
     }
-
-
 
     @Test
     public void validUsers(){
-        List<String> users =data.getDatabase().getUsers();
+        List<String> users = data.getDatabase().getList();
         for(String elem: users){
             assertTrue(Validation.validEmailString(elem));
         }
     }
 
-
+    @Test
+    public void testOnCLickMyProfileButton(){
+        onView( findViewById (R.id.wel_myprofile_button));
+    }
 }
