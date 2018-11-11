@@ -19,6 +19,8 @@ import java.util.List;
 public class ServiceManagement extends AppCompatActivity {
     MyDBHandler data;
     ListView listView;
+    private ServiceType updatedServiceType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,23 +36,26 @@ public class ServiceManagement extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedService = (String) parent.getItemAtPosition(position);
+                ServiceType serviceType = data.findServiceType(selectedService);
+
+                // Show the modify options
                 Button addButton = findViewById(R.id.addB);
                 Button updateButton = findViewById(R.id.updateB);
                 Button deleteButton = findViewById(R.id.deleteB);
-                EditText serviceName = findViewById(R.id.serviceName);
-                EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
-
-                // Show the modify options
                 addButton.setVisibility(View.GONE);
                 updateButton.setVisibility(View.VISIBLE);
                 deleteButton.setVisibility(View.VISIBLE);
 
-                serviceName.setText(o.toString());
-                serviceMaxRate.setText();
+                // Fills the fields with the current information of the selected service
+                EditText serviceName = findViewById(R.id.serviceName);
+                EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+                serviceName.setText(serviceType.getName());
+                serviceMaxRate.setText(Double.toString(serviceType.getRate()));
 
 
-
-                System.out.println(o);
+                // Stores the information of the selected service type
+                updatedServiceType = data.findServiceType(serviceType.getName());
+//                System.out.println(o);
             }
         });
     }
@@ -68,8 +73,10 @@ public class ServiceManagement extends AppCompatActivity {
     public void onClickAddService(View view) {
         // Add the service to the database
         String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
-        double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.servicePrice)).getText().toString());
-        data.addServiceType(serviceName, serviceRate);
+        double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
+
+        ServiceType serviceType = new ServiceType(serviceName, serviceRate);
+        data.addServiceType(serviceType);
 
         // Display a success message
         Toast toast = Toast.makeText(getApplicationContext(), "Service added!", Toast.LENGTH_LONG);
@@ -79,28 +86,80 @@ public class ServiceManagement extends AppCompatActivity {
         List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
     }
+//
+//     public void onClickList(View view) {
+//         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
+//         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
+//         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
+//         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 //update on database
+//             }
+//         });
+//         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//             @Override
+//             public void onClick(DialogInterface dialog, int which) {
+//                 // do nothing
+//             }
+//         });
+//         AlertDialog dialog = builder.create();
+//         dialog.show();
+//     }
 
-     public void onClickList(View view) {
-         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-         View mView = getLayoutInflater().inflate(R.layout.dialog_add_service, null);
-         EditText serviceName = (EditText) mView.findViewById(R.id.nameUpdate);
-         EditText price = (EditText) mView.findViewById(R.id.priceUpdate);
-         builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-             @Override
-             public void onClick(DialogInterface dialog, int which) {
-                 //update on database
-             }
-         });
-         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-             @Override
-             public void onClick(DialogInterface dialog, int which) {
-                 // do nothing
-             }
-         });
-         AlertDialog dialog = builder.create();
-         dialog.show();
-     }
+    public void onClickUpdate(View view) {
+        // Get the inputs and update the object updatedServiceType
+        String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
+        double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
 
+        updatedServiceType.setName(newServiceName);
+        updatedServiceType.setRate(newServiceRate);
+
+        data.updateServiceType(updatedServiceType);
+
+        // Hide the modify options and clear the fields
+        Button addButton = findViewById(R.id.addB);
+        Button updateButton = findViewById(R.id.updateB);
+        Button deleteButton = findViewById(R.id.deleteB);
+        EditText serviceName = findViewById(R.id.serviceName);
+        EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+
+        addButton.setVisibility(View.VISIBLE);
+        updateButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        serviceName.setText("");
+        serviceMaxRate.setText("");
+
+        // Update the list view
+        List<String> services = data.getList("Name","ServiceTypes");
+        showServiceList(services);
+    }
+
+    public void onClickDelete(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Delete service");
+        builder.setMessage("Are you sure that you want to delete this service?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                data.deleteServiceType(updatedServiceType);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Update the list view
+        List<String> services = data.getList("Name","ServiceTypes");
+        showServiceList(services);
+    }
 
 
 }
