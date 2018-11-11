@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -75,20 +76,23 @@ public class ServiceManagement extends AppCompatActivity {
 
 
     public void onClickAddService(View view) {
-        // Add the service to the database
-        String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
-        double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
-        MyDBHandler data = new MyDBHandler(getApplicationContext());
-        ServiceType serviceType = new ServiceType(serviceName, serviceRate);
-        data.addServiceType(serviceType);
+        ViewGroup layout = findViewById(R.id.sma_layout_root);
+        if (Validation.validateAll(layout)) {
+            // Add the service to the database
+            String serviceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
+            double serviceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
+            MyDBHandler data = new MyDBHandler(getApplicationContext());
+            ServiceType serviceType = new ServiceType(serviceName, serviceRate);
+            data.addServiceType(serviceType);
 
-        // Display a success message
-        Toast toast = Toast.makeText(getApplicationContext(), "Service added!", Toast.LENGTH_LONG);
-        toast.show();
+            // Display a success message
+            Toast toast = Toast.makeText(getApplicationContext(), "Service added!", Toast.LENGTH_LONG);
+            toast.show();
 
-        // Update the list view
-        List<String> services = data.getList("Name","ServiceTypes");
-        showServiceList(services);
+            // Update the list view
+            List<String> services = data.getList("Name", "ServiceTypes");
+            showServiceList(services);
+        }
     }
 //
 //     public void onClickList(View view) {
@@ -113,35 +117,40 @@ public class ServiceManagement extends AppCompatActivity {
 //     }
 
     public void onClickUpdate(View view) {
-        // Get the inputs and update the object updatedServiceType
-        String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
-        double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
-        MyDBHandler data = new MyDBHandler(getApplicationContext());
-        updatedServiceType.setName(newServiceName);
-        updatedServiceType.setRate(newServiceRate);
+        ViewGroup layout = findViewById(R.id.sma_layout_root);
+        if (Validation.validateAll(layout)) {
+            // Get the inputs and update the object updatedServiceType
+            String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
+            double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
+            MyDBHandler data = new MyDBHandler(getApplicationContext());
+            updatedServiceType.setName(newServiceName);
+            updatedServiceType.setRate(newServiceRate);
 
-        data.updateServiceType(updatedServiceType);
+            data.updateServiceType(updatedServiceType);
 
-        // Hide the modify options and clear the fields
-        Button addButton = findViewById(R.id.addB);
-        Button updateButton = findViewById(R.id.updateB);
-        Button deleteButton = findViewById(R.id.deleteB);
-        EditText serviceName = findViewById(R.id.serviceName);
-        EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+            // Hide the modify options and clear the fields
+            Button addButton = findViewById(R.id.addB);
+            Button updateButton = findViewById(R.id.updateB);
+            Button deleteButton = findViewById(R.id.deleteB);
+            Button cancelButton = findViewById(R.id.cancelB);
+            EditText serviceName = findViewById(R.id.serviceName);
+            EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
 
-        addButton.setVisibility(View.VISIBLE);
-        updateButton.setVisibility(View.GONE);
-        deleteButton.setVisibility(View.GONE);
-        serviceName.setText("");
-        serviceMaxRate.setText("");
+            addButton.setVisibility(View.VISIBLE);
+            updateButton.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.GONE);
+            cancelButton.setVisibility(View.GONE);
+            serviceName.setText("");
+            serviceMaxRate.setText("");
 
-        //Display the success message
-        Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
-        toast.show();
+            //Display the success message
+            Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
+            toast.show();
 
-        // Update the list view
-        List<String> services = data.getList("Name","ServiceTypes");
-        showServiceList(services);
+            // Update the list view
+            List<String> services = data.getList("Name","ServiceTypes");
+            showServiceList(services);
+        }
     }
 
     public void onClickDelete(View view) {
@@ -158,6 +167,22 @@ public class ServiceManagement extends AppCompatActivity {
                 //Display the success message
                 Toast toast = Toast.makeText(getApplicationContext(), "Service deleted!", Toast.LENGTH_LONG);
                 toast.show();
+
+                // Hide the modify options and clear the fields
+                Button addButton = findViewById(R.id.addB);
+                Button updateButton = findViewById(R.id.updateB);
+                Button deleteButton = findViewById(R.id.deleteB);
+                Button cancelButton = findViewById(R.id.cancelB);
+                EditText serviceName = findViewById(R.id.serviceName);
+                EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
+
+                addButton.setVisibility(View.VISIBLE);
+                updateButton.setVisibility(View.GONE);
+                deleteButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                serviceName.setText("");
+                serviceMaxRate.setText("");
+
                 // Update the list view
                 List<String> services = data.getList("Name","ServiceTypes");
                 showServiceList(services);
