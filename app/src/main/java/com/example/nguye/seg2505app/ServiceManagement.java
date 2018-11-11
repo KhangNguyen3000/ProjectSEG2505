@@ -135,6 +135,10 @@ public class ServiceManagement extends AppCompatActivity {
         serviceName.setText("");
         serviceMaxRate.setText("");
 
+        //Display the success message
+        Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
+        toast.show();
+
         // Update the list view
         List<String> services = data.getList("Name","ServiceTypes");
         showServiceList(services);
@@ -150,6 +154,10 @@ public class ServiceManagement extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 MyDBHandler data = new MyDBHandler(getApplicationContext());
                 data.deleteServiceType(updatedServiceType);
+
+                //Display the success message
+                Toast toast = Toast.makeText(getApplicationContext(), "Service deleted!", Toast.LENGTH_LONG);
+                toast.show();
                 // Update the list view
                 List<String> services = data.getList("Name","ServiceTypes");
                 showServiceList(services);
@@ -171,13 +179,17 @@ public class ServiceManagement extends AppCompatActivity {
         Button deleteButton = findViewById(R.id.deleteB);
         Button cancelButton = findViewById(R.id.cancelB);
 
+        //Hide the 3 buttons and show the add one
         addButton.setVisibility(View.VISIBLE);
         updateButton.setVisibility(View.GONE);
         deleteButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.GONE);
+
+        //Fill the fields empty
         EditText serviceName = findViewById(R.id.serviceName);
         EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
         serviceName.setText("");
         serviceMaxRate.setText("");
+
     }
 }
