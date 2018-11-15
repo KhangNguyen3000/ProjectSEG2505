@@ -33,34 +33,16 @@ public class OfferedService extends Storable {
     public OfferedService () {
     }
 
-    // Constructor
-    public OfferedService (Context context) {
-        this.context = context;
-    }
+//    // Constructor
+//    public OfferedService (Context context) {
+//        this.context = context;
+//    }
 
     // Constructor
-    public OfferedService (Context context, int typeID, int providerID, double hourlyRate) {
-        this.context = context;
+    public OfferedService (int typeID, int providerID, double hourlyRate) {
         this.typeID = typeID;
         this.providerID = providerID;
         this.hourlyRate = hourlyRate;
-    }
-
-    /**
-     * Use a cursor to store a record into an OfferedService object
-     * @param db
-     * @param cursor
-     * @return the created OfferedService. Its attributes will be null if the record is not found.
-     */
-    public OfferedService cursorHandler(SQLiteDatabase db, Cursor cursor) {
-        OfferedService service = new OfferedService(this.getContext());
-        if(cursor.moveToFirst()) {
-            service.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
-            service.setTypeID(cursor.getInt(getFieldIndex(COL_TYPE, COLUMNS)));
-            service.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
-            service.setHourlyRate(cursor.getDouble(getFieldIndex(COL_HOURLYRATE, COLUMNS)));
-        }
-        return service;
     }
 
     /**
@@ -73,6 +55,39 @@ public class OfferedService extends Storable {
         values.put(COL_PROVIDER, getProviderID());
         values.put(COL_HOURLYRATE, getHourlyRate());
         return values;
+    }
+
+    /**
+     * Search for the record that has the specified value in the specified field in the table "Services".
+     * @param fieldName Name of the column to look into
+     * @param value Value to search for
+     * @return The first record that matches.
+     */
+    public OfferedService find(Context context, String fieldName, Object value, boolean quotedValue) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String quotes = "";
+        if (quotedValue) {
+            quotes = "\"";
+        }
+        String query = "SELECT * FROM " + this.getTableName()
+                + " WHERE " + fieldName + " = " + quotes + value + quotes;
+        System.out.println(query);
+
+        // Store the item's data into a Storable using a cursor
+        Cursor cursor = db.rawQuery(query, null);
+        OfferedService service = null;
+        if(cursor.moveToFirst()) {
+            service = new OfferedService();
+            service.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
+            service.setTypeID(cursor.getInt(getFieldIndex(COL_TYPE, COLUMNS)));
+            service.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
+            service.setHourlyRate(cursor.getDouble(getFieldIndex(COL_HOURLYRATE, COLUMNS)));
+        }
+        db.close();
+        return service;
     }
 
     // Getters and setters

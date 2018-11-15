@@ -41,6 +41,8 @@ public class Account extends Storable {
         COLUMNS.add(new String[] {COL_PASSWORD, "TEXT"});
     }
 
+    private static Account currentAccount;
+
     // Attributes
     private String email;
     private int type;
@@ -60,8 +62,165 @@ public class Account extends Storable {
         this.email = "empty"; // This is to prevent errors on a null value
     }
 
-    public Account(Context context) {
-        this.context = context;
+//    // Constructor
+//    public Account(Context context) {
+//        this.context = context;
+//        this.email = "empty"; // This is to prevent errors on a null value
+//    }
+
+
+
+
+//    public boolean add() {
+//        boolean result;
+//        com.example.vincent.testing.MyDBHandler dbHandler = new com.example.vincent.testing.MyDBHandler(context);
+//        SQLiteDatabase db = dbHandler.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(COL_EMAIL, getEmail());
+//        values.put(COL_TYPE, getType());
+//        values.put(COL_FIRSTNAME, getFirstName());
+//        values.put(COL_LASTNAME, getLastName());
+//        values.put(COL_STREETNUMBER, getStreetNumber());
+//        values.put(COL_STREETNAME, getStreetName());
+//        values.put(COL_CITY, getCity());
+//        values.put(COL_PROVINCE, getProvince());
+//        values.put(COL_COUNTRY, getCountry());
+//        values.put(COL_POSTALCODE, getPostalCode());
+//        values.put(COL_PHONENUMBER, getPhoneNumber());
+//        values.put(COL_PASSWORD, getPassword());
+//
+//        result = db.insert(TABLE_NAME, null, values) > 0;
+//        db.close();
+//        return result;
+//    }
+//
+//    public boolean update() {
+//        boolean result;
+//        com.example.vincent.testing.MyDBHandler dbHandler = new com.example.vincent.testing.MyDBHandler(context);
+//        SQLiteDatabase db = dbHandler.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(COL_EMAIL, getEmail());
+//        values.put(COL_TYPE, getType());
+//        values.put(COL_FIRSTNAME, getFirstName());
+//        values.put(COL_LASTNAME, getLastName());
+//        values.put(COL_STREETNUMBER, getStreetNumber());
+//        values.put(COL_STREETNAME, getStreetName());
+//        values.put(COL_CITY, getCity());
+//        values.put(COL_PROVINCE, getProvince());
+//        values.put(COL_COUNTRY, getCountry());
+//        values.put(COL_POSTALCODE, getPostalCode());
+//        values.put(COL_PHONENUMBER, getPhoneNumber());
+//        values.put(COL_PASSWORD, getPassword());
+//
+//        result = db.update(TABLE_NAME, values, COL_ID + " = " + getID(), null) > 0;
+//        db.close();
+//        return result;
+//    }
+
+
+
+
+//    /**
+//     * Use a cursor to store a record into an Account object
+//     * @param db
+//     * @param cursor
+//     * @return the created Account. Its attributes will be null if the record is not found.
+//     */
+//    public Account cursorHandler(SQLiteDatabase db, Cursor cursor) {
+//        Account account = new Account();
+//        if(cursor.moveToFirst()) {
+//            account.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_EMAIL, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_TYPE, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_FIRSTNAME, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_LASTNAME, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_STREETNUMBER, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_STREETNAME, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_CITY, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_PROVINCE, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_COUNTRY, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_POSTALCODE, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_PHONENUMBER, COLUMNS)));
+//            account.setID(cursor.getInt(getFieldIndex(COL_PASSWORD, COLUMNS)));
+//        }
+//        return account;
+//    }
+
+    public static Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public static void setCurrentAccount(Account account) {
+        currentAccount = account;
+    }
+
+    public static void logout() {
+        currentAccount = null;
+    }
+
+    /**
+     * Put the Account's attributes into a ContentValues object to use with database functions
+     * @return the ContentValues object
+     */
+    public ContentValues valuePutter() {
+        ContentValues values = new ContentValues();
+        values.put(COL_EMAIL, getEmail());
+        values.put(COL_TYPE, getType());
+        values.put(COL_FIRSTNAME, getFirstName());
+        values.put(COL_LASTNAME, getLastName());
+        values.put(COL_STREETNUMBER, getStreetNumber());
+        values.put(COL_STREETNAME, getStreetName());
+        values.put(COL_CITY, getCity());
+        values.put(COL_PROVINCE, getProvince());
+        values.put(COL_COUNTRY, getCountry());
+        values.put(COL_POSTALCODE, getPostalCode());
+        values.put(COL_PHONENUMBER, getPhoneNumber());
+        values.put(COL_PASSWORD, getPassword());
+        return values;
+    }
+
+    /**
+     * Search for the record that has the specified value in the specified field in the table "Accounts".
+     * @param fieldName Name of the column to look into
+     * @param value Value to search for
+     * @return The first record that matches.
+     */
+    public Account find(Context context, String fieldName, Object value, boolean quotedValue) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String quotes = "";
+        if (quotedValue) {
+            quotes = "\"";
+        }
+        String query = "SELECT * FROM " + this.getTableName()
+                + " WHERE " + fieldName + " = " + quotes + value + quotes;
+        System.out.println(query);
+
+        // Store the item's data into a Storable using a cursor
+        Cursor cursor = db.rawQuery(query, null);
+        Account account = null;
+        if(cursor.moveToFirst()) {
+            account = new Account();
+            account.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
+            account.setEmail(cursor.getString(getFieldIndex(COL_EMAIL, COLUMNS)));
+            account.setType(cursor.getInt(getFieldIndex(COL_TYPE, COLUMNS)));
+            account.setFirstName(cursor.getString(getFieldIndex(COL_FIRSTNAME, COLUMNS)));
+            account.setLastName(cursor.getString(getFieldIndex(COL_LASTNAME, COLUMNS)));
+            account.setStreetNumber(cursor.getInt(getFieldIndex(COL_STREETNUMBER, COLUMNS)));
+            account.setStreetName(cursor.getString(getFieldIndex(COL_STREETNAME, COLUMNS)));
+            account.setCity(cursor.getString(getFieldIndex(COL_CITY, COLUMNS)));
+            account.setProvince(cursor.getString(getFieldIndex(COL_PROVINCE, COLUMNS)));
+            account.setCountry(cursor.getString(getFieldIndex(COL_COUNTRY, COLUMNS)));
+            account.setPostalCode(cursor.getString(getFieldIndex(COL_POSTALCODE, COLUMNS)));
+            account.setPhoneNumber(cursor.getString(getFieldIndex(COL_PHONENUMBER, COLUMNS)));
+            account.setPassword(cursor.getString(getFieldIndex(COL_PASSWORD, COLUMNS)));
+        }
+        db.close();
+        return account;
     }
 
     // Setters and getters
@@ -102,80 +261,5 @@ public class Account extends Storable {
 
     public String getPassword(){return this.password;}
     public void setPassword(String password){this.password = password;}
-
-
-    public boolean add() {
-        boolean result;
-        com.example.vincent.testing.MyDBHandler dbHandler = new com.example.vincent.testing.MyDBHandler(context);
-        SQLiteDatabase db = dbHandler.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COL_EMAIL, getEmail());
-        values.put(COL_TYPE, getType());
-        values.put(COL_FIRSTNAME, getFirstName());
-        values.put(COL_LASTNAME, getLastName());
-        values.put(COL_STREETNUMBER, getStreetNumber());
-        values.put(COL_STREETNAME, getStreetName());
-        values.put(COL_CITY, getCity());
-        values.put(COL_PROVINCE, getProvince());
-        values.put(COL_COUNTRY, getCountry());
-        values.put(COL_POSTALCODE, getPostalCode());
-        values.put(COL_PHONENUMBER, getPhoneNumber());
-        values.put(COL_PASSWORD, getPassword());
-
-        result = db.insert(TABLE_NAME, null, values) > 0;
-        db.close();
-        return result;
-    }
-
-    public boolean update() {
-        boolean result;
-        com.example.vincent.testing.MyDBHandler dbHandler = new com.example.vincent.testing.MyDBHandler(context);
-        SQLiteDatabase db = dbHandler.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COL_EMAIL, getEmail());
-        values.put(COL_TYPE, getType());
-        values.put(COL_FIRSTNAME, getFirstName());
-        values.put(COL_LASTNAME, getLastName());
-        values.put(COL_STREETNUMBER, getStreetNumber());
-        values.put(COL_STREETNAME, getStreetName());
-        values.put(COL_CITY, getCity());
-        values.put(COL_PROVINCE, getProvince());
-        values.put(COL_COUNTRY, getCountry());
-        values.put(COL_POSTALCODE, getPostalCode());
-        values.put(COL_PHONENUMBER, getPhoneNumber());
-        values.put(COL_PASSWORD, getPassword());
-
-        result = db.update(TABLE_NAME, values, COL_ID + " = " + getID(), null) > 0;
-        db.close();
-        return result;
-    }
-
-    public boolean delete() {
-        return true;
-    }
-
-    public Account cursorHandler(SQLiteDatabase db, Cursor cursor) {
-        Account account = new Account(context);
-        if(cursor.moveToFirst()) {
-
-        } else {
-            account = null;
-        }
-        return account;
-    }
-
-
-    public ContentValues valuePutter() {
-        ContentValues values = new ContentValues();
-        values.put(COL_TYPE, getType());
-        return values;
-    }
-
-
-
-
-
 
 }

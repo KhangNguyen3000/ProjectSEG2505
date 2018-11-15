@@ -20,7 +20,7 @@ public class MyProfile extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         // Update the account information
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        Account currentAccount = Account.getCurrentAccount();
         TextView tvFullName = (TextView)findViewById(R.id.mp_txt_fullNameDisp);
         TextView tvAddress = (TextView)findViewById(R.id.mp_txt_addressDisp);
         TextView tvPhoneNumber = (TextView)findViewById(R.id.mp_txt_phoneNumberDisp);
@@ -58,9 +58,10 @@ public class MyProfile extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
-                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
-                dbHandler.deleteAccount(currentEmail);
+//                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
+//                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
+//                dbHandler.deleteAccount(currentEmail);
+                Account.getCurrentAccount().delete(getApplicationContext());
                 // The result code 9999 indicates that the account has been deleted
                 setResult(9999, null);
                 finish();

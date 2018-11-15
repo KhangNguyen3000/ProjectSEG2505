@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 15;
-    private static final String DATABASE_NAME = "TestingDatabase";
+    private static final int DATABASE_VERSION = 19;
+    private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
     protected static final HashMap<String, ArrayList<String[]>> DATABASE = new HashMap<>();
@@ -67,10 +67,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
         System.out.println("Upgrading the database...");
         DATABASE.put(Account.TABLE_NAME, Account.COLUMNS);
         DATABASE.put(OfferedService.TABLE_NAME, OfferedService.COLUMNS);
+        DATABASE.put(ServiceType.TABLE_NAME, ServiceType.COLUMNS);
         for (String table : DATABASE.keySet()) {
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");
         }
+        db.execSQL("DROP TABLE IF EXISTS " + "ServicesTypes");
+        db.execSQL("DROP TABLE IF EXISTS " + "ServicesType");
         onCreate(db);
     }
 //
@@ -245,68 +248,70 @@ public class MyDBHandler extends SQLiteOpenHelper{
 //        }
 //    }
 
-//    /**
-////     * Add an administrator account to the database
-////     */
-////    public void createAdmin(){
-////        // Set all the attributes of the admin account.
-////        Account account = new Account();
-////        account.setFirstName("admin");
-////        account.setLastName("admin");
-////        account.setEmail("admin@admin.admin");
-////        account.setPassword("admin0");
-////        account.setStreetNumber(0);
-////        account.setStreetName("admin");
-////        account.setCity("admin");
-////        account.setProvince("admin");
-////        account.setCountry("admin");
-////        account.setPostalCode("a0a0a0");
-////        account.setPhoneNumber("1000000000");
-////        account.setType(1);
-////
-////        // Add the account to the database
-////        addAccount(account);
-//////        System.out.println("Administrateur créé");
-////    }
+    /**
+     * Add an administrator account to the database
+     */
+    public void createAdmin(Context context){
+        // Set all the attributes of the admin account.
+        Account account = new Account();
+        account.setFirstName("admin");
+        account.setLastName("admin");
+        account.setEmail("admin@admin.admin");
+        account.setPassword("admin0");
+        account.setStreetNumber(0);
+        account.setStreetName("admin");
+        account.setCity("admin");
+        account.setProvince("admin");
+        account.setCountry("admin");
+        account.setPostalCode("a0a0a0");
+        account.setPhoneNumber("1000000000");
+        account.setType(1);
 
-//    /**
-//     * Check if an account of the specifies type already exists in the database.
-//     * @param type (1 = Administrator, 2 = Provider, 3 = Client)
-//     * @return true if an account of the specified type exists in the database
-//     */
-//    public boolean existsType(int type) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String query =
-//                "SELECT * FROM " + TABLE_ACCOUNTS
-//                        + " WHERE " + ACCOUNTS_TYPE + " = " + type
-//                ;
-//        Cursor cursor = db.rawQuery(query, null);
-//        if(cursor.moveToFirst()) {
+        // Add the account to the database
+//        addAccount(account);
+        account.add(context);
+//        System.out.println("Administrateur créé");
+    }
+
+    /**
+     * Check if an account of the specifies type already exists in the database.
+     * @param type (1 = Administrator, 2 = Provider, 3 = Client)
+     * @return true if an account of the specified type exists in the database
+     */
+    public boolean existsType(int type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + Account.TABLE_NAME
+                + " WHERE " + Account.COL_TYPE + " = " + type;
+        System.out.println(query);
+
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.moveToFirst();
+//        if (cursor.moveToFirst()) {
 //            return true;
 //        } else {
 //            return false;
 //        }
-//    }
-//
-//    /**
-//     * Return a List of string that contains the value of the specified field in the specified table
-//     * @param elem, column/field name in the table
-//     * @param table, name of the table
-//     * @return
-//     */
-//    public List<String> getList(String elem, String table){
-//        List<String> mArrayList = new ArrayList<String>();
-//
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String query ="SELECT " + elem + " FROM "+ table;
-//        Cursor users = db.rawQuery(query,null);
-//        users.moveToFirst();
-//        while(!users.isAfterLast()) {
-//            mArrayList.add(users.getString(0)); //add the item
-//            users.moveToNext();
-//        }
-//        return mArrayList;
-//    }
+    }
+
+    /**
+     * Return a List of string that contains the value of the specified field in the specified table
+     * @param elem, column/field name in the table
+     * @param table, name of the table
+     * @return
+     */
+    public List<String> getList(String elem, String table){
+        List<String> mArrayList = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + elem + " FROM "+ table;
+        Cursor users = db.rawQuery(query,null);
+        users.moveToFirst();
+        while(!users.isAfterLast()) {
+            mArrayList.add(users.getString(0)); //add the item
+            users.moveToNext();
+        }
+        return mArrayList;
+    }
 
 
 //    public static void setDatabaseStructure() {

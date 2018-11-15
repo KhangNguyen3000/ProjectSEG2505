@@ -30,7 +30,7 @@ public class ModifyScreen extends AppCompatActivity{
         setContentView(R.layout.modify);
 
         // Set the content of each field to the values of the currentAccount
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        Account currentAccount = Account.getCurrentAccount();
 
         TextView tvFirstName = (TextView)findViewById(R.id.mod_input_firstName);
         tvFirstName.setText(currentAccount.getFirstName());
@@ -71,8 +71,8 @@ public class ModifyScreen extends AppCompatActivity{
      */
     public void updateUserInDatabase(){
         // set the attributes of the currentAccount with the values entered in the fields
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+//        MyDBHandler dbHandler = new MyDBHandler(this);
+        Account currentAccount = Account.getCurrentAccount();
         currentAccount.setFirstName(firstName);
         currentAccount.setLastName(lastName);
         currentAccount.setEmail(email);
@@ -84,13 +84,14 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setCountry(country);
         currentAccount.setPostalCode(postalC);
         currentAccount.setPhoneNumber(phoneNumber);
-        currentAccount.setId(CurrentAccount.getCurrentAccount().getId());
+        currentAccount.setID(Account.getCurrentAccount().getID());
 
-        // Refresh the CurrentAccount
-        CurrentAccount.setCurrentAccount(currentAccount);
+//        // Refresh the CurrentAccount
+//        CurrentAccount.setCurrentAccount(currentAccount);
 
         // Update the database
-        dbHandler.updateAccount(currentAccount);
+        currentAccount.update(this);
+//        dbHandler.updateAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
     }

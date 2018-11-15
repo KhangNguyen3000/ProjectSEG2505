@@ -36,9 +36,10 @@ public class ServiceManagement extends AppCompatActivity {
         serviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyDBHandler data = new MyDBHandler(getApplicationContext());
+//                MyDBHandler data = new MyDBHandler(getApplicationContext());
                 String selectedService = (String) parent.getItemAtPosition(position);
-                ServiceType serviceType = data.findServiceType(selectedService);
+//                ServiceType serviceType = data.findServiceType(selectedService);
+                ServiceType serviceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, selectedService,true);
 
                 // Show the modify options
                 Button addButton = findViewById(R.id.addB);
@@ -54,10 +55,10 @@ public class ServiceManagement extends AppCompatActivity {
                 EditText serviceName = findViewById(R.id.serviceName);
                 EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
                 serviceName.setText(serviceType.getName());
-                serviceMaxRate.setText(Double.toString(serviceType.getRate()));
+                serviceMaxRate.setText(Double.toString(serviceType.getMaxRate()));
 
                 // Stores the information of the selected service type
-                updatedServiceType = data.findServiceType(serviceType.getName());
+                updatedServiceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, serviceType.getName(),true);
                 System.out.println(updatedServiceType.getID());
                 System.out.println(updatedServiceType.getName());
             }
@@ -88,15 +89,17 @@ public class ServiceManagement extends AppCompatActivity {
             // Add the service to the database
             String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
-            MyDBHandler data = new MyDBHandler(getApplicationContext());
+
             ServiceType serviceType = new ServiceType(newServiceName, newServiceRate);
-            data.addServiceType(serviceType);
+//            data.addServiceType(serviceType);
+            serviceType.add(this);
 
             // Display a success message
             Toast toast = Toast.makeText(getApplicationContext(), "Service added!", Toast.LENGTH_LONG);
             toast.show();
 
             // Update the list view
+            MyDBHandler data = new MyDBHandler(getApplicationContext());
             List<String> services = data.getList("Name", "ServiceTypes");
             showServiceList(services);
         }
@@ -115,12 +118,12 @@ public class ServiceManagement extends AppCompatActivity {
             // Get the inputs and update the object updatedServiceType
             String newServiceName = ((EditText) findViewById(R.id.serviceName)).getText().toString().trim();
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.serviceMaxRate)).getText().toString());
-            MyDBHandler data = new MyDBHandler(getApplicationContext());
+
             updatedServiceType.setName(newServiceName);
-            updatedServiceType.setRate(newServiceRate);
+            updatedServiceType.setMaxRate(newServiceRate);
 
-            data.updateServiceType(updatedServiceType);
-
+//            data.updateServiceType(updatedServiceType);
+            updatedServiceType.update(this);
             // Hide the modify options and clear the fields
             Button addButton = findViewById(R.id.addB);
             Button updateButton = findViewById(R.id.updateB);
@@ -141,6 +144,7 @@ public class ServiceManagement extends AppCompatActivity {
             toast.show();
 
             // Update the list view
+            MyDBHandler data = new MyDBHandler(getApplicationContext());
             List<String> services = data.getList("Name","ServiceTypes");
             showServiceList(services);
         }
@@ -160,9 +164,9 @@ public class ServiceManagement extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MyDBHandler data = new MyDBHandler(getApplicationContext());
-                data.deleteServiceType(updatedServiceType);
 
+//                data.deleteServiceType(updatedServiceType);
+                updatedServiceType.delete(getApplicationContext());
                 //Display the success message
                 Toast toast = Toast.makeText(getApplicationContext(), "Service deleted!", Toast.LENGTH_LONG);
                 toast.show();
@@ -183,6 +187,7 @@ public class ServiceManagement extends AppCompatActivity {
                 serviceMaxRate.setText("");
 
                 // Update the list view
+                MyDBHandler data = new MyDBHandler(getApplicationContext());
                 List<String> services = data.getList("Name","ServiceTypes");
                 showServiceList(services);
             }

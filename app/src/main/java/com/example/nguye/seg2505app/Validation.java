@@ -65,9 +65,10 @@ public class Validation extends AppCompatActivity {
         Toast errorMessage;
         String input = inputField.getText().toString().trim(); // Extract the string from the input field
         MyDBHandler dbHandler = new MyDBHandler(inputField.getContext()); // Instantiate MyDBHandler
-        Account currentAccount = CurrentAccount.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
+        Account currentAccount = Account.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
         String currentEmail = currentAccount.getEmail();
-        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+//        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+        if((new Account().find(inputField.getContext(), Account.COL_EMAIL, input, true) != null) && (!currentEmail.equals(input))) {
             errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
             errorMessage.show();
             return false;
@@ -88,7 +89,8 @@ public class Validation extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(inputField.getContext()); // Instantiate MyDBHandler
 //        Account currentAccount = CurrentAccount.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
 //        String currentEmail = currentAccount.getEmail();
-        if((dbHandler.findServiceType(input) != null) && (!currentServiceType.equals(input))) {
+//        if((dbHandler.findServiceType(input) != null) && (!currentServiceType.equals(input))) {
+        if((new ServiceType().find(inputField.getContext(), ServiceType.COL_NAME, input, true) != null) && (!currentServiceType.equals(input))) {
             errorMessage = Toast.makeText(inputField.getContext(), "This service type already exists.", Toast.LENGTH_LONG);
             errorMessage.show();
             return false;
