@@ -9,13 +9,13 @@ public class ServiceType {
     private String name;
     private double rate; // Max hourly rate of the service. The provider will not be able to set a higher hourly rate.
 
-    // Constructors 1
+    // Constructor
     public ServiceType(String name, double rate){
         this.name = name;
         this.rate = rate;
     }
 
-    // Constructors 2
+    // Constructor
     public ServiceType(int ID, String name, double rate){
         this.ID = ID;
         this.name = name;
