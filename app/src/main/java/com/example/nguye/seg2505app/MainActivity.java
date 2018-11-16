@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
      * Opens the RegisterFinal activity.
      * @param view
      */
+    public void onClick1(View viewà){
+
+        Intent intent = new Intent(getApplicationContext(), RegisterProvider.class);
+        startActivity(intent);
+    }
     public void onClickSignupButton(View view){
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
         startActivity(intent);
