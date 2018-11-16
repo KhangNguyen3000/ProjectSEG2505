@@ -30,6 +30,9 @@ public class RegisterProvider extends AppCompatActivity{
             addServiceToDatabase();
         }
     }
+
+    
+
     public void addServiceToDatabase(){
         Toast toast = Toast.makeText(getApplicationContext(), "Provider account created!", Toast.LENGTH_LONG);
         toast.show();
