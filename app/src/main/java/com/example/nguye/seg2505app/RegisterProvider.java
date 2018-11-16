@@ -22,11 +22,11 @@ public class RegisterProvider extends AppCompatActivity{
 
     public void onClickRegisterAsProvider(View view){
         EditText nameOfCompany = findViewById(R.id.rp_noc);
-        EditText generalDescription = findViewById(R.id.rp_gendes);
+        EditText generalDescription = findViewById(R.id.editText2);
         if (!(Validation.isEmpty(nameOfCompany)) && !(Validation.isEmpty(generalDescription))){
 
-            //NEED TO BE CODED
-            
+            //NEED TO BE CODEDr
+
             addServiceToDatabase();
         }
     }
