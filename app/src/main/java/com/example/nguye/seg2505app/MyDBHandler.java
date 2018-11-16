@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "TBD";
 
     // Structure of the table "Accounts"
@@ -184,37 +184,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return account;
     }
 
-    public ServiceType findServiceType(String name){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query =
-                "SELECT * FROM " + TABLE_SERVICETYPES
-                        + " WHERE " + SERVICETYPES_NAME + " = \"" + name + "\""
-                ;
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()) {
-            ServiceType service = new ServiceType(cursor.getString(1), cursor.getDouble(2));
-            db.close();
-            return service;
-        } else {
-            ServiceType service = null;
-            db.close();
-            return service;
-        }
-    }
-
-//    // Adds a service type to the table ServiceTypes
-//    public void addServiceType(String name, double maxRate) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(SERVICETYPES_NAME, name);
-//        values.put(SERVICETYPES_MAXRATE, maxRate);
-//
-//        db.insert(TABLE_SERVICETYPES, null, values);
-//        db.close();
-//    }
-
-    // Adds a service type to the table ServiceTypes
+    /**
+     * Adds a service type to the table ServiceTypes
+     * @param serviceType
+     */
     public void addServiceType(ServiceType serviceType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -226,18 +199,10 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-
-//    public void modifyServiceType(int id, String name, double maxRate) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(SERVICETYPES_NAME, name);
-//        values.put(SERVICETYPES_NAME, maxRate);
-//
-//        db.update(TABLE_SERVICETYPES, values, "ID="+id, null);
-//        db.close();
-//    }
-
+    /**
+     * Update a service type in the table ServiceTypes
+     * @param serviceType
+     */
     public void updateServiceType(ServiceType serviceType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -249,29 +214,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-//    public boolean deleteServiceType(int id) {
-//        boolean result;
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        result = db.delete(TABLE_SERVICETYPES,SERVICETYPES_ID + " = " + id, null) > 0;
-//
-//        db.close();
-//        return result;
-////        String query =
-////                "SELECT * FROM " + TABLE_SERVICETYPES
-////                        + " WHERE " + SERVICETYPES_ID + " = " + id
-////                ;
-////        Cursor cursor = db.rawQuery(query, null);
-////        if(cursor.moveToFirst()){
-////            int primaryKey = Integer.parseInt(cursor.getString(0)); // primary key
-////            db.delete(TABLE_SERVICETYPES, SERVICETYPES_ID + " = " + primaryKey, null);
-////            cursor.close();
-////            result = true;
-////        }
-////        db.close();
-////        return result;
-//    }
-
+    /**
+     * Delete a service type from the table ServiceTypes
+     * @param serviceType
+     * @return whether the deletion was successful
+     */
     public boolean deleteServiceType(ServiceType serviceType) {
         boolean result;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -280,22 +227,31 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
         db.close();
         return result;
-//        String query =
-//                "SELECT * FROM " + TABLE_SERVICETYPES
-//                        + " WHERE " + SERVICETYPES_ID + " = " + id
-//                ;
-//        Cursor cursor = db.rawQuery(query, null);
-//        if(cursor.moveToFirst()){
-//            int primaryKey = Integer.parseInt(cursor.getString(0)); // primary key
-//            db.delete(TABLE_SERVICETYPES, SERVICETYPES_ID + " = " + primaryKey, null);
-//            cursor.close();
-//            result = true;
-//        }
-//        db.close();
-//        return result;
     }
 
+    public ServiceType findServiceType(String name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query =
+                "SELECT * FROM " + TABLE_SERVICETYPES
+                        + " WHERE " + SERVICETYPES_NAME + " = \"" + name + "\""
+                ;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            ServiceType service = new ServiceType(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2));
+            db.close();
+            return service;
+        } else {
+            ServiceType service = null;
+            db.close();
+            return service;
+        }
+    }
+
+    /**
+     * Add an administrator account to the database
+     */
     public void createAdmin(){
+        // Set all the attributes of the admin account.
         Account account = new Account();
         account.setFirstName("admin");
         account.setLastName("admin");
@@ -310,23 +266,23 @@ public class MyDBHandler extends SQLiteOpenHelper{
         account.setPhoneNumber("1000000000");
         account.setType(1);
 
+        // Add the account to the database
         addAccount(account);
-
-        System.out.println("Administrateur créé");
+//        System.out.println("Administrateur créé");
     }
 
+    /**
+     * Check if an account of the specifies type already exists in the database.
+     * @param type (1 = Administrator, 2 = Provider, 3 = Client)
+     * @return true if an account of the specified type exists in the database
+     */
     public boolean existsType(int type) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query =
-
                 "SELECT * FROM " + TABLE_ACCOUNTS
                         + " WHERE " + ACCOUNTS_TYPE + " = " + type
                 ;
-
-
         Cursor cursor = db.rawQuery(query, null);
-
-
         if(cursor.moveToFirst()) {
             return true;
         } else {
@@ -334,8 +290,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
         }
     }
 
+    /**
+     * Return a List of string that contains the value of the specified field in the specified table
+     * @param elem, column/field name in the table
+     * @param table, name of the table
+     * @return
+     */
     public List<String> getList(String elem, String table){
-
         List<String> mArrayList = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -347,9 +308,5 @@ public class MyDBHandler extends SQLiteOpenHelper{
             users.moveToNext();
         }
         return mArrayList;
-
-
     }
-
-
 }

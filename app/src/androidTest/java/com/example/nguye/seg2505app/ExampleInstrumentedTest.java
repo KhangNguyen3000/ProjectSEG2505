@@ -23,4 +23,5 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.nguye.seg2505app", appContext.getPackageName());
     }
+
 }
