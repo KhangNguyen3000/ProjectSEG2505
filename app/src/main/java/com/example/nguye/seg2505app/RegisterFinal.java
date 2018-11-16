@@ -32,6 +32,8 @@ public class RegisterFinal extends AppCompatActivity {
         typeUserSpinner.setAdapter(typeUserAdapter);
     }
 
+
+
     // This function is used to store all the values that we need to register a new user
     public void storeInfo(){
         firstName = ((EditText) findViewById(R.id.reg_input_firstName)).getText().toString();
@@ -94,15 +96,26 @@ public class RegisterFinal extends AppCompatActivity {
 
         if (typeOption.equals("Client")) {
             accType = 3;
+            account.setType(accType);
+            // Add the account to the database.
+            dbHandler.addAccount(account);
+            Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+            toast.show();
+            finish();
         }
         else if (typeOption.equals("Provider")) {
             accType = 2;
+            account.setType(accType);
+            boolean truc = false;
+            // APPEL SUR LE NOUVEAU LAYOUT QUI CHANGE LA VALEUR DE TRUC SI TOUT EST OK
+            if (truc) {
+                // Add the account to the database.
+                dbHandler.addAccount(account);
+                Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+                toast.show();
+                finish();
+            }
         }
-        account.setType(accType);
-        // Add the account to the database.
-        dbHandler.addAccount(account);
-        Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
-        toast.show();
-        finish();
+
     }
 }

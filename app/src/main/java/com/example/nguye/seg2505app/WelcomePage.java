@@ -73,6 +73,8 @@ public class WelcomePage extends AppCompatActivity{
             return accType;
         } else if (currentAccount.getType() == 2) {
             accType = "Provider";
+            Button serviceManagement = findViewById(R.id.wel_manageservice_button);
+            serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"
         } else {
             accType ="Client";
         }
@@ -84,8 +86,15 @@ public class WelcomePage extends AppCompatActivity{
      * @param view
      */
     public void onClickManageServiceButton(View view) {
-        Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
-        startActivity(intent);
+        Account currentAccount = CurrentAccount.getCurrentAccount();
+        if(currentAccount.getType() == 1) {
+            Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
+            startActivity(intent);
+        }
+        if(currentAccount.getType() == 2) {
+            Intent intent = new Intent(getApplicationContext(), ServiceManagementProvider.class);
+            startActivity(intent);
+        }
     }
 
     /**
