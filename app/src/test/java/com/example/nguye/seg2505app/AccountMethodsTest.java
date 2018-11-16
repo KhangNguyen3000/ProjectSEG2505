@@ -18,8 +18,8 @@ public class AccountMethodsTest {
     @Test
     public void checkId(){
         Account testAccount = new Account();
-        testAccount.setId(20);
-        assertEquals(testAccount.getId(), 20);
+        testAccount.setID(20);
+        assertEquals(testAccount.getID(), 20);
     }
 
     // Check if setEmail and getEmail methods work
