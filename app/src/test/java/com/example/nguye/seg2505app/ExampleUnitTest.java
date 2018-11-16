@@ -1,13 +1,9 @@
 package com.example.nguye.seg2505app;
 
-import android.content.Context;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import org.junit.Test;
 
 
-import java.util.List;
 
 import static org.junit.Assert.*;
 

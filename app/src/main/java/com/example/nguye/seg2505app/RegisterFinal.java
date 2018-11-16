@@ -1,7 +1,5 @@
 package com.example.nguye.seg2505app;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,7 +24,7 @@ public class RegisterFinal extends AppCompatActivity {
         setContentView(R.layout.register_final);
 
         // Spinner creation
-        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        Spinner typeUserSpinner = findViewById(R.id.reg_dd_accountType);
         ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
@@ -112,8 +110,6 @@ public class RegisterFinal extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
         finish();
-//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivityForResult(intent, 0);
     }
 
 
