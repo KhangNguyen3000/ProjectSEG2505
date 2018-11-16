@@ -74,7 +74,7 @@ public class RegisterFinal extends AppCompatActivity {
      * This function adds the new user to the Database
      */
     public void addUserToDatabase(){
-        MyDBHandler dbHandler = new MyDBHandler(this);
+//        MyDBHandler dbHandler = new MyDBHandler(this);
         Account account = new Account();
         account.setFirstName(firstName);
         account.setLastName(lastName);
@@ -100,7 +100,8 @@ public class RegisterFinal extends AppCompatActivity {
         }
         account.setType(accType);
         // Add the account to the database.
-        dbHandler.addAccount(account);
+//        dbHandler.addAccount(account);
+        account.add(this);
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
         finish();

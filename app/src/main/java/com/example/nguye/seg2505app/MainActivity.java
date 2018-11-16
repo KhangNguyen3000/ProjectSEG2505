@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         MyDBHandler dbHandler = new MyDBHandler(this);
         if(!(dbHandler.existsType(1))){
-            dbHandler.createAdmin();
+            dbHandler.createAdmin(this);
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
      * Opens the RegisterFinal activity.
      * @param view
      */
+    public void onClick1(View viewà){
+
+        Intent intent = new Intent(getApplicationContext(), RegisterProvider.class);
+        startActivity(intent);
+    }
     public void onClickSignupButton(View view){
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
         startActivity(intent);
@@ -49,13 +54,15 @@ public class MainActivity extends AppCompatActivity {
             String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
             String dbPassword;
             // Search for the account with the provided email
-            Account account = dbHandler.findAccount(email);
+//            Account account = dbHandler.findAccount(email);
+            Account account = new Account().find(this, Account.COL_EMAIL, email, true);
             if (account != null) {
                 // if the account is found, check if the password is correct
                 dbPassword = account.getPassword();
+                System.out.println(dbPassword);
                 if (dbPassword.equals(password)) {
                     // store the account information in CurrentAccount
-                    CurrentAccount.setCurrentAccount(account);
+                    Account.setCurrentAccount(account);
                     Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
