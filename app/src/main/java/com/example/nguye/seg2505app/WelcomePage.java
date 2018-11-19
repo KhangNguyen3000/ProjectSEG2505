@@ -20,16 +20,15 @@ import java.util.List;
 public class WelcomePage extends AppCompatActivity{
 
     public static int ACCOUNT_DELETED = 9999;
-    MyDBHandler a;
+    MyDBHandler data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        this.a = new MyDBHandler(this);
+        this.data = new MyDBHandler(this);
 
-
-        Account currentAccount = CurrentAccount.getCurrentAccount();
-
+        Account currentAccount = Account.getCurrentAccount();
 
         TextView tvFullName = (TextView)findViewById(R.id.textView2);
         TextView tvAccountType = (TextView)findViewById(R.id.textView);
@@ -40,29 +39,34 @@ public class WelcomePage extends AppCompatActivity{
     }
 
     @Override
-    /**
-     * Finish the activity and go back to the login screen if the account has been deleted from the MyProfile screen.
-     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Finish the activity and go back to the login screen if the account has been deleted from the MyProfile screen.
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ACCOUNT_DELETED) {
             finish();
         }
     }
 
-    //Display The list of Users;
+    /**
+     * Display The list of Users
+     * @param users
+     */
     public void UserList( List<String> users){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users.toArray(new String[users.size()]));
         ListView listView = (ListView) findViewById(R.id._ListViewUsers);
         listView.setAdapter(itemsAdapter);
     }
 
-    public String AccountType (Account currentAccount) { //select the account type and display or not the buttons that needs the current account
-
+    /**
+     * Find the account type and display or not the components that should be visible to the current account
+     * @param currentAccount
+     * @return
+     */
+    public String AccountType (Account currentAccount) {
         String accType;
         if(currentAccount.getType() == 1) {
             accType = "Administrator";
-            List<String> users = a.getList("Email","Accounts");
+            List<String> users = data.getList("Email","Accounts");
             UserList(users); //display the list of users
             Button serviceManagement = findViewById(R.id.wel_manageservice_button);
             serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"
@@ -75,20 +79,29 @@ public class WelcomePage extends AppCompatActivity{
         return accType;
     }
 
-
-    public void onClickManageServiceButton(View view){ //go to the activity_service_management
+    /**
+     * Launch the ServiceManagement activity
+     * @param view
+     */
+    public void onClickManageServiceButton(View view) {
         Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
         startActivity(intent);
     }
 
+    /**
+     * Launch the MyProfile activity
+     * @param view
+     */
     public void onClickMyProfileButton(View view){ //go to the activity_my_profile
         Intent intent = new Intent(getApplicationContext(), MyProfile.class);
         startActivityForResult(intent, ACCOUNT_DELETED);
     }
 
+    /**
+     * Go back to the login screen after confirmation
+     * @param view
+     */
     public void onClickLogOutButton(View view){ //go ot the activity_main
-//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivity(intent);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("Logging out");

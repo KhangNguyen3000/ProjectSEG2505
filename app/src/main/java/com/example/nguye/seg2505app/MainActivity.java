@@ -2,15 +2,10 @@ package com.example.nguye.seg2505app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,81 +15,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         MyDBHandler dbHandler = new MyDBHandler(this);
         if(!(dbHandler.existsType(1))){
-            dbHandler.createAdmin();
+            dbHandler.createAdmin(this);
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        })*/;
-
-
-//        final MyDBHandler dbHandler = new MyDBHandler(this);
-//        final Button button = findViewById(R.id.loginButton);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
-//                String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
-//                Account account = dbHandler.findAccount(email);
-//                if(account != null) {
-//                    Toast toast = Toast.makeText(getApplicationContext(), "User found!", Toast.LENGTH_LONG);
-//                    toast.show();
-//                } else {
-//                    Toast toast = Toast.makeText(getApplicationContext(), "User does not exist...", Toast.LENGTH_LONG);
-//                    toast.show();
-//                }
-//            }
-//        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    /**
+     * Called when the signup button is clicked.
+     * Opens the RegisterFinal activity.
+     * @param view
+     */
+    public void onClick1(View viewà){
+
+        Intent intent = new Intent(getApplicationContext(), RegisterProvider.class);
+        startActivity(intent);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void onClickSignupButton(View view){
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
         startActivity(intent);
     }
 
+    /**
+     * Called when the login button is clicked.
+     * Opens the WelcomeScreen activity.
+     * @param view
+     */
     public void onClickLoginButton(View view) {
+        // Basic validation on the fields
         ViewGroup layout = findViewById(R.id.main_layout_root);
-        if (Validation.validateAll(layout)) { // Basic validation
+        if (Validation.validateAll(layout)) {
+
             MyDBHandler dbHandler = new MyDBHandler(this);
             String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
             String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
             String dbPassword;
-            Account account = dbHandler.findAccount(email);
+            // Search for the account with the provided email
+//            Account account = dbHandler.findAccount(email);
+            Account account = new Account().find(this, Account.COL_EMAIL, email, true);
             if (account != null) {
+                // if the account is found, check if the password is correct
                 dbPassword = account.getPassword();
+                System.out.println(dbPassword);
                 if (dbPassword.equals(password)) {
-                    CurrentAccount.setCurrentAccount(account);
+                    // store the account information in CurrentAccount
+                    Account.setCurrentAccount(account);
                     Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
                     toast.show();
                     Intent intent = new Intent(getApplicationContext(), WelcomePage.class);
