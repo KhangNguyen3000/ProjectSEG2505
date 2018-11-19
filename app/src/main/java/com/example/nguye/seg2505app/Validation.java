@@ -12,9 +12,16 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Stores static validation methods that can be reused on any input field
+ */
 public class Validation extends AppCompatActivity {
 
-
+    /**
+     * Validate an email input field
+     * @param inputField, the instance of the EditText
+     * @return true if valid
+     */
     public static boolean validateEmail(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -22,10 +29,8 @@ public class Validation extends AppCompatActivity {
         }
 
         // If not empty, check if the input is valid
-        // This regular expression should cover most valid email addresses, just don't go crazy.
         Toast errorMessage;
         String input = inputField.getText().toString().trim();
-
 
         boolean isValid = validEmailString(input) ;
         if (!isValid) {
@@ -33,28 +38,37 @@ public class Validation extends AppCompatActivity {
             errorMessage.show();
             return false;
         }
-
-//        // Check if the email is already bound to an account
-//        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
-//        Account currentAccount = CurrentAccount.getCurrentAccount();
-//        String currentEmail = currentAccount.getEmail();
-//        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
-//            errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
-//            errorMessage.show();
-//            return false;
-//        }
-
         return true;
     }
 
+    /**
+     * Method that verifies the Email String value validity (Returns boolean value true if valid)
+     * Used for testing purpose
+     * @param input
+     * @return
+     */
+    public static boolean validEmailString(String input){
+        // This regular expression should cover most valid email addresses, just don't go crazy.
+        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(input);
+        return m.matches();
+    }
+
+    /**
+     *  Check if the email is already used
+     * @param inputField, the instance of the EditText
+     * @return true if the email is already used
+     */
     public static boolean availableEmail(EditText inputField) {
         // Check if the email is already bound to an account
         Toast errorMessage;
-        String input = inputField.getText().toString().trim();
-        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext());
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        String input = inputField.getText().toString().trim(); // Extract the string from the input field
+        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext()); // Instantiate MyDBHandler
+        Account currentAccount = Account.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
         String currentEmail = currentAccount.getEmail();
-        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+//        if((dbHandler.findAccount(input) != null) && (!currentEmail.equals(input))) {
+        if((new Account().find(inputField.getContext(), Account.COL_EMAIL, input, true) != null) && (!currentEmail.equals(input))) {
             errorMessage = Toast.makeText(inputField.getContext(), "An account already exists with this email address.", Toast.LENGTH_LONG);
             errorMessage.show();
             return false;
@@ -62,27 +76,33 @@ public class Validation extends AppCompatActivity {
         return true;
     }
 
-//    public static boolean confirmEmail(EditText emailField, EditText emailConfirmField) {
-//        String email = emailField.getText().toString();
-//        String emailConfirm = emailConfirmField.getText().toString();
-//
-//        boolean isValid = email.equals(emailConfirm);
-//        if (!isValid) {
-//            Toast errorMessage = Toast.makeText(emailField.getContext(), "The email address does not match.", Toast.LENGTH_LONG);
-//            errorMessage.show();
-//        }
-//        return isValid;
-//    }
-
-    //Method that verifies the Email String value validity (Returns boolean value true if valid)
-    public static boolean validEmailString(String input){
-        String regex = "^([a-zA-Z0-9\\.!#$%&'*+/=?^_`{|}~-]+)@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(input);
-        return m.matches();
+    /**
+     *  Check if the serviceType already exists
+     * @param inputField, the instance of the EditText
+     * @param currentServiceType,
+     * @return true if the serviceType already exists
+     */
+    public static boolean availableServiceType(EditText inputField, String currentServiceType) {
+        // Check if the serviceType already exists
+        Toast errorMessage;
+        String input = inputField.getText().toString().trim(); // Extract the string from the input field
+        MyDBHandler dbHandler = new MyDBHandler(inputField.getContext()); // Instantiate MyDBHandler
+//        Account currentAccount = CurrentAccount.getCurrentAccount(); // This is used to avoid an error when keeping the same email in the ModifyScreen
+//        String currentEmail = currentAccount.getEmail();
+//        if((dbHandler.findServiceType(input) != null) && (!currentServiceType.equals(input))) {
+        if((new ServiceType().find(inputField.getContext(), ServiceType.COL_NAME, input, true) != null) && (!currentServiceType.equals(input))) {
+            errorMessage = Toast.makeText(inputField.getContext(), "This service type already exists.", Toast.LENGTH_LONG);
+            errorMessage.show();
+            return false;
+        }
+        return true;
     }
 
-
+    /**
+     * Validate a password input field
+     * @param inputField, the instance of the EditText
+     * @return true if valid
+     */
     public static boolean validatePassword(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -90,26 +110,19 @@ public class Validation extends AppCompatActivity {
         }
 
         // If not empty, check if the input is valid
+        String input = inputField.getText().toString();
+        if (input.length() < 6 || input.length() > 20) {
+            Toast errorMessage = Toast.makeText(inputField.getContext(), "Please use a password between 6 and 20 characters.", Toast.LENGTH_LONG);
+            errorMessage.show();
+            return false;
+        }
         return true;
     }
 
-//    public static boolean confirmPassword(EditText passwordField, EditText passwordConfirmField) {
-//        String password = passwordField.getText().toString();
-//        String passwordConfirm = passwordConfirmField.getText().toString();
-//
-//        boolean isValid = password.equals(passwordConfirm);
-//        if (!isValid) {
-//            Toast errorMessage = Toast.makeText(passwordField.getContext(), "The password does not match.", Toast.LENGTH_LONG);
-//            errorMessage.show();
-//        }
-//        return isValid;
-//    }
-
-
     /**
      * Validate any proper noun (ex. city, first name, last name, street, etc.)
-     * @param inputField
-     * @return
+     * @param inputField, the instance of the EditText
+     * @return true if valid
      */
     public static boolean validateName(EditText inputField) {
         // First, check if the field is empty
@@ -119,6 +132,7 @@ public class Validation extends AppCompatActivity {
 
         // If not empty, check if the input is valid
         String input = inputField.getText().toString().trim();
+        // This regular expression limits the special characters that can be used
         String regex = "^[a-zA-Z]+((['. -][a-zA-Z ])?[a-zA-Z]*)*$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(input);
@@ -131,6 +145,11 @@ public class Validation extends AppCompatActivity {
         return isValid;
     }
 
+    /**
+     * Validate a postal code input field
+     * @param inputField, the instance of the EditText
+     * @return true if valid
+     */
     public static boolean validatePostalCode(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -139,6 +158,7 @@ public class Validation extends AppCompatActivity {
 
         // If not empty, check if the input is valid
         String input = inputField.getText().toString().trim();
+        // Check if the input is in the format A1A1A1
         String regex = "^[a-zA-Z]{1}\\d{1}[a-zA-Z]{1}\\d{1}[a-zA-Z]{1}\\d{1}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(input);
@@ -151,6 +171,11 @@ public class Validation extends AppCompatActivity {
         return isValid;
     }
 
+    /**
+     * Validate a phone number input field
+     * @param inputField, the instance of the EditText
+     * @return true if valid
+     */
     public static boolean validatePhoneNumber(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -159,6 +184,7 @@ public class Validation extends AppCompatActivity {
 
         // If not empty, check if the input is valid
         String input = inputField.getText().toString().trim();
+        // Check if the phone number contains 10 digits
         String regex = "^\\d{10}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(input);
@@ -172,11 +198,11 @@ public class Validation extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param inputField
-     * @param inputConfirmField
-     * @param inputDescription
-     * @return
+     * Check if the two fields correspond
+     * @param inputField, the instance of the first EditText
+     * @param inputConfirmField, the instance of the second EditText
+     * @param inputDescription, input type used for the error message.
+     * @return true if both fields match
      */
     public static boolean confirmField(EditText inputField, EditText inputConfirmField, String inputDescription) {
         String input = inputField.getText().toString();
@@ -192,8 +218,8 @@ public class Validation extends AppCompatActivity {
 
     /**
      * Checks if the input field is empty.
-     * @param inputField
-     * @return
+     * @param inputField,  the instance of the EditText
+     * @return true if the EditText field is empty
      */
     public static boolean isEmpty(EditText inputField) {
         if (inputField.getText().toString().trim().length() == 0) {
@@ -205,21 +231,43 @@ public class Validation extends AppCompatActivity {
     }
 
     /**
+     * Recursively gets all the EditText descendants of the specified layout.
+     * @param layout, the layout containing the fields to validate
+     * @return a List of all the EditText descendants of the layout
+     */
+    public static ArrayList<EditText> getAllEditTexts(ViewGroup layout) {
+
+        ArrayList<EditText> subEditTextList = new ArrayList<EditText>(); // Initialize a list
+
+        int childCount = layout.getChildCount(); // get the number of children of the layout
+        if (childCount > 0) {
+            for (int i = 0; i < childCount; i++) { // for each child...
+                View child = layout.getChildAt(i);
+                if (child instanceof EditText) { // ...if the child is an instance of EditText,
+                    subEditTextList.add((EditText) child); // add it to the list
+                } else if (child instanceof ViewGroup) { // ...if the child is a ViewGroup,
+                    subEditTextList.addAll(getAllEditTexts((ViewGroup) child)); // call the method recursively on that ViewGroup
+                }
+            }
+        }
+
+        ArrayList<EditText> fullEditTextList = new ArrayList<EditText>();
+        fullEditTextList.addAll(subEditTextList); // Add all elements from the sub-list to the full list
+        return fullEditTextList; // return the full list
+    }
+
+    /**
      * Goes through all EditText fields in the specified layout and validates them.
      * Confirmation validation (ex. for email and password) must be done separately.
-     * To be validated, each field must have the appropriate input type assigned to it.
-     * @param layout
+     * To be validated with more than default validation, each field must have the appropriate input type assigned to it.
+     * @param layout, the layout containing the fields to validate
      * @return false as soon as any validation fails, returns true if all validations are successful
      */
     public static boolean validateAll(ViewGroup layout) {
-        // Puts all the EditText components in a list
-        // Inspired from https://stackoverflow.com/questions/7790487/method-to-get-all-edittexts-in-a-view
+        // Puts all the EditText components in a list using a recursive function
+        // This allows to get more than just the direct descendants of the layout
         ArrayList<EditText> editTextList = getAllEditTexts(layout);
-//        for (int i = 0; i < layout.getChildCount(); i++) {
-//            if (layout.getChildAt(i) instanceof EditText) {
-//                editTextList.add((EditText) layout.getChildAt(i)); // Adds all EditText components in a list
-//            }
-//        }
+
         // Validate each field in the list, applying a different validation based on its type
         for (EditText field : editTextList) {
             // See https://developer.android.com/reference/android/text/InputType for input types
@@ -266,32 +314,4 @@ public class Validation extends AppCompatActivity {
         }
         return true;
     }
-
-    /**
-     * Recursively gets all the EditText descendants of the specified layout.
-     * @param layout
-     * @return
-     */
-    public static ArrayList<EditText> getAllEditTexts(ViewGroup layout) {
-
-        ArrayList<EditText> subEditTextList = new ArrayList<EditText>();
-
-        int childCount = layout.getChildCount();
-        if (childCount > 0) {
-            for (int i = 0; i < childCount; i++) {
-                View child = layout.getChildAt(i);
-                if (child instanceof EditText) {
-                    subEditTextList.add((EditText) child);
-                } else if (child instanceof ViewGroup) {
-                    subEditTextList.addAll(getAllEditTexts((ViewGroup) child));
-                }
-            }
-        }
-
-        ArrayList<EditText> fullEditTextList = new ArrayList<EditText>();
-        fullEditTextList.addAll(subEditTextList);
-
-        return fullEditTextList;
-    }
-
 }

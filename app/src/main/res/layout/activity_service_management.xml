@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sma_layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ServiceManagement">
@@ -9,7 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/serviceName"
@@ -18,29 +27,64 @@
             android:contentDescription="Service name"
             android:ems="10"
             android:hint="Enter service name"
-            android:inputType="textPersonName" />
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/servicePrice"
+            android:id="@+id/serviceMaxRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Service price"
+            android:contentDescription="Service max hourly rate"
             android:ems="10"
-            android:hint="Enter service price"
+            android:hint="Enter maximum hourly rate"
             android:inputType="numberDecimal" />
 
-        <Button
-            android:id="@+id/addB"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClickAddService"
-            android:text="ADD" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:onClick="onClickAddService"
+                android:text="Add Service" />
+
+            <Button
+                android:id="@+id/updateB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickUpdate"
+                android:text="Update"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/deleteB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickDelete"
+                android:text="Delete"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/cancelB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickCancelButton"
+                android:text="Cancel"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/_ListViewServices"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

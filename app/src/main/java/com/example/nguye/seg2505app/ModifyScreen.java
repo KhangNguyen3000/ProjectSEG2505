@@ -29,7 +29,8 @@ public class ModifyScreen extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify);
 
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        // Set the content of each field to the values of the currentAccount
+        Account currentAccount = Account.getCurrentAccount();
 
         TextView tvFirstName = (TextView)findViewById(R.id.mod_input_firstName);
         tvFirstName.setText(currentAccount.getFirstName());
@@ -65,10 +66,13 @@ public class ModifyScreen extends AppCompatActivity{
         tvPhoneNumber.setText(currentAccount.getPhoneNumber());
     }
 
-
+    /**
+     * Update the account information in the database
+     */
     public void updateUserInDatabase(){
-        MyDBHandler dbHandler = new MyDBHandler(this);
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        // set the attributes of the currentAccount with the values entered in the fields
+//        MyDBHandler dbHandler = new MyDBHandler(this);
+        Account currentAccount = Account.getCurrentAccount();
         currentAccount.setFirstName(firstName);
         currentAccount.setLastName(lastName);
         currentAccount.setEmail(email);
@@ -80,19 +84,21 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setCountry(country);
         currentAccount.setPostalCode(postalC);
         currentAccount.setPhoneNumber(phoneNumber);
-        currentAccount.setId(CurrentAccount.getCurrentAccount().getId());
+        currentAccount.setID(Account.getCurrentAccount().getID());
 
-        // Refresh the CurrentAccount
-        CurrentAccount.setCurrentAccount(currentAccount);
+//        // Refresh the CurrentAccount
+//        CurrentAccount.setCurrentAccount(currentAccount);
 
-        //
-        dbHandler.updateAccount(currentAccount);
+        // Update the database
+        currentAccount.update(this);
+//        dbHandler.updateAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
-
     }
 
-
+    /**
+     * Store the informations entered in the fields in variables
+     */
     public void storeInfo(){
         firstName = ((EditText) findViewById(R.id.mod_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
@@ -109,6 +115,11 @@ public class ModifyScreen extends AppCompatActivity{
         postalC = ((EditText) findViewById(R.id.mod_input_postalCode)).getText().toString();
     }
 
+    /**
+     * Called when clicking on the modify button.
+     * Validate every field and update the database if the validation is successful.
+     * @param view
+     */
     public void onClickModify(View view){
 //        int len = 0;
 //        MyDBHandler dbHandler = new MyDBHandler(this);

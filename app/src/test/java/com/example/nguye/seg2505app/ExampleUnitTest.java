@@ -1,5 +1,10 @@
 package com.example.nguye.seg2505app;
 
+
+import android.content.Context;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import org.junit.Test;
 
 
@@ -14,34 +19,12 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
 
+
     TestDataBase data = new TestDataBase();
 
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
-    }
-
-    @Test
-    public void hasAdmin(){
-
-        assertEquals( data.getDatabase().existsType(1),true);
-    }
-
-    @Test
-    public void hasUnoAdmin(){
-
-
-
-    }
-
-
-
-    @Test
-    public void validUsers(){
-        List<String> users =data.getDatabase().getUsers();
-        for(String elem: users){
-            assertTrue(Validation.validEmailString(elem));
-        }
     }
 
 
