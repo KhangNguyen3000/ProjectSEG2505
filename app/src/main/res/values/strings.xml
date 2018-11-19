@@ -2,6 +2,7 @@
     <string name="app_name">SEG2505App</string>
     <string name="action_settings">Settings</string>
     <string-array name="account_type_spinner">
+        <item></item>
         <item>Client</item>
         <item>Provider</item>
     </string-array>

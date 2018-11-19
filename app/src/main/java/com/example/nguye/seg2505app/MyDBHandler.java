@@ -16,7 +16,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
-    protected static final HashMap<String, ArrayList<String[]>> DATABASE = new HashMap<>();
+    private static final HashMap<String, ArrayList<String[]>> DATABASE = new HashMap<>();
 
 //    // Structure of the table "Accounts"
 //    public static final String TABLE_ACCOUNTS = "Accounts";

@@ -41,7 +41,7 @@ public class Account extends Storable {
         COLUMNS.add(new String[] {COL_PASSWORD, "TEXT"});
     }
 
-    private static Account currentAccount;
+    private static Account currentAccount = new Account();
 
     // Attributes
     private String email;
@@ -157,7 +157,7 @@ public class Account extends Storable {
     }
 
     public static void logout() {
-        currentAccount = null;
+        currentAccount = new Account();
     }
 
     /**
