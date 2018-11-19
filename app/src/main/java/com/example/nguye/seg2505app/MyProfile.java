@@ -50,31 +50,40 @@ public class MyProfile extends AppCompatActivity {
      * @param view
      */
     public void onClickDelete(View view) {
-        // Create the alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle("Warning!");
-        builder.setMessage("You are about to delete this account permanently. Do you wish to continue?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-//                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
-//                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
-//                dbHandler.deleteAccount(currentEmail);
-                Account.getCurrentAccount().delete(getApplicationContext());
-                // The result code 9999 indicates that the account has been deleted
-                setResult(9999, null);
-                finish();
+        if (Account.getCurrentAccount().getType() != 1) {
+            // Create the alert dialog
+            builder.setCancelable(true);
+            builder.setTitle("Warning!");
+            builder.setMessage("You are about to delete this account permanently. Do you wish to continue?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //                MyDBHandler dbHandler = new MyDBHandler(getApplicationContext());
+                    //                String currentEmail = CurrentAccount.getCurrentAccount().getEmail();
+                    //                dbHandler.deleteAccount(currentEmail);
+                    Account.getCurrentAccount().delete(getApplicationContext());
+                    // The result code 9999 indicates that the account has been deleted
+                    setResult(9999, null);
+                    finish();
 
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // do nothing
-            }
-        });
-
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
+        } else {
+            builder.setTitle("Nope");
+            builder.setMessage("You cannot delete the administrator account.");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
+        }
         AlertDialog dialog = builder.create();
         dialog.show();
     }

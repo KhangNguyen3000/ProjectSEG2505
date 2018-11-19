@@ -64,16 +64,17 @@ public class WelcomePage extends AppCompatActivity{
      */
     public String AccountType (Account currentAccount) {
         String accType;
-        if(currentAccount.getType() == 1) {
+        if(currentAccount.getType() == 1) { // If the user is an Administrator
             accType = "Administrator";
             List<String> users = data.getList("Email","Accounts");
             UserList(users); //display the list of users
             Button serviceManagement = findViewById(R.id.wel_manageservice_button);
             serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"
             return accType;
-        } else if (currentAccount.getType() == 2) {
+        } else if (currentAccount.getType() == 2) { // If the user is a Provider
             accType = "Provider";
-        } else {
+            findViewById(R.id.wel_schedule_button).setVisibility(View.VISIBLE);
+        } else { // If the user is a client
             accType ="Client";
         }
         return accType;
@@ -109,6 +110,7 @@ public class WelcomePage extends AppCompatActivity{
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Account.logout();
                 finish();
             }
         });
@@ -120,6 +122,11 @@ public class WelcomePage extends AppCompatActivity{
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void onClickScheduleButton(View view) {
+        Intent intent = new Intent(getApplicationContext(), Schedule.class);
+        startActivity(intent);
     }
 }
 

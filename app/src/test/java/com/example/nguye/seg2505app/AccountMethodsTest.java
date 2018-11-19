@@ -14,9 +14,9 @@ public class AccountMethodsTest {
         assertEquals(testAccount.getType(), 2);
     }
 
-    // Check if setId and getId methods work
+    // Check if setID and getID methods work
     @Test
-    public void checkId(){
+    public void checkID(){
         Account testAccount = new Account();
         testAccount.setID(20);
         assertEquals(testAccount.getID(), 20);

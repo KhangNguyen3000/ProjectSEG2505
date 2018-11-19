@@ -60,11 +60,14 @@ public class RegisterFinal extends AppCompatActivity {
         EditText emailConf = findViewById(R.id.reg_input_emailConfirm);
         EditText password = findViewById(R.id.reg_input_password);
         EditText passwordConf = findViewById(R.id.reg_input_passwordConfirm);
+        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        String typeOption = typeUserSpinner.getSelectedItem().toString();
 
         if (Validation.validateAll(layout) // Perform validation on all fields
                 && Validation.availableEmail(email) // Check if the email is already taken
                 && Validation.confirmField(email, emailConf, "Email") // Confirm the email
-                && Validation.confirmField(password, passwordConf, "Password")) { // Confirm the password
+                && Validation.confirmField(password, passwordConf, "Password")
+                && Validation.validateDropDown(typeUserSpinner, typeOption)) { // Confirm the password
             storeInfo();
             addUserToDatabase();
         }
