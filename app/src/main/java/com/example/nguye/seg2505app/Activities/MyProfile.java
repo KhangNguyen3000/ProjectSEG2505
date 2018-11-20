@@ -17,6 +17,23 @@ public class MyProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+        // Set the components' visibility based on the user's account type
+        int accType = Account.getCurrentAccount().getType();
+        switch (accType) {
+            case 1: // Administrator
+                findViewById(R.id.mp_llv_company).setVisibility(View.GONE);
+                findViewById(R.id.mp_btn_modComp).setVisibility(View.GONE);
+                break;
+            case 2: // Provider
+                break;
+            case 3: // Client
+                findViewById(R.id.mp_llv_company).setVisibility(View.GONE);
+                findViewById(R.id.mp_btn_modComp).setVisibility(View.GONE);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -45,6 +62,11 @@ public class MyProfile extends AppCompatActivity {
     public void onClickModifyButton(View view){
         Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
         startActivity(intent);
+    }
+
+    public void onClickModifyCompanyButton(View view) {
+//        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
+//        startActivity(intent);
     }
 
     /**
