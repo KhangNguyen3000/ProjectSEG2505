@@ -28,7 +28,8 @@
             android:exported="true" />
         <activity android:name=".Activities.ServiceManagement" />
         <activity android:name=".Activities.DefaultAvail" />
-        <activity android:name=".Activities.Schedule"></activity>
+        <activity android:name=".Activities.Schedule" />
+        <activity android:name=".Activities.DateTimeTable"></activity>
     </application>
 
 </manifest>
