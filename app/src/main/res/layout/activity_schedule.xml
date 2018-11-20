@@ -57,5 +57,34 @@
             android:layout_height="wrap_content"
             android:text="Custom availabilities"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/clarificationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My availabilities for the next 2 weeks"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

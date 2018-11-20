@@ -56,7 +56,7 @@ public class DateTimeTable extends AppCompatActivity{ //extends TableLayout?
                     break;
                 case Calendar.MONDAY:
                     startTime = schedule.getStartTimes(0);
-                    endTime = schedule.getEndTimes(6);
+                    endTime = schedule.getEndTimes(0);
                     break;
                 case Calendar.TUESDAY:
                     startTime = schedule.getStartTimes(1);
