@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -93,6 +94,12 @@ public class Schedule extends AppCompatActivity {
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(0, 6, 0, 6);
             tableRow.addView(textView);
+            /*
+            if(tableRow.getParent() != null){
+                ((ViewGroup)tableRow.getParent()).removeView(tableRow);
+            }
+            */
+            layout.removeAllViews();
             layout.addView(tableRow);
             gc.add(Calendar.DATE, 1);
 

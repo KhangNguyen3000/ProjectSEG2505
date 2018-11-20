@@ -11,6 +11,7 @@ import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class RegisterProvider extends AppCompatActivity{
     MyDBHandler data;
+    Account account;
 
     @Override
     protected void onCreate (Bundle savedInstanceState)
@@ -19,6 +20,8 @@ public class RegisterProvider extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_provider);
         this.data = new MyDBHandler(this);
+        account = (Account) getIntent().getSerializableExtra("current_account");
+        System.out.println(account.getFirstName());
     }
 
 
