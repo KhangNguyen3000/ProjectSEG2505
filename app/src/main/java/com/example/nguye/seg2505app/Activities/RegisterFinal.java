@@ -97,6 +97,7 @@ public class RegisterFinal extends AppCompatActivity {
         Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
         String typeOption = typeUserSpinner.getSelectedItem().toString();
 
+
         if (typeOption.equals("Client")) {
             accType = 3;
         }
@@ -110,5 +111,7 @@ public class RegisterFinal extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
         toast.show();
         finish();
+
+
     }
 }

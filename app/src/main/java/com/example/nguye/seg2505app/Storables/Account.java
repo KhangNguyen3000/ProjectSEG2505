@@ -9,7 +9,7 @@ import com.example.nguye.seg2505app.MyDBHandler;
 
 import java.util.ArrayList;
 
-public class Account extends Storable {
+public class Account extends Storable implements java.io.Serializable {
 
     // Structure of the table "Accounts"
     public static final String TABLE_NAME = "Accounts";

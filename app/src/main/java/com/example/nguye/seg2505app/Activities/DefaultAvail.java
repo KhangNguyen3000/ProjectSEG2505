@@ -19,6 +19,8 @@ import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Utilities.DateTimePicker;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
+import java.util.Date;
+
 public class DefaultAvail extends AppCompatActivity {
 
     // All checkboxes should be checked initially
@@ -34,33 +36,14 @@ public class DefaultAvail extends AppCompatActivity {
     //  Change the horizontal layout's color back to default
     //  CLEAR the startTime and endTime fields
 
-//    CheckBox cbMondeay, cbTuesday, cbWednesday, cbThursday,
-//    cbFriday, cbSaturday, cbSunday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_avail);
 
-//        cbMondeay = (CheckBox) findViewById(R.id.checkBox_monday);
-//        cbTuesday = (CheckBox) findViewById(R.id.checkBox_tuesday);
-//        cbWednesday = (CheckBox) findViewById(R.id.checkBox_wednesday);
-//        cbThursday = (CheckBox) findViewById(R.id.checkBox_thursday);
-//        cbFriday = (CheckBox) findViewById(R.id.checkBox_friday);
-//        cbSaturday = (CheckBox) findViewById(R.id.checkBox_saturday);
-//        cbSunday = (CheckBox) findViewById(R.id.checkBox_sunday);
-//
-//        // *** MAYBE THERE IS AN ATTRIBUTE THAT ALLOWS TO INITIALLY CHECK THE CHECKBOXES
-//        // EVEN IF NOT, MAYBE THIS CODE IS WRONG
-//        // IF I DON'T NEED THOSE VARIABLES ELSEWHERE, REMOVE THE DECLARATION AND DO EVERYTHING IN ONE
-//        //  BLOCK INSTEAD OF 3
-//        cbMondeay.setChecked(true);
-//        cbTuesday.setChecked(true);
-//        cbWednesday.setChecked(true);
-//        cbThursday.setChecked(true);
-//        cbFriday.setChecked(true);
-//        cbSaturday.setChecked(true);
-//        cbSunday.setChecked(true);
+        Date today = new Date();
+        ((EditText) findViewById(R.id.dav_input_effDate)).setText(today.toString());
     }
 
     public void showTimePicker(View view) {
