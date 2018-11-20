@@ -73,6 +73,9 @@ public class DefaultSchedule extends Storable {
 
     // Constructor (empty)
     public DefaultSchedule() {
+        this.effectiveDate = "00:00";
+        this.startTimes = new String[] {"00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"};
+        this.endTimes = new String[] {"00:00", "00:00", "00:00", "00:00", "00:00", "00:00", "00:00"};
     }
 
     // Constructor (full)
@@ -128,7 +131,7 @@ public class DefaultSchedule extends Storable {
 
         // Store the item's data into a Storable using a cursor
         Cursor cursor = db.rawQuery(query, null);
-        DefaultSchedule schedule = null;
+        DefaultSchedule schedule = new DefaultSchedule();
         if(cursor.moveToFirst()) {
             schedule = new DefaultSchedule();
             schedule.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));

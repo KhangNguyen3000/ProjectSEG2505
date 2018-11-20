@@ -26,6 +26,9 @@ public class Account extends Storable implements java.io.Serializable {
     public static final String COL_POSTALCODE = "PostalCode";
     public static final String COL_PHONENUMBER = "PhoneNumber";
     public static final String COL_PASSWORD = "Password";
+    public static final String COL_COMPANY = "CompanyName";
+    public static final String COL_DESCRIPTION = "Description";
+    public static final String COL_LICENSED = "LICENSED";
     public static final ArrayList<String[]> COLUMNS = new ArrayList<>();
     static {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
@@ -41,6 +44,10 @@ public class Account extends Storable implements java.io.Serializable {
         COLUMNS.add(new String[] {COL_POSTALCODE, "TEXT"});
         COLUMNS.add(new String[] {COL_PHONENUMBER, "TEXT"});
         COLUMNS.add(new String[] {COL_PASSWORD, "TEXT"});
+        COLUMNS.add(new String[] {COL_COMPANY, "TEXT"});
+        COLUMNS.add(new String[] {COL_DESCRIPTION, "TEXT"});
+        COLUMNS.add(new String[] {COL_LICENSED, "INTEGER"});
+
     }
 
     private static Account currentAccount = new Account();
