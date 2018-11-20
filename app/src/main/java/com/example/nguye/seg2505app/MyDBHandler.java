@@ -329,7 +329,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         search.moveToFirst();
         out.moveToFirst();
         while(!search.isAfterLast()) {
-            if (search.getString(0) == "key") {
+            if(search.getString(0)=="key") {
                 mArrayList.add(out.getString(0)); //add the item
                 search.moveToNext();
                 out.moveToNext();
