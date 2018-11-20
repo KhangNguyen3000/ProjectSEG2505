@@ -28,7 +28,7 @@ public class WelcomePage extends AppCompatActivity{
         setContentView(R.layout.activity_welcome);
         this.data = new MyDBHandler(this);
 
-        Account currentAccount = CurrentAccount.getCurrentAccount();
+        Account currentAccount = Account.getCurrentAccount();
 
         TextView tvFullName = (TextView)findViewById(R.id.textView2);
         TextView tvAccountType = (TextView)findViewById(R.id.textView);
