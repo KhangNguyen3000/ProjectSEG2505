@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Utilities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

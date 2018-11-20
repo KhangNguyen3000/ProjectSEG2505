@@ -1,9 +1,11 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.example.nguye.seg2505app.R;
 
 public class CustomDispo extends AppCompatActivity {
 

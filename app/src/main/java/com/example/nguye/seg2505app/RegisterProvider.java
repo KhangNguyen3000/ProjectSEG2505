@@ -1,12 +1,12 @@
 package com.example.nguye.seg2505app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class RegisterProvider extends AppCompatActivity{
     MyDBHandler data;

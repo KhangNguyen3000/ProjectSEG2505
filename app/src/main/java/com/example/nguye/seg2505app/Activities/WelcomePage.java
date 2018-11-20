@@ -1,8 +1,7 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.Storables.Account;
+
 import java.util.List;
 
 

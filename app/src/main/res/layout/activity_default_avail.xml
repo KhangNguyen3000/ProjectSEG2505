@@ -5,11 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DefaultAvail">
-
-    <TableLayout>
-        <TableRow></TableRow>
-    </TableLayout>
+    tools:context=".Activities.DefaultAvail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:contentDescription="Effective date"
                 android:ems="10"
                 android:focusableInTouchMode="false"
                 android:hint="YYYY-MM-DD"
@@ -81,7 +78,10 @@
                 android:id="@+id/checkBox_monday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_mondayLbl"
@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Monday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -111,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Monday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -132,7 +134,10 @@
                 android:id="@+id/checkBox_tuesday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_tuesdayLbl"
@@ -149,6 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Tuesday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -162,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Tuesday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -183,7 +190,10 @@
                 android:id="@+id/checkBox_wednesday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_wednesdayLbl"
@@ -200,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Wednesday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -213,6 +224,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Wednesday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -234,7 +246,10 @@
                 android:id="@+id/checkBox_thursday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_thursdayLbl"
@@ -251,6 +266,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Thursday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -264,6 +280,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Thursday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -285,7 +302,10 @@
                 android:id="@+id/checkBox_friday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_fridayLbl"
@@ -302,6 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Friday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -315,6 +336,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Friday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -336,7 +358,10 @@
                 android:id="@+id/checkBox_saturday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_saturdayLbl"
@@ -353,6 +378,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Saturday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -366,6 +392,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Saturday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -387,7 +414,10 @@
                 android:id="@+id/checkBox_sunday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
 
             <TextView
                 android:id="@+id/dav_txt_sundayLbl"
@@ -404,6 +434,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Sunday start time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -417,6 +448,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:clickable="true"
+                android:contentDescription="Sunday end time"
                 android:ems="10"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -436,6 +468,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onClickSaveButton"
                 android:text="Save" />
 
             <Button
@@ -443,6 +476,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onClickCancelButton"
                 android:text="Cancel" />
         </LinearLayout>
     </LinearLayout>
