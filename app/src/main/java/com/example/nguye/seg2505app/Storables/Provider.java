@@ -13,4 +13,8 @@ public class Provider extends Account {
     public void setCompanyName(String companyName) { this.companyName = companyName; }
 
     public String getDescription() { return this.description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public boolean isLicensed() { return this.licensed; }
+    public void setLicensed(boolean licensed) { this.licensed = licensed; }
 }
