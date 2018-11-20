@@ -319,28 +319,27 @@ public class MyDBHandler extends SQLiteOpenHelper{
         return mArrayList;
     }
 
-    public List<String> getListKey(String searchElem, String searchTable, String key, String elem, String table){
+  /*  public List<String> getListKey(String searchElem, String searchTable, String key, String elem, String table) {
         List<String> mArrayList = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String searchQuery = "SELECT " + searchElem + " FROM "+ searchTable;
-        String query = "SELECT " + elem + " FROM "+ table;
-        Cursor search = db.rawQuery(searchQuery,null);
-        Cursor out = db.rawQuery(query,null);
+        String searchQuery = "SELECT " + searchElem + " FROM " + searchTable;
+        String query = "SELECT " + elem + " FROM " + table;
+        Cursor search = db.rawQuery(searchQuery, null);
+        Cursor out = db.rawQuery(query, null);
         search.moveToFirst();
         out.moveToFirst();
-        while(!search.isAfterLast()) {
-            if(search.getString(0)=="key") {
+        while (!search.isAfterLast()) {
+            if (search.getString(0) == "key") {
                 mArrayList.add(out.getString(0)); //add the item
                 search.moveToNext();
                 out.moveToNext();
             }
+
+            return mArrayList;
         }
 
-        return mArrayList;
-    }
-
-
+    }*/
 //    public static void setDatabaseStructure() {
 //        DATABASE.put("Services", OfferedService.FIELDS);
-//    }
+//}
 }

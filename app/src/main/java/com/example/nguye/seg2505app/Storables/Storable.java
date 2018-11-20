@@ -2,11 +2,13 @@ package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nguye.seg2505app.MyDBHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class Storable {
