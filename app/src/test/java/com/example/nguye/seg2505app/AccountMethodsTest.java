@@ -1,5 +1,7 @@
 package com.example.nguye.seg2505app;
 
+import com.example.nguye.seg2505app.Storables.Account;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

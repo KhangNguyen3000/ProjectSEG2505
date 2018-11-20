@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Utilities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,7 +7,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import java.text.Normalizer;
 import java.util.Calendar;
 
 public class DateTimePicker {

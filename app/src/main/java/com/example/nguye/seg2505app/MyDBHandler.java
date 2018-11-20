@@ -3,8 +3,12 @@ package com.example.nguye.seg2505app;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
-import android.content.ContentValues;
 import android.database.Cursor;
+
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.DefaultSchedule;
+import com.example.nguye.seg2505app.Storables.OfferedService;
+import com.example.nguye.seg2505app.Storables.ServiceType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +16,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets

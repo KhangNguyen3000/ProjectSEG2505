@@ -1,13 +1,14 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Utilities;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.content.Context;
+
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.ServiceType;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

@@ -1,7 +1,6 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +13,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.Storables.ServiceType;
+import com.example.nguye.seg2505app.Utilities.Validation;
+
 import java.util.List;
 
 public class ServiceManagement extends AppCompatActivity {
