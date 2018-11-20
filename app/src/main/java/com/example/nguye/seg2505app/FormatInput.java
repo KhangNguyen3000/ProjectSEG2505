@@ -1,5 +1,9 @@
 package com.example.nguye.seg2505app;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FormatInput {
 
     /**
@@ -63,5 +67,38 @@ public class FormatInput {
         }
 
         return hours + ":" + minutes;
+    }
+
+    /**
+     * Convert a date string to a long
+     * @param dateString
+     * @return
+     */
+    public static long dateToLong(String dateString) {
+        // From https://stackoverflow.com/questions/12473550/how-to-convert-a-string-date-to-long-millseconds
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse(dateString);
+            long time = date.getTime();
+            return time;
+        } catch (ParseException e) {
+            return (long) 0;
+        }
+    }
+
+    /**
+     * Convert a time string to a long
+     * @param timeString
+     * @return
+     */
+    public static long timeToLong(String timeString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        try {
+            Date date = formatter.parse(timeString);
+            long time = date.getTime();
+            return time;
+        } catch (ParseException e) {
+            return (long) 0;
+        }
     }
 }

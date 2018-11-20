@@ -68,6 +68,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         DATABASE.put(Account.TABLE_NAME, Account.COLUMNS);
         DATABASE.put(OfferedService.TABLE_NAME, OfferedService.COLUMNS);
         DATABASE.put(ServiceType.TABLE_NAME, ServiceType.COLUMNS);
+        DATABASE.put(DefaultSchedule.TABLE_NAME, DefaultSchedule.COLUMNS);
         for (String table : DATABASE.keySet()) {
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");
