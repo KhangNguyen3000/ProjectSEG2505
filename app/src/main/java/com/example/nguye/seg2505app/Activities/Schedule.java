@@ -52,48 +52,56 @@ public class Schedule extends AppCompatActivity {
             textView = new TextView(getBaseContext());
             textView2 = new TextView(getBaseContext());
             textView.setTextColor(mTextColor);
-            textView.setText(""+gc.getTime());
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(0, 6, 0, 6);
-            tableRow.addView(textView);
 
             int day = gc.get(Calendar.DAY_OF_WEEK);
             DefaultSchedule schedule = new DefaultSchedule().find(this, "ID", Account.getCurrentAccount().getID(), false);
             String startTime = "0";
             String endTime = "0";
+            String weekDay = "";
             switch (day) {
                 case Calendar.SUNDAY:
                     startTime = schedule.getStartTimes(6);
                     endTime = schedule.getEndTimes(6);
+                    weekDay = "Sunday";
                     break;
                 case Calendar.MONDAY:
                     startTime = schedule.getStartTimes(0);
                     endTime = schedule.getEndTimes(0);
+                    weekDay = "Monday";
                     break;
                 case Calendar.TUESDAY:
                     startTime = schedule.getStartTimes(1);
                     endTime = schedule.getEndTimes(1);
+                    weekDay = "Tuesday";
                     break;
                 case Calendar.WEDNESDAY:
                     startTime = schedule.getStartTimes(2);
                     endTime = schedule.getEndTimes(2);
+                    weekDay = "Wednesday";
                     break;
                 case Calendar.THURSDAY:
                     startTime = schedule.getStartTimes(3);
                     endTime = schedule.getEndTimes(3);
+                    weekDay = "Thursday";
                     break;
                 case Calendar.FRIDAY:
                     startTime = schedule.getStartTimes(4);
                     endTime = schedule.getEndTimes(4);
+                    weekDay = "Sunday";
                     break;
                 case Calendar.SATURDAY:
                     startTime = schedule.getStartTimes(5);
                     endTime = schedule.getEndTimes(5);
+                    weekDay = "Friday";
                     break;
             }
+            textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+" "+(gc.get(Calendar.MONTH)+1)+" "+gc.get(Calendar.DAY_OF_MONTH));
             textView2.setText(startTime+" - "+endTime);
             textView2.setGravity(Gravity.CENTER);
             textView2.setPadding(0, 6, 0, 6);
+            tableRow.addView(textView);
             tableRow.addView(textView2);
             /*
             if(tableRow.getParent() != null){
