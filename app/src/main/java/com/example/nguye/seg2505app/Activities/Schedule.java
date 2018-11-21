@@ -26,13 +26,13 @@ public class Schedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_schedule);
         mTextColor = 0xff111111;
         mBorderColor = 0xAA444444;
         mTextViewBorderWidth = 1;
         mTableBorderWidth = mTextViewBorderWidth * 2;
         TableLayout layout = (TableLayout)findViewById(R.id.layout);
         setupTable(layout);
-        setContentView(R.layout.activity_schedule);
     }
 
 
@@ -108,7 +108,7 @@ public class Schedule extends AppCompatActivity {
                 ((ViewGroup)tableRow.getParent()).removeView(tableRow);
             }
             */
-            //layout.removeAllViews();
+
             layout.addView(tableRow);
             gc.add(Calendar.DATE, 1);
 

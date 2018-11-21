@@ -65,6 +65,9 @@ public class Account extends Storable implements java.io.Serializable {
     private String postalCode;
     private String phoneNumber;
     private String password;
+    private String companyName = "NO COMPANY";
+    private String description = "NO DESCRIPTION";
+    private int licensed = 0;
 
     // Constructor
     public Account(){
@@ -187,6 +190,9 @@ public class Account extends Storable implements java.io.Serializable {
         values.put(COL_POSTALCODE, getPostalCode());
         values.put(COL_PHONENUMBER, getPhoneNumber());
         values.put(COL_PASSWORD, getPassword());
+        values.put(COL_COMPANY, getCompanyName());
+        values.put(COL_DESCRIPTION, getDescription());
+        values.put(COL_LICENSED, getLicensed());
         return values;
     }
 
@@ -227,6 +233,9 @@ public class Account extends Storable implements java.io.Serializable {
             account.setPostalCode(cursor.getString(getFieldIndex(COL_POSTALCODE, COLUMNS)));
             account.setPhoneNumber(cursor.getString(getFieldIndex(COL_PHONENUMBER, COLUMNS)));
             account.setPassword(cursor.getString(getFieldIndex(COL_PASSWORD, COLUMNS)));
+            account.setCompanyName(cursor.getString(getFieldIndex(COL_COMPANY, COLUMNS)));
+            account.setDescription(cursor.getString(getFieldIndex(COL_DESCRIPTION, COLUMNS)));
+            account.setLicensed(cursor.getInt(getFieldIndex(COL_LICENSED, COLUMNS)));
         }
         db.close();
         return account;
@@ -272,5 +281,14 @@ public class Account extends Storable implements java.io.Serializable {
 
     public String getPassword(){return this.password;}
     public void setPassword(String password){this.password = password;}
+
+    public String getCompanyName() { return this.companyName; }
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
+
+    public String getDescription() { return this.description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getLicensed() { return this.licensed; }
+    public void setLicensed(int licensed) { this.licensed = licensed; }
 
 }
