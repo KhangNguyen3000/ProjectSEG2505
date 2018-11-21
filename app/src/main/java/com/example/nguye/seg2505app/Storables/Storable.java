@@ -3,13 +3,14 @@ package com.example.nguye.seg2505app.Storables;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
 
 import com.example.nguye.seg2505app.MyDBHandler;
 
 import java.util.ArrayList;
 
 
-public abstract class Storable {
+public abstract class Storable implements java.io.Serializable{
 
     // Every table will have a column called "ID"
     public static final String COL_ID = "ID";
@@ -113,6 +114,29 @@ public abstract class Storable {
         }
         db.close();
         return result;
+    }
+
+    public static String search(Context context, String tableName, String fieldName, Object key, Object value, boolean quotedValue) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String quotes = "";
+        if (quotedValue) {
+            quotes = "\"";
+        }
+        String query = "SELECT " + fieldName + " FROM " + tableName
+                + " WHERE " + key + " = " + quotes + value + quotes;
+        System.out.println(query);
+
+        // Store the item's data into a Storable using a cursor
+        Cursor cursor = db.rawQuery(query, null);
+        String foundValue = "";
+        if(cursor.moveToFirst()) {
+            foundValue = cursor.getString(0);
+        }
+        db.close();
+        return foundValue;
     }
 
     //    public <T extends Storable> Storable find(Context context, Class<T> cls, int ID) {
