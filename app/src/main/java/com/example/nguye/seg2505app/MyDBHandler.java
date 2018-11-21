@@ -304,7 +304,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
      * @param table, name of the table
      * @return
      */
-
     public List<String> getList(String elem, String table){
         List<String> mArrayList = new ArrayList<String>();
 

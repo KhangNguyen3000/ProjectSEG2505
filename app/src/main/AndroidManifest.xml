@@ -23,12 +23,15 @@
         <activity android:name=".Activities.RegisterFinal" />
         <activity android:name=".Activities.WelcomePage" />
         <activity android:name=".Activities.ModifyScreen" />
-        <activity android:name=".RegisterProvider"
+        <activity
+            android:name=".RegisterProvider"
             android:exported="true" />
         <activity android:name=".Activities.ServiceManagement" />
         <activity android:name=".Activities.ServiceManagementProvider" />
         <activity android:name=".Activities.DefaultAvail" />
         <activity android:name=".Activities.Schedule" />
+        <activity android:name=".Activities.DateTimeTable" />
+        <activity android:name=".Activities.ServiceManagementProv"></activity>
     </application>
 
 </manifest>
