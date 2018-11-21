@@ -42,8 +42,9 @@ public class DefaultAvail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_avail);
 
-        Date today = new Date();
-        ((EditText) findViewById(R.id.dav_input_effDate)).setText(today.toString());
+        Account account = (Account) getIntent().getSerializableExtra("schedule");
+//        Date today = new Date();
+//        ((EditText) findViewById(R.id.dav_input_effDate)).setText(today.toString());
     }
 
     public void showTimePicker(View view) {
@@ -121,7 +122,9 @@ public class DefaultAvail extends AppCompatActivity {
                     ((EditText) findViewById(R.id.dav_input_sundayStart)).getText().toString(),
                     ((EditText) findViewById(R.id.dav_input_sundayEnd)).getText().toString()
             );
-            schedule.add(this); // Add the DefaultSchedule to the database
+            if (!schedule.update(this)) {
+                schedule.add(this); // Add the DefaultSchedule to the database
+            }
             // Display a message
             Toast toast = Toast.makeText(this, "Your default schedule has been saved.", Toast.LENGTH_LONG);
             toast.show();
