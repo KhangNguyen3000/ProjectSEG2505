@@ -30,7 +30,7 @@ public class Schedule extends AppCompatActivity {
         mBorderColor = 0xAA444444;
         mTextViewBorderWidth = 1;
         mTableBorderWidth = mTextViewBorderWidth * 2;
-        TableLayout layout = (TableLayout) findViewById(R.id.layout);
+        TableLayout layout = (TableLayout)findViewById(R.id.layout);
         setupTable(layout);
         setContentView(R.layout.activity_schedule);
     }
@@ -100,7 +100,7 @@ public class Schedule extends AppCompatActivity {
                 ((ViewGroup)tableRow.getParent()).removeView(tableRow);
             }
             */
-            layout.removeAllViews();
+            //layout.removeAllViews();
             layout.addView(tableRow);
             gc.add(Calendar.DATE, 1);
 
