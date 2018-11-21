@@ -9,6 +9,7 @@ import android.database.Cursor;
 import com.example.nguye.seg2505app.MyDBHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class Storable implements java.io.Serializable {

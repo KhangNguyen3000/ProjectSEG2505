@@ -214,6 +214,7 @@
                 android:id="@+id/mp_btn_modComp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickModifyAsProvider"
                 android:text="Change my company information"
                 android:visibility="visible" />
 
