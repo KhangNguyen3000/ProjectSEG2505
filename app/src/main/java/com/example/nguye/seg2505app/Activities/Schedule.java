@@ -45,11 +45,12 @@ public class Schedule extends AppCompatActivity {
     private void setupTable(TableLayout layout){
         GregorianCalendar gc = new GregorianCalendar();
         TableRow tableRow;
-        TextView textView;
+        TextView textView, textView2;
         for(int rowNumber = 0; rowNumber < 14; rowNumber++){
             tableRow = new TableRow(getBaseContext());
 
             textView = new TextView(getBaseContext());
+            textView2 = new TextView(getBaseContext());
             textView.setTextColor(mTextColor);
             textView.setText(""+gc.getTime());
             textView.setGravity(Gravity.CENTER);
@@ -90,10 +91,10 @@ public class Schedule extends AppCompatActivity {
                     endTime = schedule.getEndTimes(5);
                     break;
             }
-            textView.setText(startTime+" - "+endTime);
-            textView.setGravity(Gravity.CENTER);
-            textView.setPadding(0, 6, 0, 6);
-            tableRow.addView(textView);
+            textView2.setText(startTime+" - "+endTime);
+            textView2.setGravity(Gravity.CENTER);
+            textView2.setPadding(0, 6, 0, 6);
+            tableRow.addView(textView2);
             /*
             if(tableRow.getParent() != null){
                 ((ViewGroup)tableRow.getParent()).removeView(tableRow);
