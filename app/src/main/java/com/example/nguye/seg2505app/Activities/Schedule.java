@@ -102,9 +102,7 @@ public class Schedule extends AppCompatActivity {
                     weekDay = "Friday";
                     break;
             }
-
-//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30,30);
-            tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             //textView2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+"-"+(gc.get(Calendar.MONTH)+1)+"-"+gc.get(Calendar.DAY_OF_MONTH));
             textView2.setText(startTime+" - "+endTime);
