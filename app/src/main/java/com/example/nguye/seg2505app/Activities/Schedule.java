@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ActionMenuView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -48,16 +49,19 @@ public class Schedule extends AppCompatActivity {
         TableRow tableRow;
         TextView textView, textView2;
         for(int rowNumber = 0; rowNumber < 14; rowNumber++){
-            tableRow = new TableRow(getBaseContext());
+            tableRow = new TableRow(this);
 
-            textView = new TextView(getBaseContext());
-            textView2 = new TextView(getBaseContext());
+            textView = new TextView(this);
+            textView2 = new TextView(this);
             textView.setTextColor(mTextColor);
-            textView.setGravity(Gravity.CENTER);
+            textView.setGravity(Gravity.LEFT);
             textView.setPadding(0, 6, 0, 6);
+            textView2.setGravity(Gravity.RIGHT);
+            textView2.setPadding(0, 6, 0, 6);
 
             int day = gc.get(Calendar.DAY_OF_WEEK);
             DefaultSchedule schedule = new DefaultSchedule().find(this, "ID", Account.getCurrentAccount().getID(), false);
+
             String startTime = "0";
             String endTime = "0";
             String weekDay = "";
@@ -102,10 +106,11 @@ public class Schedule extends AppCompatActivity {
             //textView2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+"-"+(gc.get(Calendar.MONTH)+1)+"-"+gc.get(Calendar.DAY_OF_MONTH));
             textView2.setText(startTime+" - "+endTime);
-            textView2.setGravity(Gravity.CENTER);
-            textView2.setPadding(0, 6, 0, 6);
-            tableRow.addView(textView);
+            System.out.println(textView2.getText().toString());
+            TextView tv = new TextView(this);
+            tv.setText("asdasd");
             tableRow.addView(textView2);
+            tableRow.addView(textView);
             /*
             if(tableRow.getParent() != null){
                 ((ViewGroup)tableRow.getParent()).removeView(tableRow);

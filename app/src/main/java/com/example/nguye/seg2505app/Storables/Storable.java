@@ -2,6 +2,7 @@ package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nguye.seg2505app.MyDBHandler;
@@ -187,6 +188,29 @@ public abstract class Storable {
     // Getters and setters
 //    public Context getContext() { return this.context; }
 //    public void setContext(Context context) { this.context = context; }
+
+    public static String search(Context context, String tableName, String fieldName, Object key, Object value, boolean quotedValue) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String quotes = "";
+        if (quotedValue) {
+            quotes = "\"";
+        }
+        String query = "SELECT " + fieldName + " FROM " + tableName
+                + " WHERE " + key + " = " + quotes + value + quotes;
+        System.out.println(query);
+
+        // Store the item's data into a Storable using a cursor
+        Cursor cursor = db.rawQuery(query, null);
+        String foundValue = "";
+        if(cursor.moveToFirst()) {
+            foundValue = cursor.getString(0);
+        }
+        db.close();
+        return foundValue;
+    }
 
     public int getID() { return this.ID; }
     public void setID(int ID) { this.ID = ID; }
