@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app.Activities;
+package com.example.nguye.seg2505app.Bench;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +35,7 @@ public class DateTimeTable extends AppCompatActivity{ //extends TableLayout?
         GregorianCalendar gc = new GregorianCalendar();
         TableRow tableRow;
         TextView textView;
+        layout.removeAllViews();
         for(int rowNumber = 0; rowNumber < 14; rowNumber++){
             tableRow = new TableRow(getBaseContext());
 

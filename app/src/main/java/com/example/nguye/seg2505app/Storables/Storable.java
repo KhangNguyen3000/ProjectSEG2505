@@ -10,7 +10,7 @@ import com.example.nguye.seg2505app.MyDBHandler;
 import java.util.ArrayList;
 
 
-public abstract class Storable {
+public abstract class Storable implements java.io.Serializable {
 
     // Every table will have a column called "ID"
     public static final String COL_ID = "ID";
