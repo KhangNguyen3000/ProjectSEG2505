@@ -1,6 +1,5 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.RegisterProvider;
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Utilities.Validation;
+
 public class RegisterFinal extends AppCompatActivity {
+
+    public static int PROVIDER_CREATED = 9999;
 
     String firstName, lastName;
     String email, cEmail;
@@ -30,6 +36,15 @@ public class RegisterFinal extends AppCompatActivity {
         ArrayAdapter<CharSequence> typeUserAdapter = ArrayAdapter.createFromResource(this, R.array.account_type_spinner, android.R.layout.simple_spinner_item);
         typeUserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeUserSpinner.setAdapter(typeUserAdapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Finish the activity and go back to the login screen if the account has been deleted from the MyProfile screen.
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == PROVIDER_CREATED) {
+            finish();
+        }
     }
 
     // This function is used to store all the values that we need to register a new user
@@ -60,11 +75,14 @@ public class RegisterFinal extends AppCompatActivity {
         EditText emailConf = findViewById(R.id.reg_input_emailConfirm);
         EditText password = findViewById(R.id.reg_input_password);
         EditText passwordConf = findViewById(R.id.reg_input_passwordConfirm);
+        Spinner typeUserSpinner = (Spinner) findViewById(R.id.reg_dd_accountType);
+        String typeOption = typeUserSpinner.getSelectedItem().toString();
 
         if (Validation.validateAll(layout) // Perform validation on all fields
                 && Validation.availableEmail(email) // Check if the email is already taken
                 && Validation.confirmField(email, emailConf, "Email") // Confirm the email
-                && Validation.confirmField(password, passwordConf, "Password")) { // Confirm the password
+                && Validation.confirmField(password, passwordConf, "Password")
+                && Validation.validateDropDown(typeUserSpinner, typeOption)) { // Confirm the password
             storeInfo();
             addUserToDatabase();
         }
@@ -94,16 +112,20 @@ public class RegisterFinal extends AppCompatActivity {
 
         if (typeOption.equals("Client")) {
             accType = 3;
+            account.setType(accType);
+            // Add the account to the database.
+//        dbHandler.addAccount(account);
+            account.add(this);
+            Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+            toast.show();
+            finish();
         }
         else if (typeOption.equals("Provider")) {
             accType = 2;
+            account.setType(accType);
+            Intent intent = new Intent(getApplicationContext(), RegisterProvider.class);
+            intent.putExtra("current_account", account);
+            startActivityForResult(intent, PROVIDER_CREATED);
         }
-        account.setType(accType);
-        // Add the account to the database.
-//        dbHandler.addAccount(account);
-        account.add(this);
-        Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
-        toast.show();
-        finish();
     }
 }

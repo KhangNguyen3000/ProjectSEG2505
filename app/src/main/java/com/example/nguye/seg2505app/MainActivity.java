@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.nguye.seg2505app.Activities.RegisterFinal;
+import com.example.nguye.seg2505app.Activities.WelcomePage;
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.RegisterProvider;
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
      * Opens the RegisterFinal activity.
      * @param view
      */
-    public void onClick1(View viewà){
-
-        Intent intent = new Intent(getApplicationContext(), RegisterProvider.class);
-        startActivity(intent);
-    }
     public void onClickSignupButton(View view){
         Intent intent = new Intent(getApplicationContext(), RegisterFinal.class);
         startActivity(intent);
