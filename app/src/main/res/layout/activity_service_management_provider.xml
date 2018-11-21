@@ -57,6 +57,7 @@
                 android:id="@+id/update_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickUpdate"
                 android:text="Update"
                 android:visibility="invisible" />
 
@@ -64,6 +65,7 @@
                 android:id="@+id/delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onClickDelete"
                 android:text="Delete"
                 android:visibility="invisible" />
 
@@ -71,6 +73,7 @@
                 android:id="@+id/cancel_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClickCancelButton"
                 android:text="Cancel"
                 android:visibility="invisible" />
 

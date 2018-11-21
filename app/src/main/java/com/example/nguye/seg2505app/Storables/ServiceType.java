@@ -95,6 +95,7 @@ public class ServiceType extends Storable {
         return service;
     }
 
+
     // Getters and setters
     public String getTableName() { return TABLE_NAME; }
 

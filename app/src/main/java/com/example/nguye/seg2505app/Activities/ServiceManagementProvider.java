@@ -22,6 +22,7 @@ import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.ServiceType;
+import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
 import java.util.ArrayList;
@@ -84,10 +85,12 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
     }
 
-    public static ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList){
+    public  ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList){
         ArrayList<String> finalList = new ArrayList<String>();
+        int type = 0;
         for(int i = 0; i < myList.size(); i++){
-            finalList.add(myList.get(i).getTableName());
+            type = myList.get(i).getTypeID();
+            finalList.add(Storable.search(getApplicationContext(), ServiceType.TABLE_NAME, "Name", "ID", type, false));
         }
         return finalList;
     }
@@ -102,6 +105,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AddNewService.class);
         startActivityForResult (intent,0);
     }
+
 
     public void onClickUpdate(View view) {
         ViewGroup layout = findViewById(R.id.smp_layout_root);
