@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Service type."
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:visibility="gone" />
 
         <Space
             android:layout_width="match_parent"
@@ -38,7 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Maximum Rate"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -53,12 +55,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:visibility="gone" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/username_text_input_layout"
                 android:layout_width="180dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="GONE">
 
                 <EditText
                     android:id="@+id/my_rate"
@@ -67,7 +71,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Your Rate" />
+                    android:text="Your Rate"
+                    android:visibility="gone" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -86,14 +91,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickAdd"
-                android:text="ADD" />
+                android:text="ADD"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/b_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickCancel"
-                android:text="Cancel" />
+                android:text="Cancel"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 
@@ -102,7 +109,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +122,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Please choose one of the following service :"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
