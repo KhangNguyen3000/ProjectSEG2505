@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,12 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyProfile" />
-        <activity android:name=".RegisterFinal" />
-        <activity android:name=".WelcomePage" />
-        <activity android:name=".ModifyScreen" />
-        <activity android:name=".ServiceManagement" />
-        <activity android:name=".service_management_provider"></activity>
+        <activity android:name=".Activities.MyProfile" />
+        <activity android:name=".Activities.RegisterFinal" />
+        <activity android:name=".Activities.WelcomePage" />
+        <activity android:name=".Activities.ModifyScreen" />
+        <activity
+            android:name=".RegisterProvider"
+            android:exported="true" />
+        <activity android:name=".Activities.ServiceManagement" />
+        <activity android:name=".Activities.DefaultAvail" />
+        <activity android:name=".Activities.Schedule" />
+        <activity android:name=".Activities.DateTimeTable"></activity>
     </application>
 
 </manifest>

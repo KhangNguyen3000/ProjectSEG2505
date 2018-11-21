@@ -1,13 +1,15 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.nguye.seg2505app.MyDBHandler;
+
 import java.util.ArrayList;
 
-public class Account extends Storable {
+public class Account extends Storable implements java.io.Serializable {
 
     // Structure of the table "Accounts"
     public static final String TABLE_NAME = "Accounts";
@@ -24,6 +26,9 @@ public class Account extends Storable {
     public static final String COL_POSTALCODE = "PostalCode";
     public static final String COL_PHONENUMBER = "PhoneNumber";
     public static final String COL_PASSWORD = "Password";
+    public static final String COL_COMPANY = "CompanyName";
+    public static final String COL_DESCRIPTION = "Description";
+    public static final String COL_LICENSED = "LICENSED";
     public static final ArrayList<String[]> COLUMNS = new ArrayList<>();
     static {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
@@ -39,9 +44,13 @@ public class Account extends Storable {
         COLUMNS.add(new String[] {COL_POSTALCODE, "TEXT"});
         COLUMNS.add(new String[] {COL_PHONENUMBER, "TEXT"});
         COLUMNS.add(new String[] {COL_PASSWORD, "TEXT"});
+        COLUMNS.add(new String[] {COL_COMPANY, "TEXT"});
+        COLUMNS.add(new String[] {COL_DESCRIPTION, "TEXT"});
+        COLUMNS.add(new String[] {COL_LICENSED, "INTEGER"});
+
     }
 
-    private static Account currentAccount;
+    private static Account currentAccount = new Account();
 
     // Attributes
     private String email;
@@ -157,7 +166,7 @@ public class Account extends Storable {
     }
 
     public static void logout() {
-        currentAccount = null;
+        currentAccount = new Account();
     }
 
     /**

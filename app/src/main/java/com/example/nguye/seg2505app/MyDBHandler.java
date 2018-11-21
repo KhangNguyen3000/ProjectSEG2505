@@ -3,8 +3,12 @@ package com.example.nguye.seg2505app;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
-import android.content.ContentValues;
 import android.database.Cursor;
+
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.DefaultSchedule;
+import com.example.nguye.seg2505app.Storables.OfferedService;
+import com.example.nguye.seg2505app.Storables.ServiceType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,11 +16,11 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
-    protected static final HashMap<String, ArrayList<String[]>> DATABASE = new HashMap<>();
+    private static final HashMap<String, ArrayList<String[]>> DATABASE = new HashMap<>();
 
 //    // Structure of the table "Accounts"
 //    public static final String TABLE_ACCOUNTS = "Accounts";
@@ -68,6 +72,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         DATABASE.put(Account.TABLE_NAME, Account.COLUMNS);
         DATABASE.put(OfferedService.TABLE_NAME, OfferedService.COLUMNS);
         DATABASE.put(ServiceType.TABLE_NAME, ServiceType.COLUMNS);
+        DATABASE.put(DefaultSchedule.TABLE_NAME, DefaultSchedule.COLUMNS);
         for (String table : DATABASE.keySet()) {
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");
@@ -299,6 +304,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
      * @param table, name of the table
      * @return
      */
+
     public List<String> getList(String elem, String table){
         List<String> mArrayList = new ArrayList<String>();
 
@@ -310,6 +316,26 @@ public class MyDBHandler extends SQLiteOpenHelper{
             mArrayList.add(users.getString(0)); //add the item
             users.moveToNext();
         }
+        return mArrayList;
+    }
+
+    public List<String> getListKey(String searchElem, String searchTable, String key, String elem, String table){
+        List<String> mArrayList = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String searchQuery = "SELECT " + searchElem + " FROM "+ searchTable;
+        String query = "SELECT " + elem + " FROM "+ table;
+        Cursor search = db.rawQuery(searchQuery,null);
+        Cursor out = db.rawQuery(query,null);
+        search.moveToFirst();
+        out.moveToFirst();
+        while(!search.isAfterLast()) {
+            if(search.getString(0)=="key") {
+                mArrayList.add(out.getString(0)); //add the item
+                search.moveToNext();
+                out.moveToNext();
+            }
+        }
+
         return mArrayList;
     }
 

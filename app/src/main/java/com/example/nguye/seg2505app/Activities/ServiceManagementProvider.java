@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.OfferedService;
+
 import java.util.ArrayList;
 import java.util.List;
 

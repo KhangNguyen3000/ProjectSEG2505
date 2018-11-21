@@ -1,8 +1,7 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.Storables.Account;
+
 import java.util.List;
 
 
@@ -64,18 +66,17 @@ public class WelcomePage extends AppCompatActivity{
      */
     public String AccountType (Account currentAccount) {
         String accType;
-        if(currentAccount.getType() == 1) {
+        if(currentAccount.getType() == 1) { // If the user is an Administrator
             accType = "Administrator";
             List<String> users = data.getList("Email","Accounts");
             UserList(users); //display the list of users
             Button serviceManagement = findViewById(R.id.wel_manageservice_button);
             serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"
             return accType;
-        } else if (currentAccount.getType() == 2) {
+        } else if (currentAccount.getType() == 2) { // If the user is a Provider
             accType = "Provider";
-            Button serviceManagement = findViewById(R.id.wel_manageservice_button);
-            serviceManagement.setVisibility(View.VISIBLE); //display the button "Manage Service"
-        } else {
+            findViewById(R.id.wel_schedule_button).setVisibility(View.VISIBLE);
+        } else { // If the user is a client
             accType ="Client";
         }
         return accType;
@@ -86,15 +87,8 @@ public class WelcomePage extends AppCompatActivity{
      * @param view
      */
     public void onClickManageServiceButton(View view) {
-        Account currentAccount = CurrentAccount.getCurrentAccount();
-        if(currentAccount.getType() == 1) {
-            Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
-            startActivity(intent);
-        }
-        if(currentAccount.getType() == 2) {
-            Intent intent = new Intent(getApplicationContext(), ServiceManagementProvider.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
+        startActivity(intent);
     }
 
     /**
@@ -118,6 +112,7 @@ public class WelcomePage extends AppCompatActivity{
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Account.logout();
                 finish();
             }
         });
@@ -129,6 +124,11 @@ public class WelcomePage extends AppCompatActivity{
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void onClickScheduleButton(View view) {
+        Intent intent = new Intent(getApplicationContext(), Schedule.class);
+        startActivity(intent);
     }
 }
 

@@ -1,17 +1,16 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class ModifyScreen extends AppCompatActivity{
 

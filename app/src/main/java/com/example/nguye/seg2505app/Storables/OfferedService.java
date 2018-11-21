@@ -1,13 +1,13 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.nguye.seg2505app.MyDBHandler;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.example.nguye.seg2505app;
 
+import com.example.nguye.seg2505app.Storables.Account;
+
 /**
  * This class is used to store the information of the account currently logged in.
  */

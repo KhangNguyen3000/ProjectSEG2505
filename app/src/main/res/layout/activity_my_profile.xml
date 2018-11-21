@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MyProfile">
+    tools:context=".Activities.MyProfile">
 
     <LinearLayout
         android:id="@+id/mp_llv_main"
@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Personal information"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/mp_txt_fullNameDisp"
@@ -63,7 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Credentials"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/mp_llh_email"
@@ -76,7 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    android:text="Email:" />
+                    android:text="Email:"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mp_txt_emailDisp"
@@ -97,7 +100,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    android:text="Password:" />
+                    android:text="Password:"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mp_txt_passwordDisp"
@@ -106,6 +110,87 @@
                     android:layout_weight="0.2"
                     android:hint="Password" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mp_llv_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/mp_txt_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Company"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/mp_llh_company"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mp_txt_companyLbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Company name:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mp_txt_companyDisp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.4"
+                    android:text="Company" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mp_llv_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mp_txt_descLbl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mp_txt_descDisp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mp_llh_license"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/mp_txt_licenseLbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Licensed:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mp_txt_licenseDisp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4.5"
+                    android:text="Yes/No" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -120,6 +205,13 @@
                 android:layout_height="wrap_content"
                 android:onClick="onClickModifyButton"
                 android:text="Change my information" />
+
+            <Button
+                android:id="@+id/mp_btn_modComp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change my company information"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/mp_btn_delete"

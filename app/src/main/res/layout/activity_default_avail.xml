@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dav_layout_root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DefaultAvail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dav_txt_step1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the date from which your default availabilities will change."
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/dav_llh_effDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/dav_txt_effDateLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Effective date"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_effDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:contentDescription="Effective date"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:hint="YYYY-MM-DD"
+                android:inputType="date"
+                android:onClick="showDatePicker" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/dav_txt_step2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set your availabilities for each day of the week."
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/dav_llh_monday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            app:layout_constraintTop_toBottomOf="@+id/dav_llh_effDate"
+            tools:layout_editor_absoluteX="8dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_monday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_mondayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Monday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_mondayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Monday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_mondayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Monday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="193dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_tuesday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_tuesdayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Tuesday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_tuesdayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Tuesday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_tuesdayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Tuesday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_wednesday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="255dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_wednesday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_wednesdayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Wednesday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_wednesdayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Wednesday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_wednesdayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Wednesday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_thursday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="301dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_thursday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_thursdayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Thursday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_thursdayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Thursday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_thursdayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Thursday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_friday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="355dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_friday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_fridayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Friday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_fridayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Friday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_fridayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Friday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_saturday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="413dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_saturday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_saturdayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Saturday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_saturdayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Saturday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_saturdayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Saturday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llh_sunday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3.7"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="484dp">
+
+            <CheckBox
+                android:id="@+id/checkBox_sunday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:checked="true"
+                android:clickable="true"
+                android:onClick="onClickCheckBox" />
+
+            <TextView
+                android:id="@+id/dav_txt_sundayLbl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="4sp"
+                android:text="Sunday"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dav_input_sundayStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Sunday start time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+            <EditText
+                android:id="@+id/dav_input_sundayEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:contentDescription="Sunday end time"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dav_llv_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dav_btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickSaveButton"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/dav_btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickCancelButton"
+                android:text="Cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

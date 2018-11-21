@@ -1,12 +1,14 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Utilities;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
-import android.content.Context;
+
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.ServiceType;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -192,6 +194,21 @@ public class Validation extends AppCompatActivity {
         boolean isValid = m.matches();
         if (!isValid) {
             Toast errorMessage = Toast.makeText(inputField.getContext(), "Your phone number should contain 10 digits without any symboles.", Toast.LENGTH_LONG);
+            errorMessage.show();
+        }
+        return isValid;
+    }
+
+    /**
+     * Checks if the blank default option of the drop-down list is still selected
+     * @param dropDown The Spinner object that contains the options
+     * @param selectedOption The selected option
+     * @return True if the selected option is not equal to ""
+     */
+    public static boolean validateDropDown(Spinner dropDown, String selectedOption) {
+        boolean isValid = !selectedOption.equals("");
+        if (!isValid) {
+            Toast errorMessage = Toast.makeText(dropDown.getContext(), "You must select an option from the drop-down list.", Toast.LENGTH_LONG);
             errorMessage.show();
         }
         return isValid;
