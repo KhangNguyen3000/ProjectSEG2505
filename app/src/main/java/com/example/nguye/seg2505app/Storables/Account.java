@@ -232,6 +232,8 @@ public class Account extends Storable implements java.io.Serializable {
         return account;
     }
 
+
+
     // Setters and getters
     public String getTableName() { return TABLE_NAME; }
 
