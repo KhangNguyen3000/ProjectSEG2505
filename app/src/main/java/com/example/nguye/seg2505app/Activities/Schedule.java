@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Schedule extends AppCompatActivity {
-
+    
     private int mTextColor, mBorderColor;
     private int mTextViewBorderWidth, mTableBorderWidth;
 
@@ -97,7 +98,9 @@ public class Schedule extends AppCompatActivity {
                     weekDay = "Friday";
                     break;
             }
-            textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+" "+(gc.get(Calendar.MONTH)+1)+" "+gc.get(Calendar.DAY_OF_MONTH));
+            textView.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            textView2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+"-"+(gc.get(Calendar.MONTH)+1)+"-"+gc.get(Calendar.DAY_OF_MONTH));
             textView2.setText(startTime+" - "+endTime);
             textView2.setGravity(Gravity.CENTER);
             textView2.setPadding(0, 6, 0, 6);
