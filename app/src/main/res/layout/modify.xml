@@ -44,20 +44,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/mod_txt_firstNameLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="First name" />
 
-                        <EditText
-                            android:id="@+id/mod_input_firstName"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_firstname"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="First name"
-                            android:ems="10"
-                            android:hint="First name"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_firstName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="First name"
+                                android:ems="10"
+                                android:hint="First name"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
 
                     </LinearLayout>
 
@@ -67,52 +68,63 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/mod_txt_lastNameLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Last name" />
 
-                        <EditText
-                            android:id="@+id/mod_input_lastName"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_lastname"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Last name"
-                            android:ems="10"
-                            android:hint="Last name"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_lastName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Last name"
+                                android:ems="10"
+                                android:hint="Last name"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/mod_txt_emailLbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="E-mail address" />
 
-                <EditText
-                    android:id="@+id/mod_input_email"
+                <Space
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="Email"
-                    android:ems="10"
-                    android:hint="xyz@example.com"
-                    android:inputType="textEmailAddress" />
+                    android:layout_height="20dp" />
 
-                <TextView
-                    android:id="@+id/mod_txt_passwordLbl"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Password" />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/mod_input_password"
+                    <EditText
+                        android:id="@+id/mod_input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Email"
+                        android:ems="10"
+                        android:hint="E-mail address"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txt_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="Password"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/mod_input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Password"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:id="@+id/reg_txt_addressLbl"
@@ -132,20 +144,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_streetNumberLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="No." />
 
-                        <EditText
-                            android:id="@+id/mod_input_streetNumber"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_number"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Street number"
-                            android:ems="10"
-                            android:hint="999"
-                            android:inputType="number" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_streetNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Street number"
+                                android:ems="10"
+                                android:hint="No."
+                                android:inputType="number" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -154,20 +167,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_streetNameLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Street" />
 
-                        <EditText
-                            android:id="@+id/mod_input_streetName"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_streetname"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Street name"
-                            android:ems="10"
-                            android:hint="Street name"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_streetName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Street name"
+                                android:ems="10"
+                                android:hint="Street"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -176,20 +190,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_cityLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="City" />
 
-                        <EditText
-                            android:id="@+id/mod_input_city"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_city"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="City"
-                            android:ems="10"
-                            android:hint="City"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="City"
+                                android:ems="10"
+                                android:hint="City"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -205,20 +220,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_provinceLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Province" />
 
-                        <EditText
-                            android:id="@+id/mod_input_province"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_province"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Province"
-                            android:ems="10"
-                            android:hint="Province"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_province"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Province"
+                                android:ems="10"
+                                android:hint="Province"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -227,20 +243,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_countryLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Country" />
 
-                        <EditText
-                            android:id="@+id/mod_input_country"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_country"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Country"
-                            android:ems="10"
-                            android:hint="Country"
-                            android:inputType="textPersonName" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_country"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Country"
+                                android:ems="10"
+                                android:hint="Country"
+                                android:inputType="textPersonName" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -249,22 +266,27 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/reg_txt_postalCodeLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Postal code" />
 
-                        <EditText
-                            android:id="@+id/mod_input_postalCode"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/txt_postalcode"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="Postal code"
-                            android:ems="10"
-                            android:hint="A1A1A1"
-                            android:inputType="textPostalAddress" />
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/mod_input_postalCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Postal code"
+                                android:ems="10"
+                                android:hint="PostalCode"
+                                android:inputType="textPostalAddress" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
 
                 <LinearLayout
                     android:id="@+id/reg_llh_phone"
@@ -279,15 +301,23 @@
                         android:layout_weight="1"
                         android:text="Phone number" />
 
-                    <EditText
-                        android:id="@+id/mod_input_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:contentDescription="Phone number"
-                        android:ems="10"
-                        android:hint="1234567890"
-                        android:inputType="phone" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/username_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/mod_input_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:contentDescription="Phone number"
+                            android:ems="10"
+                            android:hint="Phone number"
+                            android:inputType="phone" />
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
                 <Button
@@ -308,10 +338,6 @@
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_weight="0.1" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

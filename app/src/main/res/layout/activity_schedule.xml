@@ -43,7 +43,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="?android:attr/listDivider" />
-
+<!--
         <TextView
             android:id="@+id/sch_txt_step2"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Custom availabilities"
             android:textSize="16sp" />
-
+-->
         <TextView
             android:id="@+id/clarificationText"
             android:layout_width="match_parent"
@@ -65,11 +65,38 @@
             android:text="My availabilities for the next 2 weeks"
             android:textSize="20sp" />
 
-        <TableLayout
-            android:id="@+id/layout"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </TableLayout>
+
+
+                <TableLayout
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </TableLayout>
+
+
+        </ScrollView>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

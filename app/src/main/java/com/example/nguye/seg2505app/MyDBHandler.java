@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 23;
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
@@ -304,7 +304,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
      * @param table, name of the table
      * @return
      */
-
     public List<String> getList(String elem, String table){
         List<String> mArrayList = new ArrayList<String>();
 

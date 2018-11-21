@@ -13,9 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
@@ -34,6 +36,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management_provider);
+
 
         Account currentAccount = Account.getCurrentAccount();
 
@@ -211,6 +214,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
         name.setVisibility(View.GONE);
         price.setVisibility(View.GONE);
     }
+
 
 }
 
