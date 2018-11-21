@@ -4,7 +4,7 @@ public class Provider extends Account {
 
     private String companyName;
     private String description;
-    private boolean licensed;
+    private int licensed;
 
 
 
@@ -13,4 +13,8 @@ public class Provider extends Account {
     public void setCompanyName(String companyName) { this.companyName = companyName; }
 
     public String getDescription() { return this.description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getLicensed() { return this.licensed; }
+    public void setLicensed(int licensed) { this.licensed = licensed; }
 }

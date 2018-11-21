@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MyDBHandler extends SQLiteOpenHelper {
+public class MyDBHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 22;
     private static final String DATABASE_NAME = "TBD";
@@ -50,7 +50,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db){
         System.out.println("Creating new database....");
         for (String table : DATABASE.keySet()) {
             String createTable = "CREATE TABLE " + table + "(";
@@ -256,7 +256,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     /**
      * Add an administrator account to the database
      */
-    public void createAdmin(Context context) {
+    public void createAdmin(Context context){
         // Set all the attributes of the admin account.
         Account account = new Account();
         account.setFirstName("admin");
@@ -280,7 +280,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     /**
      * Check if an account of the specifies type already exists in the database.
-     *
      * @param type (1 = Administrator, 2 = Provider, 3 = Client)
      * @return true if an account of the specified type exists in the database
      */
@@ -301,45 +300,46 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     /**
      * Return a List of string that contains the value of the specified field in the specified table
-     *
-     * @param elem,  column/field name in the table
+     * @param elem, column/field name in the table
      * @param table, name of the table
      * @return
      */
 
-    public List<String> getList(String elem, String table) {
+    public List<String> getList(String elem, String table){
         List<String> mArrayList = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + elem + " FROM " + table;
-        Cursor users = db.rawQuery(query, null);
+        String query = "SELECT " + elem + " FROM "+ table;
+        Cursor users = db.rawQuery(query,null);
         users.moveToFirst();
-        while (!users.isAfterLast()) {
+        while(!users.isAfterLast()) {
             mArrayList.add(users.getString(0)); //add the item
             users.moveToNext();
         }
         return mArrayList;
     }
 
-    public List<String> getListKey(String searchElem, String searchTable, String key, String elem, String table) {
+    public List<String> getListKey(String searchElem, String searchTable, String key, String elem, String table){
         List<String> mArrayList = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String searchQuery = "SELECT " + searchElem + " FROM " + searchTable;
-        String query = "SELECT " + elem + " FROM " + table;
-        Cursor search = db.rawQuery(searchQuery, null);
-        Cursor out = db.rawQuery(query, null);
+        String searchQuery = "SELECT " + searchElem + " FROM "+ searchTable;
+        String query = "SELECT " + elem + " FROM "+ table;
+        Cursor search = db.rawQuery(searchQuery,null);
+        Cursor out = db.rawQuery(query,null);
         search.moveToFirst();
         out.moveToFirst();
-        while (!search.isAfterLast()) {
-            if (search.getString(0) == "key") {
+        while(!search.isAfterLast()) {
+            if(search.getString(0)=="key") {
                 mArrayList.add(out.getString(0)); //add the item
                 search.moveToNext();
                 out.moveToNext();
             }
         }
-        return mArrayList;
 
+        return mArrayList;
     }
+
+
 //    public static void setDatabaseStructure() {
 //        DATABASE.put("Services", OfferedService.FIELDS);
 //    }

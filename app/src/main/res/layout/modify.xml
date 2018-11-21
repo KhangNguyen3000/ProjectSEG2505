@@ -5,7 +5,7 @@
     android:id="@+id/mod_layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterFinal">
+    tools:context=".Activities.RegisterFinal">
 
     <LinearLayout
         android:layout_width="match_parent"

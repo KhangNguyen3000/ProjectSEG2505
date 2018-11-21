@@ -1,12 +1,14 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.nguye.seg2505app.MyDBHandler;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 public class OfferedService extends Storable {
@@ -88,6 +90,34 @@ public class OfferedService extends Storable {
         }
         db.close();
         return service;
+    }
+
+    public  static ArrayList<OfferedService> findAll(Context context, String fieldName, Object value, boolean quotedValue){
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String quotes = "";
+        if (quotedValue) {
+            quotes = "\"";
+        }
+        String query = "SELECT * FROM " + OfferedService.TABLE_NAME
+                + " WHERE " + fieldName + " = " + quotes + value + quotes;
+        System.out.println(query);
+
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<OfferedService> serviceList = new ArrayList<>();
+        OfferedService service = null;
+        while(cursor.moveToNext()){
+            service = new OfferedService();
+            service.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
+            service.setTypeID(cursor.getInt(getFieldIndex(COL_TYPE, COLUMNS)));
+            service.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
+            service.setHourlyRate(cursor.getDouble(getFieldIndex(COL_HOURLYRATE, COLUMNS)));
+            serviceList.add(service);
+        }
+        db.close();
+        return serviceList;
     }
 
     // Getters and setters

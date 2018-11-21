@@ -1,5 +1,7 @@
 package com.example.nguye.seg2505app;
 
+import com.example.nguye.seg2505app.Storables.Account;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,9 +16,9 @@ public class AccountMethodsTest {
         assertEquals(testAccount.getType(), 2);
     }
 
-    // Check if setId and getId methods work
+    // Check if setID and getID methods work
     @Test
-    public void checkId(){
+    public void checkID(){
         Account testAccount = new Account();
         testAccount.setID(20);
         assertEquals(testAccount.getID(), 20);

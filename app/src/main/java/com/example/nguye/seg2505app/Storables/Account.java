@@ -1,13 +1,15 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Storables;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.nguye.seg2505app.MyDBHandler;
+
 import java.util.ArrayList;
 
-public class Account extends Storable {
+public class Account extends Storable implements java.io.Serializable {
 
     // Structure of the table "Accounts"
     public static final String TABLE_NAME = "Accounts";
@@ -24,6 +26,9 @@ public class Account extends Storable {
     public static final String COL_POSTALCODE = "PostalCode";
     public static final String COL_PHONENUMBER = "PhoneNumber";
     public static final String COL_PASSWORD = "Password";
+    public static final String COL_COMPANY = "CompanyName";
+    public static final String COL_DESCRIPTION = "Description";
+    public static final String COL_LICENSED = "LICENSED";
     public static final ArrayList<String[]> COLUMNS = new ArrayList<>();
     static {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
@@ -39,9 +44,13 @@ public class Account extends Storable {
         COLUMNS.add(new String[] {COL_POSTALCODE, "TEXT"});
         COLUMNS.add(new String[] {COL_PHONENUMBER, "TEXT"});
         COLUMNS.add(new String[] {COL_PASSWORD, "TEXT"});
+        COLUMNS.add(new String[] {COL_COMPANY, "TEXT"});
+        COLUMNS.add(new String[] {COL_DESCRIPTION, "TEXT"});
+        COLUMNS.add(new String[] {COL_LICENSED, "INTEGER"});
+
     }
 
-    private static Account currentAccount;
+    private static Account currentAccount = new Account();
 
     // Attributes
     private String email;
@@ -56,6 +65,9 @@ public class Account extends Storable {
     private String postalCode;
     private String phoneNumber;
     private String password;
+    private String companyName = "NO COMPANY";
+    private String description = "NO DESCRIPTION";
+    private int licensed = 0;
 
     // Constructor
     public Account(){
@@ -157,7 +169,7 @@ public class Account extends Storable {
     }
 
     public static void logout() {
-        currentAccount = null;
+        currentAccount = new Account();
     }
 
     /**
@@ -178,6 +190,9 @@ public class Account extends Storable {
         values.put(COL_POSTALCODE, getPostalCode());
         values.put(COL_PHONENUMBER, getPhoneNumber());
         values.put(COL_PASSWORD, getPassword());
+        values.put(COL_COMPANY, getCompanyName());
+        values.put(COL_DESCRIPTION, getDescription());
+        values.put(COL_LICENSED, getLicensed());
         return values;
     }
 
@@ -218,10 +233,15 @@ public class Account extends Storable {
             account.setPostalCode(cursor.getString(getFieldIndex(COL_POSTALCODE, COLUMNS)));
             account.setPhoneNumber(cursor.getString(getFieldIndex(COL_PHONENUMBER, COLUMNS)));
             account.setPassword(cursor.getString(getFieldIndex(COL_PASSWORD, COLUMNS)));
+            account.setCompanyName(cursor.getString(getFieldIndex(COL_COMPANY, COLUMNS)));
+            account.setDescription(cursor.getString(getFieldIndex(COL_DESCRIPTION, COLUMNS)));
+            account.setLicensed(cursor.getInt(getFieldIndex(COL_LICENSED, COLUMNS)));
         }
         db.close();
         return account;
     }
+
+
 
     // Setters and getters
     public String getTableName() { return TABLE_NAME; }
@@ -261,5 +281,14 @@ public class Account extends Storable {
 
     public String getPassword(){return this.password;}
     public void setPassword(String password){this.password = password;}
+
+    public String getCompanyName() { return this.companyName; }
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
+
+    public String getDescription() { return this.description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getLicensed() { return this.licensed; }
+    public void setLicensed(int licensed) { this.licensed = licensed; }
 
 }
