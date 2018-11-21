@@ -75,8 +75,8 @@ public class MyProfile extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickModifyCompanyButton(View view) {
-        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
+    public void onClickModifyAsProvider(View view) {
+        Intent intent = new Intent(getApplicationContext(), ModifyCompany.class);
         startActivity(intent);
     }
 
