@@ -9,7 +9,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.nguye.seg2505app.Storables.Account;
-import com.example.nguye.seg2505app.Storables.Provider;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class RegisterProvider extends AppCompatActivity {
