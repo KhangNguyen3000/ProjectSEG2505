@@ -106,7 +106,7 @@ public class OfferedService extends Storable {
         System.out.println(query);
 
         Cursor cursor = db.rawQuery(query, null);
-        ArrayList<OfferedService> serviceList = null;
+        ArrayList<OfferedService> serviceList = new ArrayList<>();
         OfferedService service = null;
         while(cursor.moveToNext()){
             service = new OfferedService();
