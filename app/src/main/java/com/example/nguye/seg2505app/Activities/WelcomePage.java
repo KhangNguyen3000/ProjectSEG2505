@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.nguye.seg2505app.Bench.ServiceManagementProv;
 import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
@@ -38,6 +39,8 @@ public class WelcomePage extends AppCompatActivity{
         String accType = AccountType(currentAccount);
         tvFullName.setText("Welcome " + currentAccount.getFirstName() + " " + currentAccount.getLastName());
         tvAccountType.setText("You are now logged in as " + accType);
+
+
     }
 
     @Override
@@ -76,6 +79,7 @@ public class WelcomePage extends AppCompatActivity{
         } else if (currentAccount.getType() == 2) { // If the user is a Provider
             accType = "Provider";
             findViewById(R.id.wel_schedule_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.wel_manageserviceProvider_button).setVisibility(View.VISIBLE);
         } else { // If the user is a client
             accType ="Client";
         }
@@ -88,6 +92,11 @@ public class WelcomePage extends AppCompatActivity{
      */
     public void onClickManageServiceButton(View view) {
         Intent intent = new Intent(getApplicationContext(), ServiceManagement.class);
+        startActivity(intent);
+    }
+
+    public void onClickManageServiceProviderButton(View view) {
+        Intent intent = new Intent(getApplicationContext(), ServiceManagementProv.class);
         startActivity(intent);
     }
 

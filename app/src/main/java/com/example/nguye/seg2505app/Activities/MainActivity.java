@@ -21,15 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+
         MyDBHandler dbHandler = new MyDBHandler(this);
         if(!(dbHandler.existsType(1))){
             dbHandler.createAdmin(this);
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
     }
 
     /**
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickLoginButton(View view) {
         // Basic validation on the fields
-        ViewGroup layout = findViewById(R.id.main_layout_root);
+//        ViewGroup layout = findViewById(R.id.main_layout_root);
+        ViewGroup layout = findViewById(R.id.content_main);
         if (Validation.validateAll(layout)) {
 
             MyDBHandler dbHandler = new MyDBHandler(this);

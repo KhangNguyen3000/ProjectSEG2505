@@ -46,6 +46,10 @@ public class MyProfile extends AppCompatActivity {
         TextView tvPhoneNumber = (TextView)findViewById(R.id.mp_txt_phoneNumberDisp);
         TextView tvEmail = (TextView)findViewById(R.id.mp_txt_emailDisp);
         TextView tvPassword = (TextView)findViewById(R.id.mp_txt_passwordDisp);
+        TextView tvCompany = (TextView)findViewById(R.id.mp_txt_companyDisp);
+        TextView tvDescription = (TextView)findViewById(R.id.mp_txt_descDisp);
+        TextView tvLicensed = (TextView)findViewById(R.id.mp_txt_licenseDisp);
+
         tvFullName.setText(currentAccount.getFirstName() + " " + currentAccount.getLastName());
         tvAddress.setText(currentAccount.getStreetNumber() + " " + currentAccount.getStreetName()
                 + ", " + currentAccount.getCity() + ", " + currentAccount.getProvince()
@@ -53,6 +57,13 @@ public class MyProfile extends AppCompatActivity {
         tvPhoneNumber.setText(currentAccount.getPhoneNumber());
         tvEmail.setText(currentAccount.getEmail());
         tvPassword.setText(currentAccount.getPassword());
+        tvCompany.setText(currentAccount.getCompanyName());
+        tvDescription.setText(currentAccount.getDescription());
+        if (currentAccount.getLicensed() == 1) {
+            tvLicensed.setText("Yes");
+        } else {
+            tvLicensed.setText("No");
+        }
     }
 
     /**
@@ -65,8 +76,8 @@ public class MyProfile extends AppCompatActivity {
     }
 
     public void onClickModifyCompanyButton(View view) {
-//        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), ModifyScreen.class);
+        startActivity(intent);
     }
 
     /**

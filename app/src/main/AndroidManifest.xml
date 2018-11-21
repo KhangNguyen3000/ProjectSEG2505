@@ -27,9 +27,11 @@
             android:name=".RegisterProvider"
             android:exported="true" />
         <activity android:name=".Activities.ServiceManagement" />
+        <activity android:name=".Activities.ServiceManagementProvider" />
         <activity android:name=".Activities.DefaultAvail" />
         <activity android:name=".Activities.Schedule" />
-        <activity android:name=".Activities.DateTimeTable"></activity>
+        <activity android:name=".Bench.DateTimeTable" />
+        <activity android:name=".Bench.ServiceManagementProv"></activity>
     </application>
 
 </manifest>
