@@ -105,7 +105,7 @@ public class Schedule extends AppCompatActivity {
             textView2.setGravity(Gravity.CENTER);
             textView2.setPadding(0, 6, 0, 6);
             tableRow.addView(textView);
-            tableRow.addView(textView2);
+            tableRow.addView(textView);
             /*
             if(tableRow.getParent() != null){
                 ((ViewGroup)tableRow.getParent()).removeView(tableRow);
