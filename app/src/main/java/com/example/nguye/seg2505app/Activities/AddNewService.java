@@ -28,7 +28,7 @@ public class AddNewService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final Account currentAccount = Account.getCurrentAccount();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_service);
+        setContentView(R.layout.add_service);
         MyDBHandler data = new MyDBHandler(this);
 
         List<String> services = data.getList("Name","ServiceTypes");
@@ -78,6 +78,7 @@ public class AddNewService extends AppCompatActivity {
     }
 
     public void onClickAdd(View view){
+
         String rate = findViewById(R.id.my_rate).toString();
         String max_rate = findViewById((R.id.max_rate)).toString();
         if (Integer.parseInt(rate)> Integer.parseInt(max_rate)){

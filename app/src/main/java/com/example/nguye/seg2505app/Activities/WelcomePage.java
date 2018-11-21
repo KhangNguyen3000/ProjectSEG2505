@@ -96,7 +96,7 @@ public class WelcomePage extends AppCompatActivity{
     }
 
     public void onClickManageServiceProviderButton(View view) {
-        Intent intent = new Intent(getApplicationContext(), ServiceManagementProv.class);
+        Intent intent = new Intent(getApplicationContext(), ServiceManagementProvider.class);
         startActivity(intent);
     }
 
