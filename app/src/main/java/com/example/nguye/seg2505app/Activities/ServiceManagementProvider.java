@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +100,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
     }
 
     public void onClickUpdate(View view) {
-        ViewGroup layout = findViewById(R.id.sma_layout_root);
-        EditText serviceName = findViewById(R.id.serviceName);
+        ViewGroup layout = findViewById(R.id.smp_layout_root);
         if (Validation.validateAll(layout)) {
             // Get the inputs and update the object updatedServiceType
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.text_price)).getText().toString());
