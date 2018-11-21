@@ -28,7 +28,7 @@ public class AddNewService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final Account currentAccount = Account.getCurrentAccount();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_service);
+        setContentView(R.layout.activity_add_service);
         MyDBHandler data = new MyDBHandler(this);
 
         List<String> services = data.getList("Name","ServiceTypes");
@@ -103,7 +103,7 @@ public class AddNewService extends AppCompatActivity {
         TextView msg = findViewById(R.id.msg);
         TextView msg_rate = findViewById(R.id.txt_max_rate);
         addButton.setVisibility(View.VISIBLE);
-        cancelButton.setVisibility(view.GONE);
+        cancelButton.setVisibility(View.GONE);
         name.setVisibility(View.GONE);
         maxRate.setVisibility(View.GONE);
         myRate.setVisibility(View.GONE);
