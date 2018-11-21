@@ -23,6 +23,7 @@
         <activity android:name=".Activities.RegisterFinal" />
         <activity android:name=".Activities.WelcomePage" />
         <activity android:name=".Activities.ModifyScreen" />
+        <activity android:name=".Activities.ModifyCompany" />
         <activity
             android:name=".RegisterProvider"
             android:exported="true" />
