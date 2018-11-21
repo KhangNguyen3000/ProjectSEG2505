@@ -79,7 +79,7 @@ public class AddNewService extends AppCompatActivity {
 
     public void onClickAdd(View view){
         String rate = findViewById(R.id.my_rate).toString();
-        String max_rate = findViewById((R.id.max_rate));
+        String max_rate = findViewById((R.id.max_rate)).toString();
         if (Integer.parseInt(rate)> Integer.parseInt(max_rate)){
             Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate", Toast.LENGTH_LONG);
             error.show();

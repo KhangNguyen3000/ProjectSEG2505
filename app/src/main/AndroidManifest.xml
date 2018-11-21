@@ -28,6 +28,7 @@
             android:exported="true" />
         <activity android:name=".Activities.ServiceManagement" />
         <activity android:name=".Activities.ServiceManagementProvider" />
+        <activity android:name=".Activities.AddNewService" />
         <activity android:name=".Activities.DefaultAvail" />
         <activity android:name=".Activities.Schedule" />
         <activity android:name=".Bench.DateTimeTable" />
