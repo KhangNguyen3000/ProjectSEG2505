@@ -62,7 +62,7 @@
                 android:id="@+id/username_text_input_layout"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:visibility="GONE">
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/my_rate"

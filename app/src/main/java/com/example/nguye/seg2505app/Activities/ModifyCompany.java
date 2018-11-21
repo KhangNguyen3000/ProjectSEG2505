@@ -26,6 +26,7 @@ public class ModifyCompany extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify_provider);
         this.data = new MyDBHandler(this);
+        currentAccount = Account.getCurrentAccount();
          CompanyName= (TextView)findViewById(R.id.name_of_company);
         CompanyName.setText(currentAccount.getCompanyName());
         Description = (TextView)findViewById(R.id.description );
