@@ -214,6 +214,37 @@ public abstract class Storable implements java.io.Serializable {
 //    public Context getContext() { return this.context; }
 //    public void setContext(Context context) { this.context = context; }
 
+    /**
+     * Get a list of all the values from the specified field in the specified table where
+     *  the specified condition is met.
+     * @param context
+     * @param fieldName
+     * @param tableName
+     * @param where String representing a SQL WHERE condition
+     * @return
+     */
+    public static ArrayList<String> select(Context context, String fieldName, String tableName, String where) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+//        String quotes = "";
+//        if (quotedKey) {
+//            quotes = "\"";
+//        }
+        String query = "SELECT " + fieldName + " FROM " + tableName
+                + " WHERE " + where;
+        System.out.println(query);
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<String> array = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                array.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
+        }
+        return array;
+    }
 
     public int getID() { return this.ID; }
     public void setID(int ID) { this.ID = ID; }

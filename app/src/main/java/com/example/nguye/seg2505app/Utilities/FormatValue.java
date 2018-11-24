@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FormatInput {
+public class FormatValue {
 
     /**
      * Change the string to the format YYYY-MM-DD by adding a leading zero to the month or day
@@ -99,6 +99,51 @@ public class FormatInput {
             return time;
         } catch (ParseException e) {
             return (long) 0;
+        }
+    }
+
+    /**
+     * Convert an int to a time in format 0:00
+     * @param time int representing a number of minutes
+     * @return the formatted String
+     */
+    public static String minToTimeString(int time) {
+        int hours = time / 60;
+        int minutes = time % 60;
+        if (minutes < 10) {
+            return hours + ":0" + minutes; // Add a leading zero to the minutes
+        } else {
+            return hours + ":" + minutes;
+        }
+    }
+
+    /**
+     * Convert a time in format 0:00 to an int corresponding to a number of minutes
+     * @param timeString String representing a time in format 0:00
+     * @return the number of minutes
+     */
+    public static int timeStringToMin(String timeString) {
+        // Find the index of the first colon in the String
+        int colon = 0; // Index of the first colon (:) in timeString
+        for (int i = 0; i < timeString.length(); i++) {
+            if (timeString.charAt(i) == ':') {
+                colon = i;
+                break;
+            }
+        }
+        if (colon == 0) { // The string definitely has the wrong format
+            return -1;
+        }
+        try {
+            String hours = timeString.substring(0, colon);
+            String minutes = timeString.substring(colon + 1, colon + 3);
+
+            int h = Integer.parseInt(hours);
+            int m = Integer.parseInt(minutes);
+
+            return 60*h + m;
+        } catch (IndexOutOfBoundsException ex) {
+            return -1;
         }
     }
 }

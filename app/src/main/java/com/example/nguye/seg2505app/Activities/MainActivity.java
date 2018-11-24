@@ -15,6 +15,7 @@ import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.RegisterProvider;
 import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.TestingActivity;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         }
+    }
+
+    public void onClickGoToTesting(View view) {
+        Intent intent = new Intent(this, TestingActivity.class);
+        startActivity(intent);
     }
 }
 

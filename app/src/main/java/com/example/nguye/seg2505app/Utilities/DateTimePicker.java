@@ -27,7 +27,7 @@ public class DateTimePicker {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1; // Months go from 0 to 11
                 String fullDate = year + "-" + month + "-" + day;
-                fullDate = FormatInput.dateYMD(fullDate);
+                fullDate = FormatValue.dateYMD(fullDate);
                 ((EditText) v).setText(fullDate);
             }
         }, cYear, cMonth, cDay);
@@ -53,7 +53,7 @@ public class DateTimePicker {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 String fullTime = hour + ":" + minute;
-                fullTime = FormatInput.timeHM(fullTime);
+//                fullTime = FormatValue.timeHM(fullTime);
                 ((EditText) v).setText(fullTime);
             }
         }, cHour, cMinute, true);

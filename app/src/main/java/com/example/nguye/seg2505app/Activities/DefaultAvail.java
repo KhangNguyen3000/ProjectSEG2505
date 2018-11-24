@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
-import com.example.nguye.seg2505app.Utilities.FormatInput;
+import com.example.nguye.seg2505app.Utilities.FormatValue;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Utilities.DateTimePicker;
@@ -23,26 +23,12 @@ import java.util.Date;
 
 public class DefaultAvail extends AppCompatActivity {
 
-    // All checkboxes should be checked initially
-
-    // Unchecked checkboxes:
-    //  Make the fields unclickable
-    //  Change the horizontal layout's color to grey
-    //  Set both startTime and endTimes to 00:00
-    //      (this prevent validation errors and provides values to store in the database)
-
-    // Checked checkboxes
-    //  Make the fields clickable
-    //  Change the horizontal layout's color back to default
-    //  CLEAR the startTime and endTime fields
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_avail);
 
-        Account account = (Account) getIntent().getSerializableExtra("schedule");
+//        Account account = (Account) getIntent().getSerializableExtra("schedule");
 //        Date today = new Date();
 //        ((EditText) findViewById(R.id.dav_input_effDate)).setText(today.toString());
     }
@@ -79,25 +65,7 @@ public class DefaultAvail extends AppCompatActivity {
             startTime.setText("00:00");
             endTime.setEnabled(false);
             endTime.setText("00:00");
-
-            // Make the horizontal layout unclickable
-            //  maybe I'll have to make the children unclickable individually
-            // Set both startTime and endTimes to 00:00
-            // Set the color to default
         }
-
-        // DO NOT FORGET TO BIND THE EVENT TO THE CHECKBOXES
-
-        // Unchecked checkboxes:
-        //  Make the fields unclickable
-        //  Change the horizontal layout's color to grey
-
-        //      (this prevent validation errors and provides values to store in the database)
-
-        // Checked checkboxes
-        //  Make the fields clickable
-        //  Change the horizontal layout's color back to default
-        //  CLEAR the startTime and endTime fields
     }
 
     public void onClickSaveButton(View view) {

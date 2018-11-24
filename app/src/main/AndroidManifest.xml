@@ -33,7 +33,8 @@
         <activity android:name=".Activities.DefaultAvail" />
         <activity android:name=".Activities.Schedule" />
         <activity android:name=".Bench.DateTimeTable" />
-        <activity android:name=".Bench.ServiceManagementProv"/>
+        <activity android:name=".Bench.ServiceManagementProv" />
+        <activity android:name=".TestingActivity"></activity>
     </application>
 
 </manifest>
