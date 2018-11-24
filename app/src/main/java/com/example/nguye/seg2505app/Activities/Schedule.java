@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import com.example.nguye.seg2505app.Activities.DefaultAvail;
 import com.example.nguye.seg2505app.R;
+import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
+import com.example.nguye.seg2505app.Utilities.TableRow3Col;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -35,6 +38,11 @@ public class Schedule extends AppCompatActivity {
         mTableBorderWidth = mTextViewBorderWidth * 2;
         TableLayout layout = (TableLayout)findViewById(R.id.layout);
         setupTable(layout);
+
+
+        //Vincent's part. DO NOT TOUCH. WORKING ON IT
+        ArrayList<TableRow3Col<String, DailySchedule, Boolean>> upcomingSchedule = new ArrayList<>();
+
     }
 
 
