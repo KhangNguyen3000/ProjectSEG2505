@@ -10,7 +10,9 @@ import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.ServiceType;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,6 +59,8 @@ public class Validation extends AppCompatActivity {
         return m.matches();
     }
 
+
+    // TODO replace this method and availableServiceType() with a more general method that checks if the value already exists
     /**
      *  Check if the email is already used
      * @param inputField, the instance of the EditText
@@ -200,6 +204,30 @@ public class Validation extends AppCompatActivity {
     }
 
     /**
+     * Validate a date input field by making sure that the date is not in the past
+     * @param inputField, the instance of the EditText
+     * @return true if valid
+     */
+    public static boolean validateDate(EditText inputField) {
+        // First, check if the field is empty
+        if (isEmpty(inputField)) {
+            return false;
+        }
+        // If not empty, check if the input is valid
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today = df.format(date);
+        String input = inputField.getText().toString().trim();
+
+        boolean isValid = FormatValue.dateToLong(input) >= FormatValue.dateToLong(today);
+        if (!isValid) {
+            Toast errorMessage = Toast.makeText(inputField.getContext(), "You can't select a date in the past.", Toast.LENGTH_LONG);
+            errorMessage.show();
+        }
+        return isValid;
+    }
+
+    /**
      * Checks if the blank default option of the drop-down list is still selected
      * @param dropDown The Spinner object that contains the options
      * @param selectedOption The selected option
@@ -318,6 +346,7 @@ public class Validation extends AppCompatActivity {
                         return false;
                     }
                     break;
+                    // TODO add the case for date
                 case 131073: // inputType == none
                     // Don't do anything and apply custom validation outside of this function.
                     // Keep this input type for validation of inputs that don't belong to another category

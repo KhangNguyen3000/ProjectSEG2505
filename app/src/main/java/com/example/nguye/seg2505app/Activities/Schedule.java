@@ -50,7 +50,8 @@ public class Schedule extends AppCompatActivity {
         TableLayout layout = (TableLayout)findViewById(R.id.layout);
         setupTable(layout);
 
-
+        // TODO implement the self-cleaning features for CustomSchedules and DefaultSchedules
+        // Might not be necessary since there will never be a lot of data for this project, but would be fun
     }
 
 

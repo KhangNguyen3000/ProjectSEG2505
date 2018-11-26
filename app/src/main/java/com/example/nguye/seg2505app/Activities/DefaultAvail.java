@@ -139,6 +139,9 @@ public class DefaultAvail extends AppCompatActivity {
     }
 
     public void onClickSaveButton(View view) {
+        // TODO validate the date and time
+        //  For the date, make sure the user didn't select a date in the past
+        //  For times, make sure that endTime >= startTime
         ViewGroup layout = findViewById(R.id.dav_layout_root);
         if (Validation.validateAll(layout)) {
             // Create a DefaultSchedule object with the values entered in the fields
