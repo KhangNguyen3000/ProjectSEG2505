@@ -29,7 +29,7 @@ public class VariousTests {
 
     @Test
     public void Storable_select() {
-        ArrayList<String> list = Storable.select(App.getContext(), Account.COL_FIRSTNAME, Account.TABLE_NAME, "ID >= 1");
+        ArrayList<String> list = Storable.selectAllInColumn(App.getContext(), Account.COL_FIRSTNAME, Account.TABLE_NAME, "ID >= 1");
         for (String record : list) {
             System.out.println(record);
         }

@@ -30,7 +30,7 @@ public class ExampleUnitTest {
 
     @Test
     public void sadasd() {
-        ArrayList<String> array = Storable.select(context, Account.COL_ID, Account.TABLE_NAME, "FirstName = \"admin\"");
+        ArrayList<String> array = Storable.selectAllInColumn(context, Account.COL_ID, Account.TABLE_NAME, "FirstName = \"admin\"");
         for (String record : array) {
             System.out.println(record);
         }

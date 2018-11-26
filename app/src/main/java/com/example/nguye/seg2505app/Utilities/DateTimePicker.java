@@ -52,8 +52,7 @@ public class DateTimePicker {
         TimePickerDialog timePicker = new TimePickerDialog(v.getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String fullTime = hour + ":" + minute;
-//                fullTime = FormatValue.timeHM(fullTime);
+                String fullTime = FormatValue.minToTimeString((60 * hour) + minute);
                 ((EditText) v).setText(fullTime);
             }
         }, cHour, cMinute, true);

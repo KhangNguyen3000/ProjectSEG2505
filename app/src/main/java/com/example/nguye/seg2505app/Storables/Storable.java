@@ -26,7 +26,7 @@ public abstract class Storable implements java.io.Serializable {
 //    abstract Storable cursorHandler(SQLiteDatabase db, Cursor cursor);
     //<T extends Storable> T
     abstract ContentValues valuePutter();
-    abstract Storable find(Context context, String fieldName, Object value, boolean quotedValue);
+//    abstract Storable find(Context context, String fieldName, Object value, boolean quotedValue);
 
 //    // Constructor
 //    public Storable() {
@@ -218,12 +218,12 @@ public abstract class Storable implements java.io.Serializable {
      * Get a list of all the values from the specified field in the specified table where
      *  the specified condition is met.
      * @param context
-     * @param fieldName
+     * @param fieldName Name of the field from which you want to pull the data
      * @param tableName
      * @param where String representing a SQL WHERE condition
      * @return
      */
-    public static ArrayList<String> select(Context context, String fieldName, String tableName, String where) {
+    public static ArrayList<String> selectAllInColumn(Context context, String fieldName, String tableName, String where) {
         // Connect to the database
         MyDBHandler dbHandler = new MyDBHandler(context);
         SQLiteDatabase db = dbHandler.getReadableDatabase();
@@ -235,6 +235,7 @@ public abstract class Storable implements java.io.Serializable {
         String query = "SELECT " + fieldName + " FROM " + tableName
                 + " WHERE " + where;
         System.out.println(query);
+
         Cursor cursor = db.rawQuery(query, null);
         ArrayList<String> array = new ArrayList<>();
         if (cursor.moveToFirst()) {
@@ -243,7 +244,156 @@ public abstract class Storable implements java.io.Serializable {
                 cursor.moveToNext();
             }
         }
+        db.close();
         return array;
+    }
+
+    /**
+     * Put all the values from a record from the specified table into an ArrayList
+     * @param context
+     * @param numberOfFields Number of columns in the row
+     * @param tableName
+     * @param where String representing a SQL WHERE condition
+     * @return
+     */
+    public static ArrayList<String> selectAllInRow(Context context, int numberOfFields, String tableName, String where) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+//        String quotes = "";
+//        if (quotedKey) {
+//            quotes = "\"";
+//        }
+        String query = "SELECT * FROM " + tableName
+                + " WHERE " + where;
+        System.out.println(query);
+
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<String> array = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            for (int i = 0; i < numberOfFields; i++) {
+                array.add(cursor.getString(i));
+            }
+        }
+        db.close();
+        return array;
+    }
+
+    /**
+     * Get a list of all the values from the specified field in the specified table where
+     *  the specified condition is met.
+     * @param context
+     * @param fieldName
+     * @param tableName
+     * @param where String representing a SQL WHERE condition
+     * @return
+     */
+    public static String selectFirst(Context context, String fieldName, String tableName, String where) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+//        String quotes = "";
+//        if (quotedKey) {
+//            quotes = "\"";
+//        }
+        String query = "SELECT " + fieldName + " FROM " + tableName
+                + " WHERE " + where;
+        System.out.println(query);
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            db.close();
+            return cursor.getString(0);
+        } else {
+            db.close();
+            return "VALUE_NOT_FOUND";
+        }
+    }
+
+
+    /**
+     * Return an ArrayList that contains arrays of String (String[]) where each String[] represents
+     *  a record where every value is returned as a String. Those values can be parsed after if
+     *  necessary. This allows to get only specific information rather than whole objects.
+     * @param context
+     * @param query The fully defined SQL query
+     * @param numOfFields The number of fields that will be retrieved according to the query. This
+     *                    is to set the size of the String[]
+     * @return
+     */
+    public static ArrayList<String[]> select(Context context, String query, int numOfFields) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        ArrayList<String[]> records = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String[] fieldValues = new String[numOfFields];
+                for (int i = 0; i < numOfFields; i++) {
+                    fieldValues[i] = cursor.getString(i);
+                }
+                records.add(fieldValues);
+                cursor.moveToNext();
+            }
+        }
+        db.close();
+        return records;
+    }
+
+    /**
+     * Simply return the value (as a String) of the specified field in the specified table in the
+     *  record that corresponds to the specified ID. Use this for quick lookup.
+     * @param context
+     * @param tableName Name of the table that contains the specified field
+     * @param fieldName Name of the field that you want to get the value from
+     * @param ID ID of the record
+     * @return
+     */
+    public static String findFieldByID(Context context, String tableName, String fieldName, int ID) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        String query = "SELECT " + fieldName + " FROM " + tableName
+                + " WHERE " + COL_ID + " = " + ID;
+        System.out.println(query);
+
+        String foundValue = "NO_RECORD_FOUND";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            foundValue = cursor.getString(0);
+        }
+        return foundValue;
+    }
+
+    /**
+     * Checks if there is a record in the specified table that matches the condition
+     * @param context
+     * @param tableName
+     * @param where The condition
+     * @return
+     */
+    public static boolean exists(Context context, String tableName, String where) {
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+
+        String query = "SELECT " + COL_ID + " FROM " + tableName
+                + " WHERE " + where;
+        System.out.println(query);
+        Cursor cursor = db.rawQuery(query, null);
+
+        boolean result;
+        if (cursor.moveToFirst()) {
+            result = true;
+        } else {
+            result = false;
+        }
+        db.close();
+        return result;
     }
 
     public int getID() { return this.ID; }

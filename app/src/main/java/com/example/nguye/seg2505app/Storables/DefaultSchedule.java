@@ -15,6 +15,8 @@ public class DefaultSchedule extends Storable {
     public static final String TABLE_NAME = "DefaultSchedules";
     public static final String COL_PROVIDER = "ProviderID";
     public static final String COL_EFFECTIVEDATE = "EffectiveDate";
+    public static final String COL_SUNDAYSTART = "SundayStart";
+    public static final String COL_SUNDAYEND = "SundayEnd";
     public static final String COL_MONDAYSTART = "MondayStart";
     public static final String COL_MONDAYEND = "MondayEnd";
     public static final String COL_TUESDAYSTART = "TuesdayStart";
@@ -27,13 +29,14 @@ public class DefaultSchedule extends Storable {
     public static final String COL_FRIDAYEND = "FridayEnd";
     public static final String COL_SATURDAYSTART = "SaturdayStart";
     public static final String COL_SATURDAYEND = "SaturdayEnd";
-    public static final String COL_SUNDAYSTART = "SundayStart";
-    public static final String COL_SUNDAYEND = "SundayEnd";
+
     public static final ArrayList<String[]> COLUMNS = new ArrayList<>();
     static {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
         COLUMNS.add(new String[] {COL_PROVIDER, "INTEGER"});
         COLUMNS.add(new String[] {COL_EFFECTIVEDATE, "TEXT"});
+        COLUMNS.add(new String[] {COL_SUNDAYSTART, "TEXT"});
+        COLUMNS.add(new String[] {COL_SUNDAYEND, "TEXT"});
         COLUMNS.add(new String[] {COL_MONDAYSTART, "TEXT"});
         COLUMNS.add(new String[] {COL_MONDAYEND, "TEXT"});
         COLUMNS.add(new String[] {COL_TUESDAYSTART, "TEXT"});
@@ -46,8 +49,6 @@ public class DefaultSchedule extends Storable {
         COLUMNS.add(new String[] {COL_FRIDAYEND, "TEXT"});
         COLUMNS.add(new String[] {COL_SATURDAYSTART, "TEXT"});
         COLUMNS.add(new String[] {COL_SATURDAYEND, "TEXT"});
-        COLUMNS.add(new String[] {COL_SUNDAYSTART, "TEXT"});
-        COLUMNS.add(new String[] {COL_SUNDAYEND, "TEXT"});
     }
 
     // Attributes
@@ -154,6 +155,50 @@ public class DefaultSchedule extends Storable {
         }
         db.close();
         return schedule;
+    }
+
+    /**
+     * Create a list of DefaultSchedules built with the data stored in the database. This function
+     *  gives more freedom and allows for more precise search by using a fully defined SQL query.
+     * @param context
+     * @param query
+     * @return
+     */
+    public static ArrayList<DefaultSchedule> findByQuery(Context context, String query) {
+        // Connect to the database
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+
+        // Store the item's data into a Storable using a cursor
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<DefaultSchedule> DefSchedules = new ArrayList<>();
+        DefaultSchedule schedule;
+        if(cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                schedule = new DefaultSchedule();
+                schedule.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
+                schedule.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
+                schedule.setEffectiveDate(cursor.getString(getFieldIndex(COL_EFFECTIVEDATE, COLUMNS)));
+                schedule.setStartTimes(0, cursor.getString(getFieldIndex(COL_MONDAYSTART, COLUMNS)));
+                schedule.setEndTimes(0, cursor.getString(getFieldIndex(COL_MONDAYEND, COLUMNS)));
+                schedule.setStartTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYSTART, COLUMNS)));
+                schedule.setEndTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYEND, COLUMNS)));
+                schedule.setStartTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYSTART, COLUMNS)));
+                schedule.setEndTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYEND, COLUMNS)));
+                schedule.setStartTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYSTART, COLUMNS)));
+                schedule.setEndTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYEND, COLUMNS)));
+                schedule.setStartTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYSTART, COLUMNS)));
+                schedule.setEndTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYEND, COLUMNS)));
+                schedule.setStartTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYSTART, COLUMNS)));
+                schedule.setEndTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYEND, COLUMNS)));
+                schedule.setStartTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYSTART, COLUMNS)));
+                schedule.setEndTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYEND, COLUMNS)));
+                DefSchedules.add(schedule);
+                cursor.moveToNext();
+            }
+        }
+        db.close();
+        return DefSchedules;
     }
 
     // Getters and setters

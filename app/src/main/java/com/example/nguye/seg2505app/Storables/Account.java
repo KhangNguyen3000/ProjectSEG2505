@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.ScheduleClasses.CurrentUserSchedule;
 
 import java.util.ArrayList;
 
@@ -170,6 +171,7 @@ public class Account extends Storable implements java.io.Serializable {
 
     public static void logout() {
         currentAccount = new Account();
+        CurrentUserSchedule.set(null);
     }
 
     /**
