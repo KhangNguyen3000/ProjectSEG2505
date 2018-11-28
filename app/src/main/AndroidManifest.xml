@@ -25,7 +25,7 @@
         <activity android:name=".Activities.ModifyScreen" />
         <activity android:name=".Activities.ModifyCompany" />
         <activity
-            android:name=".RegisterProvider"
+            android:name=".Activities.RegisterProvider"
             android:exported="true" />
         <activity android:name=".Activities.ServiceManagement" />
         <activity android:name=".Activities.ServiceManagementProvider" />
@@ -33,7 +33,7 @@
         <activity android:name=".Activities.DefaultAvail" />
         <activity android:name=".Activities.Schedule" />
         <activity android:name=".Bench.DateTimeTable" />
-        <activity android:name=".Bench.ServiceManagementProv"/>
+        <activity android:name=".TestingActivity" />
     </application>
 
 </manifest>

@@ -77,6 +77,14 @@
 
                 android:text="SignUP"
                 android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/openTestActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickGoToTesting"
+                android:text="OpenTestActivity" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

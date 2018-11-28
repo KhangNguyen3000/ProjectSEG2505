@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.ServiceType;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 23;
+    private static final int DATABASE_VERSION = 28;
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
@@ -73,6 +74,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         DATABASE.put(OfferedService.TABLE_NAME, OfferedService.COLUMNS);
         DATABASE.put(ServiceType.TABLE_NAME, ServiceType.COLUMNS);
         DATABASE.put(DefaultSchedule.TABLE_NAME, DefaultSchedule.COLUMNS);
+        DATABASE.put(CustomSchedule.TABLE_NAME, CustomSchedule.COLUMNS);
         for (String table : DATABASE.keySet()) {
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");

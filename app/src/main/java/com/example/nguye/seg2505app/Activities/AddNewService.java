@@ -32,7 +32,7 @@ public class AddNewService extends AppCompatActivity {
         MyDBHandler data = new MyDBHandler(this);
 
         List<String> services = data.getList("Name","ServiceTypes");
-        showServiceList(services);
+         showServiceList(services);
 
         ListView serviceList = (ListView) findViewById(R.id.s_list);
 //        serviceList.setClickable(true);
@@ -73,7 +73,7 @@ public class AddNewService extends AppCompatActivity {
 
     public void showServiceList(List<String> services){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
-        this.listView = (ListView) findViewById(R.id._ListViewServices);
+        this.listView = (ListView) findViewById(R.id.s_list);
         listView.setAdapter(itemsAdapter);
     }
 

@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.nguye.seg2505app.R;
-import com.example.nguye.seg2505app.RegisterProvider;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Utilities.Validation;
 

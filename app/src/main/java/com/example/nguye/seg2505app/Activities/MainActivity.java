@@ -3,18 +3,15 @@ package com.example.nguye.seg2505app.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.nguye.seg2505app.Activities.RegisterFinal;
-import com.example.nguye.seg2505app.Activities.WelcomePage;
 import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
-import com.example.nguye.seg2505app.RegisterProvider;
 import com.example.nguye.seg2505app.Storables.Account;
+import com.example.nguye.seg2505app.TestingActivity;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         }
+    }
+
+    public void onClickGoToTesting(View view) {
+        Intent intent = new Intent(this, TestingActivity.class);
+        startActivity(intent);
     }
 }
 
