@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Bench;
 
 import com.example.nguye.seg2505app.Storables.Account;
 

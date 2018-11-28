@@ -1,7 +1,5 @@
 package com.example.nguye.seg2505app.ScheduleClasses;
 
-import com.example.nguye.seg2505app.Utilities.TableRow3Col;
-
 import java.util.ArrayList;
 
 public class CurrentUserSchedule {

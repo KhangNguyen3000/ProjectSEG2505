@@ -5,14 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ActionMenuView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.nguye.seg2505app.Activities.DefaultAvail;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.ScheduleClasses.CurrentUserSchedule;
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
@@ -24,7 +20,6 @@ import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.FormatValue;
-import com.example.nguye.seg2505app.Utilities.TableRow3Col;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -228,5 +228,4 @@ public class ServiceManagement extends AppCompatActivity {
         serviceName.setText("");
         serviceMaxRate.setText("");
     }
-
 }
