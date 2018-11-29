@@ -34,6 +34,7 @@
         <activity android:name=".Activities.Schedule" />
         <activity android:name=".Bench.DateTimeTable" />
         <activity android:name=".TestingActivity" />
+        <activity android:name=".SearchForProviders"></activity>
     </application>
 
 </manifest>

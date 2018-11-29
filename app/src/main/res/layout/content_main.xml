@@ -84,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClickGoToTesting"
-                android:text="OpenTestActivity" />
+                android:text="OpenTestActivity"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
