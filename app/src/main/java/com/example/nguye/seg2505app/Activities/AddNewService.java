@@ -112,6 +112,5 @@ public class AddNewService extends AppCompatActivity {
 
         name.setText("");
         maxRate.setText("");
-
     }
 }

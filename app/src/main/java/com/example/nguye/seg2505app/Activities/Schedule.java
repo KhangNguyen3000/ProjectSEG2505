@@ -91,38 +91,38 @@ public class Schedule extends AppCompatActivity {
             String weekDay = "";
             switch (day) {
                 case Calendar.SUNDAY:
-                    startTime = schedule.getStartTimes(6);
-                    endTime = schedule.getEndTimes(6);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(6));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(6));
                     weekDay = "Sunday";
                     break;
                 case Calendar.MONDAY:
-                    startTime = schedule.getStartTimes(0);
-                    endTime = schedule.getEndTimes(0);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(0));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(0));
                     weekDay = "Monday";
                     break;
                 case Calendar.TUESDAY:
-                    startTime = schedule.getStartTimes(1);
-                    endTime = schedule.getEndTimes(1);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(1));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(1));
                     weekDay = "Tuesday";
                     break;
                 case Calendar.WEDNESDAY:
-                    startTime = schedule.getStartTimes(2);
-                    endTime = schedule.getEndTimes(2);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(2));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(2));
                     weekDay = "Wednesday";
                     break;
                 case Calendar.THURSDAY:
-                    startTime = schedule.getStartTimes(3);
-                    endTime = schedule.getEndTimes(3);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(3));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(3));
                     weekDay = "Thursday";
                     break;
                 case Calendar.FRIDAY:
-                    startTime = schedule.getStartTimes(4);
-                    endTime = schedule.getEndTimes(4);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(4));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(4));
                     weekDay = "Sunday";
                     break;
                 case Calendar.SATURDAY:
-                    startTime = schedule.getStartTimes(5);
-                    endTime = schedule.getEndTimes(5);
+                    startTime = FormatValue.minToTimeString(schedule.getStartTimes(5));
+                    endTime = FormatValue.minToTimeString(schedule.getEndTimes(5));
                     weekDay = "Friday";
                     break;
             }
