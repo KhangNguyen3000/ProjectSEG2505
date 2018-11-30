@@ -25,16 +25,16 @@ public class CustomSchedule extends Storable {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
         COLUMNS.add(new String[] {COL_PROVIDER, "INTEGER"});
         COLUMNS.add(new String[] {COL_DATE, "TEXT"});
-        COLUMNS.add(new String[] {COL_START, "TEXT"});
-        COLUMNS.add(new String[] {COL_END, "TEXT"});
+        COLUMNS.add(new String[] {COL_START, "INTEGER"});
+        COLUMNS.add(new String[] {COL_END, "INTEGER"});
         COLUMNS.add(new String[] {COL_AVAILABILITY, "TEXT"});
     }
 
     // Attributes
     private int providerID;
     private String date;
-    private String startTime;
-    private String endTime;
+    private int startTime;
+    private int endTime;
     private ScheduleState state;
 
 //    private int mondayStart;
@@ -54,7 +54,7 @@ public class CustomSchedule extends Storable {
 
 
     // Constructor (full)
-    public CustomSchedule(int providerID, String date, String startTime, String endTime, ScheduleState state) {
+    public CustomSchedule(int providerID, String date, int startTime, int endTime, ScheduleState state) {
         this.providerID = providerID;
         this.date = date;
         this.startTime = startTime;
@@ -177,11 +177,11 @@ public class CustomSchedule extends Storable {
     public String getDate() { return this.date; }
     public void setDate(String date) { this.date = date; }
 
-    public String getStartTime() { return this.startTime; }
-    public void setStartTime(String startTime) { this.startTime = startTime; }
+    public int getStartTime() { return this.startTime; }
+    public void setStartTime(int startTime) { this.startTime = startTime; }
 
-    public String getEndTime() { return this.endTime; }
-    public void setEndTime(String endTime) { this.endTime = endTime; }
+    public int getEndTime() { return this.endTime; }
+    public void setEndTime(int endTime) { this.endTime = endTime; }
 
     public ScheduleState getState() { return this.state; }
     public void setState(ScheduleState state) { this.state = state; }

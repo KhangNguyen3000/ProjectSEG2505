@@ -173,6 +173,7 @@ public class DailySchedule {
         }
 
         newDS.cleanUp();
+        newDS.setSize(newDS.getSize());
         return newDS;
     }
 
@@ -385,8 +386,15 @@ public class DailySchedule {
 //	  }
 
     public int getSize() {
-        return this.size;
+        int size = 0;
+        TimeNode node = this.head;
+        while (node.getNext() != null) {
+            node = node.getNext();
+            size++;
+        }
+        return size;
     }
+    public void setSize(int size) { this.size = size; }
 
     public String toString() {
         TimeNode timeNode = this.head.getNext();

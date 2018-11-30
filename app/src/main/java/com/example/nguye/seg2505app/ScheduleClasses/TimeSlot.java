@@ -14,7 +14,6 @@ public class TimeSlot {
     }
 
     public TimeNode getStartNode() { return this.startNode; }
-
     public TimeNode getEndNode() { return this.endNode; }
 
     public int getStartTime() { return this.startNode.getTime(); }

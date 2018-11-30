@@ -12,6 +12,7 @@ import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.TestingActivity;
+import com.example.nguye.seg2505app.Utilities.RandomAccountGenerator;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this);
         if(!(dbHandler.existsType(1))){
             dbHandler.createAdmin(this);
+            dbHandler.createServiceTypes(this);
         }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -83,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
     public void onClickGoToTesting(View view) {
         Intent intent = new Intent(this, TestingActivity.class);
         startActivity(intent);
+    }
+
+    public void onClickGenerate(View view) {
+        RandomAccountGenerator.generateStuff(this, 5);
+        Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
 

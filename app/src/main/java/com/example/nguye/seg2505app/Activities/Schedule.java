@@ -32,7 +32,7 @@ public class Schedule extends AppCompatActivity {
     
     private int mTextColor, mBorderColor;
     private int mTextViewBorderWidth, mTableBorderWidth;
-    final int numOfDaysToShow = 14;
+    final int numOfDaysToShow = 60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +66,12 @@ public class Schedule extends AppCompatActivity {
         generateSchedule();
     }
 
+    // TODO days are shifted (monday's schedule is written beside Sunday, tuesday beside monday, etc)
     private void setupTable(TableLayout layout){
-        // TODO only display weekdays abbreviations instead of full names
-        // TODO Saturday is not displayed
-        GregorianCalendar gc = new GregorianCalendar();
+        Calendar cal = Calendar.getInstance();
         TableRow tableRow;
         TextView textView, textView2;
-        for(int rowNumber = 0; rowNumber < 14; rowNumber++){
+        for(int rowNumber = 0; rowNumber < numOfDaysToShow; rowNumber++){
             tableRow = new TableRow(this);
 
             textView = new TextView(this);
@@ -83,7 +82,7 @@ public class Schedule extends AppCompatActivity {
             textView2.setGravity(Gravity.RIGHT);
             textView2.setPadding(0, 6, 0, 6);
 
-            int day = gc.get(Calendar.DAY_OF_WEEK);
+            int day = cal.get(Calendar.DAY_OF_WEEK);
             DefaultSchedule schedule = new DefaultSchedule().find(this, DefaultSchedule.COL_PROVIDER, Account.getCurrentAccount().getID(), false);
 
             String startTime = "0";
@@ -93,42 +92,42 @@ public class Schedule extends AppCompatActivity {
                 case Calendar.SUNDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(6));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(6));
-                    weekDay = "Sunday";
+                    weekDay = "Sun";
                     break;
                 case Calendar.MONDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(0));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(0));
-                    weekDay = "Monday";
+                    weekDay = "Mon";
                     break;
                 case Calendar.TUESDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(1));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(1));
-                    weekDay = "Tuesday";
+                    weekDay = "Tue";
                     break;
                 case Calendar.WEDNESDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(2));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(2));
-                    weekDay = "Wednesday";
+                    weekDay = "Wed";
                     break;
                 case Calendar.THURSDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(3));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(3));
-                    weekDay = "Thursday";
+                    weekDay = "Thu";
                     break;
                 case Calendar.FRIDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(4));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(4));
-                    weekDay = "Sunday";
+                    weekDay = "Fri";
                     break;
                 case Calendar.SATURDAY:
                     startTime = FormatValue.minToTimeString(schedule.getStartTimes(5));
                     endTime = FormatValue.minToTimeString(schedule.getEndTimes(5));
-                    weekDay = "Friday";
+                    weekDay = "Sat";
                     break;
             }
             tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             //textView2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            textView.setText(weekDay+" "+gc.get(Calendar.YEAR)+"-"+(gc.get(Calendar.MONTH)+1)+"-"+gc.get(Calendar.DAY_OF_MONTH));
+            textView.setText(weekDay+" "+FormatValue.dateYMD(cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH)));
             textView2.setText(startTime+" - "+endTime);
             System.out.println(textView2.getText().toString());
             tableRow.addView(textView);
@@ -140,8 +139,8 @@ public class Schedule extends AppCompatActivity {
             */
 
             layout.addView(tableRow);
-            gc.add(Calendar.DATE, 1);
-
+//            cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 1);
+            cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
     }
@@ -171,7 +170,6 @@ public class Schedule extends AppCompatActivity {
             int dayOfWeekFieldIndex;
             int sundayFieldIndex = (Storable.getFieldIndex(DefaultSchedule.COL_SUNDAYSTART, DefaultSchedule.COLUMNS) - 1); // Index of the SundayStartTime field.
             // Retrieved like this instead of using a constant for maintainability in case some fields are added or removed.
-
             for (int i = 0; i < numOfDaysToShow; i++) {
                 // Check if the schedule for the current day has to be generated to save time if not necessary
                 boolean toGenerate = false;
@@ -182,8 +180,12 @@ public class Schedule extends AppCompatActivity {
                         toGenerate = true;
                     }
                 }
-
                 if (toGenerate) {
+                    System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+                    System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+                    System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+                    System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+                    System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
                     // Generate the date as a String
                     date.setTime(calendar.getTimeInMillis());
                     dateString = df.format(date);
@@ -218,7 +220,7 @@ public class Schedule extends AppCompatActivity {
 //            String endTime = Storable.selectFirst(this, DefaultSchedule.COLUMNS.get(dayOfWeekFieldIndex + 1)[0], DefaultSchedule.TABLE_NAME, where);
                     String startTime = currentEffDate.get(0)[0];
                     String endTime = currentEffDate.get(0)[1];
-                    schedule = new DailySchedule(FormatValue.timeStringToMin(startTime), FormatValue.timeStringToMin(endTime), ScheduleState.AVAILABLE);
+                    schedule = new DailySchedule(Integer.parseInt(startTime), Integer.parseInt(endTime), ScheduleState.AVAILABLE);
 
                     // For each record in CustomSchedule that meet the right conditions, merge one by one with the DailySchedule.
                     String query = "SELECT " + CustomSchedule.COL_START + ", " + CustomSchedule.COL_END + ", "
@@ -232,11 +234,12 @@ public class Schedule extends AppCompatActivity {
                     int timeSlotEnd;
                     ScheduleState state;
                     for (String[] record : customSchedules) {
-                        timeSlotStart = FormatValue.timeStringToMin(record[0]);
-                        timeSlotEnd = FormatValue.timeStringToMin(record[1]);
+                        timeSlotStart = Integer.parseInt(record[0]);
+                        timeSlotEnd = Integer.parseInt(record[1]);
                         state = ScheduleState.valueOf(record[2]);
                         TimeSlot timeSlot = new TimeSlot(timeSlotStart, timeSlotEnd, state);
-                        schedule.merge(timeSlot); // Merge
+                        // TODO check if the problem is fixed
+                        schedule = schedule.merge(timeSlot); // Merge
                     }
 
                     // Set the flag to true to indicate that the DailySchedule has been generate since the last modification
@@ -249,10 +252,9 @@ public class Schedule extends AppCompatActivity {
                     } else { // else, update it
                         upcomingSchedule.set(i, day);
                     }
-
-                    // Increment the day to repeat the process for the next day.
-                    calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
                 }
+                // Increment the day to repeat the process for the next day.
+                calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
             }
 
 //        for (TableRow3Col<String, DailySchedule, Boolean> row : upcomingSchedule) {
@@ -263,34 +265,11 @@ public class Schedule extends AppCompatActivity {
 
             // TODO the DailySchedule has not updated properly
             System.out.println(upcomingSchedule.size());
-            int i = 0;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 1;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 2;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 3;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 4;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 5;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 6;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 7;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 8;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 9;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 10;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 11;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 12;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
-            i = 13;
-            System.out.println(upcomingSchedule.get(i).getDateString() + " : " + upcomingSchedule.get(i).getSchedule() + ", " + upcomingSchedule.get(i).isLoaded());
+            for (int i = 0; i < numOfDaysToShow; i++) {
+                System.out.println(CurrentUserSchedule.get().get(i).getDateString()
+                        + " : " + CurrentUserSchedule.get().get(i).getSchedule()
+                        + ", " + CurrentUserSchedule.get().get(i).isLoaded());
+            }
         } else {
             System.out.println("The current account has not setup a default schedule yet.");
         }

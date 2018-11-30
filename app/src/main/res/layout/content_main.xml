@@ -86,6 +86,14 @@
                 android:onClick="onClickGoToTesting"
                 android:text="OpenTestActivity"
                 android:visibility="gone" />
+
+            <Button
+                android:id="@+id/generate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickGenerate"
+                android:text="Generate random stuff" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

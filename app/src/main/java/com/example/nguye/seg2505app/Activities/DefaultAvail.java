@@ -138,6 +138,7 @@ public class DefaultAvail extends AppCompatActivity {
         }
     }
 
+    // TODO set the flag isLoaded to false IF there is a change
     public void onClickSaveButton(View view) {
         // TODO validate the date and time
         //  For the date, make sure the user didn't select a date in the past
@@ -147,13 +148,13 @@ public class DefaultAvail extends AppCompatActivity {
             // Create a DefaultSchedule object with the values entered in the fields
             DefaultSchedule schedule = new DefaultSchedule(
                     Account.getCurrentAccount().getID(), effDate.getText().toString(),
-                    mondayStart.getText().toString(), mondayEnd.getText().toString(),
-                    tuesdayStart.getText().toString(), tuesdayEnd.getText().toString(),
-                    wednesdayStart.getText().toString(), wednesdayEnd.getText().toString(),
-                    thursdayStart.getText().toString(), thursdayEnd.getText().toString(),
-                    fridayStart.getText().toString(), fridayEnd.getText().toString(),
-                    saturdayStart.getText().toString(), saturdayEnd.getText().toString(),
-                    sundayStart.getText().toString(), sundayEnd.getText().toString()
+                    FormatValue.timeStringToMin(mondayStart.getText().toString()), FormatValue.timeStringToMin(mondayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(tuesdayStart.getText().toString()), FormatValue.timeStringToMin(tuesdayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(wednesdayStart.getText().toString()), FormatValue.timeStringToMin(wednesdayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(thursdayStart.getText().toString()), FormatValue.timeStringToMin(thursdayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(fridayStart.getText().toString()), FormatValue.timeStringToMin(fridayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(saturdayStart.getText().toString()), FormatValue.timeStringToMin(saturdayEnd.getText().toString()),
+                    FormatValue.timeStringToMin(sundayStart.getText().toString()), FormatValue.timeStringToMin(sundayEnd.getText().toString())
             );
 
             // Overwrite the record if the user already has a DefaultSchedule starting on the specified date
@@ -247,7 +248,8 @@ public class DefaultAvail extends AppCompatActivity {
         // Get the record with highest date that is smaller than or equal to the selected date
         //  (and that belongs to the current provider)
         String effDateQuery = "SELECT * FROM " + DefaultSchedule.TABLE_NAME
-                + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE
+                + " WHERE " + DefaultSchedule.COL_PROVIDER + " = " + Account.getCurrentAccount().getID()
+                + " AND" + DefaultSchedule.COL_EFFECTIVEDATE
                 + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
                 + ") FROM " + DefaultSchedule.TABLE_NAME
                 + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";
@@ -255,24 +257,41 @@ public class DefaultAvail extends AppCompatActivity {
 
         // The ArrayList should contain only 1 record
         ArrayList<DefaultSchedule> defSchedules = DefaultSchedule.findByQuery(this, effDateQuery);
+        ArrayList<String[]> defSchedule = Storable.select(this, effDateQuery, DefaultSchedule.COLUMNS.size());
         if (defSchedules.size() > 0) {
 //            effDate.setText(defSchedules.get(0).getEffectiveDate());
             // TODO check all the boxes that have 0:00 and uncheck the boxes that don't
-            mondayStart.setText(defSchedules.get(0).getStartTimes(0));
-            mondayEnd.setText(defSchedules.get(0).getEndTimes(0));
-            tuesdayStart.setText(defSchedules.get(0).getStartTimes(1));
-            tuesdayEnd.setText(defSchedules.get(0).getEndTimes(1));
-            wednesdayStart.setText(defSchedules.get(0).getStartTimes(2));
-            wednesdayEnd.setText(defSchedules.get(0).getEndTimes(2));
-            thursdayStart.setText(defSchedules.get(0).getStartTimes(3));
-            thursdayEnd.setText(defSchedules.get(0).getEndTimes(3));
-            fridayStart.setText(defSchedules.get(0).getStartTimes(4));
-            fridayEnd.setText(defSchedules.get(0).getEndTimes(4));
-            saturdayStart.setText(defSchedules.get(0).getStartTimes(5));
-            saturdayEnd.setText(defSchedules.get(0).getEndTimes(5));
-            sundayStart.setText(defSchedules.get(0).getStartTimes(6));
-            sundayEnd.setText(defSchedules.get(0).getEndTimes(6));
-            return defSchedules.get(0).getID();
+            sundayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[3])));
+            sundayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[4])));
+            mondayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[5])));
+            mondayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[6])));
+            tuesdayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[7])));
+            tuesdayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[8])));
+            wednesdayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[9])));
+            wednesdayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[10])));
+            thursdayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[11])));
+            thursdayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[12])));
+            fridayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[13])));
+            fridayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[14])));
+            saturdayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[15])));
+            saturdayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[16])));
+
+
+//            mondayStart.setText(defSchedules.get(0).getStartTimes(0));
+//            mondayEnd.setText(defSchedules.get(0).getEndTimes(0));
+//            tuesdayStart.setText(defSchedules.get(0).getStartTimes(1));
+//            tuesdayEnd.setText(defSchedules.get(0).getEndTimes(1));
+//            wednesdayStart.setText(defSchedules.get(0).getStartTimes(2));
+//            wednesdayEnd.setText(defSchedules.get(0).getEndTimes(2));
+//            thursdayStart.setText(defSchedules.get(0).getStartTimes(3));
+//            thursdayEnd.setText(defSchedules.get(0).getEndTimes(3));
+//            fridayStart.setText(defSchedules.get(0).getStartTimes(4));
+//            fridayEnd.setText(defSchedules.get(0).getEndTimes(4));
+//            saturdayStart.setText(defSchedules.get(0).getStartTimes(5));
+//            saturdayEnd.setText(defSchedules.get(0).getEndTimes(5));
+//            sundayStart.setText(defSchedules.get(0).getStartTimes(6));
+//            sundayEnd.setText(defSchedules.get(0).getEndTimes(6));
+            return Integer.parseInt(defSchedule.get(0)[0]); // return the ID
         } else { // If the user does not have a default schedule for that day
             // TODO uncheck all the boxes
             mondayStart.setText("");
