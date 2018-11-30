@@ -76,6 +76,7 @@ public class SearchForProviders extends AppCompatActivity {
                 new int[] {R.id.srch_dd_service},
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         // TODO test the drop-down list
+        // TODO sort the services in alphabetical order
         serviceSpinner.setAdapter(serviceAdapter);
     }
 
@@ -178,6 +179,7 @@ public class SearchForProviders extends AppCompatActivity {
             query = queryDate;
         } else {
             // TODO error, must select at least 1 criteria
+            // TODO do not forget to consider the custom schedules
         }
         providerIDs = Storable.select(this, query, 1);
         // TODO do something with that list

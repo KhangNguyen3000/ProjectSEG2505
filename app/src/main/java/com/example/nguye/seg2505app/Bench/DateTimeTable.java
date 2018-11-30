@@ -48,8 +48,8 @@ public class DateTimeTable extends AppCompatActivity{ //extends TableLayout?
 
             int day = gc.get(Calendar.DAY_OF_WEEK);
             DefaultSchedule schedule = new DefaultSchedule().find(this, "ID", Account.getCurrentAccount().getID(), false);
-            String startTime = "0";
-            String endTime = "0";
+            int startTime = 0;
+            int endTime = 0;
             switch (day) {
                 case Calendar.SUNDAY:
                     startTime = schedule.getStartTimes(6);

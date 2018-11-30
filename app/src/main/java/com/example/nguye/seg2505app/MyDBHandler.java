@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 28;
+    private static final int DATABASE_VERSION = 30;
     private static final String DATABASE_NAME = "TBD";
     // The whole database's structure can be represented by a HashMap where the keys correspond
     //  to each table and the values are the fieldsets
@@ -278,6 +278,19 @@ public class MyDBHandler extends SQLiteOpenHelper{
 //        addAccount(account);
         account.add(context);
 //        System.out.println("Administrateur créé");
+    }
+
+    public void createServiceTypes(Context context) {
+        ServiceType service1 = new ServiceType("Plumber", 100);
+        service1.add(context);
+        ServiceType service2 = new ServiceType("Wifi Dude", 50);
+        service2.add(context);
+        ServiceType service3 = new ServiceType("Exterminator", 150);
+        service3.add(context);
+        ServiceType service4 = new ServiceType("Snow Remover", 75);
+        service4.add(context);
+        ServiceType service5 = new ServiceType("Caterer", 200);
+        service5.add(context);
     }
 
     /**

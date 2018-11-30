@@ -70,10 +70,11 @@ public class Account extends Storable implements java.io.Serializable {
     private String description = "NO DESCRIPTION";
     private int licensed = 0;
 
-    // Constructor
+    // Empty constructor
     public Account(){
         this.email = "empty"; // This is to prevent errors on a null value
     }
+
 
 //    // Constructor
 //    public Account(Context context) {

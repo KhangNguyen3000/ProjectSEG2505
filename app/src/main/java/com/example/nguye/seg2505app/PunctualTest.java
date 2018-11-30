@@ -2,6 +2,9 @@ package com.example.nguye.seg2505app;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
+import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
+import com.example.nguye.seg2505app.ScheduleClasses.TimeSlot;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.Storable;
@@ -46,5 +49,10 @@ public class PunctualTest {
                 + ") FROM " + DefaultSchedule.TABLE_NAME
                 + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";
         System.out.println(effDateQuery);
+
+        DailySchedule schedule = new DailySchedule(852, 1232, ScheduleState.AVAILABLE);
+        TimeSlot ts = new TimeSlot(521, 1123, ScheduleState.UNAVAILABLE);
+        schedule = schedule.merge(ts);
+        System.out.println(schedule);
     }
 }

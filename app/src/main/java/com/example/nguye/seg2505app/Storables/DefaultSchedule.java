@@ -265,4 +265,26 @@ public class DefaultSchedule extends Storable {
     public int[] getEndTimes() { return this.endTimes; }
     public int getEndTimes(int dayIndex) { return this.endTimes[dayIndex]; }
     public void setEndTimes(int dayIndex, int endTime) { this.endTimes[dayIndex] = endTime; }
+
+    public String toString() {
+        String string = "DEFAULT SCHEDULE\n";
+        string += "Provider: " + getProviderID() + "\n";
+        string += "Effective date: " + getEffectiveDate() + "\n";
+        string += "SunStart: " + getStartTimes(0) + "\n";
+        string += "SunEnd: " + getEndTimes(0) + "\n";
+        string += "MonStart: " + getStartTimes(1) + "\n";
+        string += "MonEnd: " + getEndTimes(1) + "\n";
+        string += "TueStart: " + getStartTimes(2) + "\n";
+        string += "TueEnd: " + getEndTimes(2) + "\n";
+        string += "WedStart: " + getStartTimes(3) + "\n";
+        string += "WedEnd: " + getEndTimes(3) + "\n";
+        string += "ThuStart: " + getStartTimes(4) + "\n";
+        string += "ThuEnd: " + getEndTimes(4) + "\n";
+        string += "FriStart: " + getStartTimes(5) + "\n";
+        string += "FriEnd: " + getEndTimes(5) + "\n";
+        string += "SatStart: " + getStartTimes(6) + "\n";
+        string += "SatEnd: " + getEndTimes(6) + "\n";
+
+        return string;
+    }
 }
