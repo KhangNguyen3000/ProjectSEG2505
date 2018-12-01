@@ -85,7 +85,7 @@
                 android:layout_weight="1"
                 android:onClick="onClickGoToTesting"
                 android:text="OpenTestActivity"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/generate"
