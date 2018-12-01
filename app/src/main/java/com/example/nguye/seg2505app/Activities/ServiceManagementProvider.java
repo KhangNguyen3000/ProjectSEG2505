@@ -85,18 +85,31 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
     }
 
-    public  ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList){
+    public ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList){
+//        ArrayList<String> finalList = new ArrayList<String>();
+//        int type = 0;
+//        for(int i = 0; i < myList.size(); i++){
+//            type = myList.get(i).getTypeID();
+//            finalList.add(Storable.search(getApplicationContext(), ServiceType.TABLE_NAME, "Name", "ID", type, false));
+//        }
+        String query = "SELECT " + ServiceType.TABLE_NAME + "." + ServiceType.COL_NAME
+                + " FROM " + ServiceType.TABLE_NAME
+                + " INNER JOIN " + OfferedService.TABLE_NAME
+                + " ON " + ServiceType.TABLE_NAME + "." + ServiceType.COL_ID
+                + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER;
+
+        System.out.println(query);
+        ArrayList<String[]> selection = Storable.select(this, query, 1);
         ArrayList<String> finalList = new ArrayList<String>();
-        int type = 0;
-        for(int i = 0; i < myList.size(); i++){
-            type = myList.get(i).getTypeID();
-            finalList.add(Storable.search(getApplicationContext(), ServiceType.TABLE_NAME, "Name", "ID", type, false));
+        for (String[] record : selection) {
+            finalList.add(record[0]);
         }
+
         return finalList;
     }
 
     public void showServiceList(List<String> services){
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, services.toArray(new String[services.size()]));
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
         this.listView = (ListView) findViewById(R.id._ListViewMyServices);
         listView.setAdapter(itemsAdapter);
     }
@@ -124,7 +137,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
             Button deleteButton = findViewById(R.id.delete_button);
             Button cancelButton = findViewById(R.id.cancel_button);
             TextView name = findViewById(R.id.text_name);
-            TextInputEditText price = findViewById(R.id.text_price);
+            EditText price = findViewById(R.id.text_price);
 
             addButton.setVisibility(View.VISIBLE);
             updateButton.setVisibility(View.INVISIBLE);
@@ -169,7 +182,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
                 Button deleteButton = findViewById(R.id.delete_button);
                 Button cancelButton = findViewById(R.id.cancel_button);
                 TextView name = findViewById(R.id.text_name);
-                TextInputEditText price = findViewById(R.id.text_price);
+                EditText price = findViewById(R.id.text_price);
 
                 addButton.setVisibility(View.VISIBLE);
                 updateButton.setVisibility(View.INVISIBLE);
@@ -203,7 +216,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
         Button deleteButton = findViewById(R.id.delete_button);
         Button cancelButton = findViewById(R.id.cancel_button);
         TextView name = findViewById(R.id.text_name);
-        TextInputEditText price = findViewById(R.id.text_price);
+        EditText price = findViewById(R.id.text_price);
 
         addButton.setVisibility(View.VISIBLE);
         updateButton.setVisibility(View.INVISIBLE);
