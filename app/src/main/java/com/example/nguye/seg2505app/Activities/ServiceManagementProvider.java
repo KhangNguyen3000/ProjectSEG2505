@@ -1,5 +1,6 @@
 package com.example.nguye.seg2505app.Activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,11 +33,11 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
     ListView listView;
     private OfferedService updatedOfferedService;
+    int maxRate;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_management_provider);
-
 
         Account currentAccount = Account.getCurrentAccount();
 
@@ -76,11 +77,21 @@ public class ServiceManagementProvider extends AppCompatActivity {
                 cancelButton.setVisibility(View.VISIBLE);
 
                 // Fills the fields with the current information of the selected service
-                EditText serviceMaxRate = findViewById(R.id.serviceMaxRate);
-                name.setText(actualService.getTableName());
+                int myID = actualService.getTypeID();
+
+                String query = "SELECT " + ServiceType.TABLE_NAME + "." + ServiceType.COL_MAXRATE
+                        + " FROM (" + ServiceType.TABLE_NAME
+                        + " INNER JOIN " + OfferedService.TABLE_NAME
+                        + " ON " + ServiceType.TABLE_NAME + "." + ServiceType.COL_ID
+                        + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER + ") WHERE " + OfferedService.TABLE_NAME + "." + OfferedService.COL_ID + " = " + myID;
+
+                ArrayList<String[]> array= Storable.select(getApplicationContext(), query, 1);
+
+                maxRate = Integer.parseInt(array.get(0)[0]);
+
+                name.setText(selectedService);
                 double actualPrice = actualService.getHourlyRate();
                 price.setText(Double.toString((actualPrice)));
-
             }
         });
 
@@ -124,41 +135,47 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
     public void onClickUpdate(View view) {
         ViewGroup layout = findViewById(R.id.smp_layout_root);
-        if (!Validation.validateAll(layout)) {
+        if (Validation.validateAll(layout)) {
             // Get the inputs and update the object updatedServiceType
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.text_price)).getText().toString());
 
-            updatedOfferedService.setHourlyRate(newServiceRate);
+            if(newServiceRate > maxRate){
+                Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate: " + maxRate, Toast.LENGTH_LONG);
+                error.show();
+            }
+            else {
+                updatedOfferedService.setHourlyRate(newServiceRate);
 
-//            data.updateServiceType(updatedServiceType);
-            updatedOfferedService.update(this);
+                //            data.updateServiceType(updatedServiceType);
+                updatedOfferedService.update(this);
 
-            // Hide the modify options and clear the fields
-            Button addButton = findViewById(R.id.add_button);
-            Button updateButton = findViewById(R.id.update_button);
-            Button deleteButton = findViewById(R.id.delete_button);
-            Button cancelButton = findViewById(R.id.cancel_button);
-            TextView name = findViewById(R.id.text_name);
-            EditText price = findViewById(R.id.text_price);
+                // Hide the modify options and clear the fields
+                Button addButton = findViewById(R.id.add_button);
+                Button updateButton = findViewById(R.id.update_button);
+                Button deleteButton = findViewById(R.id.delete_button);
+                Button cancelButton = findViewById(R.id.cancel_button);
+                TextView name = findViewById(R.id.text_name);
+                EditText price = findViewById(R.id.text_price);
 
-            addButton.setVisibility(View.VISIBLE);
-            updateButton.setVisibility(View.INVISIBLE);
-            deleteButton.setVisibility(View.INVISIBLE);
-            cancelButton.setVisibility(View.INVISIBLE);
-            name.setText("");
-            price.setText("");
-            name.setVisibility(View.GONE);
-            price.setVisibility(View.GONE);
+                addButton.setVisibility(View.VISIBLE);
+                updateButton.setVisibility(View.INVISIBLE);
+                deleteButton.setVisibility(View.INVISIBLE);
+                cancelButton.setVisibility(View.INVISIBLE);
+                name.setText("");
+                price.setText("");
+                name.setVisibility(View.GONE);
+                price.setVisibility(View.GONE);
 
-            //Display the success message
-            Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
-            toast.show();
+                //Display the success message
+                Toast toast = Toast.makeText(getApplicationContext(), "Service updtated!", Toast.LENGTH_LONG);
+                toast.show();
 
-            //List update
-            Account currentAccount = Account.getCurrentAccount();
-            ArrayList<OfferedService> servicesL = OfferedService.findAll(getApplicationContext(), OfferedService.COL_PROVIDER, currentAccount.getID(), false);
-            ArrayList<String> servicesName = getNameFromServices(servicesL);
-            showServiceList(servicesName);
+                //List update
+                Account currentAccount = Account.getCurrentAccount();
+                ArrayList<OfferedService> servicesL = OfferedService.findAll(getApplicationContext(), OfferedService.COL_PROVIDER, currentAccount.getID(), false);
+                ArrayList<String> servicesName = getNameFromServices(servicesL);
+                showServiceList(servicesName);
+            }
         }
     }
 
