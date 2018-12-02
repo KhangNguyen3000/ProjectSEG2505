@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/max_rate"
-                android:layout_width="324dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
@@ -60,20 +60,21 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/username_text_input_layout"
-                android:layout_width="180dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:layout_weight="1">
 
                 <EditText
                     android:id="@+id/my_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ems="10"
+                    android:hint="Your rate"
                     android:inputType="textPersonName"
-                    android:text="Your Rate"
                     android:visibility="gone" />
+
             </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
 
         <Space

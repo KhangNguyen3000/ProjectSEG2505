@@ -23,10 +23,8 @@ import java.util.List;
 public class AddNewService extends AppCompatActivity {
 
     ListView listView;
-    protected OfferedService service;
 
     protected void onCreate(Bundle savedInstanceState) {
-        final Account currentAccount = Account.getCurrentAccount();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
         MyDBHandler data = new MyDBHandler(this);
@@ -34,7 +32,7 @@ public class AddNewService extends AppCompatActivity {
         List<String> services = data.getList("Name","ServiceTypes");
          showServiceList(services);
 
-        ListView serviceList = (ListView) findViewById(R.id.s_list);
+        final ListView serviceList = (ListView) findViewById(R.id.s_list);
 //        serviceList.setClickable(true);
         serviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,28 +43,30 @@ public class AddNewService extends AppCompatActivity {
                 ServiceType serviceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, selectedService, true);
 
                 // Show the modify options
-                Button addButton = findViewById(R.id.addB);
-                Button cancelButton = findViewById(R.id.cancelB);
+                ListView serviceList = (ListView) findViewById(R.id.s_list);
+                Button addButton = findViewById(R.id.b_add);
+                Button cancelButton = findViewById(R.id.b_cancel);
                 TextView name = findViewById(R.id.service_name);
                 TextView maxRate = findViewById(R.id.max_rate);
                 EditText myRate = findViewById(R.id.my_rate);
                 TextView msg = findViewById(R.id.msg);
                 TextView msg_rate = findViewById(R.id.txt_max_rate);
                 addButton.setVisibility(View.VISIBLE);
-                cancelButton.setVisibility(view.VISIBLE);
+                cancelButton.setVisibility(View.VISIBLE);
                 name.setVisibility(View.VISIBLE);
                 maxRate.setVisibility(View.VISIBLE);
                 myRate.setVisibility(View.VISIBLE);
                 msg_rate.setVisibility(View.VISIBLE);
                 msg.setVisibility(View.GONE);
+                serviceList.setVisibility(View.GONE);
 
                 // Fills the fields with the current information of the selected service
                 name.setText(serviceType.getName());
                 maxRate.setText(Double.toString(serviceType.getMaxRate()));
 
                 // Stores the information of the selected service type
-                service.setTypeID(serviceType.getID());
-                service.setProviderID(currentAccount.getID());
+                //service.setTypeID(serviceType.getID());
+                //service.setProviderID(currentAccount.getID());
             }
         });
     }
@@ -79,38 +79,54 @@ public class AddNewService extends AppCompatActivity {
 
     public void onClickAdd(View view){
 
-        String rate = findViewById(R.id.my_rate).toString();
-        String max_rate = findViewById((R.id.max_rate)).toString();
-        if (Integer.parseInt(rate)> Integer.parseInt(max_rate)){
+        TextView name = findViewById(R.id.service_name);
+        String nameService = name.getText().toString();
+        ServiceType serviceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, nameService, true);
+        int idService = serviceType.getID();
+        Account currentAccount = Account.getCurrentAccount();
+        int idProvider = currentAccount.getID();
+
+        EditText myRate = findViewById(R.id.my_rate);
+        String rate = myRate.getText().toString();
+        TextView maxRate = findViewById((R.id.max_rate));
+        String max_rate = maxRate.getText().toString();
+        if (Double.parseDouble(rate)> Double.parseDouble(max_rate)){
             Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate", Toast.LENGTH_LONG);
             error.show();
         }
-        service.setHourlyRate(Integer.parseInt(rate));
-        Toast toast = Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_LONG);
-        toast.show();
-        service.add(this);
-        Intent intent = new Intent(getApplicationContext(), ServiceManagementProvider.class);
-        startActivityForResult (intent,0);
+        else {
+            OfferedService service = new OfferedService();
+            service.setHourlyRate(Double.parseDouble(rate));
+            service.setProviderID(idProvider);
+            service.setTypeID(idService);
+            service.add(this);
+            Toast toast = Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_LONG);
+            toast.show();
+            finish();
+        }
     }
 
     public void onClickCancel(View view){
 
-        Button addButton = findViewById(R.id.addB);
-        Button cancelButton = findViewById(R.id.cancelB);
+        ListView serviceList = (ListView) findViewById(R.id.s_list);
+        Button addButton = findViewById(R.id.b_add);
+        Button cancelButton = findViewById(R.id.b_cancel);
         TextView name = findViewById(R.id.service_name);
         TextView maxRate = findViewById(R.id.max_rate);
         EditText myRate = findViewById(R.id.my_rate);
         TextView msg = findViewById(R.id.msg);
         TextView msg_rate = findViewById(R.id.txt_max_rate);
-        addButton.setVisibility(View.VISIBLE);
+        addButton.setVisibility(View.GONE);
         cancelButton.setVisibility(View.GONE);
         name.setVisibility(View.GONE);
         maxRate.setVisibility(View.GONE);
         myRate.setVisibility(View.GONE);
         msg.setVisibility(View.VISIBLE);
         msg_rate.setVisibility(View.GONE);
+        serviceList.setVisibility(View.VISIBLE);
 
         name.setText("");
         maxRate.setText("");
+        myRate.setText("");
     }
 }

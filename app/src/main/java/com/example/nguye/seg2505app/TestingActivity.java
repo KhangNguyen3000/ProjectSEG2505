@@ -28,13 +28,17 @@ public class TestingActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        ArrayList<String> dataset = new ArrayList<>();
-        dataset.add("horse");
-        dataset.add("cow");
-        dataset.add("dog");
-        dataset.add("cat");
-        mAdapter = new MyAdapter(this, dataset);
-        mRecyclerView.setAdapter(mAdapter);
+//        // specify an adapter (see also next example)
+//        ArrayList<String[]> dataset = new ArrayList<>();
+//        dataset.add(new String[] {"140", "AVAILABLE"});
+//        dataset.add(new String[] {"180", "BOOKED"});
+//        dataset.add(new String[] {"200", "AVAILABLE"});
+//        dataset.add(new String[] {"300", "UNAVAILABLE"});
+//        dataset.add(new String[] {"400", "AVAILABLE"});
+//        dataset.add(new String[] {"500", "BOOKED"});
+//        dataset.add(new String[] {"600", "AVAILABLE"});
+//        dataset.add(new String[] {"700", "UNAVAILABLE"});
+//        mAdapter = new ScheduleAdapter(this, dataset);
+//        mRecyclerView.setAdapter(mAdapter);
     }
 }
