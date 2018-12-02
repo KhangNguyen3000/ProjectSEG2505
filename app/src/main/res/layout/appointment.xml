@@ -41,7 +41,11 @@
                     android:id="@+id/input_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="From"
+                    android:cursorVisible="false"
                     android:ems="10"
+                    android:focusableInTouchMode="false"
                     android:hint="0:00"
                     android:inputType="time" />
             </LinearLayout>
@@ -62,7 +66,12 @@
                     android:id="@+id/input_to"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="To"
+                    android:cursorVisible="false"
                     android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:hint="0:00"
                     android:inputType="time" />
             </LinearLayout>

@@ -62,7 +62,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                 break;
         }
         tvTimeSlotStart.setText(timeSlotStart);
-        tvTimeSlotEnd.setText(" - " + timeSlotEnd);
+        tvTimeSlotEnd.setText(timeSlotEnd);
         tvAvail.setText(mSchedule.get(position).getState().name());
     }
 
