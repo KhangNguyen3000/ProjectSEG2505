@@ -1,7 +1,9 @@
 package com.example.nguye.seg2505app.Utilities;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FormatValue {
@@ -39,7 +41,6 @@ public class FormatValue {
 
         return year + "-" + month + "-" + day;
     }
-
 
     /**
      * Change the string to the format hh:mm by adding a leading zero to the hours or minutes
@@ -144,6 +145,23 @@ public class FormatValue {
             return 60*h + m;
         } catch (IndexOutOfBoundsException ex) {
             return -1;
+        }
+    }
+
+    /**
+     * Increment the given date by one day.
+     * @param dateString The date to increment, in format yyyy-mm-dd
+     * @return
+     */
+    public static String incrementDate(String dateString) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            calendar.setTime(df.parse(dateString));
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            return df.format(calendar.getTime());
+        } catch (ParseException e) {
+            return "0000-00-00";
         }
     }
 }
