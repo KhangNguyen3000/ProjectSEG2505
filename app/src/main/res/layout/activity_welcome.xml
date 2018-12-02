@@ -104,6 +104,14 @@
             android:onClick="onClickLogOutButton"
             android:text="Log Out" />
 
+        <Button
+            android:id="@+id/directAccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickDirectAccess"
+            android:text="access" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
