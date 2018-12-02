@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.ServiceType;
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 import java.util.List;
 
@@ -90,19 +92,22 @@ public class AddNewService extends AppCompatActivity {
         String rate = myRate.getText().toString();
         TextView maxRate = findViewById((R.id.max_rate));
         String max_rate = maxRate.getText().toString();
-        if (Double.parseDouble(rate)> Double.parseDouble(max_rate)){
-            Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate", Toast.LENGTH_LONG);
-            error.show();
-        }
-        else {
-            OfferedService service = new OfferedService();
-            service.setHourlyRate(Double.parseDouble(rate));
-            service.setProviderID(idProvider);
-            service.setTypeID(idService);
-            service.add(this);
-            Toast toast = Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_LONG);
-            toast.show();
-            finish();
+        ViewGroup layout = findViewById(R.id.add_root);
+        if(Validation.validateAll(layout)) {
+            if (Double.parseDouble(rate) > Double.parseDouble(max_rate)) {
+                Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate", Toast.LENGTH_LONG);
+                error.show();
+            }
+            else {
+                OfferedService service = new OfferedService();
+                service.setHourlyRate(Double.parseDouble(rate));
+                service.setProviderID(idProvider);
+                service.setTypeID(idService);
+                service.add(this);
+                Toast toast = Toast.makeText(getApplicationContext(), "Service added !", Toast.LENGTH_LONG);
+                toast.show();
+                finish();
+            }
         }
     }
 

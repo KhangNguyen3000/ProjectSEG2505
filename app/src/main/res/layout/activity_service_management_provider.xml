@@ -8,10 +8,13 @@
     tools:context=".Activities.ServiceManagementProvider">
 
     <LinearLayout
+        android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <Space
             android:layout_width="match_parent"
@@ -31,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:visibility="gone" />
 
         <Button
