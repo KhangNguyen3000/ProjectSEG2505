@@ -48,7 +48,6 @@ public class Account extends Storable implements java.io.Serializable {
         COLUMNS.add(new String[] {COL_COMPANY, "TEXT"});
         COLUMNS.add(new String[] {COL_DESCRIPTION, "TEXT"});
         COLUMNS.add(new String[] {COL_LICENSED, "INTEGER"});
-
     }
 
     private static Account currentAccount = new Account();
