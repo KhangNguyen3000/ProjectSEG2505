@@ -3,6 +3,7 @@ package com.example.nguye.seg2505app.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -85,13 +86,13 @@ public class GetProviderInfos extends AppCompatActivity {
         p_rating.setRating(rating);
     }
 
-    public void onClickSchedule(){
+    public void onClickSchedule(View view){
         Intent intent = new Intent(this, Booking.class);
         intent.putExtra("providerID", provider.getID());
         startActivity(intent);
     }
 
-    public void onClickRating(){
+    public void onClickRating(View view){
 
     }
 

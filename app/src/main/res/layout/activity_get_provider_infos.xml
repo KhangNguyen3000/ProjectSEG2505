@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignTop="@+id/10"
     tools:context=".Activities.GetProviderInfos">
 
     <ScrollView
@@ -116,7 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="Paul&Co" />
+                        android:text="PaulAndCo" />
 
                     <TextView
                         android:id="@+id/p_licensed"
@@ -219,6 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:onClick="onClickRating"
                 android:text="Ratings and comments"
                 android:textColor="@color/design_default_color_primary_dark"
                 android:textStyle="italic" />
