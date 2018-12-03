@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Utilities.DateTimePicker;
 import com.example.nguye.seg2505app.Utilities.FormatValue;
+import com.example.nguye.seg2505app.Utilities.Validation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -159,8 +161,6 @@ public class Booking extends AppCompatActivity {
                     TextView tvTimeSlotStart = view.findViewById(R.id.timeSlotStart);
                     TextView tvTimeSlotEnd = view.findViewById(R.id.timeSlotEnd);
 
-                    // TODO Set the default times in the dialog using the times above
-
                     final Dialog dialog = new Dialog(view.getContext());
                     dialog.setContentView(R.layout.appointment);
                     TextView tvDate = dialog.findViewById(R.id.txt_date);
@@ -194,16 +194,21 @@ public class Booking extends AppCompatActivity {
                     btnConfirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // TODO add the appointment
-                            CustomSchedule appointment = new CustomSchedule(providerID,
-                                    selectedDate,
-                                    FormatValue.timeStringToMin(etTimeSlotStart.getText().toString()),
-                                    FormatValue.timeStringToMin(etTimeSlotEnd.getText().toString()),
-                                    ScheduleState.BOOKED);
-
-                            // TODO finish all activities after the WelcomePage
-                            dialog.dismiss();
-                            finish();
+                            ViewGroup layout = findViewById(R.id.llh_times);
+                            // Validate the fields
+                            if (Validation.validateAll(layout)) {
+                                CustomSchedule appointment = new CustomSchedule(providerID,
+                                        selectedDate,
+                                        FormatValue.timeStringToMin(etTimeSlotStart.getText().toString()),
+                                        FormatValue.timeStringToMin(etTimeSlotEnd.getText().toString()),
+                                        ScheduleState.BOOKED);
+                                // TODO make sure this is fine (i.e. the provider does not have to confirm)
+                                // Add the appointment as a CustomSchedule
+                                appointment.add(v.getContext());
+                                // TODO finish all activities after the WelcomePage
+                                dialog.dismiss();
+                                finish();
+                            }
                         }
                     });
 
@@ -211,11 +216,10 @@ public class Booking extends AppCompatActivity {
                     btnCancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // TODO just close the dialog
+                            // Simply close the dialog window
                             dialog.dismiss();
                         }
                     });
-
                     dialog.show();
                 } else {
                     // If the clicked time slot is not AVAILABLE
