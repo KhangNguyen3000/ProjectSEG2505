@@ -39,9 +39,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String timeSlotStart = FormatValue.minToTimeString(mSchedule.get(position).getTime());
-        String timeSlotEnd = FormatValue.minToTimeString(mSchedule.get(position).getNext().getTime());
-        ScheduleState avail = mSchedule.get(position).getState();
+        TimeNode node = mSchedule.get(position);
+        String timeSlotStart = FormatValue.minToTimeString(node.getTime());
+        String timeSlotEnd = FormatValue.minToTimeString(node.getNext().getTime());
+        ScheduleState avail = node.getState();
 //        TextView tvTimeSlotStart = (TextView) holder.viewGroup.getChildAt(0);
 //        TextView tvTimeSlotEnd = (TextView) holder.viewGroup.getChildAt(1);
 //        TextView tvAvail = (TextView) holder.viewGroup.getChildAt(2);
@@ -62,8 +63,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                 break;
         }
         tvTimeSlotStart.setText(timeSlotStart);
-        tvTimeSlotEnd.setText(" - " + timeSlotEnd);
-        tvAvail.setText(mSchedule.get(position).getState().name());
+        tvTimeSlotEnd.setText(timeSlotEnd);
+        tvAvail.setText(node.getState().name());
     }
 
     // total number of rows
@@ -74,7 +75,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ViewGroup viewGroup;
 
         ViewHolder(View itemView) {
