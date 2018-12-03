@@ -24,7 +24,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    ScheduleAdapter(Context context, ArrayList<TimeNode> schedule) {
+    public ScheduleAdapter(Context context, ArrayList<TimeNode> schedule) {
         this.mInflater = LayoutInflater.from(context);
         this.mSchedule = schedule;
     }

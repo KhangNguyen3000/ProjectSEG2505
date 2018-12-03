@@ -2,6 +2,7 @@ package com.example.nguye.seg2505app;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class Booking extends AppCompatActivity {
 // From https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example
 //  and https://developer.android.com/guide/topics/ui/layout/recyclerview#java
 
+    // TODO change to a dynamic id after testing
     private int providerID = 5;
     private String selectedDate;
     private CalendarView calendarView;
@@ -52,6 +54,10 @@ public class Booking extends AppCompatActivity {
         recyclerView.setLayoutManager(rvLayoutManager);
 
         // TODO receive the provider ID from the previous activity (Provider's page) with an EXTRA
+        // This ID will have to be passed from searchResult to providerPage to Booking
+        Intent intent = getIntent();
+        providerID = intent.getIntExtra("providerID", 0);
+
 //        providerID = ... (NOT Account.getCurrentAccount().getID, this would return the client's ID)
 
         // Set the minimum date to today
