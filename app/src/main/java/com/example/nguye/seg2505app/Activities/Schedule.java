@@ -57,6 +57,11 @@ public class Schedule extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickCustomScheduleButton(View view){
+        Intent intent = new Intent(getApplicationContext(), DefaultAvail.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
