@@ -1,10 +1,12 @@
 package com.example.nguye.seg2505app.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.nguye.seg2505app.Booking;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
@@ -17,13 +19,14 @@ import java.util.ArrayList;
 
 public class GetProviderInfos extends AppCompatActivity {
     private int id_provider;
+    private Account provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_provider_infos);
         id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
-        Account provider = new Account();
+        provider = new Account();
         provider = provider.find(this, "ID", id_provider, false);
 
 
@@ -52,7 +55,7 @@ public class GetProviderInfos extends AppCompatActivity {
             services += servicesName.get(i) + ", ";
         }
 
-        double rating = 0;
+        float rating = 0;
         ArrayList <Rating> ratings = Rating.findAll(this, Rating.COL_PROVIDER_ID, id_provider, false);
         for(int i = 0; i < ratings.size(); i++){
             rating += ratings.get(i).getRating();
@@ -69,10 +72,10 @@ public class GetProviderInfos extends AppCompatActivity {
         else {
             p_licensed.setText("");
         }
-        p_nStreet.setText(provider.getStreetNumber());
-        p_street.setText(provider.getStreetName());
+        p_nStreet.setText(provider.getStreetNumber()+", ");
+        p_street.setText(provider.getStreetName()+", ");
         p_city.setText(provider.getCity());
-        p_postalC.setText(provider.getPostalCode());
+        p_postalC.setText(provider.getPostalCode()+", ");
         p_country.setText(provider.getCountry());
         p_nPhone.setText(provider.getPhoneNumber());
         p_email.setText(provider.getEmail());
@@ -83,7 +86,9 @@ public class GetProviderInfos extends AppCompatActivity {
     }
 
     public void onClickSchedule(){
-
+        Intent intent = new Intent(this, Booking.class);
+        intent.putExtra("providerID", provider.getID());
+        startActivity(intent);
     }
 
     public void onClickRating(){
