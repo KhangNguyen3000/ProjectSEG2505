@@ -23,7 +23,7 @@ public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_ad
     private ScheduleAdapter.ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    Provider_list_adapter(Context context, ArrayList<Account> provider) {
+    public Provider_list_adapter(Context context, ArrayList<Account> provider) {
         this.mInflater = LayoutInflater.from(context);
         this.mProvider = provider;
     }
