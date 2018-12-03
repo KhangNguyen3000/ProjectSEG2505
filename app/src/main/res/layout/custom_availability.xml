@@ -16,15 +16,17 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:gravity="left">
+
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/edit_datePick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
             android:inputType="date"
-            android:text="Date" />
+            android:padding="10dp"
+            android:text="Date"
+            android:onClick="showDatePicker" />
 
         <TableRow
             android:layout_width="wrap_content"
@@ -39,12 +41,16 @@
                 android:text="From"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/edit_timePick1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:lineSpacingExtra="-10sp"
+                android:text="time"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:onClick="showTimePicker" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -53,12 +59,17 @@
                 android:text="To"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-            <Spinner
-                android:id="@+id/spinner8"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/edit_timePick2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:lineSpacingExtra="-10sp"
+                android:text="time"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:onClick="showTimePicker" />
+
         </TableRow>
 
         <TableRow
@@ -80,7 +91,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/duration_drop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
@@ -111,10 +122,11 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/buttonConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Confirm" />
+                android:text="Confirm"
+                android:onClick="OnClickConfirm"/>
         </TableRow>
 
     </LinearLayout>
