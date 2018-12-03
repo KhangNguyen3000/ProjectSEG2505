@@ -36,6 +36,9 @@
         <activity android:name=".TestingActivity" />
         <activity android:name=".SearchForProviders" />
         <activity android:name=".Activities.GetProviderInfos"></activity>
+        <activity android:name=".Booking" />
+        <activity android:name=".Activities.RatingList" />
+        <activity android:name=".Activities.RateScreen"></activity>
     </application>
 
 </manifest>

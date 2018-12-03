@@ -1,5 +1,6 @@
 package com.example.nguye.seg2505app;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -181,7 +182,12 @@ public class SearchForProviders extends AppCompatActivity {
             // TODO error, must select at least 1 criteria
             // TODO do not forget to consider the custom schedules
         }
+
+        // TODO create the intent when going to the searchResult screen
+//        Intent intent = new Intent(this, SearchResults.class);
+        // TODO convert the ArrayList to a simple int[]
         providerIDs = Storable.select(this, query, 1);
+//        intent.putExtra("providers", providerIDs)
         // TODO do something with that list
         // TODO break down in smaller functions
     }
