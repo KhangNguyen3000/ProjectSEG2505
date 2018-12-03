@@ -18,8 +18,10 @@ import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.ServiceType;
+import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddNewService extends AppCompatActivity {
@@ -31,8 +33,8 @@ public class AddNewService extends AppCompatActivity {
         setContentView(R.layout.activity_add_service);
         MyDBHandler data = new MyDBHandler(this);
 
-        List<String> services = data.getList("Name","ServiceTypes");
-         showServiceList(services);
+        List<String> services = data.getList("Name", "ServiceTypes");
+        showServiceList(services);
 
         final ListView serviceList = (ListView) findViewById(R.id.s_list);
 //        serviceList.setClickable(true);
@@ -73,13 +75,13 @@ public class AddNewService extends AppCompatActivity {
         });
     }
 
-    public void showServiceList(List<String> services){
+    public void showServiceList(List<String> services) {
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, services.toArray(new String[services.size()]));
         this.listView = (ListView) findViewById(R.id.s_list);
         listView.setAdapter(itemsAdapter);
     }
 
-    public void onClickAdd(View view){
+    public void onClickAdd(View view) {
 
         TextView name = findViewById(R.id.service_name);
         String nameService = name.getText().toString();
@@ -87,18 +89,22 @@ public class AddNewService extends AppCompatActivity {
         int idService = serviceType.getID();
         Account currentAccount = Account.getCurrentAccount();
         int idProvider = currentAccount.getID();
+        ArrayList<OfferedService> servicesL = OfferedService.findAll(this, OfferedService.COL_PROVIDER, currentAccount.getID(), false);
+        ArrayList<String> servicesName = getNameFromServices(servicesL);
 
         EditText myRate = findViewById(R.id.my_rate);
         String rate = myRate.getText().toString();
         TextView maxRate = findViewById((R.id.max_rate));
         String max_rate = maxRate.getText().toString();
         ViewGroup layout = findViewById(R.id.add_root);
-        if(Validation.validateAll(layout)) {
+        if (Validation.validateAll(layout)) {
             if (Double.parseDouble(rate) > Double.parseDouble(max_rate)) {
                 Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate", Toast.LENGTH_LONG);
                 error.show();
-            }
-            else {
+            } else if (servicesName.contains(nameService)) {
+                Toast error2 = Toast.makeText(getApplicationContext(), "You already propose this service", Toast.LENGTH_LONG);
+                error2.show();
+            } else {
                 OfferedService service = new OfferedService();
                 service.setHourlyRate(Double.parseDouble(rate));
                 service.setProviderID(idProvider);
@@ -111,7 +117,7 @@ public class AddNewService extends AppCompatActivity {
         }
     }
 
-    public void onClickCancel(View view){
+    public void onClickCancel(View view) {
 
         ListView serviceList = (ListView) findViewById(R.id.s_list);
         Button addButton = findViewById(R.id.b_add);
@@ -133,5 +139,15 @@ public class AddNewService extends AppCompatActivity {
         name.setText("");
         maxRate.setText("");
         myRate.setText("");
+    }
+
+    public ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList) {
+        ArrayList<String> finalList = new ArrayList<String>();
+        int type = 0;
+        for (int i = 0; i < myList.size(); i++) {
+            type = myList.get(i).getTypeID();
+            finalList.add(Storable.search(getApplicationContext(), ServiceType.TABLE_NAME, "Name", "ID", type, false));
+        }
+        return finalList;
     }
 }
