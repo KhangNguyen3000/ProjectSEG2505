@@ -320,6 +320,7 @@ public class Validation extends AppCompatActivity {
             //  (ex. 33 for textEmailAddress even though it says 32 on the website).
             int inputType = field.getInputType();
 //            System.out.println(inputType); // Used to find the actual inputType values.
+            System.out.print(inputType);
             switch(inputType) {
                 case 33: // inputType == textEmailAddress
                     if(!validateEmail(field)) {

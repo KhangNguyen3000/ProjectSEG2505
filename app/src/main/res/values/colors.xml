@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorAvailableFill">#ffbdd7ee</color>
+    <color name="colorAvailableBorder">#ff5b9bd5</color>
+    <color name="colorUnavailableFill">#ffffc1c1</color>
+    <color name="colorUnavailableBorder">#ffff0000</color>
+    <color name="colorBookedFill">#ffdbdbdb</color>
+    <color name="colorBookedBorder">#ffa5a5a5</color>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
