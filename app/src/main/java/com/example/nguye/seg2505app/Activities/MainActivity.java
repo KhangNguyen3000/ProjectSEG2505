@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
         toast.show();
     }
+    public void onClickTestingSearch(View view){
+        Intent intent = new Intent(getApplicationContext(), SearchResults.class);
+        startActivity(intent);
+    }
 }
 
 
