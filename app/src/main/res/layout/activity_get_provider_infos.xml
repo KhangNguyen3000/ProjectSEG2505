@@ -156,7 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:onClick="onClickSchedule"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/design_default_color_primary_dark" />
 
             <Space
                 android:layout_width="match_parent"

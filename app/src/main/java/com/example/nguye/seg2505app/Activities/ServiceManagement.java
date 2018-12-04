@@ -35,13 +35,10 @@ public class ServiceManagement extends AppCompatActivity {
         showServiceList(services);
 
         ListView serviceList = (ListView) findViewById(R.id._ListViewServices);
-//        serviceList.setClickable(true);
         serviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MyDBHandler data = new MyDBHandler(getApplicationContext());
                 String selectedService = (String) parent.getItemAtPosition(position);
-//                ServiceType serviceType = data.findServiceType(selectedService);
                 ServiceType serviceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, selectedService,true);
 
                 // Show the modify options
@@ -124,8 +121,6 @@ public class ServiceManagement extends AppCompatActivity {
 
             updatedServiceType.setName(newServiceName);
             updatedServiceType.setMaxRate(newServiceRate);
-
-//            data.updateServiceType(updatedServiceType);
             updatedServiceType.update(this);
             // Hide the modify options and clear the fields
             Button addButton = findViewById(R.id.addB);
@@ -168,7 +163,6 @@ public class ServiceManagement extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-//                data.deleteServiceType(updatedServiceType);
                 updatedServiceType.delete(getApplicationContext());
                 //Display the success message
                 Toast toast = Toast.makeText(getApplicationContext(), "Service deleted!", Toast.LENGTH_LONG);

@@ -42,18 +42,19 @@ public class CustomDispo extends AppCompatActivity {
         availBox = findViewById(R.id.checkBox_available);
 
         Spinner dropdown = findViewById(R.id.duration_drop);
-//create a list of items for the spinner.
+        // create a list of items for the spinner.
         String[] days = new String[]{"1", "2", "2","3","4","5","6","7"};
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
+        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+        //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
-//set the spinners adapter to the previously created one.
+        //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
 
         //query is an sql style query to get elements only corresponding to the current account
         String query = "SELECT " + CustomSchedule.COL_DATE + ", " + CustomSchedule.COL_START
                 + ", " + CustomSchedule.COL_END + ", " + CustomSchedule.COL_AVAILABILITY
+                + " FROM " + CustomSchedule.TABLE_NAME
                 + " WHERE " + CustomSchedule.COL_PROVIDER + " = " + Account.getCurrentAccount().getID();
         System.out.println(query);
         ArrayList<String[]> customSchedules = Storable.select(this, query, 4);

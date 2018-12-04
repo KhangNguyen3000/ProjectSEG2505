@@ -17,8 +17,8 @@ public class Schedule extends AppCompatActivity {
     }
 
     public void onClickManage(View view){
-        Intent k = new Intent(this, ScheduleManagement.class);
-        startActivity(k);
+        Intent intent = new Intent(getApplicationContext(), ScheduleManagement.class);
+        startActivity(intent);
     }
 
 }

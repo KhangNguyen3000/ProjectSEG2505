@@ -24,21 +24,21 @@ public class Rating extends Storable {
         COLUMNS.add(new String[] {COL_PROVIDER_ID, "INTEGER"});
         COLUMNS.add(new String[] {COL_CUSTOMER_ID, "INTEGER"});
         COLUMNS.add(new String[] {COL_COMMENT, "TEXT"});
-        COLUMNS.add(new String[] {COL_RATING, "DOUBLE"}); // TODO replace by INTEGER
+        COLUMNS.add(new String[] {COL_RATING, "FLOAT"});
     }
 
     // Attributes
     private int p_ID;
     private int c_ID;
     private String description;
-    private double rating; // TODO replace by int
+    private float rating;
 
     // Constructor
     public Rating() {
     }
 
     // Constructor
-    public Rating(int pID, int cID, String description, double rating){
+    public Rating(int pID, int cID, String description, float rating){
         this.p_ID = pID;
         this.c_ID = cID;
         this.description = description;
@@ -46,7 +46,7 @@ public class Rating extends Storable {
     }
 
     // Constructor
-    public Rating(int ID, int pID, int cID, String description, double rating){
+    public Rating(int ID, int pID, int cID, String description, float rating){
         this.ID = ID;
         this.p_ID = pID;
         this.c_ID = cID;
@@ -95,7 +95,7 @@ public class Rating extends Storable {
             rating.setPID(cursor.getInt(getFieldIndex(COL_PROVIDER_ID, COLUMNS)));
             rating.setCID(cursor.getInt(getFieldIndex(COL_CUSTOMER_ID, COLUMNS)));
             rating.setComment(cursor.getString(getFieldIndex(COL_COMMENT, COLUMNS)));
-            rating.setRating(cursor.getDouble(getFieldIndex(COL_RATING, COLUMNS)));
+            rating.setRating(cursor.getFloat(getFieldIndex(COL_RATING, COLUMNS)));
         }
         db.close();
         return rating;
@@ -112,7 +112,7 @@ public class Rating extends Storable {
     public void setCID(int cID) { this.c_ID= cID; }
 
     public double getRating(){ return this.rating; }
-    public void setRating(double rating) { this.rating = rating; }
+    public void setRating(float rating) { this.rating = rating; }
 
     public String getComment(){return this.description;}
     public void setComment(String comment){this.description = comment;}
@@ -138,7 +138,7 @@ public class Rating extends Storable {
             rating.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
             rating.setPID(cursor.getInt(getFieldIndex(COL_PROVIDER_ID, COLUMNS)));
             rating.setCID(cursor.getInt(getFieldIndex(COL_CUSTOMER_ID, COLUMNS)));
-            rating.setRating(cursor.getDouble(getFieldIndex(COL_RATING, COLUMNS)));
+            rating.setRating(cursor.getFloat(getFieldIndex(COL_RATING, COLUMNS)));
             rating.setComment(cursor.getString((getFieldIndex(COL_COMMENT, COLUMNS))));
             ratings.add(rating);
         }

@@ -36,8 +36,8 @@ public class AccountMethodsTest {
     @Test
     public void checkPassword(){
         Account testAccount = new Account();
-        testAccount.setPassword("Password");
-        assertEquals(testAccount.getPassword(), "Password");
+        testAccount.setPassword(3);
+        assertEquals(testAccount.getPassword(), 3);
     }
 
     // Check if setFirstName and getFirstName methods work

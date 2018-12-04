@@ -58,7 +58,6 @@ public class ServiceManagementProvider extends AppCompatActivity {
                 ArrayList<String> servicesName = getNameFromServices(servicesL, getApplicationContext());
 
                 String selectedService = (String) parent.getItemAtPosition(position);
-//                ServiceType serviceType = data.findServiceType(selectedService);
                 OfferedService actualService = servicesL.get(servicesName.indexOf(selectedService));
                 updatedOfferedService = servicesL.get(servicesName.indexOf(selectedService));
 
@@ -146,7 +145,6 @@ public class ServiceManagementProvider extends AppCompatActivity {
             else {
                 updatedOfferedService.setHourlyRate(newServiceRate);
 
-                //            data.updateServiceType(updatedServiceType);
                 updatedOfferedService.update(this);
 
                 // Hide the modify options and clear the fields

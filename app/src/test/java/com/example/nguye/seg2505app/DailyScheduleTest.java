@@ -10,9 +10,6 @@ public class DailyScheduleTest {
 
     @Test
     public void DailySchedule_isBookedBetween() {
-        // Test every possible TimeNode match-up
-        // dss = DailyScheduleStart, dse = DailyScheduleEnd,
-        // tss = TimeSlotStart, tse = TimeSlotEnd
         DailySchedule schedule = new DailySchedule(480, 960, ScheduleState.BOOKED);
         assertFalse(schedule.isBookedBetween(240, 360)); // (tss < dss) && (tse < dss)
         assertFalse(schedule.isBookedBetween(240, 480)); // (tss < dss) && (tse == dss)

@@ -31,15 +31,16 @@
         <activity android:name=".Activities.ServiceManagementProvider" />
         <activity android:name=".Activities.AddNewService" />
         <activity android:name=".Activities.DefaultAvail" />
-        <activity android:name=".Activities.ScheduleManagement" />
+        <activity android:name=".Activities.Schedule" />
+        <activity android:name=".Activities.ScheduleManagement"/>
         <activity android:name=".Bench.DateTimeTable" />
         <activity android:name=".TestingActivity" />
-        <activity android:name=".SearchForProviders" />
+        <activity android:name=".Activities.SearchForProviders" />
         <activity android:name=".Activities.GetProviderInfos" />
         <activity android:name=".Booking" />
         <activity android:name=".Activities.RatingList" />
         <activity android:name=".Activities.RateScreen" />
-        <activity android:name=".Activities.Schedule"></activity>
+        <activity android:name=".Activities.CustomDispo" />
     </application>
 
 </manifest>

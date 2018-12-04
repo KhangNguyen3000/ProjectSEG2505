@@ -1,6 +1,6 @@
 package com.example.nguye.seg2505app.Activities;
 
-public class Hash {
+public class Hashing {
 
     static int hash(String s){
         int hash = 7;

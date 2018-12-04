@@ -69,13 +69,12 @@ public class ModifyScreen extends AppCompatActivity{
      */
     public void updateUserInDatabase(){
         // set the attributes of the currentAccount with the values entered in the fields
-//        MyDBHandler dbHandler = new MyDBHandler(this);
         Account currentAccount = Account.getCurrentAccount();
         currentAccount.setFirstName(firstName);
         currentAccount.setLastName(lastName);
         currentAccount.setEmail(email);
         if(!(pass.equals(""))) {
-            currentAccount.setPassword(Hash.hash(pass));
+            currentAccount.setPassword(Hashing.hash(pass));
         }
         currentAccount.setStreetNumber(streetNumber);
         currentAccount.setStreetName(street);
@@ -86,12 +85,9 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setPhoneNumber(phoneNumber);
         currentAccount.setID(Account.getCurrentAccount().getID());
 
-//        // Refresh the CurrentAccount
-//        CurrentAccount.setCurrentAccount(currentAccount);
 
         // Update the database
         currentAccount.update(this);
-//        dbHandler.updateAccount(currentAccount);
         Toast toast = Toast.makeText(getApplicationContext(), "Account modified!", Toast.LENGTH_LONG);
         toast.show();
     }
@@ -103,9 +99,7 @@ public class ModifyScreen extends AppCompatActivity{
         firstName = ((EditText) findViewById(R.id.mod_input_firstName)).getText().toString();
         lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
         email = ((EditText) findViewById(R.id.mod_input_email)).getText().toString();
-//        cEmail = ((EditText) findViewById(R.id.mod_input_emailConfirm)).getText().toString();
         pass= ((EditText) findViewById(R.id.mod_input_password)).getText().toString();
-//        cPass= ((EditText) findViewById(R.id.mod_input_passwordConfirm)).getText().toString();
         streetNumber = Integer.parseInt(((EditText) findViewById(R.id.mod_input_streetNumber)).getText().toString());
         street = ((EditText) findViewById(R.id.mod_input_streetName)).getText().toString();
         city = ((EditText) findViewById(R.id.mod_input_city)).getText().toString();
@@ -121,25 +115,6 @@ public class ModifyScreen extends AppCompatActivity{
      * @param view
      */
     public void onClickModify(View view){
-//        int len = 0;
-//        MyDBHandler dbHandler = new MyDBHandler(this);
-//        Context context = getApplicationContext();
-//        firstName = ((EditText) findViewById(R.id.mod_input_firstName)).getText().toString();
-//        lastName = ((EditText) findViewById(R.id.mod_input_lastName)).getText().toString();
-//        email = ((EditText) findViewById(R.id.mod_input_email)).getText().toString();
-//        pass= ((EditText) findViewById(R.id.mod_input_password)).getText().toString();
-//        streetNumber = Integer.parseInt(((EditText) findViewById(R.id.mod_input_streetNumber)).getText().toString());
-//        street = ((EditText) findViewById(R.id.mod_input_streetName)).getText().toString();
-//        city = ((EditText) findViewById(R.id.mod_input_city)).getText().toString();
-//        province = ((EditText) findViewById(R.id.mod_input_province)).getText().toString();
-//        country = ((EditText) findViewById(R.id.mod_input_country)).getText().toString();
-//        phoneNumber = ((EditText) findViewById(R.id.mod_input_phone)).getText().toString();
-//        postalC = ((EditText) findViewById(R.id.mod_input_postalCode)).getText().toString();
-//        len = ((EditText) findViewById(R.id.mod_input_phone)).getText().length();
-//        Checking check = new Checking(firstName, lastName, email, pass, street, city, province, country, postalC, len, dbHandler, context);
-//        if (check.checkAll()){
-//            updateUserInDatabase();
-//        }
         ViewGroup layout = findViewById(R.id.mod_layout_root);
         EditText email = findViewById(R.id.mod_input_email);
         if (Validation.validateAll(layout)
