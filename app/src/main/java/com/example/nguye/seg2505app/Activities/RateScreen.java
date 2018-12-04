@@ -1,5 +1,7 @@
 package com.example.nguye.seg2505app.Activities;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,9 +40,21 @@ public class RateScreen extends AppCompatActivity {
         EditText commentaire = (EditText) findViewById(R.id.commentaire);
         String description = commentaire.getText().toString();
         float ratingNumber = ((RatingBar) findViewById(R.id.ratingBar2)).getRating();
-
-        Rating rating = new Rating(id_provider, id_customer, description, ratingNumber);
-        rating.add(this);
+        if(ratingNumber > 0 && ratingNumber < 5) {
+            Rating rating = new Rating(id_provider, id_customer, description, ratingNumber);
+            rating.add(this);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Rating needed");
+            builder.setMessage("please add a rating before posting");
+            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
     }
 
 }
