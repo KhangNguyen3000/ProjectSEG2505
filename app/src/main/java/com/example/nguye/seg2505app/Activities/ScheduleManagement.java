@@ -13,10 +13,7 @@ import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.ScheduleClasses.CurrentUserSchedule;
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
 import com.example.nguye.seg2505app.ScheduleClasses.Day;
-import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
-import com.example.nguye.seg2505app.ScheduleClasses.TimeSlot;
 import com.example.nguye.seg2505app.Storables.Account;
-import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.FormatValue;
@@ -25,10 +22,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Date;
 
-public class Schedule extends AppCompatActivity {
+public class ScheduleManagement extends AppCompatActivity {
     
     private int mTextColor, mBorderColor;
     private int mTextViewBorderWidth, mTableBorderWidth;
@@ -37,7 +32,7 @@ public class Schedule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        setContentView(R.layout.activity_schedule_management);
         mTextColor = 0xff111111;
         mBorderColor = 0xAA444444;
         mTextViewBorderWidth = 1;
