@@ -37,6 +37,7 @@ public class RegisterProvider extends AppCompatActivity {
             Switch licensed = findViewById(R.id.switch1);
             account.setCompanyName(nameOfCompany.getText().toString());
             account.setDescription(generalDescription.getText().toString());
+            account.setRating(0);
             if (licensed.isChecked()) {
                 account.setLicensed(1);
             } else {

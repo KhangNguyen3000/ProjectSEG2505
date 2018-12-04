@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
+import com.example.nguye.seg2505app.Storables.Rating;
 import com.example.nguye.seg2505app.Storables.ServiceType;
 import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.DateTimePicker;
@@ -93,8 +94,6 @@ public class SearchForProviders extends AppCompatActivity {
     }
 
     public void search(View view) {
-        float rating = editRating.getRating();
-
         boolean isCheckedName = cbName.isChecked();
         boolean isCheckedService = cbService.isChecked();
         boolean isCheckedRating = cbRating.isChecked();
@@ -125,9 +124,14 @@ public class SearchForProviders extends AppCompatActivity {
                         + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
             System.out.println(queryService);
         }
-        // TODO decide if we assign ratings by service or by provider.
         if (isCheckedRating) {
-            // also, when searching by rating, the providers with no rating are displayed regardless of the specified criterion.
+            int rating = (int) editRating.getRating();
+            queryRating = "SELECT " + Account.COL_ID
+                    + " FROM " + Account.TABLE_NAME
+                    + " WHERE (" + Account.COL_RATING + " >= " + rating
+                    + ") OR (" + Account.COL_RATING + " = 0)";
+            // when searching by rating, the providers with no rating are displayed regardless of the specified criterion.
+            System.out.println(queryRating);
         }
         if (isCheckedDate && !(isCheckedName || isCheckedService || isCheckedRating)) {
             // if only the date criterion is specified, get the providers' IDs directly from the table DefaultSchedules
@@ -158,23 +162,29 @@ public class SearchForProviders extends AppCompatActivity {
             if (isCheckedName) {
                 query += queryName;
                 if (isCheckedService) {
-                    query += " UNION" + queryService;
+                    query += " INNER JOIN (" + queryService
+                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
+                            + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER;
                 }
                 if (isCheckedRating) {
-                    query += " UNION" + queryRating;
+                    query += " INNER JOIN (" + queryRating
+                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
+                            + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
                 }
             } else {
                 if (isCheckedService) {
                     query += queryService;
                     if (isCheckedRating) {
-                        query += " UNION" + queryRating;
+                        query += " INNER JOIN (" + queryRating
+                                + ") ON " + OfferedService.TABLE_NAME + "." + OfferedService.COL_ID
+                                + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
                     }
                 } else {
                     query += queryRating; // has to be true
                 }
             }
             if (isCheckedDate) {
-                query = queryDate + " AND " + DefaultSchedule.COL_ID + " IN " + query;
+                query = queryDate + " AND " + DefaultSchedule.COL_PROVIDER + " IN " + query;
             }
         } else if (isCheckedDate) {
             query = queryDate;
@@ -183,12 +193,16 @@ public class SearchForProviders extends AppCompatActivity {
             // TODO do not forget to consider the custom schedules
         }
 
-        // TODO create the intent when going to the searchResult screen
 //        Intent intent = new Intent(this, SearchResults.class);
-        // TODO convert the ArrayList to a simple int[]
-        providerIDs = Storable.select(this, query, 1);
-//        intent.putExtra("providers", providerIDs)
-        // TODO do something with that list
+//        // Convert the ArrayList to a simple int[]
+//        providerIDs = Storable.select(this, query, 1);
+//        int[] pIDs = new int[providerIDs.size()];
+//        int i = 0;
+//        for (String[] record : providerIDs) {
+//            pIDs[i] = Integer.parseInt(record[0]);
+//        }
+//        intent.putExtra("providers", pIDs);
+//        startActivity(intent);
         // TODO break down in smaller functions
     }
 
