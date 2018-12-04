@@ -26,7 +26,9 @@ public class GetProviderInfos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_provider_infos);
-        id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
+        Bundle extras = getIntent().getExtras();
+        id_provider = extras.getInt("providerID");
+//        id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
         provider = new Account();
         provider = provider.find(this, "ID", id_provider, false);
 

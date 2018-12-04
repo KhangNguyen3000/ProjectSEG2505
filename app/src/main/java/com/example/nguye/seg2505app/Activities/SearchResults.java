@@ -33,8 +33,8 @@ public class SearchResults extends AppCompatActivity {
         rvLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(rvLayoutManager);
 
-        Intent intent = getIntent();
-        providerID = intent.getIntArrayExtra("providers");
+        Bundle extras = getIntent().getExtras();
+        providerID = extras.getIntArray("providers");
         Account account;
         ArrayList<Account> providers = new ArrayList<Account>();
         for (int i = 0; i < providerID.length; i++){
