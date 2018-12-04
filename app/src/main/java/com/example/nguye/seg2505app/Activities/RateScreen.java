@@ -27,7 +27,7 @@ public class RateScreen extends AppCompatActivity {
         TextView ratedArea = (TextView) findViewById(R.id.cityProvinceArea);
         ratedArea.setText(provider.getCity()+", "+provider.getProvince()+", "+provider.getPostalCode());
         TextView providerName = (TextView) findViewById(R.id.companyName);
-        ratedArea.setText(provider.getCompanyName());
+        providerName.setText(provider.getCompanyName());
     }
 
     public void onClickRate(View view){
