@@ -29,7 +29,8 @@ public class Account extends Storable implements java.io.Serializable {
     public static final String COL_PASSWORD = "Password";
     public static final String COL_COMPANY = "CompanyName";
     public static final String COL_DESCRIPTION = "Description";
-    public static final String COL_LICENSED = "LICENSED";
+    public static final String COL_LICENSED = "Licensed";
+    public static final String COL_RATING = "Rating";
     public static final ArrayList<String[]> COLUMNS = new ArrayList<>();
     static {
         COLUMNS.add(new String[] {COL_ID, "INTEGER PRIMARY KEY AUTOINCREMENT"});
@@ -48,6 +49,7 @@ public class Account extends Storable implements java.io.Serializable {
         COLUMNS.add(new String[] {COL_COMPANY, "TEXT"});
         COLUMNS.add(new String[] {COL_DESCRIPTION, "TEXT"});
         COLUMNS.add(new String[] {COL_LICENSED, "INTEGER"});
+        COLUMNS.add(new String[] {COL_RATING, "REAL"});
     }
 
     private static Account currentAccount = new Account();
@@ -68,6 +70,7 @@ public class Account extends Storable implements java.io.Serializable {
     private String companyName = "NO COMPANY";
     private String description = "NO DESCRIPTION";
     private int licensed = 0;
+    private double rating = -1;
 
     // Empty constructor
     public Account(){
@@ -195,6 +198,7 @@ public class Account extends Storable implements java.io.Serializable {
         values.put(COL_COMPANY, getCompanyName());
         values.put(COL_DESCRIPTION, getDescription());
         values.put(COL_LICENSED, getLicensed());
+        values.put(COL_RATING, getRating());
         return values;
     }
 
@@ -238,6 +242,7 @@ public class Account extends Storable implements java.io.Serializable {
             account.setCompanyName(cursor.getString(getFieldIndex(COL_COMPANY, COLUMNS)));
             account.setDescription(cursor.getString(getFieldIndex(COL_DESCRIPTION, COLUMNS)));
             account.setLicensed(cursor.getInt(getFieldIndex(COL_LICENSED, COLUMNS)));
+            account.setRating(cursor.getDouble(getFieldIndex(COL_RATING, COLUMNS)));
         }
         db.close();
         return account;
@@ -293,5 +298,6 @@ public class Account extends Storable implements java.io.Serializable {
     public int getLicensed() { return this.licensed; }
     public void setLicensed(int licensed) { this.licensed = licensed; }
 
-
+    public double getRating() { return this.rating; }
+    public void setRating(double rating) { this.rating = rating; }
 }
