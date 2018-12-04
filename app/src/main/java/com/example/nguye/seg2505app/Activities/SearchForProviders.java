@@ -216,8 +216,9 @@ public class SearchForProviders extends AppCompatActivity {
         } else if (isCheckedDate) {
             query = queryDate;
         } else {
-            // TODO error, must select at least 1 criteria
-            // TODO do not forget to consider the custom schedules
+            Toast toast = Toast.makeText(this, "You must specify at least one search criterion.", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
         }
 
         providerIDs = Storable.select(this, query, 1);
@@ -226,7 +227,7 @@ public class SearchForProviders extends AppCompatActivity {
             int i = 0;
             for (String[] record : providerIDs) {
                 pIDs[i] = Integer.parseInt(record[0]);
-                System.out.println(pIDs[i]);
+                i++;
             }
             Intent intent = new Intent(this, SearchResults.class);
             // Convert the ArrayList to a simple int[]
