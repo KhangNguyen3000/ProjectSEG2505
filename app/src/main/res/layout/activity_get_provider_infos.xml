@@ -122,7 +122,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="licensed" />
+                        android:text="licensed"
+                        android:textColor="@color/colorPrimary" />
 
                 </LinearLayout>
 
