@@ -66,7 +66,7 @@ public class Account extends Storable implements java.io.Serializable {
     private String country;
     private String postalCode;
     private String phoneNumber;
-    private String password;
+    private int password;
     private String companyName = "NO COMPANY";
     private String description = "NO DESCRIPTION";
     private int licensed = 0;
@@ -238,7 +238,7 @@ public class Account extends Storable implements java.io.Serializable {
             account.setCountry(cursor.getString(getFieldIndex(COL_COUNTRY, COLUMNS)));
             account.setPostalCode(cursor.getString(getFieldIndex(COL_POSTALCODE, COLUMNS)));
             account.setPhoneNumber(cursor.getString(getFieldIndex(COL_PHONENUMBER, COLUMNS)));
-            account.setPassword(cursor.getString(getFieldIndex(COL_PASSWORD, COLUMNS)));
+            account.setPassword(cursor.getInt(getFieldIndex(COL_PASSWORD, COLUMNS)));
             account.setCompanyName(cursor.getString(getFieldIndex(COL_COMPANY, COLUMNS)));
             account.setDescription(cursor.getString(getFieldIndex(COL_DESCRIPTION, COLUMNS)));
             account.setLicensed(cursor.getInt(getFieldIndex(COL_LICENSED, COLUMNS)));
@@ -286,8 +286,8 @@ public class Account extends Storable implements java.io.Serializable {
     public String getPhoneNumber(){return this.phoneNumber;}
     public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
 
-    public String getPassword(){return this.password;}
-    public void setPassword(String password){this.password = password;}
+    public int getPassword(){return this.password;}
+    public void setPassword(int password){this.password = password;}
 
     public String getCompanyName() { return this.companyName; }
     public void setCompanyName(String companyName) { this.companyName = companyName; }
