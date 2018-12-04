@@ -33,8 +33,7 @@ public class Booking extends AppCompatActivity {
 // From https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example
 //  and https://developer.android.com/guide/topics/ui/layout/recyclerview#java
 
-    // TODO change to a dynamic id after testing
-    private int providerID = 5;
+    private int providerID;
     private String selectedDate;
     private CalendarView calendarView;
 
@@ -47,18 +46,14 @@ public class Booking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
+        Bundle extras = getIntent().getExtras();
+        providerID = extras.getInt("providerID");
+
         calendarView = findViewById(R.id.calendarView);
         recyclerView = findViewById(R.id.daily_schedule);
         recyclerView.setHasFixedSize(true);
         rvLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(rvLayoutManager);
-
-        // TODO receive the provider ID from the previous activity (Provider's page) with an EXTRA
-        // This ID will have to be passed from searchResult to providerPage to Booking
-        Intent intent = getIntent();
-        providerID = intent.getIntExtra("providerID", 0);
-
-//        providerID = ... (NOT Account.getCurrentAccount().getID, this would return the client's ID)
 
         // Set the minimum date to today
         Calendar calendar = Calendar.getInstance();
@@ -200,7 +195,7 @@ public class Booking extends AppCompatActivity {
                     btnConfirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ViewGroup layout = findViewById(R.id.llh_times);
+                            ViewGroup layout = dialog.findViewById(R.id.llh_times);
                             // Validate the fields
                             if (Validation.validateAll(layout)) {
                                 CustomSchedule appointment = new CustomSchedule(providerID,

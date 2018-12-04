@@ -125,6 +125,7 @@ public class SearchForProviders extends AppCompatActivity {
         String queryDate = "";
 
         if (isCheckedName) {
+            // TODO works if the firstName and lastName are joined
             String name = editName.getText().toString();
             queryName = "SELECT " + Account.COL_ID
                     + " FROM " + Account.TABLE_NAME
