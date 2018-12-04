@@ -85,15 +85,16 @@ public class GetProviderInfos extends AppCompatActivity {
         p_services.setText(services);
         p_rating.setRating(rating);
     }
-
+    // Launch Schedule Activity
     public void onClickSchedule(View view){
         Intent intent = new Intent(this, Booking.class);
         intent.putExtra("providerID", provider.getID());
         startActivity(intent);
     }
 
+    // Launch Rating Activity
     public void onClickRating(View view){
-        Intent intent = new Intent(this, RatingScreen.class);
+        Intent intent = new Intent(this, RateScreen.class);
         intent.putExtra("id_provider", provider.getID());
         startActivity(intent);
     }

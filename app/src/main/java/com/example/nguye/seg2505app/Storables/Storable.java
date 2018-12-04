@@ -18,24 +18,13 @@ public abstract class Storable implements java.io.Serializable {
     public static final String COL_ID = "ID";
 
     // Attributes
-//    protected Context context;
+    // protected Context context;
     protected int ID;
 
     // Methods to be implemented by subclasses
     abstract String getTableName();
-//    abstract Storable cursorHandler(SQLiteDatabase db, Cursor cursor);
-    //<T extends Storable> T
     abstract ContentValues valuePutter();
-//    abstract Storable find(Context context, String fieldName, Object value, boolean quotedValue);
 
-//    // Constructor
-//    public Storable() {
-//    }
-//
-//    // Constructor
-//    public Storable(Context context) {
-//        this.context = context;
-//    }
 
     /**
      * Every subclass of Storable has its columns stored in an ArrayList. This function allows to
@@ -141,78 +130,7 @@ public abstract class Storable implements java.io.Serializable {
         return foundValue;
     }
 
-    //    public <T extends Storable> Storable find(Context context, Class<T> cls, int ID) {
-//    /**
-//     * Search for the item's record in its respective table
-//     * @param ID
-//     * @return
-//     */
-//    public Storable findByID(Context context, int ID) {
-//        try {
-//            // Instantiate the calling class
-//            Storable storable = this.getClass().newInstance();
-//
-//            // Connect to the database
-//            MyDBHandler dbHandler = new MyDBHandler(context);
-//            SQLiteDatabase db = dbHandler.getReadableDatabase();
-//
-//            // Store the item's data into a Storable using a cursor
-//            String query = "SELECT * FROM " + storable.getTableName()
-//                    + " WHERE " + "ID" + " = " + ID;
-//            System.out.println(query);
-//            Cursor cursor = db.rawQuery(query, null);
-//            storable = storable.cursorHandler(db, cursor);
-//            db.close();
-//
-//            return storable;
-////            return this.getClass().cast(storable);
-//        } catch (IllegalAccessException e) {
-//            System.out.println("Illegal access exception.");
-//            return null;
-//        } catch (InstantiationException e) {
-//            System.out.println("Instantiation exception.");
-//            return null;
-//        }
-//    }
 
-//    /**
-//     * Search for the record that has the specified value in the specified field in the calling class' respective table.
-//     * @param fieldName Name of the column to look into
-//     * @param value Value to search for
-//     * @return The first record that matches.
-//     */
-//    public Storable find(Context context, String fieldName, Object value) {
-//        try {
-//            // Instantiate the calling class
-//            Storable storable = this.getClass().newInstance();
-//
-//            // Connect to the database
-//            MyDBHandler dbHandler = new MyDBHandler(context);
-//            SQLiteDatabase db = dbHandler.getReadableDatabase();
-//
-//            // Store the item's data into a Storable using a cursor
-//            String query = "SELECT * FROM " + storable.getTableName()
-//                    + " WHERE " + fieldName + " = " + value;
-//            System.out.println(query);
-//            Cursor cursor = db.rawQuery(query, null);
-//            storable = storable.cursorHandler(db, cursor);
-//            db.close();
-//            Class currentClass = this.getClass();
-//            System.out.println(currentClass);
-//            return storable;
-////            return this.getClass().cast(storable);
-//        } catch (IllegalAccessException e) {
-//            System.out.println("Illegal access exception.");
-//            return null;
-//        } catch (InstantiationException e) {
-//            System.out.println("Instantiation exception.");
-//            return null;
-//        }
-//    }
-
-    // Getters and setters
-//    public Context getContext() { return this.context; }
-//    public void setContext(Context context) { this.context = context; }
 
     /**
      * Get a list of all the values from the specified field in the specified table where
@@ -227,11 +145,6 @@ public abstract class Storable implements java.io.Serializable {
         // Connect to the database
         MyDBHandler dbHandler = new MyDBHandler(context);
         SQLiteDatabase db = dbHandler.getReadableDatabase();
-
-//        String quotes = "";
-//        if (quotedKey) {
-//            quotes = "\"";
-//        }
         String query = "SELECT " + fieldName + " FROM " + tableName
                 + " WHERE " + where;
         System.out.println(query);
@@ -260,11 +173,6 @@ public abstract class Storable implements java.io.Serializable {
         // Connect to the database
         MyDBHandler dbHandler = new MyDBHandler(context);
         SQLiteDatabase db = dbHandler.getReadableDatabase();
-
-//        String quotes = "";
-//        if (quotedKey) {
-//            quotes = "\"";
-//        }
         String query = "SELECT * FROM " + tableName
                 + " WHERE " + where;
         System.out.println(query);
@@ -293,11 +201,6 @@ public abstract class Storable implements java.io.Serializable {
         // Connect to the database
         MyDBHandler dbHandler = new MyDBHandler(context);
         SQLiteDatabase db = dbHandler.getReadableDatabase();
-
-//        String quotes = "";
-//        if (quotedKey) {
-//            quotes = "\"";
-//        }
         String query = "SELECT " + fieldName + " FROM " + tableName
                 + " WHERE " + where;
         System.out.println(query);

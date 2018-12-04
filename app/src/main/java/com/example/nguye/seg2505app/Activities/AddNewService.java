@@ -1,6 +1,5 @@
 package com.example.nguye.seg2505app.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,13 +36,10 @@ public class AddNewService extends AppCompatActivity {
         showServiceList(services);
 
         final ListView serviceList = (ListView) findViewById(R.id.s_list);
-//        serviceList.setClickable(true);
         serviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MyDBHandler data = new MyDBHandler(getApplicationContext());
                 String selectedService = (String) parent.getItemAtPosition(position);
-//                ServiceType serviceType = data.findServiceType(selectedService);
                 ServiceType serviceType = new ServiceType().find(getApplicationContext(), ServiceType.COL_NAME, selectedService, true);
 
                 // Show the modify options
@@ -67,10 +63,6 @@ public class AddNewService extends AppCompatActivity {
                 // Fills the fields with the current information of the selected service
                 name.setText(serviceType.getName());
                 maxRate.setText(Double.toString(serviceType.getMaxRate()));
-
-                // Stores the information of the selected service type
-                //service.setTypeID(serviceType.getID());
-                //service.setProviderID(currentAccount.getID());
             }
         });
     }

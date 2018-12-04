@@ -53,32 +53,5 @@ public class RegisterProvider extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG);
             toast.show();
         }
-//        EditText nameOfCompany = findViewById(R.id.rp_noc);
-//        EditText generalDescription = findViewById(R.id.editText2);
-//        if (!(Validation.isEmpty(nameOfCompany)) && !(Validation.isEmpty(generalDescription))) {
-//            addServiceToDatabase();
-//        } else {
-//            Toast toast = Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG);
-//            toast.show();
-//        }
     }
-
-//    public void addServiceToDatabase() {
-//        Account account = (Provider) getIntent().getSerializableExtra("current_account");
-//        ((Provider) account).setCompanyName();
-//        account.add(this);
-//        System.out.println(account.getEmail());
-//        Toast toast = Toast.makeText(getApplicationContext(), "Provider account created!", Toast.LENGTH_LONG);
-//        toast.show();
-//        setResult(9999, null);
-//        finish();
-//    }
-
-    
-//
-//    public void addServiceToDatabase(){
-//        Toast toast = Toast.makeText(getApplicationContext(), "Provider account created!", Toast.LENGTH_LONG);
-//        toast.show();
-//        finish();
-//    }
 }

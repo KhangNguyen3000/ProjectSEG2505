@@ -25,16 +25,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
 
 
-    TestDataBase data = new TestDataBase();
-    Context context = new Activity();
-
-    @Test
-    public void sadasd() {
-        ArrayList<String> array = Storable.selectAllInColumn(context, Account.COL_ID, Account.TABLE_NAME, "FirstName = \"admin\"");
-        for (String record : array) {
-            System.out.println(record);
-        }
-    }
 
     @Test
     public void addition_isCorrect() {

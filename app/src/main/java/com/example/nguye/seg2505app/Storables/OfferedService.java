@@ -35,10 +35,6 @@ public class OfferedService extends Storable {
     public OfferedService () {
     }
 
-//    // Constructor
-//    public OfferedService (Context context) {
-//        this.context = context;
-//    }
 
     // Constructor
     public OfferedService (int typeID, int providerID, double hourlyRate) {
