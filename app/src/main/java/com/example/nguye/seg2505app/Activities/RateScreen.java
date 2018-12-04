@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
@@ -16,6 +17,15 @@ public class RateScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_screen);
+        Account provider = new Account().find(this, Account.COL_ID, (Integer) getIntent().getSerializableExtra("id_provider"), false);
+        TextView ratedName = (TextView) findViewById(R.id.ratedName);
+        ratedName.setText(provider.getFirstName()+" "+provider.getLastName());
+        TextView ratedAddress = (TextView) findViewById(R.id.ratedAddress);
+        ratedAddress.setText(provider.getStreetNumber()+" "+provider.getStreetName());
+        TextView ratedArea = (TextView) findViewById(R.id.cityProvinceArea);
+        ratedArea.setText(provider.getCity()+", "+provider.getProvince()+", "+provider.getPostalCode());
+        TextView providerName = (TextView) findViewById(R.id.companyName);
+        ratedArea.setText(provider.getCompanyName());
     }
 
     public void onClickRate(View view){

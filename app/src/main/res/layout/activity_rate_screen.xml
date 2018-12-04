@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/raterName"
+                android:id="@+id/ratedName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FirstName LastName"
@@ -41,7 +41,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/raterAddress"
+            android:id="@+id/ratedAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="999 StreetName" />
