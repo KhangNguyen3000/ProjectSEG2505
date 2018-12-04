@@ -227,7 +227,6 @@ public class SearchForProviders extends AppCompatActivity {
             int i = 0;
             for (String[] record : providerIDs) {
                 pIDs[i] = Integer.parseInt(record[0]);
-                System.out.println(pIDs[i]);
                 i++;
             }
             Intent intent = new Intent(this, SearchResults.class);
