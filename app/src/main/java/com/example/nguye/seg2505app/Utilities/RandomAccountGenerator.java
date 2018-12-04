@@ -21,6 +21,7 @@ import java.util.Random;
  */
 public class RandomAccountGenerator {
 
+    //TODO make sure that a provider cannot offer the same service twice
     public static Account generateNewAccount(Context context) {
         Account account = new Account();
         account.setID(getNumOfAccounts(context) + 1);

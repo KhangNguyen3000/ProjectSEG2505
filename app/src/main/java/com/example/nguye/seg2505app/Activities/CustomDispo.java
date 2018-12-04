@@ -81,6 +81,8 @@ public class CustomDispo extends AppCompatActivity {
     public void showDatePicker(View view){ DateTimePicker.showDatePicker(view);}
 
     public void OnClickConfirm(View view){
+        // TODO when adding a custom dispo, make sure the provider is not booked between the
+        //      specified times using the DailySchedule.isBookedBetween() function
         if(availBox.isChecked()){
             state = ScheduleState.AVAILABLE;
         } else{state = ScheduleState.UNAVAILABLE;}

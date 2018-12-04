@@ -28,4 +28,7 @@ public class DailyScheduleTest {
         DailySchedule schedule2 = new DailySchedule(480, 960, ScheduleState.AVAILABLE);
         assertFalse(schedule2.isBookedBetween(0, 1440));
     }
+
+
+    // TODO other tests related to schedules
 }

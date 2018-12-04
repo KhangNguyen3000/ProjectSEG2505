@@ -153,7 +153,7 @@ public class SearchForProviders extends AppCompatActivity {
             System.out.println(queryService);
         }
         if (isCheckedRating) {
-            int rating = (int) editRating.getRating();
+            float rating = editRating.getRating();
             queryRating = "SELECT " + Account.COL_ID
                     + " FROM " + Account.TABLE_NAME
                     + " WHERE (" + Account.COL_RATING + " >= " + rating
