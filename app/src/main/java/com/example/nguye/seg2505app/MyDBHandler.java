@@ -9,6 +9,7 @@ import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
+import com.example.nguye.seg2505app.Storables.Rating;
 import com.example.nguye.seg2505app.Storables.ServiceType;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         DATABASE.put(ServiceType.TABLE_NAME, ServiceType.COLUMNS);
         DATABASE.put(DefaultSchedule.TABLE_NAME, DefaultSchedule.COLUMNS);
         DATABASE.put(CustomSchedule.TABLE_NAME, CustomSchedule.COLUMNS);
+        DATABASE.put(Rating.TABLE_NAME, Rating.COLUMNS);
         for (String table : DATABASE.keySet()) {
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");
