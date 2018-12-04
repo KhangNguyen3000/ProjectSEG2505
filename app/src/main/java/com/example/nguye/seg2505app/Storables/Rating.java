@@ -9,13 +9,9 @@ import com.example.nguye.seg2505app.MyDBHandler;
 
 import java.util.ArrayList;
 
-/**
- * Service types established by the administrator.
- * The providers will be able to offer one or more of those services
- */
 public class Rating extends Storable {
 
-    // Structure of the table "ServiceTypes"
+    // Structure of the table "Ratings"
     public static final String TABLE_NAME = "Ratings";
     public static final String COL_ID = "ID";
     public static final String COL_PROVIDER_ID = "ProviderID";
@@ -28,19 +24,18 @@ public class Rating extends Storable {
         COLUMNS.add(new String[] {COL_PROVIDER_ID, "INTEGER"});
         COLUMNS.add(new String[] {COL_CUSTOMER_ID, "INTEGER"});
         COLUMNS.add(new String[] {COL_COMMENT, "TEXT"});
-        COLUMNS.add(new String[] {COL_RATING, "DOUBLE"});
+        COLUMNS.add(new String[] {COL_RATING, "DOUBLE"}); // TODO replace by INTEGER
     }
 
     // Attributes
     private int p_ID;
     private int c_ID;
     private String description;
-    private double rating; // Max hourly rate of the service. The provider will not be able to set a higher hourly rate.
+    private double rating; // TODO replace by int
 
     // Constructor
     public Rating() {
     }
-
 
     // Constructor
     public Rating(int pID, int cID, String description, double rating){
@@ -60,7 +55,7 @@ public class Rating extends Storable {
     }
 
     /**
-     * Put the ServiceType's attributes into a ContentValues object to use with database functions
+     * Put the Rating's attributes into a ContentValues object to use with database functions
      * @return the ContentValues object
      */
     public ContentValues valuePutter() {
@@ -73,7 +68,7 @@ public class Rating extends Storable {
     }
 
     /**
-     * Search for the record that has the specified value in the specified field in the table "Services".
+     * Search for the record that has the specified value in the specified field in the table "Ratings".
      * @param fieldName Name of the column to look into
      * @param value Value to search for
      * @return The first record that matches.
@@ -150,5 +145,4 @@ public class Rating extends Storable {
         db.close();
         return ratings;
     }
-
 }

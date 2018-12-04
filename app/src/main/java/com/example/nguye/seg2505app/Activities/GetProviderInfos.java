@@ -26,13 +26,11 @@ public class GetProviderInfos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_provider_infos);
-        id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
-        provider = new Account();
-        provider = provider.find(this, "ID", id_provider, false);
-
+        id_provider = (Integer) getIntent().getSerializableExtra("id_provider"); // TODO make sure this is how Nicolas named the extra, also not necessary to use serializable
+        provider = new Account().find(this, "ID", id_provider, false);
 
         // Getting the screen elements
-        TextView p_Fname = findViewById(R.id.p_fName);
+        TextView p_fName = findViewById(R.id.p_fName);
         TextView p_lName = findViewById(R.id.p_lName);
         TextView p_cName = findViewById(R.id.p_cName);
         TextView p_licensed = findViewById(R.id.p_licensed);
@@ -64,7 +62,7 @@ public class GetProviderInfos extends AppCompatActivity {
         rating = rating / ratings.size();
 
         // Setting informations
-        p_Fname.setText(provider.getFirstName());
+        p_fName.setText(provider.getFirstName());
         p_lName.setText(provider.getLastName());
         p_cName.setText(provider.getCompanyName());
         if(provider.getLicensed() == 1){
@@ -93,7 +91,7 @@ public class GetProviderInfos extends AppCompatActivity {
     }
 
     public void onClickRating(View view){
-
+        // TODO start the rating activity (RateScreen)
     }
 
 
