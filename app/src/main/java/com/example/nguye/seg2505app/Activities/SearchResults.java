@@ -48,7 +48,7 @@ public class SearchResults extends AppCompatActivity {
                                            TextView tvEmail = view.findViewById(R.id.sr_txt_email);
                                            String email = tvEmail.getText().toString();
                                            Account provider = new Account().find(view.getContext(), Account.COL_EMAIL, email, true);
-                                           Intent provider_id = new Intent(getApplicationContext(), GetProvidersInfos.class);
+                                           Intent provider_id = new Intent(getApplicationContext(), GetProviderInfos.class);
                                            provider_id.putExtra("providerID", provider.getID());
                                            startActivity(provider_id);
                                        }
