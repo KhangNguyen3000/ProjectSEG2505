@@ -155,7 +155,7 @@ public class Account extends Storable implements java.io.Serializable {
             account.setCompanyName(cursor.getString(getFieldIndex(COL_COMPANY, COLUMNS)));
             account.setDescription(cursor.getString(getFieldIndex(COL_DESCRIPTION, COLUMNS)));
             account.setLicensed(cursor.getInt(getFieldIndex(COL_LICENSED, COLUMNS)));
-            account.setRating(cursor.getDouble(getFieldIndex(COL_RATING, COLUMNS)));
+            account.setRating(cursor.getFloat(getFieldIndex(COL_RATING, COLUMNS)));
         }
         db.close();
         return account;
