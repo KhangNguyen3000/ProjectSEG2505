@@ -21,6 +21,9 @@ import java.util.Random;
  */
 public class RandomAccountGenerator {
 
+    private static int serviceType; // just to make sure a provider does not offer the same service twice
+    private static int numOfServiceTypes;
+
     //TODO make sure that a provider cannot offer the same service twice
     public static Account generateNewAccount(Context context) {
         Account account = new Account();
@@ -60,10 +63,11 @@ public class RandomAccountGenerator {
     }
 
     public static OfferedService generateNewService(Context context, Account account) {
-        int type = new Random().nextInt(getNumOfServiceTypes(context)) + 1;
-        double maxRate = Double.parseDouble(Storable.findFieldByID(context, ServiceType.TABLE_NAME, ServiceType.COL_MAXRATE, type));
+        serviceType = (serviceType % numOfServiceTypes) + 1;
+//        int type = new Random().nextInt(getNumOfServiceTypes(context)) + 1;
+        double maxRate = Double.parseDouble(Storable.findFieldByID(context, ServiceType.TABLE_NAME, ServiceType.COL_MAXRATE, serviceType));
         double hourlyRate = new Random().nextDouble()*(maxRate -25) + 25;
-        OfferedService service = new OfferedService(type, account.getID(), hourlyRate);
+        OfferedService service = new OfferedService(serviceType, account.getID(), hourlyRate);
 
         return service;
     }
@@ -118,6 +122,8 @@ public class RandomAccountGenerator {
     }
 
     public static void generateStuff(Context context, int numOfNew) {
+        numOfServiceTypes = getNumOfServiceTypes(context);
+        serviceType = new Random().nextInt(numOfServiceTypes) + 1;
         for (int n = 0; n < numOfNew; n++) {
             // Generate a new account, either Client or Provider
             Account account = generateNewAccount(context);
