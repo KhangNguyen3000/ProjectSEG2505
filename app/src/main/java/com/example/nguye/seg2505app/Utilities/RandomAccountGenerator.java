@@ -5,7 +5,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nguye.seg2505app.Activities.Hash;
-import com.example.nguye.seg2505app.Activities.ScheduleManagement;
+import com.example.nguye.seg2505app.Activities.Schedule;
 import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
 import com.example.nguye.seg2505app.Storables.Account;
