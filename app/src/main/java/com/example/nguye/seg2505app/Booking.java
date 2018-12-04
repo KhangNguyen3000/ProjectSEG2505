@@ -41,6 +41,8 @@ public class Booking extends AppCompatActivity {
     private ScheduleAdapter rvAdapter;
     private RecyclerView.LayoutManager rvLayoutManager;
 
+    // TODO Make sure appointments are registered and displayed properly
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

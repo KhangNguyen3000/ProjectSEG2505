@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void onClickGenerate(View view) {
         RandomAccountGenerator.generateStuff(this, 5);
         Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
