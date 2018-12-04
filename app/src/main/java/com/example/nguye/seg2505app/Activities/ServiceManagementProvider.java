@@ -77,16 +77,20 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
                 // Fills the fields with the current information of the selected service
                 int myID = actualService.getTypeID();
+                System.out.println(myID);
 
                 String query = "SELECT " + ServiceType.TABLE_NAME + "." + ServiceType.COL_MAXRATE
                         + " FROM (" + ServiceType.TABLE_NAME
                         + " INNER JOIN " + OfferedService.TABLE_NAME
                         + " ON " + ServiceType.TABLE_NAME + "." + ServiceType.COL_ID
-                        + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER + ") WHERE " + OfferedService.TABLE_NAME + "." + OfferedService.COL_ID + " = " + myID;
+                        + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_TYPE + ") WHERE " + ServiceType.TABLE_NAME + "." + ServiceType.COL_ID + " = " + myID;
+
+                System.out.println(query);
 
                 ArrayList<String[]> array= Storable.select(getApplicationContext(), query, 1);
 
                 maxRate = Integer.parseInt(array.get(0)[0]);
+                System.out.println(maxRate);
 
                 name.setText(selectedService);
                 double actualPrice = actualService.getHourlyRate();
@@ -139,7 +143,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
         if (Validation.validateAll(layout)) {
             // Get the inputs and update the object updatedServiceType
             double newServiceRate = Double.parseDouble(((EditText) findViewById(R.id.text_price)).getText().toString());
-
+            System.out.println(maxRate);
             if(newServiceRate > maxRate){
                 Toast error = Toast.makeText(getApplicationContext(), "Please enter a valid rate: " + maxRate, Toast.LENGTH_LONG);
                 error.show();
