@@ -96,7 +96,7 @@ public class RegisterFinal extends AppCompatActivity {
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setEmail(email);
-        account.setPassword(Hash.hash(pass));
+        account.setPassword(Hashing.hash(pass));
         account.setStreetNumber(streetNumber);
         account.setStreetName(street);
         account.setCity(city);
@@ -112,8 +112,6 @@ public class RegisterFinal extends AppCompatActivity {
         if (typeOption.equals("Client")) {
             accType = 3;
             account.setType(accType);
-            // Add the account to the database.
-//        dbHandler.addAccount(account);
             account.add(this);
             Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
             toast.show();

@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
 
         MyDBHandler dbHandler = new MyDBHandler(this);
@@ -28,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
             dbHandler.createAdmin(this);
             dbHandler.createServiceTypes(this);
         }
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
     }
 
     /**
@@ -49,22 +46,17 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickLoginButton(View view) {
         // Basic validation on the fields
-//        ViewGroup layout = findViewById(R.id.main_layout_root);
         ViewGroup layout = findViewById(R.id.content_main);
         if (Validation.validateAll(layout)) {
-
-            MyDBHandler dbHandler = new MyDBHandler(this);
             String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
             String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
             int dbPassword;
-            // Search for the account with the provided email
-//            Account account = dbHandler.findAccount(email);
             Account account = new Account().find(this, Account.COL_EMAIL, email, true);
             if (account != null) {
                 // if the account is found, check if the password is correct
                 dbPassword = account.getPassword();
                 System.out.println(dbPassword);
-                if (dbPassword == Hash.hash(password)) {
+                if (dbPassword == Hashing.hash(password)) {
                     // store the account information in CurrentAccount
                     Account.setCurrentAccount(account);
                     Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);
