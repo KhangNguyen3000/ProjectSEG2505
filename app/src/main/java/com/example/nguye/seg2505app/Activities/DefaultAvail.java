@@ -249,7 +249,7 @@ public class DefaultAvail extends AppCompatActivity {
         //  (and that belongs to the current provider)
         String effDateQuery = "SELECT * FROM " + DefaultSchedule.TABLE_NAME
                 + " WHERE " + DefaultSchedule.COL_PROVIDER + " = " + Account.getCurrentAccount().getID()
-                + " AND" + DefaultSchedule.COL_EFFECTIVEDATE
+                + " AND " + DefaultSchedule.COL_EFFECTIVEDATE
                 + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
                 + ") FROM " + DefaultSchedule.TABLE_NAME
                 + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";

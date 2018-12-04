@@ -28,7 +28,7 @@ public class SearchResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
-        recyclerView = findViewById(R.id.daily_schedule);
+        recyclerView = findViewById(R.id.provider_list);
         recyclerView.setHasFixedSize(true);
         rvLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(rvLayoutManager);
@@ -43,19 +43,22 @@ public class SearchResults extends AppCompatActivity {
         }
         rvAdapter = new Provider_list_adapter(this, providers);
         rvAdapter.setClickListener(new Provider_list_adapter.ItemClickListener() {
-                                       @Override
-                                       public void onItemClick(View view, int position){
-                                           TextView tvEmail = view.findViewById(R.id.sr_txt_email);
-                                           String email = tvEmail.getText().toString();
-                                           Account provider = new Account().find(view.getContext(), Account.COL_EMAIL, email, true);
-                                           Intent provider_id = new Intent(getApplicationContext(), GetProviderInfos.class);
-                                           provider_id.putExtra("providerID", provider.getID());
-                                           startActivity(provider_id);
-                                       }
-                                   });
+            @Override
+            public void onItemClick(View view, int position){
+                TextView tvEmail = view.findViewById(R.id.sr_txt_email);
+                String email = tvEmail.getText().toString();
+                Account provider = new Account().find(view.getContext(), Account.COL_EMAIL, email, true);
+                Intent provider_id = new Intent(getApplicationContext(), GetProviderInfos.class);
+                provider_id.putExtra("providerID", provider.getID());
+                startActivity(provider_id);
+            }
+        });
         recyclerView.setAdapter(rvAdapter);
     }
 
+    public void onClickNewSearch(View view) {
+        finish();
+    }
 
 
 
