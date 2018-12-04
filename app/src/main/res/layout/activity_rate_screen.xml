@@ -77,7 +77,8 @@
                 <RatingBar
                     android:id="@+id/ratingBar2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickRate" />
 
             </LinearLayout>
 
@@ -106,7 +107,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/commentaire"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
