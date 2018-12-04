@@ -31,7 +31,7 @@
         <activity android:name=".Activities.ServiceManagementProvider" />
         <activity android:name=".Activities.AddNewService" />
         <activity android:name=".Activities.DefaultAvail" />
-        <activity android:name=".Activities.ScheduleManagement" />
+        <activity android:name=".Activities.Schedule" />
         <activity android:name=".Bench.DateTimeTable" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".Activities.SearchForProviders" />
