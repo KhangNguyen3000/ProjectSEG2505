@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.nguye.seg2505app.Provider_list_adapter;
 import com.example.nguye.seg2505app.R;
@@ -41,8 +42,22 @@ public class SearchResults extends AppCompatActivity {
             providers.add(account);
         }
         rvAdapter = new Provider_list_adapter(this, providers);
+        rvAdapter.setClickListener(new Provider_list_adapter.ItemClickListener() {
+                                       @Override
+                                       public void onItemClick(View view, int position){
+                                           TextView tvEmail = view.findViewById(R.id.sr_txt_email);
+                                           String email = tvEmail.getText().toString();
+                                           Account provider = new Account().find(view.getContext(), Account.COL_EMAIL, email, true);
+                                           Intent provider_id = new Intent(getApplicationContext(), GetProvidersInfos.class);
+                                           provider_id.putExtra("providerID", provider.getID());
+                                           startActivity(provider_id);
+                                       }
+                                   });
         recyclerView.setAdapter(rvAdapter);
     }
+
+
+
 
 
 

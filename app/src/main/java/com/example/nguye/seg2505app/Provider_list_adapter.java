@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_adapter.ViewHolder> {
     private ArrayList<Account> mProvider;
     private LayoutInflater mInflater;
-    private ScheduleAdapter.ItemClickListener mClickListener;
+    private Provider_list_adapter.ItemClickListener mClickListener;
 
     // data is passed into the constructor
     public Provider_list_adapter(Context context, ArrayList<Account> provider) {
@@ -93,7 +93,7 @@ public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_ad
 //    }
 
     // allows clicks events to be caught
-    void setClickListener(ScheduleAdapter.ItemClickListener itemClickListener) {
+    public void setClickListener(Provider_list_adapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
