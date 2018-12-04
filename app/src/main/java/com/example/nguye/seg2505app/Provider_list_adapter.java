@@ -77,7 +77,7 @@ public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_ad
 
         ViewHolder(View itemView) {
             super(itemView);
-            viewGroup = itemView.findViewById(R.id.csrtLayout);
+            viewGroup = itemView.findViewById(R.id.provider_card);
             itemView.setOnClickListener(this);
         }
 

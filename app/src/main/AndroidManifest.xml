@@ -41,6 +41,7 @@
         <activity android:name=".Activities.RatingList" />
         <activity android:name=".Activities.RateScreen" />
         <activity android:name=".Activities.CustomDispo" />
+        <activity android:name=".Activities.SearchResults" />
     </application>
 
 </manifest>

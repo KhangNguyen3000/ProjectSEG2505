@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.ResourceCursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.R;
@@ -68,20 +69,36 @@ public class SearchForProviders extends AppCompatActivity {
 
 //        String serviceQuery = "SELECT * FROM " + this.getTableName()
 //                + " WHERE " + fieldName + " = " + quotes + value + quotes;
-        String serviceQuery = "SELECT " + ServiceType.COL_NAME + " FROM " + ServiceType.TABLE_NAME;
+        String serviceQuery = "SELECT " + ServiceType.COL_NAME
+                + " FROM " + ServiceType.TABLE_NAME
+                + " ORDER BY " + ServiceType.COL_NAME;
         System.out.println(serviceQuery);
 
-        Cursor cursor = db.rawQuery(serviceQuery, null);
+        // Get all the service types from the table ServiceTypes
+        ArrayList<String[]> serviceTypes = Storable.select(this, serviceQuery, 1);
+        // Put them in an array of String
+        String[] serviceOptions = new String[serviceTypes.size()];
+        for (int i = 0; i < serviceTypes.size(); i++) {
+            serviceOptions[i] = serviceTypes.get(i)[0];
+        }
+        // Set the service options using the array
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, serviceOptions);
+        serviceSpinner.setAdapter(adapter);
 
-        CursorAdapter serviceAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1,
-                cursor,
-                new String[] {ServiceType.COL_NAME},
-                new int[] {R.id.srch_dd_service},
-                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        // TODO test the drop-down list
-        // TODO sort the services in alphabetical order
-        serviceSpinner.setAdapter(serviceAdapter);
+//        Cursor cursor = db.rawQuery(serviceQuery, null);
+//
+//        CursorAdapter serviceAdapter = new SimpleCursorAdapter(this,
+//                android.R.layout.simple_list_item_1,
+//                cursor,
+//                new String[] {ServiceType.COL_NAME},
+//                new int[] {R.id.srch_dd_service},
+//                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+//        // TODO test the drop-down list
+//        // TODO sort the services in alphabetical order
+
+
+
+//        serviceSpinner.setAdapter(serviceAdapter);
     }
 
 
@@ -118,12 +135,20 @@ public class SearchForProviders extends AppCompatActivity {
         }
         if (isCheckedService) {
             String service = serviceSpinner.getSelectedItem().toString();
-            queryService = "SELECT DISTINCT " + OfferedService.COL_PROVIDER
+//            queryService = "SELECT OS." + OfferedService.COL_PROVIDER
+//                    + " FROM " + OfferedService.TABLE_NAME + " OS"
+//                    + " INNER JOIN " + ServiceType.TABLE_NAME + " ST"
+//                    + " ON OS." + OfferedService.COL_TYPE
+//                    + " WHERE " + OfferedService.COL_TYPE
+//                    + " IN (SELECT " + ServiceType.COL_ID
+//                        + " FROM " + ServiceType.TABLE_NAME
+//                        + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
+            queryService = "SELECT " + OfferedService.COL_PROVIDER
                     + " FROM " + OfferedService.TABLE_NAME
-                    + " WHERE " + OfferedService.COL_ID
+                    + " WHERE " + OfferedService.COL_TYPE
                     + " IN (SELECT " + ServiceType.COL_ID
-                        + " FROM " + ServiceType.TABLE_NAME
-                        + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
+                    + " FROM " + ServiceType.TABLE_NAME
+                    + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
             System.out.println(queryService);
         }
         if (isCheckedRating) {
@@ -196,16 +221,21 @@ public class SearchForProviders extends AppCompatActivity {
         }
 
         providerIDs = Storable.select(this, query, 1);
-        int[] pIDs = new int[providerIDs.size()];
-        int i = 0;
-        for (String[] record : providerIDs) {
-            pIDs[i] = Integer.parseInt(record[0]);
+        if (providerIDs.size() > 0) {
+            int[] pIDs = new int[providerIDs.size()];
+            int i = 0;
+            for (String[] record : providerIDs) {
+                pIDs[i] = Integer.parseInt(record[0]);
+                System.out.println(pIDs[i]);
+            }
+            Intent intent = new Intent(this, SearchResults.class);
+            // Convert the ArrayList to a simple int[]
+            intent.putExtra("providers", pIDs);
+            startActivity(intent);
+        } else {
+            Toast toast = Toast.makeText(this, "No provider match your criteria.", Toast.LENGTH_LONG);
+            toast.show();
         }
-        System.out.println(pIDs);
-        Intent intent = new Intent(this, SearchResults.class);
-        // Convert the ArrayList to a simple int[]
-        intent.putExtra("providers", pIDs);
-        startActivity(intent);
         // TODO break down in smaller functions
     }
 
