@@ -87,6 +87,18 @@ public class GetProviderInfos extends AppCompatActivity {
         p_services.setText(services);
         p_rating.setRating(rating);
     }
+
+    public void onResume(){
+        super.onResume();
+        float rating = 0;
+        ArrayList <Rating> ratings = Rating.findAll(this, Rating.COL_PROVIDER_ID, id_provider, false);
+        for(int i = 0; i < ratings.size(); i++){
+            rating += ratings.get(i).getRating();
+        }
+        rating = rating / ratings.size();
+        RatingBar p_rating = findViewById(R.id.p_rating);
+        p_rating.setRating(rating);
+    }
     // Launch Schedule Activity
     public void onClickSchedule(View view){
         Intent intent = new Intent(this, Booking.class);

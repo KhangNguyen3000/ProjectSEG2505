@@ -93,7 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.7"
-                android:isIndicator="false"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:rating="0" />
 
