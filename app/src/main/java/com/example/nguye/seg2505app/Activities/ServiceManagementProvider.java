@@ -43,7 +43,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
         ArrayList<OfferedService> servicesL = OfferedService.findAll(this, OfferedService.COL_PROVIDER, currentAccount.getID(), false);
 
-        ArrayList<String> servicesName = getNameFromServices(servicesL);
+        ArrayList<String> servicesName = getNameFromServices(servicesL, this);
 
         final ListView serviceList = (ListView) findViewById(R.id._ListViewMyServices);
 
@@ -55,7 +55,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
                 Account currentAccount = Account.getCurrentAccount();
                 ArrayList<OfferedService> servicesL = OfferedService.findAll(getApplicationContext(), OfferedService.COL_PROVIDER, currentAccount.getID(), false);
-                ArrayList<String> servicesName = getNameFromServices(servicesL);
+                ArrayList<String> servicesName = getNameFromServices(servicesL, getApplicationContext());
 
                 String selectedService = (String) parent.getItemAtPosition(position);
 //                ServiceType serviceType = data.findServiceType(selectedService);
@@ -104,19 +104,19 @@ public class ServiceManagementProvider extends AppCompatActivity {
 
         ArrayList<OfferedService> servicesL = OfferedService.findAll(this, OfferedService.COL_PROVIDER, currentAccount.getID(), false);
 
-        ArrayList<String> servicesName = getNameFromServices(servicesL);
+        ArrayList<String> servicesName = getNameFromServices(servicesL, getApplicationContext());
 
         final ListView serviceList = (ListView) findViewById(R.id._ListViewMyServices);
 
         showServiceList(servicesName);
     }
 
-    public  ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList){
+    static ArrayList<String> getNameFromServices(ArrayList<OfferedService> myList, Context context){
         ArrayList<String> finalList = new ArrayList<String>();
         int type = 0;
         for(int i = 0; i < myList.size(); i++){
             type = myList.get(i).getTypeID();
-            finalList.add(Storable.search(getApplicationContext(), ServiceType.TABLE_NAME, "Name", "ID", type, false));
+            finalList.add(Storable.search(context , ServiceType.TABLE_NAME, "Name", "ID", type, false));
         }
         return finalList;
     }
@@ -173,7 +173,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
                 //List update
                 Account currentAccount = Account.getCurrentAccount();
                 ArrayList<OfferedService> servicesL = OfferedService.findAll(getApplicationContext(), OfferedService.COL_PROVIDER, currentAccount.getID(), false);
-                ArrayList<String> servicesName = getNameFromServices(servicesL);
+                ArrayList<String> servicesName = getNameFromServices(servicesL, getApplicationContext());
                 showServiceList(servicesName);
             }
         }
@@ -215,7 +215,7 @@ public class ServiceManagementProvider extends AppCompatActivity {
                 // Update the list view
                 Account currentAccount = Account.getCurrentAccount();
                 ArrayList<OfferedService> servicesL = OfferedService.findAll(getApplicationContext(), OfferedService.COL_PROVIDER, currentAccount.getID(), false);
-                ArrayList<String> servicesName = getNameFromServices(servicesL);
+                ArrayList<String> servicesName = getNameFromServices(servicesL, getApplicationContext());
                 showServiceList(servicesName);
             }
         });
