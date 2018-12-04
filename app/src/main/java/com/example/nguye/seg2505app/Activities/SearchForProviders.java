@@ -1,4 +1,4 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +16,8 @@ import android.widget.ResourceCursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
+import com.example.nguye.seg2505app.MyDBHandler;
+import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
@@ -38,7 +40,7 @@ public class SearchForProviders extends AppCompatActivity {
     CheckBox cbRating;
     CheckBox cbDate;
     EditText editName;
-    Spinner serviceSpinner = findViewById(R.id.srch_dd_service);
+    Spinner serviceSpinner;
     RatingBar editRating;
     EditText editDate;
     EditText editBetween;
@@ -193,16 +195,17 @@ public class SearchForProviders extends AppCompatActivity {
             // TODO do not forget to consider the custom schedules
         }
 
-//        Intent intent = new Intent(this, SearchResults.class);
-//        // Convert the ArrayList to a simple int[]
-//        providerIDs = Storable.select(this, query, 1);
-//        int[] pIDs = new int[providerIDs.size()];
-//        int i = 0;
-//        for (String[] record : providerIDs) {
-//            pIDs[i] = Integer.parseInt(record[0]);
-//        }
-//        intent.putExtra("providers", pIDs);
-//        startActivity(intent);
+        providerIDs = Storable.select(this, query, 1);
+        int[] pIDs = new int[providerIDs.size()];
+        int i = 0;
+        for (String[] record : providerIDs) {
+            pIDs[i] = Integer.parseInt(record[0]);
+        }
+        System.out.println(pIDs);
+        Intent intent = new Intent(this, SearchResults.class);
+        // Convert the ArrayList to a simple int[]
+        intent.putExtra("providers", pIDs);
+        startActivity(intent);
         // TODO break down in smaller functions
     }
 

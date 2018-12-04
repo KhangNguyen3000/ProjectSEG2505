@@ -53,7 +53,7 @@ public class ScheduleManagement extends AppCompatActivity {
     }
 
     public void onClickCustomScheduleButton(View view){
-        Intent intent = new Intent(getApplicationContext(), CustomDispo.class);
+        Intent intent = new Intent(this, CustomDispo.class);
         startActivity(intent);
     }
 
