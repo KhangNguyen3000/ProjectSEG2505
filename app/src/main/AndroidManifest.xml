@@ -39,7 +39,7 @@
         <activity android:name=".Booking" />
         <activity android:name=".Activities.RatingList" />
         <activity android:name=".Activities.RateScreen" />
-        <activity android:name=".Schedule"></activity>
+        <activity android:name=".Activities.Schedule"></activity>
     </application>
 
 </manifest>
