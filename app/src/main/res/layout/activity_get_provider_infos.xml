@@ -236,8 +236,6 @@
                 android:layout_gravity="center_horizontal"
                 android:isIndicator="true"
                 android:clickable="false"
-                android:focusableInTouchMode="false"
-                android:focusable="false"
                 android:numStars="5" />
 
         </LinearLayout>
