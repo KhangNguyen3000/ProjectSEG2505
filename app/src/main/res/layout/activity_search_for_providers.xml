@@ -7,10 +7,16 @@
     tools:context=".Activities.SearchForProviders">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
+
+        android:id="@+id/linearLayout5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
             android:id="@+id/searchByLbl"
@@ -68,13 +74,14 @@
 
         <LinearLayout
             android:id="@+id/srch_llh_rating"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/checkBoxRating"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:text="Rating"
@@ -82,13 +89,14 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="0.7"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:rating="0"
-                android:stepSize="1" />
+                android:rating="0" />
+
         </LinearLayout>
 
         <LinearLayout

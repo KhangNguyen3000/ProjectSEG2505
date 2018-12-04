@@ -23,7 +23,7 @@ public class RegisterFinal extends AppCompatActivity {
     String pass, cPass;
     String phoneNumber;
     int streetNumber;
-    String street, city, province, country, postalC, type;
+    String street, city, province, country, postalC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
