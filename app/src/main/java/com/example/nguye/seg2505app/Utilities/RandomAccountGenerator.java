@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.nguye.seg2505app.Activities.Hash;
 import com.example.nguye.seg2505app.Activities.Schedule;
 import com.example.nguye.seg2505app.MyDBHandler;
 import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
@@ -47,9 +48,17 @@ public class RandomAccountGenerator {
             phoneNumber += new Random().nextInt(10);
         }
         account.setPhoneNumber(phoneNumber);
-        account.setPassword("password");
+        account.setPassword(hash("password"));
 
         return account;
+    }
+
+    static int hash(String s){
+        int hash = 7;
+        for(int i = 0; i < s.length(); i++){
+            hash = hash*31 + s.charAt(i);
+        }
+        return hash;
     }
 
     public static OfferedService generateNewService(Context context, Account account) {

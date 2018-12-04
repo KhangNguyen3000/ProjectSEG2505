@@ -41,7 +41,6 @@ public class ModifyScreen extends AppCompatActivity{
         tvEmail.setText(currentAccount.getEmail());
 
         TextView tvPassWord = (TextView)findViewById(R.id.mod_input_password);
-        tvPassWord.setText(currentAccount.getPassword());
 
         TextView tvStreetN = (TextView)findViewById(R.id.mod_input_streetNumber);
         tvStreetN.setText(Integer.toString(currentAccount.getStreetNumber()));
@@ -75,7 +74,9 @@ public class ModifyScreen extends AppCompatActivity{
         currentAccount.setFirstName(firstName);
         currentAccount.setLastName(lastName);
         currentAccount.setEmail(email);
-        currentAccount.setPassword(pass);
+        if(!(pass.equals(""))) {
+            currentAccount.setPassword(Hash.hash(pass));
+        }
         currentAccount.setStreetNumber(streetNumber);
         currentAccount.setStreetName(street);
         currentAccount.setCity(city);

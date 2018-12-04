@@ -96,7 +96,7 @@ public class RegisterFinal extends AppCompatActivity {
         account.setFirstName(firstName);
         account.setLastName(lastName);
         account.setEmail(email);
-        account.setPassword(pass);
+        account.setPassword(Hash.hash(pass));
         account.setStreetNumber(streetNumber);
         account.setStreetName(street);
         account.setCity(city);
