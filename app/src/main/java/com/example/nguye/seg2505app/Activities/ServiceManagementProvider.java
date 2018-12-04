@@ -131,6 +131,8 @@ public class ServiceManagementProvider extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // TODO (Paul) the app crashes when clicking on an OfferedService.
+
 
     public void onClickUpdate(View view) {
         ViewGroup layout = findViewById(R.id.smp_layout_root);

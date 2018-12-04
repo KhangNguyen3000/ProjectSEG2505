@@ -42,6 +42,8 @@ public class Booking extends AppCompatActivity {
     private RecyclerView.LayoutManager rvLayoutManager;
 
     // TODO Make sure appointments are registered and displayed properly
+    // TODO when generating, it only seems to show the availabilities of the same day for every day in the current effective defaultSchedule
+    // TODO it probably has something to do with a function of DailySchedule (generate or toArrayList)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
