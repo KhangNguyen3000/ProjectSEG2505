@@ -66,8 +66,8 @@ public class CustomDispo extends AppCompatActivity {
         }
 
         DisplayCustom(displayCustomSchedule);
-
     }
+
     public void DisplayCustom( List<String> users){
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users.toArray(new String[users.size()]));
         ListView listView = findViewById(R.id._ListViewCustomDispo);
