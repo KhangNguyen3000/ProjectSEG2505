@@ -145,6 +145,11 @@ public class WelcomePage extends AppCompatActivity{
         Intent intent = new Intent(getApplicationContext(), Booking.class);
         startActivity(intent);
     }
+
+    public void onClickSearch(View view) {
+        Intent intent = new Intent(getApplicationContext(), SearchForProviders.class);
+        startActivity(intent);
+    }
 }
 
 

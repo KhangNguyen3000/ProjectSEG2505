@@ -286,6 +286,7 @@ public class Account extends Storable implements java.io.Serializable {
     public String getPhoneNumber(){return this.phoneNumber;}
     public void setPhoneNumber(String phoneNumber){this.phoneNumber = phoneNumber;}
 
+    // TODO how do we set a password now?
     public int getPassword(){return this.password;}
     public void setPassword(int password){this.password = password;}
 
