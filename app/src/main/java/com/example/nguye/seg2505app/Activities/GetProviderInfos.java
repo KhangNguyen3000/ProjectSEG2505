@@ -93,7 +93,9 @@ public class GetProviderInfos extends AppCompatActivity {
     }
 
     public void onClickRating(View view){
-
+        Intent intent = new Intent(this, RatingScreen.class);
+        intent.putExtra("id_provider", provider.getID());
+        startActivity(intent);
     }
 
 

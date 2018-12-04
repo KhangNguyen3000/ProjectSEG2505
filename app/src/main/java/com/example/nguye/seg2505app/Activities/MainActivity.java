@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             MyDBHandler dbHandler = new MyDBHandler(this);
             String email = (((EditText) findViewById(R.id.emailText)).getText().toString());
             String password = (((EditText) findViewById(R.id.passwordText)).getText().toString());
-            String dbPassword;
+            int dbPassword;
             // Search for the account with the provided email
 //            Account account = dbHandler.findAccount(email);
             Account account = new Account().find(this, Account.COL_EMAIL, email, true);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 // if the account is found, check if the password is correct
                 dbPassword = account.getPassword();
                 System.out.println(dbPassword);
-                if (dbPassword.equals(password)) {
+                if (dbPassword == Hash.hash(password)) {
                     // store the account information in CurrentAccount
                     Account.setCurrentAccount(account);
                     Toast toast = Toast.makeText(getApplicationContext(), "Logging in!", Toast.LENGTH_LONG);

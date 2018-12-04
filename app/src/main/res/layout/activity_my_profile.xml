@@ -89,27 +89,6 @@
                     android:hint="Email" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/mp_llh_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/mp_txt_passwordLbl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Password:"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mp_txt_passwordDisp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:hint="Password" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
