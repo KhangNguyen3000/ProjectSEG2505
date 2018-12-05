@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.Rating;
+import com.example.nguye.seg2505app.Storables.Storable;
+
+import java.util.ArrayList;
 
 public class RateScreen extends AppCompatActivity {
 
@@ -40,20 +43,31 @@ public class RateScreen extends AppCompatActivity {
         EditText commentaire = (EditText) findViewById(R.id.commentaire);
         String description = commentaire.getText().toString();
         float ratingNumber = ((RatingBar) findViewById(R.id.ratingBar2)).getRating();
-        if(ratingNumber > 0 && ratingNumber <= 5) {
-            Rating rating = new Rating(id_provider, id_customer, description, ratingNumber);
-            rating.add(this);
+        Rating rating = new Rating(id_provider, id_customer, description, ratingNumber);
+        String idQuery = "SELECT " + Rating.COL_ID
+                + " FROM " + Rating.TABLE_NAME
+                + " WHERE " + Rating.COL_CUSTOMER_ID + " = " + (id_customer)
+                + " AND " + Rating.COL_PROVIDER_ID + " = " + (id_provider);
+        System.out.println(idQuery);
+        ArrayList<String[]> records = Storable.select(this, idQuery, 1);
+        if(records.size() > 0){
+            rating.setID(Integer.parseInt(records.get(0)[0]));
+            rating.update(this);
         }else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(true);
-            builder.setTitle("Rating needed");
-            builder.setMessage("please add a rating before posting");
-            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+            if (ratingNumber > 0 && ratingNumber <= 5) {
+                rating.add(this);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setCancelable(true);
+                builder.setTitle("Rating needed");
+                builder.setMessage("please add a rating before posting");
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+            }
         }
         finish();
     }
