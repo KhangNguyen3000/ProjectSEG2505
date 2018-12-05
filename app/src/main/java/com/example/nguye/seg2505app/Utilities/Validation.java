@@ -261,6 +261,10 @@ public class Validation extends AppCompatActivity {
         return isValid;
     }
 
+
+    // TODO add validation for time that come in pair.
+    // startTime <= endTime
+
     /**
      * Checks if the input field is empty.
      * @param inputField,  the instance of the EditText
@@ -348,6 +352,7 @@ public class Validation extends AppCompatActivity {
                     }
                     break;
                     // TODO add the case for date
+                    // Cannot select a past date
                 case 131073: // inputType == none
                     // Don't do anything and apply custom validation outside of this function.
                     // Keep this input type for validation of inputs that don't belong to another category

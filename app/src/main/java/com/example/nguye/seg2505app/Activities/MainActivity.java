@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         if(!(dbHandler.existsType(1))){
             dbHandler.createAdmin(this);
             dbHandler.createServiceTypes(this);
+            dbHandler.createProvider(this);
+            dbHandler.createClient(this);
         }
     }
 
@@ -79,14 +81,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void onClickGenerate(View view) {
         RandomAccountGenerator.generateStuff(this, 5);
         Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
         toast.show();
-    }
-    public void onClickTestingSearch(View view){
-        Intent intent = new Intent(getApplicationContext(), SearchResults.class);
-        startActivity(intent);
     }
 }
 

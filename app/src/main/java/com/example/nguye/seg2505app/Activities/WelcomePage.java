@@ -82,6 +82,7 @@ public class WelcomePage extends AppCompatActivity{
             findViewById(R.id.wel_manageserviceProvider_button).setVisibility(View.VISIBLE);
         } else { // If the user is a client
             accType ="Client";
+            findViewById(R.id.wel_search_button).setVisibility(View.VISIBLE);
         }
         return accType;
     }
@@ -137,12 +138,6 @@ public class WelcomePage extends AppCompatActivity{
 
     public void onClickScheduleButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Schedule.class);
-        startActivity(intent);
-    }
-
-    // For testing purpose
-    public void onClickDirectAccess(View view) {
-        Intent intent = new Intent(getApplicationContext(), Booking.class);
         startActivity(intent);
     }
 

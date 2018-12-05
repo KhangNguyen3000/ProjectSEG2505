@@ -26,7 +26,9 @@ public class GetProviderInfos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_provider_infos);
-        id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
+        Bundle extras = getIntent().getExtras();
+        id_provider = extras.getInt("providerID");
+//        id_provider = (Integer) getIntent().getSerializableExtra("id_provider");
         provider = new Account();
         provider = provider.find(this, "ID", id_provider, false);
 
@@ -84,6 +86,22 @@ public class GetProviderInfos extends AppCompatActivity {
         p_description.setText(provider.getDescription());
         p_services.setText(services);
         p_rating.setRating(rating);
+    }
+
+    public void onResume(){
+        super.onResume();
+        float rating = 0;
+        ArrayList <Rating> ratings = Rating.findAll(this, Rating.COL_PROVIDER_ID, id_provider, false);
+        for(int i = 0; i < ratings.size(); i++){
+            rating += ratings.get(i).getRating();
+        }
+        rating = rating / ratings.size();
+        RatingBar p_rating = findViewById(R.id.p_rating);
+        p_rating.setRating(rating);
+        Account provider = new Account();
+        provider = provider.find(getApplicationContext(), Account.COL_ID, id_provider, false);
+        System.out.println((int) rating);
+        provider.setRating((int) rating);
     }
     // Launch Schedule Activity
     public void onClickSchedule(View view){

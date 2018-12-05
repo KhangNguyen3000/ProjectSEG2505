@@ -54,6 +54,7 @@ public class CustomDispo extends AppCompatActivity {
         //query is an sql style query to get elements only corresponding to the current account
         String query = "SELECT " + CustomSchedule.COL_DATE + ", " + CustomSchedule.COL_START
                 + ", " + CustomSchedule.COL_END + ", " + CustomSchedule.COL_AVAILABILITY
+                + " FROM " + CustomSchedule.TABLE_NAME
                 + " WHERE " + CustomSchedule.COL_PROVIDER + " = " + Account.getCurrentAccount().getID();
         System.out.println(query);
         ArrayList<String[]> customSchedules = Storable.select(this, query, 4);
@@ -80,6 +81,8 @@ public class CustomDispo extends AppCompatActivity {
     public void showDatePicker(View view){ DateTimePicker.showDatePicker(view);}
 
     public void OnClickConfirm(View view){
+        // TODO when adding a custom dispo, make sure the provider is not booked between the
+        //      specified times using the DailySchedule.isBookedBetween() function
         if(availBox.isChecked()){
             state = ScheduleState.AVAILABLE;
         } else{state = ScheduleState.UNAVAILABLE;}

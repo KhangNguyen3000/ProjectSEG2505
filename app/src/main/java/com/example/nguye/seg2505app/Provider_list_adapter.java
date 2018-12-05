@@ -60,7 +60,7 @@ public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_ad
         tvEmail.setText(email_p);
         tvCompany.setText(companyName_p);
         if (accP.getLicensed() == 1) {
-            tvLicense.setText(license_p);
+            tvLicense.setText("Licensed");
         }
     }
 
@@ -77,7 +77,7 @@ public class Provider_list_adapter extends RecyclerView.Adapter<Provider_list_ad
 
         ViewHolder(View itemView) {
             super(itemView);
-            viewGroup = itemView.findViewById(R.id.csrtLayout);
+            viewGroup = itemView.findViewById(R.id.provider_card);
             itemView.setOnClickListener(this);
         }
 

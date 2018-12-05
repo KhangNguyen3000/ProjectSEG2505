@@ -40,7 +40,7 @@ public class RateScreen extends AppCompatActivity {
         EditText commentaire = (EditText) findViewById(R.id.commentaire);
         String description = commentaire.getText().toString();
         float ratingNumber = ((RatingBar) findViewById(R.id.ratingBar2)).getRating();
-        if(ratingNumber > 0 && ratingNumber < 5) {
+        if(ratingNumber > 0 && ratingNumber <= 5) {
             Rating rating = new Rating(id_provider, id_customer, description, ratingNumber);
             rating.add(this);
         }else{
@@ -55,6 +55,7 @@ public class RateScreen extends AppCompatActivity {
                 }
             });
         }
+        finish();
     }
 
 }

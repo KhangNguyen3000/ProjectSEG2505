@@ -122,7 +122,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="licensed" />
+                        android:text="licensed"
+                        android:textColor="@color/colorPrimary" />
 
                 </LinearLayout>
 
@@ -233,6 +234,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:isIndicator="true"
+                android:clickable="false"
                 android:numStars="5" />
 
         </LinearLayout>
