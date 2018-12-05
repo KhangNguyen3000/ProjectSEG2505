@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.ResourceCursorAdapter;
 import android.widget.SimpleCursorAdapter;
@@ -36,26 +37,27 @@ import java.util.Date;
 
 public class SearchForProviders extends AppCompatActivity {
 
-    CheckBox cbName;
-    CheckBox cbService;
-    CheckBox cbRating;
-    CheckBox cbDate;
+    RadioButton rbName;
+    RadioButton rbService;
+    RadioButton rbRating;
+    RadioButton rbDate;
     EditText editName;
     Spinner serviceSpinner;
     RatingBar editRating;
     EditText editDate;
     EditText editBetween;
     EditText editAnd;
+    String searchQuery = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_for_providers);
 
-        cbName = findViewById(R.id.checkBoxName);
-        cbService = findViewById(R.id.checkBoxService);
-        cbRating = findViewById(R.id.checkBoxRating);
-        cbDate = findViewById(R.id.checkBoxDate);
+        rbName = findViewById(R.id.checkBoxName);
+        rbService = findViewById(R.id.checkBoxService);
+        rbRating = findViewById(R.id.checkBoxRating);
+        rbDate = findViewById(R.id.checkBoxDate);
         editName = findViewById(R.id.srch_input_name);
         serviceSpinner = findViewById(R.id.srch_dd_service);
         editRating = findViewById(R.id.ratingBar);
@@ -112,133 +114,254 @@ public class SearchForProviders extends AppCompatActivity {
         DateTimePicker.showTimePicker(view);
     }
 
-    public void search(View view) {
-        boolean isCheckedName = cbName.isChecked();
-        boolean isCheckedService = cbService.isChecked();
-        boolean isCheckedRating = cbRating.isChecked();
-        boolean isCheckedDate = cbDate.isChecked();
-
-        String query = "";
-        String queryName = "";
-        String queryService = "";
-        String queryRating = "";
-        String queryDate = "";
-
-        if (isCheckedName) {
-            // TODO works if the firstName and lastName are joined
-            String name = editName.getText().toString();
-            queryName = "SELECT " + Account.COL_ID
-                    + " FROM " + Account.TABLE_NAME
-                    + " WHERE " + Account.COL_FIRSTNAME + " || " + Account.COL_LASTNAME
-                    + " = \"" + name + "\""
-                    + " AND " + Account.COL_TYPE + " = 2";
-            System.out.println(queryName);
-        }
-        if (isCheckedService) {
-            String service = serviceSpinner.getSelectedItem().toString();
-//            queryService = "SELECT OS." + OfferedService.COL_PROVIDER
-//                    + " FROM " + OfferedService.TABLE_NAME + " OS"
-//                    + " INNER JOIN " + ServiceType.TABLE_NAME + " ST"
-//                    + " ON OS." + OfferedService.COL_TYPE
+//    public void search(View view) {
+//        boolean isCheckedName = rbName.isChecked();
+//        boolean isCheckedService = rbService.isChecked();
+//        boolean isCheckedRating = rbRating.isChecked();
+//        boolean isCheckedDate = rbDate.isChecked();
+//
+//        String query = "";
+//        String queryName = "";
+//        String queryService = "";
+//        String queryRating = "";
+//        String queryDate = "";
+//
+//        if (isCheckedName) {
+//            // TODO works if the firstName and lastName are joined
+//            String name = editName.getText().toString();
+//            queryName = "SELECT " + Account.COL_ID
+//                    + " FROM " + Account.TABLE_NAME
+//                    + " WHERE " + Account.COL_FIRSTNAME + " || " + Account.COL_LASTNAME
+//                    + " = \"" + name + "\""
+//                    + " AND " + Account.COL_TYPE + " = 2";
+//            System.out.println(queryName);
+//        }
+//        if (isCheckedService) {
+//            String service = serviceSpinner.getSelectedItem().toString();
+////            queryService = "SELECT OS." + OfferedService.COL_PROVIDER
+////                    + " FROM " + OfferedService.TABLE_NAME + " OS"
+////                    + " INNER JOIN " + ServiceType.TABLE_NAME + " ST"
+////                    + " ON OS." + OfferedService.COL_TYPE
+////                    + " WHERE " + OfferedService.COL_TYPE
+////                    + " IN (SELECT " + ServiceType.COL_ID
+////                        + " FROM " + ServiceType.TABLE_NAME
+////                        + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
+//            queryService = "SELECT " + OfferedService.COL_PROVIDER
+//                    + " FROM " + OfferedService.TABLE_NAME
 //                    + " WHERE " + OfferedService.COL_TYPE
 //                    + " IN (SELECT " + ServiceType.COL_ID
-//                        + " FROM " + ServiceType.TABLE_NAME
-//                        + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
-            queryService = "SELECT " + OfferedService.COL_PROVIDER
-                    + " FROM " + OfferedService.TABLE_NAME
-                    + " WHERE " + OfferedService.COL_TYPE
-                    + " IN (SELECT " + ServiceType.COL_ID
-                    + " FROM " + ServiceType.TABLE_NAME
-                    + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
-            System.out.println(queryService);
-        }
-        if (isCheckedRating) {
-            float rating = editRating.getRating();
-            queryRating = "SELECT " + Account.COL_ID
-                    + " FROM " + Account.TABLE_NAME
-                    + " WHERE (" + Account.COL_RATING + " >= " + rating
-                    + ") OR (" + Account.COL_RATING + " = 0)";
-            // when searching by rating, the providers with no rating are displayed regardless of the specified criterion.
-            System.out.println(queryRating);
-        }
-        if (isCheckedDate && !(isCheckedName || isCheckedService || isCheckedRating)) {
-            // if only the date criterion is specified, get the providers' IDs directly from the table DefaultSchedules
-            String dateValue = editDate.getText().toString();
-            String between = editBetween.getText().toString();
-            String and = editAnd.getText().toString();
+//                    + " FROM " + ServiceType.TABLE_NAME
+//                    + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
+//            System.out.println(queryService);
+//        }
+//        if (isCheckedRating) {
+//            float rating = editRating.getRating();
+//            queryRating = "SELECT " + Account.COL_ID
+//                    + " FROM " + Account.TABLE_NAME
+//                    + " WHERE (" + Account.COL_RATING + " >= " + rating
+//                    + ") OR (" + Account.COL_RATING + " = 0)";
+//            // when searching by rating, the providers with no rating are displayed regardless of the specified criterion.
+//            System.out.println(queryRating);
+//        }
+//        if (isCheckedDate && !(isCheckedName || isCheckedService || isCheckedRating)) {
+//            // if only the date criterion is specified, get the providers' IDs directly from the table DefaultSchedules
+//            String dateValue = editDate.getText().toString();
+//            String between = editBetween.getText().toString();
+//            String and = editAnd.getText().toString();
+//
+//            String[] weekdayFields = DefaultSchedule.getWeekdayField(dateValue);
+//
+//            // Select the records where the provider is available during the specified timeslot,
+//            //  but only check the effective record (according to the effective date)
+//            queryDate = "SELECT " + DefaultSchedule.COL_PROVIDER
+//                    + " FROM " + DefaultSchedule.TABLE_NAME
+//                    + " WHERE " + weekdayFields[0] + " <= " + FormatValue.timeStringToMin(between)
+//                    + " AND " + weekdayFields[1] + " >= " + FormatValue.timeStringToMin(and)
+//                    + " AND " + DefaultSchedule.COL_EFFECTIVEDATE
+//                    + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
+//                    + ") FROM " + DefaultSchedule.TABLE_NAME
+//                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateValue + "\")";
+//            System.out.println(queryDate);
+//        }
+//
+//        // TODO use INNER JOIN instead of UNION
+//        // If a name, service and/or rating criteria have been specified, get a list of the
+//        //  providers' IDs corresponding to those criteria
+//        ArrayList<String[]> providerIDs;
+//        if (isCheckedName || isCheckedService || isCheckedRating) {
+//            if (isCheckedName) {
+//                query += queryName;
+//                if (isCheckedService) {
+//                    query += " INNER JOIN (" + queryService
+//                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
+//                            + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER;
+//                }
+//                if (isCheckedRating) {
+//                    query += " INNER JOIN (" + queryRating
+//                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
+//                            + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
+//                }
+//            } else {
+//                if (isCheckedService) {
+//                    query += queryService;
+//                    if (isCheckedRating) {
+//                        query += " INNER JOIN (" + queryRating
+//                                + ") ON " + OfferedService.TABLE_NAME + "." + OfferedService.COL_ID
+//                                + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
+//                    }
+//                } else {
+//                    query += queryRating; // has to be true
+//                }
+//            }
+//            if (isCheckedDate) {
+//                query = queryDate + " AND " + DefaultSchedule.COL_PROVIDER + " IN " + query;
+//            }
+//        } else if (isCheckedDate) {
+//            query = queryDate;
+//        } else {
+//            Toast toast = Toast.makeText(this, "You must specify at least one search criterion.", Toast.LENGTH_SHORT);
+//            toast.show();
+//            return;
+//        }
+//
+//        providerIDs = Storable.select(this, query, 1);
+//        if (providerIDs.size() > 0) {
+//            int[] pIDs = new int[providerIDs.size()];
+//            int i = 0;
+//            for (String[] record : providerIDs) {
+//                pIDs[i] = Integer.parseInt(record[0]);
+//                i++;
+//            }
+//            Intent intent = new Intent(this, SearchResults.class);
+//            // Convert the ArrayList to a simple int[]
+//            intent.putExtra("providers", pIDs);
+//            startActivity(intent);
+//        } else {
+//            Toast toast = Toast.makeText(this, "No provider match your criteria.", Toast.LENGTH_LONG);
+//            toast.show();
+//        }
+//        // TODO break down in smaller functions
+//    }
 
-            String[] weekdayFields = DefaultSchedule.getWeekdayField(dateValue);
+    /**
+     * Generate a query to search by name
+     * @return
+     */
+    public String searchByName() {
+        // TODO works if the firstName and lastName are joined
+        String name = editName.getText().toString();
+        String query = "SELECT " + Account.COL_ID
+                + " FROM " + Account.TABLE_NAME
+                + " WHERE " + Account.COL_FIRSTNAME + " || " + Account.COL_LASTNAME
+                + " = \"" + name + "\""
+                + " AND " + Account.COL_TYPE + " = 2";
+        System.out.println(query);
+        return query;
+    }
 
-            // Select the records where the provider is available during the specified timeslot,
-            //  but only check the effective record (according to the effective date)
-            queryDate = "SELECT " + DefaultSchedule.COL_PROVIDER
-                    + " FROM " + DefaultSchedule.TABLE_NAME
-                    + " WHERE " + weekdayFields[0] + " <= " + FormatValue.timeStringToMin(between)
-                    + " AND " + weekdayFields[1] + " >= " + FormatValue.timeStringToMin(and)
-                    + " AND " + DefaultSchedule.COL_EFFECTIVEDATE
-                    + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
-                    + ") FROM " + DefaultSchedule.TABLE_NAME
-                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateValue + "\")";
-            System.out.println(queryDate);
+    /**
+     * Generate a query to search by service
+     * @return
+     */
+    public String searchByService() {
+        String service = serviceSpinner.getSelectedItem().toString();
+        String query = "SELECT " + OfferedService.COL_PROVIDER
+                + " FROM " + OfferedService.TABLE_NAME
+                + " WHERE " + OfferedService.COL_TYPE
+                + " IN (SELECT " + ServiceType.COL_ID
+                + " FROM " + ServiceType.TABLE_NAME
+                + " WHERE " + ServiceType.COL_NAME + " = \"" + service + "\")";
+        System.out.println(query);
+        return query;
+    }
+
+    /**
+     * Generate a query to search by rating
+     * @return
+     */
+    public String searchByRating() {
+        float rating = editRating.getRating();
+        String query = "SELECT " + Account.COL_ID
+                + " FROM " + Account.TABLE_NAME
+                + " WHERE (" + Account.COL_RATING + " >= " + rating
+                + ") OR (" + Account.COL_RATING + " = 0)";
+        // when searching by rating, the providers with no rating are displayed regardless of the specified criterion.
+        System.out.println(query);
+        return query;
+    }
+
+    /**
+     * Generate a query to search by date
+     * @return
+     */
+    public String searchByDate() {
+        String dateValue = editDate.getText().toString();
+        String between = editBetween.getText().toString();
+        String and = editAnd.getText().toString();
+
+        String[] weekdayFields = DefaultSchedule.getWeekdayField(dateValue);
+
+        // Select the records where the provider is available during the specified timeslot,
+        //  but only check the effective record (according to the effective date)
+        String query = "SELECT " + DefaultSchedule.COL_PROVIDER
+                + " FROM " + DefaultSchedule.TABLE_NAME
+                + " WHERE " + weekdayFields[0] + " <= " + FormatValue.timeStringToMin(between)
+                + " AND " + weekdayFields[1] + " >= " + FormatValue.timeStringToMin(and)
+                + " AND " + DefaultSchedule.COL_EFFECTIVEDATE
+                + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
+                + ") FROM " + DefaultSchedule.TABLE_NAME
+                + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateValue + "\")";
+        System.out.println(query);
+        return query;
+    }
+
+    // From https://developer.android.com/guide/topics/ui/controls/radiobutton#java
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioBtnName:
+                if (checked)
+                    searchQuery = searchByName();
+                    break;
+            case R.id.radioBtnService:
+                if (checked)
+                    searchQuery = searchByService();
+                    break;
+            case R.id.radioBtnRating:
+                if (checked)
+                    searchQuery = searchByRating();
+                    break;
+            case R.id.radioBtnDate:
+                if (checked)
+                    searchQuery = searchByDate();
+                    break;
         }
+    }
 
-        // TODO use INNER JOIN instead of UNION
-        // If a name, service and/or rating criteria have been specified, get a list of the
-        //  providers' IDs corresponding to those criteria
+    public void onClickSearch(View view) {
         ArrayList<String[]> providerIDs;
-        if (isCheckedName || isCheckedService || isCheckedRating) {
-            if (isCheckedName) {
-                query += queryName;
-                if (isCheckedService) {
-                    query += " INNER JOIN (" + queryService
-                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
-                            + " = " + OfferedService.TABLE_NAME + "." + OfferedService.COL_PROVIDER;
+        if (!searchQuery.equals("")) {
+            // Find the ID of all the providers that correspond to the specified criterion
+            providerIDs = Storable.select(this, searchQuery, 1);
+            if (providerIDs.size() > 0) {
+                int[] pIDs = new int[providerIDs.size()];
+                int i = 0;
+                for (String[] record : providerIDs) {
+                    pIDs[i] = Integer.parseInt(record[0]);
+                    i++;
                 }
-                if (isCheckedRating) {
-                    query += " INNER JOIN (" + queryRating
-                            + ") ON " + Account.TABLE_NAME + "." + Account.COL_ID
-                            + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
-                }
+                Intent intent = new Intent(this, SearchResults.class);
+                // Convert the ArrayList to a simple int[]
+                intent.putExtra("providers", pIDs);
+                startActivity(intent);
             } else {
-                if (isCheckedService) {
-                    query += queryService;
-                    if (isCheckedRating) {
-                        query += " INNER JOIN (" + queryRating
-                                + ") ON " + OfferedService.TABLE_NAME + "." + OfferedService.COL_ID
-                                + " = " + Rating.TABLE_NAME + "." + Rating.COL_PROVIDER_ID;
-                    }
-                } else {
-                    query += queryRating; // has to be true
-                }
+                Toast toast = Toast.makeText(this, "No provider match your criteria.", Toast.LENGTH_LONG);
+                toast.show();
             }
-            if (isCheckedDate) {
-                query = queryDate + " AND " + DefaultSchedule.COL_PROVIDER + " IN " + query;
-            }
-        } else if (isCheckedDate) {
-            query = queryDate;
-        } else {
-            Toast toast = Toast.makeText(this, "You must specify at least one search criterion.", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
         }
-
-        providerIDs = Storable.select(this, query, 1);
-        if (providerIDs.size() > 0) {
-            int[] pIDs = new int[providerIDs.size()];
-            int i = 0;
-            for (String[] record : providerIDs) {
-                pIDs[i] = Integer.parseInt(record[0]);
-                i++;
-            }
-            Intent intent = new Intent(this, SearchResults.class);
-            // Convert the ArrayList to a simple int[]
-            intent.putExtra("providers", pIDs);
-            startActivity(intent);
-        } else {
-            Toast toast = Toast.makeText(this, "No provider match your criteria.", Toast.LENGTH_LONG);
-            toast.show();
-        }
-        // TODO break down in smaller functions
     }
 
     // TODO disable/enable the fields when the checkboxes are toggled
