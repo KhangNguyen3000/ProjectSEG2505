@@ -299,6 +299,19 @@ public abstract class Storable implements java.io.Serializable {
         return result;
     }
 
+    public static int count(Context context, String query) {
+        MyDBHandler dbHandler = new MyDBHandler(context);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+
+        cursor.close();
+        db.close();
+        return count;
+    }
+
     public int getID() { return this.ID; }
     public void setID(int ID) { this.ID = ID; }
 }
