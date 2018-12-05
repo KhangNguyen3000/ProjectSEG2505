@@ -299,6 +299,12 @@ public abstract class Storable implements java.io.Serializable {
         return result;
     }
 
+    /**
+     * Count the number of records that correspond to the condition specified in the query
+     * @param context
+     * @param query
+     * @return
+     */
     public static int count(Context context, String query) {
         MyDBHandler dbHandler = new MyDBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
