@@ -88,6 +88,48 @@ public class MyDBHandler extends SQLiteOpenHelper{
 //        System.out.println("Administrateur créé");
     }
 
+    public void createProvider(Context context){
+        // Set all the attributes of the admin account.
+        Account account = new Account();
+        account.setFirstName("Provider");
+        account.setLastName("Provider");
+        account.setEmail("pro@pro.pro");
+        account.setPassword(hash("pro123"));
+        account.setStreetNumber(1);
+        account.setStreetName("provider");
+        account.setCity("Provider");
+        account.setProvince("Provider");
+        account.setCountry("Provider");
+        account.setPostalCode("A1A1A1");
+        account.setPhoneNumber("1234567890");
+        account.setType(2);
+
+        // Add the account to the database
+        account.add(context);
+    }
+
+    public void createClient(Context context){
+        // Set all the attributes of the admin account.
+        Account account = new Account();
+        account.setFirstName("Client");
+        account.setLastName("Client");
+        account.setEmail("client@client.client");
+        account.setPassword(hash("client"));
+        account.setStreetNumber(3);
+        account.setStreetName("client");
+        account.setCity("Client");
+        account.setProvince("Client");
+        account.setCountry("Client");
+        account.setPostalCode("A2A2A2");
+        account.setPhoneNumber("0987654321");
+        account.setType(3);
+
+        // Add the account to the database
+//        addAccount(account);
+        account.add(context);
+//        System.out.println("Administrateur créé");
+    }
+
     static int hash(String s){
         int hash = 7;
         for(int i = 0; i < s.length(); i++){
