@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         if(!(dbHandler.existsType(1))){
             dbHandler.createAdmin(this);
             dbHandler.createServiceTypes(this);
+            dbHandler.createProvider(this);
+            dbHandler.createClient(this);
         }
     }
 
