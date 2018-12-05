@@ -98,6 +98,10 @@ public class GetProviderInfos extends AppCompatActivity {
         rating = rating / ratings.size();
         RatingBar p_rating = findViewById(R.id.p_rating);
         p_rating.setRating(rating);
+        Account provider = new Account();
+        provider = provider.find(getApplicationContext(), Account.COL_ID, id_provider, false);
+        System.out.println((int) rating);
+        provider.setRating((int) rating);
     }
     // Launch Schedule Activity
     public void onClickSchedule(View view){
