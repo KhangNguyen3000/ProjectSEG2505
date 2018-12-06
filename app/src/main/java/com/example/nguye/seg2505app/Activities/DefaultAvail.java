@@ -279,6 +279,14 @@ public class DefaultAvail extends AppCompatActivity {
         if (defSchedules.size() > 0) {
 //            effDate.setText(defSchedules.get(0).getEffectiveDate());
             // TODO check all the boxes that have 0:00 and uncheck the boxes that don't
+            sundayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[3])==0)&&(Integer.parseInt(defSchedule.get(0)[4])==0  )));
+            mondayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[5])==0)&&(Integer.parseInt(defSchedule.get(0)[6])==0  )));
+            tuesdayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[7])==0)&&(Integer.parseInt(defSchedule.get(0)[8])==0  )));
+            wednesdayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[9])==0)&&(Integer.parseInt(defSchedule.get(0)[10])==0  )));
+            thursdayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[11])==0)&&(Integer.parseInt(defSchedule.get(0)[12])==0  )));
+            fridayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[13])==0)&&(Integer.parseInt(defSchedule.get(0)[14])==0  )));
+            saturdayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[15])==0)&&(Integer.parseInt(defSchedule.get(0)[16])==0  )));
+
             sundayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[3])));
             sundayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[4])));
             mondayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[5])));
@@ -321,20 +329,20 @@ public class DefaultAvail extends AppCompatActivity {
             sundayCheck.setChecked(false);
 
 
-            mondayStart.setText("");
-            mondayEnd.setText("");
-            tuesdayStart.setText("");
-            tuesdayEnd.setText("");
-            wednesdayStart.setText("");
-            wednesdayEnd.setText("");
-            thursdayStart.setText("");
-            thursdayEnd.setText("");
-            fridayStart.setText("");
-            fridayEnd.setText("");
-            saturdayStart.setText("");
-            saturdayEnd.setText("");
-            sundayStart.setText("");
-            sundayEnd.setText("");
+            mondayStart.setText("0:00");
+            mondayEnd.setText("0:00");
+            tuesdayStart.setText("0:00");
+            tuesdayEnd.setText("0:00");
+            wednesdayStart.setText("0:00");
+            wednesdayEnd.setText("0:00");
+            thursdayStart.setText("0:00");
+            thursdayEnd.setText("0:00");
+            fridayStart.setText("0:00");
+            fridayEnd.setText("0:00");
+            saturdayStart.setText("0:00");
+            saturdayEnd.setText("0:00");
+            sundayStart.setText("0:00");
+            sundayEnd.setText("0:00");
             return -1;
         }
 //        ArrayList<String[]> defSchedules = Storable.select(this, effDateQuery, 17);
