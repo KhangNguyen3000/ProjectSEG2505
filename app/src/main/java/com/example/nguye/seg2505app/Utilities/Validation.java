@@ -26,6 +26,7 @@ public class Validation extends AppCompatActivity {
      * @param inputField, the instance of the EditText
      * @return true if valid
      */
+    // TODO validate that starttime is smaller then endTime
     public static boolean validateEmail(EditText inputField) {
         // First, check if the field is empty
         if (isEmpty(inputField)) {
@@ -261,8 +262,11 @@ public class Validation extends AppCompatActivity {
         return isValid;
     }
 
+    public static boolean validateTimes(EditText startTime, EditText endTime){
+        return(FormatValue.timeStringToMin(endTime.getText().toString())>FormatValue.timeStringToMin(startTime.getText().toString()));
 
-    // TODO add validation for time that come in pair.
+    }
+
     // startTime <= endTime
 
     /**

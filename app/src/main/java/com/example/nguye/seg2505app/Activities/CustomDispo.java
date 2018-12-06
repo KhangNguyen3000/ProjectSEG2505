@@ -94,7 +94,7 @@ public class CustomDispo extends AppCompatActivity {
 
         if(Integer.parseInt(duration.getText().toString())>= 1){
 
-            if(Validation.validateAll(layout)){
+            if(Validation.validateAll(layout)&&Validation.validateTimes(startTime,endTime)){
                 int provider = Account.getCurrentAccount().getID();
                 String setDate = date.getText().toString();
                 int setStartTime = FormatValue.timeStringToMin(startTime.getText().toString());
