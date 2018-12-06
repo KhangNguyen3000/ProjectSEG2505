@@ -4,230 +4,232 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".Activities.SearchForProviders">
 
-    <LinearLayout
 
-        android:id="@+id/linearLayout5"
+    <TextView
+        android:id="@+id/searchByLbl"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Search providers by..."
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-        <TextView
-            android:id="@+id/searchByLbl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search providers by..."
-            android:textSize="18sp" />
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="0dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchByLbl">
 
         <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.35"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/radioBtnName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:text="Name"
+                android:textSize="16sp" />
 
-                <RadioButton
-                    android:id="@+id/radioBtnName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="Name"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/srch_input_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:contentDescription="Name"
-                    android:ems="10"
-                    android:hint="Provider's name"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
-
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/radioBtnService"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:text="Service"
+                android:textSize="16sp" />
 
-                <RadioButton
-                    android:id="@+id/radioBtnService"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="Service"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/srch_dd_service"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7" />
-            </LinearLayout>
-
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/radioBtnRating"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:text="Rating"
+                android:textSize="16sp" />
 
-                <RadioButton
-                    android:id="@+id/radioBtnRating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="Rating"
-                    android:textSize="16sp" />
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="0.7"
-                    android:isIndicator="false"
-                    android:numStars="5"
-                    android:rating="0"
-                    android:stepSize="1.00" />
-            </LinearLayout>
-
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/radioBtnDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="Specific date"
+                android:textSize="16sp" />
 
-                <RadioButton
-                    android:id="@+id/radioBtnDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Specific date"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/srch_llv_date"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.6"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/srch_txt_dateLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Date"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/srch_input_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:contentDescription="Date"
-                            android:cursorVisible="false"
-                            android:ems="10"
-                            android:enabled="true"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="YYYY-MM-DD"
-                            android:inputType="date"
-                            android:onClick="showDatePicker" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/srch_txt_betweenLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Between"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/srch_input_between"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:contentDescription="Between"
-                            android:cursorVisible="false"
-                            android:ems="10"
-                            android:enabled="true"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="0:00"
-                            android:inputType="time"
-                            android:onClick="showTimePicker" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/srch_txt_andLbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="And"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/srch_input_and"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:contentDescription="And"
-                            android:cursorVisible="false"
-                            android:ems="10"
-                            android:enabled="true"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="0:00"
-                            android:inputType="time"
-                            android:onClick="showTimePicker" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
         </RadioGroup>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.65"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/srch_btn_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickSearch"
-            android:text="Search" />
+            <EditText
+                android:id="@+id/srch_input_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:contentDescription="Name"
+                android:ems="10"
+                android:hint="Provider's name"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/srch_dd_service"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="1.00" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <LinearLayout
+            android:id="@+id/srch_llv_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/srch_txt_dateLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/srch_input_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="Date"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="YYYY-MM-DD"
+                android:inputType="date"
+                android:onClick="showDatePicker" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/srch_txt_betweenLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Between"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/srch_input_between"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="Between"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="0:00"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/srch_txt_andLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="And"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/srch_input_and"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="And"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:enabled="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="0:00"
+                android:inputType="time"
+                android:onClick="showTimePicker" />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/srch_btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickSearch"
+        android:text="Search"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
 
 </android.support.constraint.ConstraintLayout>
