@@ -264,14 +264,17 @@ public class Validation extends AppCompatActivity {
 
     public static boolean validateTimes(EditText startTime, EditText endTime){
 
-       if(FormatValue.timeStringToMin(endTime.getText().toString())>=FormatValue.timeStringToMin(startTime.getText().toString())) {
+       if(compareMinTime(FormatValue.timeStringToMin(endTime.getText().toString()),FormatValue.timeStringToMin(startTime.getText().toString()))) {
            return true;
        }else{
            Toast errorMessage = Toast.makeText(startTime.getContext(), "endTime smaller then startTime", Toast.LENGTH_LONG);
            errorMessage.show();
            return false;
        }
+    }
 
+    public static boolean compareMinTime (int startTime,int endTime){
+        return (endTime>=startTime);
     }
 
     // startTime <= endTime

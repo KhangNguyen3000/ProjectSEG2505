@@ -56,14 +56,7 @@ public class AccountMethodsTest {
         assertEquals(testAccount.getFirstName(), "Test");
     }
 
-    @Test
-    public void checkServiceType(){
-        ServiceType testServiceType = new ServiceType();
-        testServiceType.setMaxRate(100);
-        testServiceType.setName("Test");
-        assertTrue(testServiceType.getMaxRate() == 100);
-        assertEquals(testServiceType.getName(), "Test");
-    }
+
 
     @Test
     public void checkOfferedService(){
