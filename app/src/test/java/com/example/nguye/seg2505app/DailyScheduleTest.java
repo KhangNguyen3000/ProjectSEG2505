@@ -2,6 +2,8 @@ package com.example.nguye.seg2505app;
 
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
 import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
+import com.example.nguye.seg2505app.ScheduleClasses.TimeNode;
+import com.example.nguye.seg2505app.ScheduleClasses.TimeSlot;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -31,4 +33,12 @@ public class DailyScheduleTest {
 
 
     // TODO other tests related to schedules
+
+    @Test
+    public void DailySchedule_sfsd() {
+        DailySchedule schedule = new DailySchedule(480, 960, ScheduleState.AVAILABLE);
+        TimeSlot timeSlot = new TimeSlot(480, 540, ScheduleState.BOOKED);
+        schedule = schedule.merge(timeSlot);
+        System.out.println(schedule);
+    }
 }
