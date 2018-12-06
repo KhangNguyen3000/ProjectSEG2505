@@ -85,12 +85,20 @@ public class Booking extends AppCompatActivity {
 
     public void showDailySchedule() {
         DailySchedule dailySchedule = new DailySchedule().generate(this, providerID, selectedDate);
-        System.out.println(selectedDate);
-        System.out.println(dailySchedule);
-        ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
-        rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
+        if (dailySchedule.getSize() > 0) {
+            ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
+            rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
+            setOnClickListeners(rvAdapter);
+            recyclerView.setAdapter(rvAdapter);
+        } else {
+            ArrayList<TimeNode> arrayDailySchedule = new DailySchedule(0, 1440, ScheduleState.UNAVAILABLE).toArrayList();
+            rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
+            setOnClickListeners(rvAdapter);
+            recyclerView.setAdapter(rvAdapter);
+        }
 
-        setOnClickListeners(rvAdapter);
+
+
 
 //        rvAdapter.setClickListener(new ScheduleAdapter.ItemClickListener() {
 //            @Override
@@ -154,7 +162,6 @@ public class Booking extends AppCompatActivity {
 //                dialog.show();
 //            }
 //        });
-        recyclerView.setAdapter(rvAdapter);
     }
 
     // Bind an onClick event to each item in the RecyclerView everytime a new one is generated

@@ -37,6 +37,8 @@ public class ScheduleManagement extends AppCompatActivity {
         mBorderColor = 0xAA444444;
         mTextViewBorderWidth = 1;
         mTableBorderWidth = mTextViewBorderWidth * 2;
+        TextView tvNextNDays = findViewById(R.id.clarificationText);
+        tvNextNDays.setText("My availabilities for the next " + numOfDaysToShow + " days.");
         TableLayout layout = (TableLayout)findViewById(R.id.layout);
         setupTable(layout);
 
