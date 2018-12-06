@@ -90,6 +90,8 @@ public class GetProviderInfos extends AppCompatActivity {
 
     public void onResume(){
         super.onResume();
+        provider = new Account();
+        provider = provider.find(this, "ID", id_provider, false);
         float rating = 0;
         ArrayList <Rating> ratings = Rating.findAll(this, Rating.COL_PROVIDER_ID, id_provider, false);
         for(int i = 0; i < ratings.size(); i++){
