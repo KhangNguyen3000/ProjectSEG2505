@@ -96,72 +96,6 @@ public class Booking extends AppCompatActivity {
             setOnClickListeners(rvAdapter);
             recyclerView.setAdapter(rvAdapter);
         }
-
-
-
-
-//        rvAdapter.setClickListener(new ScheduleAdapter.ItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                TextView tvTimeSlotStart = view.findViewById(R.id.timeSlotStart);
-//                TextView tvTimeSlotEnd = view.findViewById(R.id.timeSlotEnd);
-//                TextView tvAvail = view.findViewById(R.id.availability);
-//                // Set the default times in the dialog using the times above
-//
-//                // TODO prompt a modal window for appointement
-//                // only allow to click on AVAILABLE slots
-//                final Dialog dialog = new Dialog(view.getContext());
-//                dialog.setContentView(R.layout.appointment);
-//                final EditText etTimeSlotStart = dialog.findViewById(R.id.timeSlotStart);
-//                final EditText etTimeSlotEnd = dialog.findViewById(R.id.timeSlotEnd);
-//                Button btnConfirm = dialog.findViewById(R.id.btn_confirm);
-//                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
-//
-//                // Bind onClick event to the timeSlotStart field
-//                etTimeSlotStart.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        DateTimePicker.showTimePicker(v);
-//                    }
-//                });
-//
-//                // Bind onClick event to the timeSlotEnd field
-//                etTimeSlotEnd.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        DateTimePicker.showTimePicker(v);
-//                    }
-//                });
-//
-//                // Bind onClick event to the confirm button
-//                btnConfirm.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO add the appointment
-//                        CustomSchedule appointment = new CustomSchedule(providerID,
-//                                selectedDate,
-//                                FormatValue.timeStringToMin(etTimeSlotStart.getText().toString()),
-//                                FormatValue.timeStringToMin(etTimeSlotEnd.getText().toString()),
-//                                ScheduleState.BOOKED);
-//
-//                        // TODO finish all activities after the WelcomePage
-//                        dialog.dismiss();
-//                        finish();
-//                    }
-//                });
-//
-//                // Bind onClick event to the cancel field
-//                btnCancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO just close the dialog
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                dialog.show();
-//            }
-//        });
     }
 
     // Bind an onClick event to each item in the RecyclerView everytime a new one is generated
@@ -217,10 +151,7 @@ public class Booking extends AppCompatActivity {
                                         FormatValue.timeStringToMin(etTimeSlotStart.getText().toString()),
                                         FormatValue.timeStringToMin(etTimeSlotEnd.getText().toString()),
                                         ScheduleState.BOOKED);
-                                // TODO make sure this is fine (i.e. the provider does not have to confirm)
-                                // Add the appointment as a CustomSchedule
                                 appointment.add(v.getContext());
-                                // TODO finish all activities after the WelcomePage
                                 dialog.dismiss();
                                 finish();
                             }
@@ -252,96 +183,4 @@ public class Booking extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    public void onItemClick(View view, int position) {
-//        TextView tvTimeSlotStart = view.findViewById(R.id.timeSlotStart);
-//        TextView tvTimeSlotEnd = view.findViewById(R.id.timeSlotEnd);
-//        TextView tvAvail = view.findViewById(R.id.availability);
-//        // Set the default times in the dialog using the times above
-//
-//        // TODO prompt a modal window for appointement
-//        // only allow to click on AVAILABLE slots
-//        final Dialog dialog = new Dialog(this);
-//        dialog.setContentView(R.layout.appointment);
-//        final EditText etTimeSlotStart = dialog.findViewById(R.id.timeSlotStart);
-//        final EditText etTimeSlotEnd = dialog.findViewById(R.id.timeSlotEnd);
-//        Button btnConfirm = dialog.findViewById(R.id.btn_confirm);
-//        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
-//
-//        // Bind onClick event to the timeSlotStart field
-//        etTimeSlotStart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DateTimePicker.showTimePicker(v);
-//            }
-//        });
-//
-//        // Bind onClick event to the timeSlotEnd field
-//        etTimeSlotEnd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DateTimePicker.showTimePicker(v);
-//            }
-//        });
-//
-//        // Bind onClick event to the confirm button
-//        btnConfirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO add the appointment
-//                CustomSchedule appointment = new CustomSchedule(providerID,
-//                        selectedDate,
-//                        FormatValue.timeStringToMin(etTimeSlotStart.getText().toString()),
-//                        FormatValue.timeStringToMin(etTimeSlotEnd.getText().toString()),
-//                        ScheduleState.BOOKED);
-//
-//                // TODO finish all activities after the WelcomePage
-//                dialog.dismiss();
-//                finish();
-//            }
-//        });
-//
-//        // Bind onClick event to the cancel field
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO just close the dialog
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        dialog.show();
-
-
-
-
-
-
-
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setView(R.layout.appointment);
-//        builder.setTitle("TITLETITLE");
-//        builder.setMessage("REQUESTING APPOINTMENT");
-//
-//        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                // TODO add the appointment
-//                CustomSchedule appointment = new CustomSchedule(providerID,
-//                        selectedDate,
-//                        R);
-//
-//                // TODO finish all activities after the WelcomePage
-//                finish();
-//            }
-//        });
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
-//    }
 }

@@ -43,9 +43,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         String timeSlotStart = FormatValue.minToTimeString(node.getTime());
         String timeSlotEnd = FormatValue.minToTimeString(node.getNext().getTime());
         ScheduleState avail = node.getState();
-//        TextView tvTimeSlotStart = (TextView) holder.viewGroup.getChildAt(0);
-//        TextView tvTimeSlotEnd = (TextView) holder.viewGroup.getChildAt(1);
-//        TextView tvAvail = (TextView) holder.viewGroup.getChildAt(2);
         TextView tvTimeSlotStart = holder.viewGroup.findViewById(R.id.timeSlotStart);
         TextView tvTimeSlotEnd = holder.viewGroup.findViewById(R.id.timeSlotEnd);
         TextView tvAvail = holder.viewGroup.findViewById(R.id.availability);
@@ -89,11 +86,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
-
-//    // convenience method for getting data at click position
-//    String getItem(int id) {
-//        return mData.get(id);
-//    }
 
     // allows clicks events to be caught
     public void setClickListener(ItemClickListener itemClickListener) {

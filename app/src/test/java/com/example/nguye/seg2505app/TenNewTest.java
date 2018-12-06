@@ -1,11 +1,15 @@
 package com.example.nguye.seg2505app;
 import com.example.nguye.seg2505app.Activities.Hashing;
+import com.example.nguye.seg2505app.Activities.WelcomePage;
+import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
+import com.example.nguye.seg2505app.ScheduleClasses.TimeNode;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.Provider;
 import com.example.nguye.seg2505app.Storables.Rating;
 import com.example.nguye.seg2505app.Storables.ServiceType;
+import com.example.nguye.seg2505app.Storables.Storable;
 import com.example.nguye.seg2505app.Utilities.FormatValue;
 import com.example.nguye.seg2505app.Utilities.Validation;
 
@@ -46,15 +50,6 @@ public class TenNewTest {
     }
 
     @Test
-    public void checkProvider(){
-        Provider testProvider = new Provider();
-        testProvider.setID(1);
-        testProvider.setCompanyName("Test");
-        assertTrue(testProvider.getID() == 1);
-        assertEquals(testProvider.getCompanyName(), "Test");
-    }
-
-    @Test
     public void checkSchecule(){
         CustomSchedule testSchedule = new CustomSchedule();
         testSchedule.setEndTime(12);
@@ -72,6 +67,34 @@ public class TenNewTest {
     }
 
     @Test
+    public void testNotEquals(){
+        Account account1 = new Account();
+        Account account2 = new Account();
+        account1.setRating(3);
+        account2.setRating(5);
+        assertTrue(account1.getRating() != account2.getRating());
+    }
+
+    @Test
+    public void checkIDEquals(){
+        Account account1 = new Account();
+        Account account2 = new Account();
+        assertTrue(account2.getID() == (account1.getID()));
+    }
+
+    @Test
+    public void accountDeleted(){
+        assertEquals(WelcomePage.ACCOUNT_DELETED,9999);
+    }
+
+    @Test
+    public void timeNodeToString(){
+        TimeNode testTimeNode = new TimeNode(12, null, ScheduleState.AVAILABLE);
+        String s = "Time: " + 12 + ", \t"
+                + "State: " + ScheduleState.AVAILABLE + "\n";
+        assertEquals(s, testTimeNode.toString());
+
+    }
 
 
 

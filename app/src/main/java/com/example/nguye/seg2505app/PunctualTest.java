@@ -19,12 +19,6 @@ import java.util.Date;
 
 public class PunctualTest {
     public static void main(String[] args) {
-//        long localTime = System.currentTimeMillis();
-//        System.out.println(localTime);
-//        Date currentDate = new Date(localTime);
-//        System.out.println(currentDate);
-//        DateFormat df = new SimpleDateFormat("yy-MM-dd");
-//        System.out.println(df.format(currentDate));
 
         Calendar calendar = Calendar.getInstance();
         Date date = new Date(calendar.getTimeInMillis());
