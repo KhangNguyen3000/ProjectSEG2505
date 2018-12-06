@@ -24,7 +24,6 @@ public class RandomAccountGenerator {
     private static int serviceType; // just to make sure a provider does not offer the same service twice
     private static int numOfServiceTypes;
 
-    //TODO make sure that a provider cannot offer the same service twice
     public static Account generateNewAccount(Context context) {
         Account account = new Account();
         account.setID(getNumOfAccounts(context) + 1);
@@ -33,6 +32,7 @@ public class RandomAccountGenerator {
             account.setCompanyName("The one and only Company");
             account.setDescription("Bla bla bla...");
             account.setLicensed(new Random().nextInt(2));
+            account.setRating(0);
         }
         account.setType(type);
         account.setFirstName((Character.toString((char) (new Random().nextInt(26)+65))));
