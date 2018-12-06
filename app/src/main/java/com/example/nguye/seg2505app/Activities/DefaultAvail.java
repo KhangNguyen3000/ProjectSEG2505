@@ -154,6 +154,34 @@ public class DefaultAvail extends AppCompatActivity {
         }
     }
 
+    public void checkBoxing( CheckBox xday){
+        ViewGroup layout = (ViewGroup) xday.getParent();
+        if (xday.isChecked()) {
+            // Set the layout's background color to default to show that it has been enabled
+//            layout.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+            layout.setBackgroundColor(Color.rgb(250,250,250));
+            // Enable the fields and clear their time
+            EditText startTime = (EditText) layout.getChildAt(2);
+            EditText endTime = (EditText) layout.getChildAt(3);
+            startTime.setEnabled(true);
+            startTime.setText("");
+            endTime.setEnabled(true);
+            endTime.setText("");
+        } else {
+            // Set the layout's background color to grey to show that it has been disabled
+            layout.setBackgroundColor(Color.rgb(200,200,200));
+
+            // Disable the fields and set their time to 00:00
+            EditText startTime = (EditText) layout.getChildAt(2);
+            EditText endTime = (EditText) layout.getChildAt(3);
+            startTime.setEnabled(false);
+            startTime.setText("00:00");
+            endTime.setEnabled(false);
+            endTime.setText("00:00");
+        }
+
+    }
+
     // TODO set the flag isLoaded to false IF there is a change
     public void onClickSaveButton(View view) {
         // TODO validate the date and time
@@ -287,6 +315,14 @@ public class DefaultAvail extends AppCompatActivity {
             fridayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[13])==0)&&(Integer.parseInt(defSchedule.get(0)[14])==0  )));
             saturdayCheck.setChecked(!((Integer.parseInt(defSchedule.get(0)[15])==0)&&(Integer.parseInt(defSchedule.get(0)[16])==0  )));
 
+            checkBoxing(mondayCheck);
+            checkBoxing(tuesdayCheck);
+            checkBoxing(wednesdayCheck);
+            checkBoxing(thursdayCheck);
+            checkBoxing(fridayCheck);
+            checkBoxing(saturdayCheck);
+            checkBoxing(sundayCheck);
+
             sundayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[3])));
             sundayEnd.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[4])));
             mondayStart.setText(FormatValue.minToTimeString(Integer.parseInt(defSchedule.get(0)[5])));
@@ -343,8 +379,19 @@ public class DefaultAvail extends AppCompatActivity {
             saturdayEnd.setText("0:00");
             sundayStart.setText("0:00");
             sundayEnd.setText("0:00");
+
+            checkBoxing(mondayCheck);
+            checkBoxing(tuesdayCheck);
+            checkBoxing(wednesdayCheck);
+            checkBoxing(thursdayCheck);
+            checkBoxing(fridayCheck);
+            checkBoxing(saturdayCheck);
+            checkBoxing(sundayCheck);
             return -1;
+
+
         }
+
 //        ArrayList<String[]> defSchedules = Storable.select(this, effDateQuery, 17);
 //
 //        // The long code between the brackets [] is used to get a dynamic reference to the field index,
