@@ -65,9 +65,11 @@ public class Schedule extends AppCompatActivity {
 
     public void showDailySchedule() {
         DailySchedule dailySchedule = new DailySchedule().generate(this, Account.getCurrentAccount().getID(), selectedDate);
-        ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
-        rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
-        recyclerView.setAdapter(rvAdapter);
+        if (dailySchedule.getSize() > 0) {
+            ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
+            rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
+            recyclerView.setAdapter(rvAdapter);
+        }
     }
 
     public void onClickManage(View view){

@@ -54,10 +54,10 @@ public class SearchForProviders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_for_providers);
 
-        rbName = findViewById(R.id.checkBoxName);
-        rbService = findViewById(R.id.checkBoxService);
-        rbRating = findViewById(R.id.checkBoxRating);
-        rbDate = findViewById(R.id.checkBoxDate);
+        rbName = findViewById(R.id.radioBtnName);
+        rbService = findViewById(R.id.radioBtnService);
+        rbRating = findViewById(R.id.radioBtnRating);
+        rbDate = findViewById(R.id.radioBtnDate);
         editName = findViewById(R.id.srch_input_name);
         serviceSpinner = findViewById(R.id.srch_dd_service);
         editRating = findViewById(R.id.ratingBar);
@@ -315,33 +315,54 @@ public class SearchForProviders extends AppCompatActivity {
         return query;
     }
 
-    // From https://developer.android.com/guide/topics/ui/controls/radiobutton#java
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
+//    // From https://developer.android.com/guide/topics/ui/controls/radiobutton#java
+//    public void onRadioButtonClicked(View view) {
+//        // Is the button now checked?
+//        boolean checked = ((RadioButton) view).isChecked();
+//
+//        // Check which radio button was clicked
+//        switch(view.getId()) {
+//            case R.id.radioBtnName:
+//                if (checked)
+//                    searchQuery = searchByName();
+//                    break;
+//            case R.id.radioBtnService:
+//                if (checked)
+//                    searchQuery = searchByService();
+//                    break;
+//            case R.id.radioBtnRating:
+//                if (checked)
+//                    searchQuery = searchByRating();
+//                    break;
+//            case R.id.radioBtnDate:
+//                if (checked)
+//                    searchQuery = searchByDate();
+//                    break;
+//        }
+//    }
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radioBtnName:
-                if (checked)
-                    searchQuery = searchByName();
-                    break;
-            case R.id.radioBtnService:
-                if (checked)
-                    searchQuery = searchByService();
-                    break;
-            case R.id.radioBtnRating:
-                if (checked)
-                    searchQuery = searchByRating();
-                    break;
-            case R.id.radioBtnDate:
-                if (checked)
-                    searchQuery = searchByDate();
-                    break;
-        }
-    }
-
+    // TODO add validation
+    // TODO fix the rating bar
     public void onClickSearch(View view) {
+        rbName = findViewById(R.id.radioBtnName);
+        rbService = findViewById(R.id.radioBtnService);
+        rbRating = findViewById(R.id.radioBtnRating);
+        rbDate = findViewById(R.id.radioBtnDate);
+        Toast errorMessage;
+
+        if (rbName.isChecked()) {
+            searchQuery = searchByName();
+        } else if (rbService.isChecked()) {
+            searchQuery = searchByService();
+        } else if (rbRating.isChecked()) {
+            searchQuery = searchByRating();
+        } else if (rbDate.isChecked()) {
+            searchQuery = searchByDate();
+        } else {
+            errorMessage = Toast.makeText(this, "You must specify a search criteria.", Toast.LENGTH_LONG);
+            errorMessage.show();
+        }
+
         ArrayList<String[]> providerIDs;
         if (!searchQuery.equals("")) {
             // Find the ID of all the providers that correspond to the specified criterion

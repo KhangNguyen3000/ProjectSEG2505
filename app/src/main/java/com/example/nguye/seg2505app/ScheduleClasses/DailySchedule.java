@@ -6,6 +6,7 @@ import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.DefaultSchedule;
 import com.example.nguye.seg2505app.Storables.Storable;
+import com.example.nguye.seg2505app.Utilities.FormatValue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -322,15 +323,45 @@ public class DailySchedule {
             }
 
             // TODO will have to be a range instead of =
-            String effDateQuery = "SELECT " + startTimeField + ", " + endTimeField
-                    + " FROM " + DefaultSchedule.TABLE_NAME
-                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE
-                    + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
-                    + ") FROM " + DefaultSchedule.TABLE_NAME
-                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";
-            System.out.println(effDateQuery);
+//            String effDateQuery = "SELECT " + startTimeField + ", " + endTimeField
+//                    + " FROM " + DefaultSchedule.TABLE_NAME
+//                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE
+//                    + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
+//                    + ") FROM " + DefaultSchedule.TABLE_NAME
+//                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";
+//            System.out.println(effDateQuery);
 
-            ArrayList<String[]> currentEffDate = Storable.select(context, effDateQuery, 2);
+            String effDateQuery = "SELECT " + DefaultSchedule.COL_EFFECTIVEDATE
+                    + " FROM " + DefaultSchedule.TABLE_NAME
+                    + " WHERE " + DefaultSchedule.COL_PROVIDER + " = " + providerID;
+
+
+            // TODO
+            // 1. get all the dates
+            // 2. convert them to timeStrings, as well as the current date
+            // 3. Keep the max date that is still lower (or equal) than today
+
+            ArrayList<String[]> effectiveDates = Storable.select(context, effDateQuery, 1);
+            long[] dateLong = new long[effectiveDates.size()];
+            for (int i = 0; i < dateLong.length; i++) {
+                dateLong[i] = FormatValue.dateToLong(effectiveDates.get(i)[0]);
+            }
+            long currentDate = FormatValue.dateToLong(dateString);
+            long currentEffDate = 0;
+            long tempEffDate;
+            for (int i = 0; i < dateLong.length; i++) {
+                tempEffDate = dateLong[i];
+                if ((tempEffDate > currentEffDate) && (tempEffDate <= currentDate)) {
+                    currentEffDate = tempEffDate;
+                }
+            }
+            String currentEffDateString = FormatValue.longToDate(currentEffDate);
+            String effDefaultScheduleQuery = "SELECT " + startTimeField + ", " + endTimeField
+                    + " FROM " + DefaultSchedule.TABLE_NAME
+                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " = \"" + currentEffDateString + "\""
+                    + " AND " + DefaultSchedule.COL_PROVIDER + " = " + providerID;
+
+            ArrayList<String[]> currentEffSchedule = Storable.select(context, effDefaultScheduleQuery, 2);
 //            String where = "ProviderID = " + Account.getCurrentAccount().getID() + " AND EffectiveDate = \"" + dateString + "\"";
 //            System.out.println("WHERE " + where);
 //            switch (Calendar.DAY_OF_WEEK) {
@@ -342,30 +373,33 @@ public class DailySchedule {
             // Initialize a new DailySchedule using the data from the table
 //            String startTime = Storable.selectFirst(this, DefaultSchedule.COLUMNS.get(dayOfWeekFieldIndex)[0], DefaultSchedule.TABLE_NAME, where);
 //            String endTime = Storable.selectFirst(this, DefaultSchedule.COLUMNS.get(dayOfWeekFieldIndex + 1)[0], DefaultSchedule.TABLE_NAME, where);
-            String startTime = currentEffDate.get(0)[0];
-            String endTime = currentEffDate.get(0)[1];
-            schedule = new DailySchedule(Integer.parseInt(startTime), Integer.parseInt(endTime), ScheduleState.AVAILABLE);
+            if (currentEffSchedule.size() > 0) {
+                String startTime = currentEffSchedule.get(0)[0];
+                String endTime = currentEffSchedule.get(0)[1];
+                schedule = new DailySchedule(Integer.parseInt(startTime), Integer.parseInt(endTime), ScheduleState.AVAILABLE);
 
-            // For each record in CustomSchedule that meet the right conditions, merge one by one with the DailySchedule.
-            String query = "SELECT " + CustomSchedule.COL_START + ", " + CustomSchedule.COL_END + ", "
-                    + CustomSchedule.COL_AVAILABILITY + " FROM " + CustomSchedule.TABLE_NAME
-                    + " WHERE " + CustomSchedule.COL_DATE + " = \"" + dateString + "\" AND " + CustomSchedule.COL_PROVIDER
-                    + " = " + Account.getCurrentAccount().getID();
-            System.out.println(query);
+                // For each record in CustomSchedule that meet the right conditions, merge one by one with the DailySchedule.
+                String query = "SELECT " + CustomSchedule.COL_START + ", " + CustomSchedule.COL_END + ", "
+                        + CustomSchedule.COL_AVAILABILITY + " FROM " + CustomSchedule.TABLE_NAME
+                        + " WHERE " + CustomSchedule.COL_DATE + " = \"" + dateString + "\" AND " + CustomSchedule.COL_PROVIDER
+                        + " = " + Account.getCurrentAccount().getID();
+                System.out.println(query);
 
-            ArrayList<String[]> customSchedules = Storable.select(context, query, 3);
-            int timeSlotStart;
-            int timeSlotEnd;
-            ScheduleState state;
-            for (String[] record : customSchedules) {
-                timeSlotStart = Integer.parseInt(record[0]);
-                timeSlotEnd = Integer.parseInt(record[1]);
-                state = ScheduleState.valueOf(record[2]);
-                TimeSlot timeSlot = new TimeSlot(timeSlotStart, timeSlotEnd, state);
-                // TODO check if the problem is fixed
-                schedule = schedule.merge(timeSlot); // Merge
+                ArrayList<String[]> customSchedules = Storable.select(context, query, 3);
+                int timeSlotStart;
+                int timeSlotEnd;
+                ScheduleState state;
+                for (String[] record : customSchedules) {
+                    timeSlotStart = Integer.parseInt(record[0]);
+                    timeSlotEnd = Integer.parseInt(record[1]);
+                    state = ScheduleState.valueOf(record[2]);
+                    TimeSlot timeSlot = new TimeSlot(timeSlotStart, timeSlotEnd, state);
+                    // TODO check if the problem is fixed
+                    schedule = schedule.merge(timeSlot); // Merge
+                }
+                return schedule;
             }
-            return schedule;
+            return new DailySchedule();
         } catch (ParseException e) {
             return new DailySchedule();
         }

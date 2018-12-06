@@ -184,6 +184,7 @@ public abstract class Storable implements java.io.Serializable {
                 array.add(cursor.getString(i));
             }
         }
+        cursor.close();
         db.close();
         return array;
     }
@@ -216,6 +217,37 @@ public abstract class Storable implements java.io.Serializable {
     }
 
 
+//    /**
+//     * Return an ArrayList that contains arrays of String (String[]) where each String[] represents
+//     *  a record where every value is returned as a String. Those values can be parsed after if
+//     *  necessary. This allows to get only specific information rather than whole objects.
+//     * @param context
+//     * @param query The fully defined SQL query
+//     * @param numOfFields The number of fields that will be retrieved according to the query. This
+//     *                    is to set the size of the String[]
+//     * @return
+//     */
+//    public static ArrayList<String[]> select(Context context, String query, int numOfFields) {
+//        // Connect to the database
+//        MyDBHandler dbHandler = new MyDBHandler(context);
+//        SQLiteDatabase db = dbHandler.getReadableDatabase();
+//        ArrayList<String[]> records = new ArrayList<>();
+//
+//        Cursor cursor = db.rawQuery(query, null);
+//        if (cursor.moveToFirst()) {
+//            while (!cursor.isAfterLast()) {
+//                String[] fieldValues = new String[numOfFields];
+//                for (int i = 0; i < numOfFields; i++) {
+//                    fieldValues[i] = cursor.getString(i);
+//                }
+//                records.add(fieldValues);
+//                cursor.moveToNext();
+//            }
+//        }
+//        db.close();
+//        return records;
+//    }
+
     /**
      * Return an ArrayList that contains arrays of String (String[]) where each String[] represents
      *  a record where every value is returned as a String. Those values can be parsed after if
@@ -233,19 +265,18 @@ public abstract class Storable implements java.io.Serializable {
         ArrayList<String[]> records = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String[] fieldValues = new String[numOfFields];
-                for (int i = 0; i < numOfFields; i++) {
-                    fieldValues[i] = cursor.getString(i);
-                }
-                records.add(fieldValues);
-                cursor.moveToNext();
+        while (cursor.moveToNext()) {
+            String[] fieldValues = new String[numOfFields];
+            for (int i = 0; i < numOfFields; i++) {
+                fieldValues[i] = cursor.getString(i);
             }
+            records.add(fieldValues);
         }
         db.close();
         return records;
     }
+
+
 
     /**
      * Simply return the value (as a String) of the specified field in the specified table in the
