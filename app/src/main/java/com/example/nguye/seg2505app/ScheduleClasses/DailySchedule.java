@@ -167,13 +167,14 @@ public class DailySchedule {
         if (timeSlot.getStartTime() == this.head.getNext().getTime()) {
             // Append the timeSlot's startNode and remove the next TimeNode of the current DailySchedule.
             newDS.append(timeSlot.getStartNode());
-            this.extractFirst(); // Don't do anything with it, just remove it.
+            timeSlot.getEndNode().setState(this.extractFirst().getState()); // Remove it but keep its state.
         } else {
             newDS.append(timeSlot.getStartNode());
         }
 
         // Ignore all subsequent TimeNodes that are earlier or equal to the TimeSlot's endTime,
         //	but copy the state of the last ignored node in the endTime TimeNode.
+
         while (this.head.getNext().getTime() <= timeSlot.getEndTime()) {
             timeSlot.getEndNode().setState(this.head.getNext().getState()); // Copy the state of the last ignored node.
             this.extractFirst();
@@ -190,6 +191,12 @@ public class DailySchedule {
         return newDS;
     }
 
+    /**
+     * Check if there is any overlap between a booked time slot in the daily schedule and the specified time slot.
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     public boolean isBookedBetween(int startTime, int endTime) {
         TimeNode currentNode = this.head;
         if (currentNode.getNext() != null) {
@@ -288,10 +295,9 @@ public class DailySchedule {
 
         try {
             calendar.setTime(df.parse(dateString));
-
             String startTimeField = "";
             String endTimeField = "";
-            switch (Calendar.DAY_OF_WEEK) {
+            switch (calendar.get(Calendar.DAY_OF_WEEK)) {
                 case Calendar.SUNDAY:
                     startTimeField = DefaultSchedule.COL_SUNDAYSTART;
                     endTimeField = DefaultSchedule.COL_SUNDAYEND;
@@ -334,7 +340,7 @@ public class DailySchedule {
             String effDateQuery = "SELECT " + DefaultSchedule.COL_EFFECTIVEDATE
                     + " FROM " + DefaultSchedule.TABLE_NAME
                     + " WHERE " + DefaultSchedule.COL_PROVIDER + " = " + providerID;
-
+            System.out.println(effDateQuery);
 
             // TODO
             // 1. get all the dates
@@ -360,6 +366,7 @@ public class DailySchedule {
                     + " FROM " + DefaultSchedule.TABLE_NAME
                     + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " = \"" + currentEffDateString + "\""
                     + " AND " + DefaultSchedule.COL_PROVIDER + " = " + providerID;
+            System.out.println(effDefaultScheduleQuery);
 
             ArrayList<String[]> currentEffSchedule = Storable.select(context, effDefaultScheduleQuery, 2);
 //            String where = "ProviderID = " + Account.getCurrentAccount().getID() + " AND EffectiveDate = \"" + dateString + "\"";
@@ -382,7 +389,7 @@ public class DailySchedule {
                 String query = "SELECT " + CustomSchedule.COL_START + ", " + CustomSchedule.COL_END + ", "
                         + CustomSchedule.COL_AVAILABILITY + " FROM " + CustomSchedule.TABLE_NAME
                         + " WHERE " + CustomSchedule.COL_DATE + " = \"" + dateString + "\" AND " + CustomSchedule.COL_PROVIDER
-                        + " = " + Account.getCurrentAccount().getID();
+                        + " = " + providerID;
                 System.out.println(query);
 
                 ArrayList<String[]> customSchedules = Storable.select(context, query, 3);
@@ -396,6 +403,7 @@ public class DailySchedule {
                     TimeSlot timeSlot = new TimeSlot(timeSlotStart, timeSlotEnd, state);
                     // TODO check if the problem is fixed
                     schedule = schedule.merge(timeSlot); // Merge
+                    System.out.println(timeSlotStart + " " + timeSlotEnd + " " + state);
                 }
                 return schedule;
             }

@@ -136,6 +136,12 @@ public class WelcomePage extends AppCompatActivity{
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        // Logs out
+        onClickLogOutButton(findViewById(R.id.wel_logout_button));
+    }
+
     public void onClickScheduleButton(View view) {
         Intent intent = new Intent(getApplicationContext(), Schedule.class);
         startActivity(intent);
