@@ -253,7 +253,7 @@ public class SearchForProviders extends AppCompatActivity {
         String query = "SELECT " + Account.COL_ID
                 + " FROM " + Account.TABLE_NAME
                 + " WHERE " + Account.COL_FIRSTNAME + " || " + Account.COL_LASTNAME
-                + " = \"" + name + "\""
+                + " = \"" + name.replaceAll("\\s+","") + "\""
                 + " AND " + Account.COL_TYPE + " = 2";
         System.out.println(query);
         return query;
