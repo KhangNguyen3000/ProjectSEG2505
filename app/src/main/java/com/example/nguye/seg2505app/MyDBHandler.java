@@ -58,8 +58,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + table);
             System.out.println("Table '" + table + "' dropped.");
         }
-        db.execSQL("DROP TABLE IF EXISTS " + "ServicesTypes");
-        db.execSQL("DROP TABLE IF EXISTS " + "ServicesType");
         onCreate(db);
     }
 

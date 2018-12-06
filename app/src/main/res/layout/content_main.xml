@@ -93,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClickGenerate"
-                android:text="Generate random stuff" />
+                android:text="Generate random stuff"
+                android:visibility="gone" />
 
         </LinearLayout>
     </LinearLayout>

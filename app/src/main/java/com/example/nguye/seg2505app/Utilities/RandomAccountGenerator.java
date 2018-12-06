@@ -27,8 +27,8 @@ public class RandomAccountGenerator {
     public static Account generateNewAccount(Context context) {
         Account account = new Account();
         account.setID(getNumOfAccounts(context) + 1);
-        int type = new Random().nextInt(2) + 2;
-        if (type == 2) {
+        int type = new Random().nextInt(3) + 2;
+        if (type > 2) { // generate more providers than clients
             account.setCompanyName("The one and only Company");
             account.setDescription("Bla bla bla...");
             account.setLicensed(new Random().nextInt(2));
