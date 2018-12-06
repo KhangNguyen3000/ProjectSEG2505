@@ -12,6 +12,7 @@ import com.example.nguye.seg2505app.Activities.ScheduleManagement;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.ScheduleAdapter;
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
+import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
 import com.example.nguye.seg2505app.ScheduleClasses.TimeNode;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Utilities.FormatValue;
@@ -66,10 +67,12 @@ public class Schedule extends AppCompatActivity {
 
     public void showDailySchedule() {
         DailySchedule dailySchedule = new DailySchedule().generate(this, Account.getCurrentAccount().getID(), selectedDate);
-        System.out.println(selectedDate);
-        System.out.println(dailySchedule.getSize());
         if (dailySchedule.getSize() > 0) {
             ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
+            rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
+            recyclerView.setAdapter(rvAdapter);
+        } else {
+            ArrayList<TimeNode> arrayDailySchedule = new DailySchedule(0, 1440, ScheduleState.UNAVAILABLE).toArrayList();
             rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
             recyclerView.setAdapter(rvAdapter);
         }
