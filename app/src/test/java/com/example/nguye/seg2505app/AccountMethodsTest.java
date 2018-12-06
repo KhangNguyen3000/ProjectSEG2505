@@ -56,40 +56,4 @@ public class AccountMethodsTest {
         assertEquals(testAccount.getFirstName(), "Test");
     }
 
-
-
-    @Test
-    public void checkOfferedService(){
-        OfferedService testOfferedService = new OfferedService();
-        testOfferedService.setTypeID(1);
-        testOfferedService.setProviderID(12);
-        testOfferedService.setHourlyRate(90);
-        assertTrue(testOfferedService.getTypeID() == 1);
-        assertTrue( testOfferedService.getProviderID() == 12);
-        assertTrue(testOfferedService.getHourlyRate() == 90);
-    }
-
-    @Test
-    public void checkRating(){
-        Rating testRating = new Rating();
-        testRating.setComment("Blabla");
-        assertEquals(testRating.getComment(), "Blabla");
-    }
-
-    @Test
-    public void checkProvider(){
-        Provider testProvider = new Provider();
-        testProvider.setID(1);
-        testProvider.setCompanyName("Test");
-        assertTrue(testProvider.getID() == 1);
-        assertEquals(testProvider.getCompanyName(), "Test");
-    }
-
-    @Test
-    public void checkSchecule(){
-        CustomSchedule testSchedule = new CustomSchedule();
-        testSchedule.setEndTime(12);
-        assertTrue(testSchedule.getEndTime() == 12);
-    }
-
 }
