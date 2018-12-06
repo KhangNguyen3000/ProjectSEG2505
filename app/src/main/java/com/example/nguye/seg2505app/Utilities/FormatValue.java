@@ -97,7 +97,10 @@ public class FormatValue {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        String dateString = cal.get(Calendar.YEAR) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.DAY_OF_MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String dateString = year + "-" + month + "-" + day;
         dateString = dateYMD(dateString);
         return dateString;
     }

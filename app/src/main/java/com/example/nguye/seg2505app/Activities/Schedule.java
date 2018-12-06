@@ -56,7 +56,8 @@ public class Schedule extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 // Make sure the format is "yyyy-MM-dd"
-                selectedDate = FormatValue.dateYMD(year + "-" + month + "-" + dayOfMonth);
+                int actualMonth = month + 1;
+                selectedDate = FormatValue.dateYMD(year + "-" + actualMonth + "-" + dayOfMonth);
                 // Generate the corresponding dailySchedule
                 showDailySchedule();
             }
@@ -65,6 +66,8 @@ public class Schedule extends AppCompatActivity {
 
     public void showDailySchedule() {
         DailySchedule dailySchedule = new DailySchedule().generate(this, Account.getCurrentAccount().getID(), selectedDate);
+        System.out.println(selectedDate);
+        System.out.println(dailySchedule.getSize());
         if (dailySchedule.getSize() > 0) {
             ArrayList<TimeNode> arrayDailySchedule = dailySchedule.toArrayList();
             rvAdapter = new ScheduleAdapter(this, arrayDailySchedule);
