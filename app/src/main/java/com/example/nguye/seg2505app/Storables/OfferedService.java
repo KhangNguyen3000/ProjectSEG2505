@@ -35,7 +35,6 @@ public class OfferedService extends Storable {
     public OfferedService () {
     }
 
-
     // Constructor
     public OfferedService (int typeID, int providerID, double hourlyRate) {
         this.typeID = typeID;
