@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             dbHandler.createServiceTypes(this);
             dbHandler.createProvider(this);
             dbHandler.createClient(this);
+            RandomAccountGenerator.generateStuff(this, 100);
         }
     }
 
@@ -82,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClickGenerate(View view) {
-        RandomAccountGenerator.generateStuff(this, 5);
-        Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
-        toast.show();
-    }
+//    public void onClickGenerate(View view) {
+//        RandomAccountGenerator.generateStuff(this, 5);
+//        Toast toast = Toast.makeText(this, "Random users have been created.", Toast.LENGTH_SHORT);
+//        toast.show();
+//    }
 }
 
 
