@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
@@ -112,7 +113,10 @@ public class CustomDispo extends AppCompatActivity {
                   //  else {
                         addCustomDispo(provider, setDate, setStartTime, setEndTime);
                   //  }
-                } } }
+                } } } else{
+            Toast toast = Toast.makeText(this, "Invalid Duration", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
                 DisplayCustom(getCustomSchedules());
     }

@@ -263,8 +263,7 @@ public class Validation extends AppCompatActivity {
     }
 
     public static boolean validateTimes(EditText startTime, EditText endTime){
-        return(FormatValue.timeStringToMin(endTime.getText().toString())>FormatValue.timeStringToMin(startTime.getText().toString()));
-
+        return(FormatValue.timeStringToMin(endTime.getText().toString())>=FormatValue.timeStringToMin(startTime.getText().toString()));
     }
 
     // startTime <= endTime

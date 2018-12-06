@@ -44,6 +44,14 @@ public class DefaultAvail extends AppCompatActivity {
     EditText sundayStart;
     EditText sundayEnd;
 
+    CheckBox mondayCheck;
+    CheckBox tuesdayCheck;
+    CheckBox wednesdayCheck;
+    CheckBox thursdayCheck;
+    CheckBox fridayCheck;
+    CheckBox saturdayCheck;
+    CheckBox sundayCheck;
+
     int foundDefaultScheduleID;
 
     @Override
@@ -66,6 +74,14 @@ public class DefaultAvail extends AppCompatActivity {
         saturdayEnd    = findViewById(R.id.dav_input_saturdayEnd);
         sundayStart    = findViewById(R.id.dav_input_sundayStart);
         sundayEnd      = findViewById(R.id.dav_input_sundayEnd);
+
+        mondayCheck = findViewById(R.id.checkBox_monday);
+        tuesdayCheck = findViewById(R.id.checkBox_tuesday);
+        wednesdayCheck = findViewById(R.id.checkBox_wednesday);
+        thursdayCheck = findViewById(R.id.checkBox_thursday);
+        fridayCheck = findViewById(R.id.checkBox_friday);
+        saturdayCheck = findViewById(R.id.checkBox_saturday);
+        sundayCheck = findViewById(R.id.checkBox_sunday);
 
         // TODO remove the reference to this line in Schedule
 //        Account account = (Account) getIntent().getSerializableExtra("schedule");
@@ -144,7 +160,9 @@ public class DefaultAvail extends AppCompatActivity {
         //  For the date, make sure the user didn't select a date in the past
         //  For times, make sure that endTime >= startTime
         ViewGroup layout = findViewById(R.id.dav_layout_root);
-        if (Validation.validateAll(layout)) {
+        if (Validation.validateAll(layout)&&Validation.validateTimes(mondayStart,mondayEnd)&&Validation.validateTimes(tuesdayStart,tuesdayEnd)&&
+                Validation.validateTimes(wednesdayStart, wednesdayEnd)&& Validation.validateTimes(thursdayStart,thursdayEnd)&& Validation.validateTimes(fridayStart,fridayEnd)&&
+                Validation.validateTimes(saturdayStart,saturdayEnd)&&Validation.validateTimes(sundayStart,sundayEnd)) {
             // Create a DefaultSchedule object with the values entered in the fields
             DefaultSchedule schedule = new DefaultSchedule(
                     Account.getCurrentAccount().getID(), effDate.getText().toString(),
@@ -293,7 +311,16 @@ public class DefaultAvail extends AppCompatActivity {
 //            sundayEnd.setText(defSchedules.get(0).getEndTimes(6));
             return Integer.parseInt(defSchedule.get(0)[0]); // return the ID
         } else { // If the user does not have a default schedule for that day
-            // TODO uncheck all the boxes
+
+            mondayCheck.setChecked(false);
+            tuesdayCheck.setChecked(false);
+            wednesdayCheck.setChecked(false);
+            thursdayCheck.setChecked(false);
+            fridayCheck.setChecked(false);
+            saturdayCheck.setChecked(false);
+            sundayCheck.setChecked(false);
+
+
             mondayStart.setText("");
             mondayEnd.setText("");
             tuesdayStart.setText("");
