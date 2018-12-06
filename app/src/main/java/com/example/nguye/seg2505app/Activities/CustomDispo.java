@@ -101,18 +101,21 @@ public class CustomDispo extends AppCompatActivity {
                 int setStartTime = FormatValue.timeStringToMin(startTime.getText().toString());
                 int setEndTime = FormatValue.timeStringToMin(endTime.getText().toString());
 
-                //DailySchedule schedule = new DailySchedule().generate(this, provider, setDate);
-                //if(schedule.isBookedBetween(setStartTime,setEndTime)){}
-               // else {
+                DailySchedule schedule = new DailySchedule().generate(this, provider, setDate);
+                if(schedule.isBookedBetween(setStartTime,setEndTime)){
+                    Toast toast = Toast.makeText(this, "You have an appointement", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+               else {
                     addCustomDispo(provider, setDate, setStartTime, setEndTime);
-               // }
+               }
                 for(int i=1; i<Integer.parseInt(duration.getText().toString()); i++){
                     setDate = FormatValue.incrementDate(setDate);
-                   // schedule = new DailySchedule().generate(this, provider, setDate);
-                  //  if(schedule.isBookedBetween(setStartTime,setEndTime)){}
-                  //  else {
+                    schedule = new DailySchedule().generate(this, provider, setDate);
+                    if(schedule.isBookedBetween(setStartTime,setEndTime)){}
+                    else {
                         addCustomDispo(provider, setDate, setStartTime, setEndTime);
-                  //  }
+                   }
                 } } } else{
             Toast toast = Toast.makeText(this, "Invalid Duration", Toast.LENGTH_LONG);
             toast.show();
