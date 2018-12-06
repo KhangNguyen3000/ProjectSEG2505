@@ -62,6 +62,8 @@ public class CustomSchedule extends Storable {
         this.state = state;
     }
 
+    public CustomSchedule(){}
+
     /**
      * Put the DefaultSchedule's attributes into a ContentValues object to use with database functions
      * @return the ContentValues object
