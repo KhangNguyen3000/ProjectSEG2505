@@ -7,14 +7,10 @@ import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.nguye.seg2505app.Booking;
 import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.OfferedService;
 import com.example.nguye.seg2505app.Storables.Rating;
-import com.example.nguye.seg2505app.Storables.Storable;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

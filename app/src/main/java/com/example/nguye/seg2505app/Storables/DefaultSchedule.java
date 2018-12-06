@@ -58,22 +58,7 @@ public class DefaultSchedule extends Storable {
     private String effectiveDate;
     private int[] startTimes;
     private int[] endTimes;
-
-//    private int mondayStart;
-//    private int mondayEnd;
-//    private int tuesdayStart;
-//    private int tuesdayEnd;
-//    private int wednesdayStart;
-//    private int wednesdayEnd;
-//    private int thursdayStart;
-//    private int thursdayEnd;
-//    private int fridayStart;
-//    private int fridayEnd;
-//    private int saturdayStart;
-//    private int saturdayEnd;
-//    private int sundayStart;
-//    private int sundayEnd;
-
+    
     // Constructor (empty)
     public DefaultSchedule() {
         this.effectiveDate = "1970-01-01";

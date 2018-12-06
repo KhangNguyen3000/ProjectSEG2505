@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nguye.seg2505app.Provider_list_adapter;
 import com.example.nguye.seg2505app.R;
-import com.example.nguye.seg2505app.ScheduleAdapter;
 import com.example.nguye.seg2505app.Storables.Account;
 
 import java.util.ArrayList;

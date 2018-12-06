@@ -8,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CalendarView;
 
-import com.example.nguye.seg2505app.Activities.ScheduleManagement;
 import com.example.nguye.seg2505app.R;
-import com.example.nguye.seg2505app.ScheduleAdapter;
 import com.example.nguye.seg2505app.ScheduleClasses.DailySchedule;
 import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
 import com.example.nguye.seg2505app.ScheduleClasses.TimeNode;

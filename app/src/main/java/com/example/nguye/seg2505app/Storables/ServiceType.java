@@ -34,10 +34,6 @@ public class ServiceType extends Storable {
     public ServiceType() {
     }
 
-//    // Constructor
-//    public ServiceType(Context context) {
-//        this.context = context;
-//    }
 
     // Constructor
     public ServiceType(String name, double maxRate){

@@ -37,22 +37,6 @@ public class CustomSchedule extends Storable {
     private int endTime;
     private ScheduleState state;
 
-//    private int mondayStart;
-//    private int mondayEnd;
-//    private int tuesdayStart;
-//    private int tuesdayEnd;
-//    private int wednesdayStart;
-//    private int wednesdayEnd;
-//    private int thursdayStart;
-//    private int thursdayEnd;
-//    private int fridayStart;
-//    private int fridayEnd;
-//    private int saturdayStart;
-//    private int saturdayEnd;
-//    private int sundayStart;
-//    private int sundayEnd;
-
-
     // Constructor (full)
     public CustomSchedule(int providerID, String date, int startTime, int endTime, ScheduleState state) {
         this.providerID = providerID;
@@ -77,98 +61,6 @@ public class CustomSchedule extends Storable {
         values.put(COL_AVAILABILITY, getState().toString());
         return values;
     }
-
-//    /**
-//     * Search for the record that has the specified value in the specified field in the table "CustomSchedules".
-//     * @param fieldName Name of the column to look into
-//     * @param value Value to search for
-//     * @return The first record that matches.
-//     */
-//    public CustomSchedule find(Context context, String fieldName, Object value, boolean quotedValue) {
-//        // Connect to the database
-//        MyDBHandler dbHandler = new MyDBHandler(context);
-//        SQLiteDatabase db = dbHandler.getReadableDatabase();
-//
-//        String quotes = "";
-//        if (quotedValue) {
-//            quotes = "\"";
-//        }
-//        String query = "SELECT * FROM " + this.getTableName()
-//                + " WHERE " + fieldName + " = " + quotes + value + quotes;
-//        System.out.println(query);
-//
-//        // Store the item's data into a Storable using a cursor
-//        Cursor cursor = db.rawQuery(query, null);
-//        DefaultSchedule schedule = new DefaultSchedule();
-//        if(cursor.moveToFirst()) {
-//            schedule = new DefaultSchedule();
-//            schedule.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
-//            schedule.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
-//            schedule.setEffectiveDate(cursor.getString(getFieldIndex(COL_EFFECTIVEDATE, COLUMNS)));
-//            schedule.setStartTimes(0, cursor.getString(getFieldIndex(COL_MONDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(0, cursor.getString(getFieldIndex(COL_MONDAYEND, COLUMNS)));
-//            schedule.setStartTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYEND, COLUMNS)));
-//            schedule.setStartTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYEND, COLUMNS)));
-//            schedule.setStartTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYEND, COLUMNS)));
-//            schedule.setStartTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYEND, COLUMNS)));
-//            schedule.setStartTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYEND, COLUMNS)));
-//            schedule.setStartTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYEND, COLUMNS)));
-//        }
-//        db.close();
-//        return schedule;
-//    }
-
-//    /**
-//     * Search for the record that has the specified value in the specified field in the table "CustomSchedules".
-//     * @param fieldName Name of the column to look into
-//     * @param value Value to search for
-//     * @return The first record that matches.
-//     */
-//    public CustomSchedule findAll(Context context, String fieldName, Object value, boolean quotedValue) {
-//        // Connect to the database
-//        MyDBHandler dbHandler = new MyDBHandler(context);
-//        SQLiteDatabase db = dbHandler.getReadableDatabase();
-//
-//        String quotes = "";
-//        if (quotedValue) {
-//            quotes = "\"";
-//        }
-//        String query = "SELECT * FROM " + this.getTableName()
-//                + " WHERE " + fieldName + " = " + quotes + value + quotes;
-//        System.out.println(query);
-//
-//        // Store the item's data into a Storable using a cursor
-//        Cursor cursor = db.rawQuery(query, null);
-//        DefaultSchedule schedule = new DefaultSchedule();
-//        if(cursor.moveToFirst()) {
-//            schedule = new DefaultSchedule();
-//            schedule.setID(cursor.getInt(getFieldIndex(COL_ID, COLUMNS)));
-//            schedule.setProviderID(cursor.getInt(getFieldIndex(COL_PROVIDER, COLUMNS)));
-//            schedule.setEffectiveDate(cursor.getString(getFieldIndex(COL_EFFECTIVEDATE, COLUMNS)));
-//            schedule.setStartTimes(0, cursor.getString(getFieldIndex(COL_MONDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(0, cursor.getString(getFieldIndex(COL_MONDAYEND, COLUMNS)));
-//            schedule.setStartTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(1, cursor.getString(getFieldIndex(COL_TUESDAYEND, COLUMNS)));
-//            schedule.setStartTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(2, cursor.getString(getFieldIndex(COL_WEDNESDAYEND, COLUMNS)));
-//            schedule.setStartTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(3, cursor.getString(getFieldIndex(COL_THURSDAYEND, COLUMNS)));
-//            schedule.setStartTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(4, cursor.getString(getFieldIndex(COL_FRIDAYEND, COLUMNS)));
-//            schedule.setStartTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(5, cursor.getString(getFieldIndex(COL_SATURDAYEND, COLUMNS)));
-//            schedule.setStartTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYSTART, COLUMNS)));
-//            schedule.setEndTimes(6, cursor.getString(getFieldIndex(COL_SUNDAYEND, COLUMNS)));
-//        }
-//        db.close();
-//        return schedule;
-//    }
 
     // Getters and setters
     public String getTableName() { return this.TABLE_NAME; }

@@ -37,7 +37,7 @@
         <activity android:name=".TestingActivity" />
         <activity android:name=".Activities.SearchForProviders" />
         <activity android:name=".Activities.GetProviderInfos" />
-        <activity android:name=".Booking" />
+        <activity android:name=".Activities.Booking" />
         <activity android:name=".Activities.RatingList" />
         <activity android:name=".Activities.RateScreen" />
         <activity android:name=".Activities.CustomDispo" />
