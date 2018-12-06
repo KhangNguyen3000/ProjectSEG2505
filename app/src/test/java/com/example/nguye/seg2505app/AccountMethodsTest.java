@@ -5,7 +5,6 @@ import android.widget.EditText;
 import com.example.nguye.seg2505app.Storables.Account;
 import com.example.nguye.seg2505app.Storables.CustomSchedule;
 import com.example.nguye.seg2505app.Storables.OfferedService;
-import com.example.nguye.seg2505app.Storables.Provider;
 import com.example.nguye.seg2505app.Storables.Rating;
 import com.example.nguye.seg2505app.Storables.ServiceType;
 
