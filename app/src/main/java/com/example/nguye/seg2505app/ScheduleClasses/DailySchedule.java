@@ -51,29 +51,6 @@ public class DailySchedule {
         size = 4;
     }
 
-
-
-//	public void add(TimeNode timeNode) {
-//		head.next = timeNode;
-//		head.state = timeNode.prevState;
-//		size++;
-//	}
-
-//	public void append(TimeNode newTimeNode, boolean hasPriority) {
-//		TimeNode last = this.head;
-//		// get to the end of the list
-//		while (last.next != null) {
-//			last = last.next;
-//		}
-//		last.next = newTimeNode;
-//		newTimeNode.prev = last;
-//		newTimeNode.next = null;
-////		newTimeNode.prevState = lat
-//
-//		// COME BACK LATER
-//	}
-
-
     public void append(TimeNode newTimeNode) {
         TimeNode last = this.head;
         while (last.getNext() != null) { // get to the end of the chain
@@ -82,39 +59,6 @@ public class DailySchedule {
         last.setNext(newTimeNode);
         newTimeNode.setNext(null);
     }
-
-
-
-//	  // add a new integer (most efficient)
-//	  public boolean add(int value) {
-//
-//	    Node newNode= new Node(value, head, head.next);
-//		head.next.prev= newNode;
-//		head.next= newNode;
-//
-//		size++;
-//
-//	    return true;
-//	  }
-
-
-
-
-
-//	public TimeNode extract() {
-//		if (this.head.next == null) {
-//			return null;
-//		} else {
-//			TimeNode first = this.head.next;
-//			this.head.next = first.next;
-//			first.next.prev = head;
-//			first.prev = null;
-//			first.next = null;
-//			return first;
-//		}
-//
-//	}
-
 
 //	/**
 //	 * Get the first TimeNode of the com.example.vincent.testing.ScheduleManager.DailySchedule.
@@ -153,14 +97,7 @@ public class DailySchedule {
 
         // Append all the TimeNodes that are earlier than the startNode of the TimeSlot.
         while (this.head.getNext().getTime() < timeSlot.getStartTime()) {
-//			TimeNode first = this.extractFirst();
-//			newDS.append(first);
             newDS.append(this.extractFirst());
-
-//			this.head.next = this.head.next.next;
-//			this.head.next.next.prev
-//			this.head.next.prev = newDS.getLast();
-//			newDS.getLast().next =
         }
 
         // If a DailySchedule's TimeNode and a TimeSlot's TimeNode have the same time, the TimeSlot has priority
@@ -174,7 +111,6 @@ public class DailySchedule {
 
         // Ignore all subsequent TimeNodes that are earlier or equal to the TimeSlot's endTime,
         //	but copy the state of the last ignored node in the endTime TimeNode.
-
         while (this.head.getNext().getTime() <= timeSlot.getEndTime()) {
             timeSlot.getEndNode().setState(this.head.getNext().getState()); // Copy the state of the last ignored node.
             this.extractFirst();
@@ -203,13 +139,6 @@ public class DailySchedule {
             currentNode = currentNode.getNext();
         }
 
-//        // Find the first BOOKED node
-//        while (currentNode.getState() != ScheduleState.BOOKED) {
-//            if (currentNode.getNext() != null) {
-//                currentNode = currentNode.getNext();
-//            }
-//        }
-
         // Find the first BOOKED node since the others have no interest.
         while (currentNode.getNext() != null) {
             if (currentNode.getState() == ScheduleState.BOOKED) {
@@ -229,38 +158,8 @@ public class DailySchedule {
             }
             currentNode = currentNode.getNext();
         }
-//        while (currentNode.getTime() < endTime) {
-//            if (currentNode.getState() == ScheduleState.BOOKED) {
-//                if (currentNode.getTime() >= startTime) {
-//                    // && (currentNode.getTime() < endTime)
-//                    return true;
-//                }
-//            }
-//            if (currentNode.getNext() != null) {
-//                currentNode = currentNode.getNext();
-//            }
-//        }
         return false;
     }
-
-//	/**
-//	 * Return the TimeNode with the earliest time. If they are equal, return the second one.
-//	 * @param timeNode1
-//	 * @param timeNode2
-//	 * @return
-//	 */
-//	public TimeNode earliest(TimeNode timeNode1, TimeNode timeNode2) {
-//		if (timeNode1.time == timeNode2.time) {
-//			return timeNode2;
-//		} else if (timeNode1.time < timeNode2.time) {
-//			return timeNode1;
-//		} else {
-//			return timeNode2;
-//		}
-//	}
-
-
-
 
     public DailySchedule cleanUp() {
         TimeNode currentNode = this.head;
@@ -285,7 +184,6 @@ public class DailySchedule {
      */
     public DailySchedule generate(Context context, int providerID, String dateString) {
         // Generate the DailySchedule from the data in the table DefaultSchedules and CustomSchedules
-        // TODO create a DailySchedule using the DefaultSchedule and CustomSchedule from the database.
         //  1. Initialize a new DailySchedule by using the right fields from DefaultSchedules
         //  2. For each record in CustomSchedule that meet the right conditions, merge one by one with the DailySchedule.
 
@@ -328,24 +226,14 @@ public class DailySchedule {
                     break;
             }
 
-            // TODO will have to be a range instead of =
-//            String effDateQuery = "SELECT " + startTimeField + ", " + endTimeField
-//                    + " FROM " + DefaultSchedule.TABLE_NAME
-//                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE
-//                    + " = (SELECT MAX(" + DefaultSchedule.COL_EFFECTIVEDATE
-//                    + ") FROM " + DefaultSchedule.TABLE_NAME
-//                    + " WHERE " + DefaultSchedule.COL_EFFECTIVEDATE + " <= \"" + dateString + "\")";
-//            System.out.println(effDateQuery);
-
             String effDateQuery = "SELECT " + DefaultSchedule.COL_EFFECTIVEDATE
                     + " FROM " + DefaultSchedule.TABLE_NAME
                     + " WHERE " + DefaultSchedule.COL_PROVIDER + " = " + providerID;
             System.out.println(effDateQuery);
 
-            // TODO
             // 1. get all the dates
             // 2. convert them to timeStrings, as well as the current date
-            // 3. Keep the max date that is still lower (or equal) than today
+            // 3. Keep the max date that is still lower than today (or equal)
 
             ArrayList<String[]> effectiveDates = Storable.select(context, effDateQuery, 1);
             long[] dateLong = new long[effectiveDates.size()];
@@ -369,17 +257,8 @@ public class DailySchedule {
             System.out.println(effDefaultScheduleQuery);
 
             ArrayList<String[]> currentEffSchedule = Storable.select(context, effDefaultScheduleQuery, 2);
-//            String where = "ProviderID = " + Account.getCurrentAccount().getID() + " AND EffectiveDate = \"" + dateString + "\"";
-//            System.out.println("WHERE " + where);
-//            switch (Calendar.DAY_OF_WEEK) {
-//                case Calendar.SUNDAY:
-//
-//            }
-//            ArrayList<String> record = Storable.selectAllInRow(this, DefaultSchedule.COLUMNS.size(), DefaultSchedule.TABLE_NAME, where);
 
-            // Initialize a new DailySchedule using the data from the table
-//            String startTime = Storable.selectFirst(this, DefaultSchedule.COLUMNS.get(dayOfWeekFieldIndex)[0], DefaultSchedule.TABLE_NAME, where);
-//            String endTime = Storable.selectFirst(this, DefaultSchedule.COLUMNS.get(dayOfWeekFieldIndex + 1)[0], DefaultSchedule.TABLE_NAME, where);
+            // If a schedule has been found
             if (currentEffSchedule.size() > 0) {
                 String startTime = currentEffSchedule.get(0)[0];
                 String endTime = currentEffSchedule.get(0)[1];
@@ -431,132 +310,6 @@ public class DailySchedule {
         return scheduleArray;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//	   // add a new integer (least efficient)
-//	  public boolean addOppositeSide(int value) {
-//
-//	    Node newNode= new Node(value, head.prev, head);
-//		head.prev.next= newNode;
-//		head.prev= newNode;
-//
-//		size++;
-//
-//	    return true;
-//	  }
-
-//	  // search if a given integer is in the array
-//	  public boolean search(int value) {
-//
-//	    Node n= head.next;
-//
-//	    while (n!=head && n.element!=value)
-//		  n= n.next;
-//
-//		if (n==head)
-//		  return false;
-//		else
-//		  return true;
-//	  }
-//
-//	  // remove a given integer (first occurrence of)
-//	  public boolean searchAndRemove(int value) {
-//
-//		Node n= head.next;
-//
-//	    while (n!=head && n.element!=value)
-//		  n= n.next;
-//
-//
-//	    if (n!=head) {
-//
-//		  n.prev.next= n.next;
-//		  n.next.prev= n.prev;
-//		  size--;
-//	      return true;
-//
-//		} else {
-//
-//		  return false;
-//		}
-//	  }
-//
-//	  // remove element at a given index
-//	  public boolean removeAt(int index) {
-//
-//	    if (index<0 || index>=size)
-//		  return false;
-//
-//		size--;
-//
-//		Node n= head.next;
-//	    for (int i=0; i<index; i++)
-//		  n= n.next;
-//
-//		n.prev.next= n.next;
-//		n.next.prev= n.prev;
-//
-//		return true;
-//	  }
-//
-//
-//
-//	  // string representation
-//	  public String toString() {
-//
-//	    StringBuffer s = new StringBuffer("");
-//
-//	    for (Node node= head.next; node!= head; node= node.next) {
-//		  s.append("["+node.element+"]");
-//		}
-//
-//		s.append("("+size+")");
-//
-//		return s.toString();
-//	  }
-//
-//	  public static void main(String[] args) {
-//
-//	    DoublyLinkedList list= new DoublyLinkedList();
-//
-//		list.add(34);
-//		list.add(93);
-//		list.add(67);
-//		list.add(23);
-//		list.add(51);
-//		System.out.println("A:" + list);
-//
-//		list.addOppositeSide(33);
-//		System.out.println("B:" + list);
-//
-//		list.searchAndRemove(51);
-//		System.out.println("C:" + list);
-//		list.searchAndRemove(67);
-//		System.out.println("D:" + list);
-//
-//		System.out.println("E1:" + list.search(93));
-//		System.out.println("E2:" + list.search(11));
-//
-//		list.removeAt(1);
-//		System.out.println("F1:" + list);
-//		list.removeAt(0);
-//		System.out.println("F2:" + list);
-//		list.removeAt(list.getSize()-1);
-//		System.out.println("F3:" + list);
-//
-//	  }
-
     public int getSize() {
         int size = 0;
         TimeNode node = this.head;
@@ -566,6 +319,7 @@ public class DailySchedule {
         }
         return size;
     }
+
     public void setSize(int size) { this.size = size; }
 
     public String toString() {

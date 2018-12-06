@@ -11,24 +11,6 @@ public class TimeNode {
         this.state = state;
     }
 
-//		public void vanish() {
-//			if (this.prev != null) {
-//				if (this.next != null) {
-//					this.prev.next = this.next;
-//					this.next.prev = this.prev;
-//					this.prev = null;
-//					this.next = null;
-//				} else {
-//					// vanish() will not be called in the first place
-//				}
-//			} else {
-//				if (this.next == null) {
-//					// do nothing
-//					// It means that only the head is left
-//				}
-//			}
-//		}
-
     public void removeNext() {
         if (this.next != null) {
             int time = this.next.time;

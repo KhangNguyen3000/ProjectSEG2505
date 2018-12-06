@@ -1,19 +1,14 @@
-package com.example.nguye.seg2505app;
+package com.example.nguye.seg2505app.Activities;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nguye.seg2505app.ScheduleClasses.ScheduleState;
-import com.example.nguye.seg2505app.ScheduleClasses.TimeNode;
+import com.example.nguye.seg2505app.R;
 import com.example.nguye.seg2505app.Storables.Account;
-import com.example.nguye.seg2505app.Utilities.FormatValue;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

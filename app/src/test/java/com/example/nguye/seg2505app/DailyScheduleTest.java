@@ -34,11 +34,5 @@ public class DailyScheduleTest {
 
     // TODO other tests related to schedules
 
-    @Test
-    public void DailySchedule_sfsd() {
-        DailySchedule schedule = new DailySchedule(480, 960, ScheduleState.AVAILABLE);
-        TimeSlot timeSlot = new TimeSlot(480, 540, ScheduleState.BOOKED);
-        schedule = schedule.merge(timeSlot);
-        System.out.println(schedule);
-    }
+
 }
